@@ -1,0 +1,81 @@
+name: EvalMath live simulator bridge
+
+on:
+  push:
+    paths:
+      - "configs/evalmath-simulation-v1.json"
+      - "systemic_risk_bench/evalmath.py"
+      - "systemic_risk_bench/simulation.py"
+      - "systemic_risk_bench/cli.py"
+      - "tests/test_evalmath.py"
+      - "docs/evalmath-bridge.md"
+      - ".github/workflows/evalmath-bridge.yml"
+  pull_request:
+    paths:
+      - "configs/evalmath-simulation-v1.json"
+      - "systemic_risk_bench/evalmath.py"
+      - "systemic_risk_bench/simulation.py"
+      - "systemic_risk_bench/cli.py"
+      - "tests/test_evalmath.py"
+      - "docs/evalmath-bridge.md"
+      - ".github/workflows/evalmath-bridge.yml"
+  workflow_dispatch:
+
+jobs:
+  finite-simulator-replay:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: SRB full tests
+        run: python -m unittest discover -s tests -v
+      - name: Export registered live simulator counterfactuals
+        run: |
+          python -m systemic_risk_bench evalmath-export --config configs/evalmath-simulation-v1.json --output artifacts/evalmath_bank.json
+      - name: Checkout pinned EvalMath SRB-01 scorer
+        uses: actions/checkout@v4
+        with:
+          repository: MoralityLabAI/EvalMath
+          ref: 1c3e07ece43cd617b05171d404c53cc8c906dc8c
+          path: evalmath
+          persist-credentials: false
+      - name: Score using actual EvalMath module
+        run: |
+          PYTHONPATH=evalmath/src python evalmath/scripts/score_systemic_risk.py --input artifacts/evalmath_bank.json --output artifacts/evalmath_score.json
+      - name: Assert paired decision obstructions and disclosure effects
+        run: |
+          python - <<'PY'
+          import json
+          from fractions import Fraction
+          bank=json.load(open("artifacts/evalmath_bank.json", encoding="utf-8"))
+          score=json.load(open("artifacts/evalmath_score.json", encoding="utf-8"))
+          m=score["metrics"]
+          assert len(bank["worlds"]) == 30
+          assert bank["source"]["simulations"] == 60
+          assert bank["source"]["model_calls"] == 0
+          assert "trace_replay_loss" not in m
+          assert Fraction(m["unobservable_regret"]) > 0
+          assert m["unobservable_regret"] == m["binary_collision_certificate"]
+          assert Fraction(m["oracle_loss"]) < Fraction(m["observable_loss"]) <= Fraction(m["fixed_loss"])
+          assert Fraction(m["query_disclosure_loss"]["depth_tier"]) < Fraction(m["observable_loss"])
+          assert Fraction(m["false_authorization_selection"]["full_disclosure"]) >= Fraction(m["false_authorization_selection"]["no_disclosure"])
+          print(json.dumps({"status": "live_cohort_simulator_scored", "scenarios": m["scenario_count"],
+                            "scenario_mass": m["total_mass"],
+                            "observability_regret": m["unobservable_regret"],
+                            "depth_query_loss": m["query_disclosure_loss"]["depth_tier"],
+                            "observable_loss": m["observable_loss"],
+                            "false_auth_no_disclosure": m["false_authorization_selection"]["no_disclosure"],
+                            "false_auth_full_disclosure": m["false_authorization_selection"]["full_disclosure"]},
+                           indent=2))
+          PY
+      - name: Archive source-bound evaluator inputs and exact scored output
+        uses: actions/upload-artifact@v4
+        with:
+          name: srb-em-01-live-synthetic-replay
+          path: |
+            artifacts/evalmath_bank.json
+            artifacts/evalmath_score.json
+          if-no-files-found: error
