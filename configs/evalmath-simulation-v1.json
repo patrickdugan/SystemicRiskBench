@@ -1,0 +1,51 @@
+{
+  "schema_version": "srb.evalmath.simulation_config.v1",
+  "experiment_id": "SRB-EM-01",
+  "evidence_level": "synthetic cohort-fire-sale simulator; equal scenario mass; zero model calls",
+  "initial_capital": "1000000",
+  "agents_represented": 1000000,
+  "impact": "0.08",
+  "max_rounds": 50,
+  "shocks": [
+    "0.04",
+    "0.08",
+    "0.12",
+    "0.30",
+    "0.38"
+  ],
+  "depths": [
+    "300000",
+    "1000000",
+    "5000000"
+  ],
+  "cohort_profiles": [
+    "homogeneous",
+    "heterogeneous"
+  ],
+  "actions": [
+    {
+      "name": "no_liquidity_support",
+      "depth_multiplier": 1,
+      "cost": "0"
+    },
+    {
+      "name": "triple_depth_backstop",
+      "depth_multiplier": 3,
+      "cost": "10000"
+    }
+  ],
+  "baseline": "no_liquidity_support",
+  "observation": "shock_index_only",
+  "query_names": [
+    "depth_tier",
+    "cohort_profile"
+  ],
+  "mass_per_scenario": 1,
+  "harm_threshold": "300000",
+  "tail_alpha": "4/5",
+  "claimed_safe_checker": "exogenous_only_v1",
+  "quantization": "Decimal(str(float_value)) nearest cent, ROUND_HALF_EVEN",
+  "scenario_horizon": "one stipulated shock plus simulator liquidation rounds",
+  "regime_probability_status": "illustrative equal-mass grid; no estimated scenario frequencies",
+  "restrictions": "All outcomes evaluator-only; never include intervention losses or regime labels in model's visible packet"
+}
