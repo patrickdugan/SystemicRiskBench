@@ -47,6 +47,9 @@ def main(argv=None):
     numeric.add_argument("--output", required=True)
     stress = commands.add_parser("stress", help="cohort stress matrix, zero model calls")
     stress.add_argument("--output", required=True)
+    em = commands.add_parser("evalmath-export", help="export evaluator-only paired simulator counterfactuals")
+    em.add_argument("--config", required=True)
+    em.add_argument("--output", required=True)
     demo = commands.add_parser("smoke", help="reference fixtures only; never a model result")
     demo.add_argument("--output-dir", required=True)
     forecast = commands.add_parser("calibration", help="score resolved frozen binary forecasts")
@@ -101,6 +104,9 @@ def main(argv=None):
         elif args.command == "stress":
             write(args.output, {"model_calls": 0, "calibration": "synthetic_illustrative",
                                 "results": sweep()})
+        elif args.command == "evalmath-export":
+            from .evalmath import export_bank
+            write(args.output, export_bank(args.config))
         elif args.command == "calibration":
             write(args.output, brier(read_json(args.input)["forecasts"]))
         elif args.command == "bitagent-packet":
