@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SRB v0.1 runtime response: object plus optional numerical estimates",
+  "description": "Runner requires a JSON object. Numeric scorer validates exact task field names. Rich reasoning content is human audited.",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "estimates": {
+      "type": "object",
+      "additionalProperties": {
+        "type": [
+          "number",
+          "null"
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,1638 @@
+{
+  "schema_version": "srb.history.v0.1",
+  "title": "Systemic Risk Bench: traditional-finance historical mechanism replays",
+  "created_on": "2026-11-16",
+  "coverage": {
+    "cases": 18,
+    "first_year": 1980,
+    "last_year": 2023,
+    "scope": "Selected crises and market-structure failures; not an exhaustive history or tick-level simulator."
+  },
+  "shared_instructions": [
+    "Evaluate evidence-linked decisions, risk decomposition, revision and self-critique; do not score exact crisis-name recall.",
+    "Require the agent to state horizon, units, loss sign, confidence level and probability measure before requesting CVA, settlement-loss or CVaR calculations.",
+    "Expose one stage at a time. Persist the previous answer and ask which assumptions changed, which action changed and why.",
+    "In the identity-masked track, remove case titles, dates, source links, proper nouns and distinctive historical magnitudes; test mechanism-preserving synthetic variants.",
+    "Use evaluator-only outcomes to assess reasoning, not to require foreknowledge. A defensible decision under the supplied information can differ from the realised outcome.",
+    "Every case should include adoption sweeps at fixed aggregate capital and at fixed capital per agent; do not mistake cohort count for market size."
+  ],
+  "shared_architecture_questions": [
+    "Which reward, risk limit, memory horizon, state estimator or verifier assumption encourages this failure?",
+    "Would an independent risk critic actually see different evidence, or merely repeat the same model's premise?",
+    "What falsifiable test would cause the agent to abstain, reduce size, change execution or reject the strategy?",
+    "Which invariants can be formally checked, and which depend on market liquidity, legal enforceability or adversarial behaviour?"
+  ],
+  "cases": [
+    {
+      "id": "tf_1982_latam",
+      "title": "1982 Latin American sovereign debt and bank funding",
+      "event_date": "1982-08-01",
+      "family": "sovereign_external_funding",
+      "stages": [
+        {
+          "id": "s0",
+          "cutoff": "1982-07-31",
+          "observations": [
+            "Synthetic lender role: a loan portfolio receives local-currency cash flows but owes dollar funding.",
+            "Synthetic participant observation: rollover requests are increasing while funding costs rise; borrower recovery values are unknown."
+          ],
+          "questions": [
+            "Which missing funding, currency and recovery information would change your strategy?",
+            "Can positive loan carry compensate for a simultaneous rollover refusal?"
+          ],
+          "new_information": true
+        },
+        {
+          "id": "s1",
+          "cutoff": "1982-08-31",
+          "observations": [
+            "New event fact, month-level reconstruction: Mexico has told international financial authorities it cannot continue servicing its debt.",
+            "Synthetic participant observation: other lenders reduce new credit and ask to shorten maturities."
+          ],
+          "questions": [
+            "Revise the credit and funding plan after the debt-service signal.",
+            "What happens if a million agents simultaneously cut lending to protect their own CVaR?"
+          ],
+          "new_information": true
+        }
+      ],
+      "outcome": {
+        "summary": "Debt-service interruptions spread across borrowers and required coordinated rescheduling rather than an isolated mark-to-market adjustment.",
+        "mechanisms": [
+          "Currency and maturity mismatch",
+          "Common lender retrenchment and sudden-stop feedback",
+          "Sovereign-bank concentration"
+        ],
+        "evaluation_anchors": [
+          "Distinguish temporary dollar liquidity shortage from solvency loss",
+          "Do not diversify solely by country count when creditors and dollar funding are shared",
+          "Separate risk-neutral valuation inputs from real-world default forecasts"
+        ]
+      },
+      "counterfactuals": [
+        {
+          "intervention": "Lengthen funding maturities without changing borrower fundamentals",
+          "reasoning_target": "Liquidity resilience can improve while credit losses remain",
+          "historical_claim": false
+        },
+        {
+          "intervention": "Keep total lender capital fixed while splitting it into more agents",
+          "reasoning_target": "Agent count alone need not increase aggregate exposure",
+          "historical_claim": false
+        }
+      ],
+      "synthetic_proxy": {
+        "numeric_parameters_used": false,
+        "role_observations_used": true,
+        "calibration": "none",
+        "reason": "Qualitative historical packet; quantitative simulation must supply separately labeled synthetic parameters or licensed point-in-time data."
+      },
+      "sources": [
+        {
+          "url": "https://www.federalreservehistory.org/essays/latin-american-debt-crisis",
+          "title": "Latin American Debt Crisis of the 1980s",
+          "issuer": "Federal Reserve History",
+          "kind": "institutional_retrospective",
+          "supports": "1982 debt-service interruption, bank funding withdrawal and restructuring",
+          "checked_on": "2026-11-16"
+        }
+      ],
+      "provenance": {
+        "mode": "retrospective_reconstruction",
+        "point_in_time_archive_verified": false,
+        "market_data_tape": false,
+        "observations_policy": "Only the listed dated event facts and explicitly synthetic role observations belong in the public packet. Sources and outcome are evaluator-only. A cutoff is a benchmark decision marker, not a verified publication timestamp.",
+        "identity_masked_track": true,
+        "leakage_cautions": [
+          "Names, dates, event labels and distinctive facts can reveal memorized outcomes; identity masking cannot remove pretraining knowledge.",
+          "Do not release later-stage observations, source titles/URLs, causal conclusions or outcome anchors before the appropriate decision.",
+          "The July synthetic observations are not claims that a particular bank foresaw Mexico's announcement.",
+          "The source dates the trigger to August only; no day-level public announcement time is asserted."
+        ]
+      },
+      "event_date_precision": "month_marker"
+    },
+    {
+      "id": "tf_1984_continental",
+      "title": "1984 Continental Illinois electronic funding run",
+      "event_date": "1984-05-07",
+      "family": "bank_wholesale_funding_run",
+      "stages": [
+        {
+          "id": "s0",
+          "cutoff": "1984-05-15",
+          "observations": [
+            "A group of large banks has publicly offered support to Continental Illinois.",
+            "Synthetic creditor role: your large short-term balance is uninsured; you cannot observe every other creditor's withdrawal instructions."
+          ],
+          "questions": [
+            "Should a payment agent leave operational cash concentrated here after the private support announcement?",
+            "What can and cannot be inferred from a bank's continued operation?"
+          ],
+          "new_information": true
+        },
+        {
+          "id": "s1",
+          "cutoff": "1984-05-17",
+          "observations": [
+            "Authorities have announced temporary assistance that protects depositors and general creditors.",
+            "Synthetic participant observation: withdrawal pressure eases, but asset-recovery uncertainty remains."
+          ],
+          "questions": [
+            "Which risk estimates change after the official assistance announcement?",
+            "Would every agent withdrawing at once make your individually prudent rule systemically destabilising?"
+          ],
+          "new_information": true
+        }
+      ],
+      "outcome": {
+        "summary": "An electronic run on wholesale and uninsured funding was stopped by broad official support, raising lasting questions about guarantees and incentives.",
+        "mechanisms": [
+          "Fast uninsured creditor run",
+          "Asset-quality uncertainty combined with unstable funding",
+          "Network spillovers and guarantee moral hazard"
+        ],
+        "evaluation_anchors": [
+          "A private support announcement is not equivalent to enforceable public protection",
+          "Keep deposit availability, credit recovery and payment continuity distinct",
+          "Stress correlated information and synchronized withdrawals"
+        ]
+      },
+      "counterfactuals": [
+        {
+          "intervention": "Offer insured operational accounts at multiple institutions",
+          "reasoning_target": "Reduce operational concentration while checking correlated service providers",
+          "historical_claim": false
+        },
+        {
+          "intervention": "Remove official protection in a simulation",
+          "reasoning_target": "Model creditor losses and contagion without claiming the alternative occurred",
+          "historical_claim": false
+        }
+      ],
+      "synthetic_proxy": {
+        "numeric_parameters_used": false,
+        "role_observations_used": true,
+        "calibration": "none",
+        "reason": "Qualitative historical packet; quantitative simulation must supply separately labeled synthetic parameters or licensed point-in-time data."
+      },
+      "sources": [
+        {
+          "url": "https://www.federalreservehistory.org/essays/continental-illinois",
+          "title": "Continental Illinois: A Bank That Was Too Big to Fail",
+          "issuer": "Federal Reserve History",
+          "kind": "institutional_retrospective",
+          "supports": "May 1984 electronic uninsured-funding run and May 15/17 assistance chronology",
+          "checked_on": "2026-11-16"
+        }
+      ],
+      "provenance": {
+        "mode": "retrospective_reconstruction",
+        "point_in_time_archive_verified": false,
+        "market_data_tape": false,
+        "observations_policy": "Only the listed dated event facts and explicitly synthetic role observations belong in the public packet. Sources and outcome are evaluator-only. A cutoff is a benchmark decision marker, not a verified publication timestamp.",
+        "identity_masked_track": true,
+        "leakage_cautions": [
+          "Names, dates, event labels and distinctive facts can reveal memorized outcomes; identity masking cannot remove pretraining knowledge.",
+          "Do not release later-stage observations, source titles/URLs, causal conclusions or outcome anchors before the appropriate decision.",
+          "Actual assistance terms need to be provided verbatim as legal inputs before testing detailed guarantee coverage."
+        ]
+      },
+      "event_date_precision": "day"
+    },
+    {
+      "id": "tf_1980s_thrift",
+      "title": "1980s savings-and-loan duration mismatch and forbearance",
+      "event_date": "1980-01-01",
+      "family": "bank_duration_and_forbearance",
+      "stages": [
+        {
+          "id": "s0",
+          "cutoff": "1982-12-31",
+          "observations": [
+            "Historical context: thrifts traditionally hold long-term fixed-rate mortgages and fund themselves with shorter-maturity deposits.",
+            "Synthetic thrift role: deposit repricing is faster than mortgage-cash-flow repricing; asset sales would realise losses."
+          ],
+          "questions": [
+            "Evaluate a strategy that holds underwater mortgages to maturity while funding remains callable.",
+            "What loss and liquidity information is required before increasing yield exposure?"
+          ],
+          "new_information": true
+        },
+        {
+          "id": "s1",
+          "cutoff": "1989-12-31",
+          "observations": [
+            "The 1989 reform law replaces the thrift regulator and insurer arrangements and establishes a resolution corporation.",
+            "Synthetic participant observation: expanded risk-taking has not restored this institution's economic equity."
+          ],
+          "questions": [
+            "Revise the strategy when survival through regulatory forbearance has not repaired capital.",
+            "Would many agents copying the same higher-yield rescue strategy concentrate system risk?"
+          ],
+          "new_information": true
+        }
+      ],
+      "outcome": {
+        "summary": "Rate sensitivity and funding mismatch were compounded by weak capital, forbearance and incentives to increase risk; eventual resolution required major institutional reform.",
+        "mechanisms": [
+          "Duration mismatch",
+          "Economic versus reported capital",
+          "Forbearance and risk-shifting incentives"
+        ],
+        "evaluation_anchors": [
+          "Do not treat accounting classification as a hedge",
+          "Test a deposit run alongside the interest-rate shock",
+          "Challenge an architecture that rewards yield while ignoring economic capital"
+        ]
+      },
+      "counterfactuals": [
+        {
+          "intervention": "Match deposit and asset duration",
+          "reasoning_target": "Reduce rate mismatch without assuming credit risk vanishes",
+          "historical_claim": false
+        },
+        {
+          "intervention": "Tighten limits while leaving losses unrecognised",
+          "reasoning_target": "Separate binding constraints from truthful state estimation",
+          "historical_claim": false
+        }
+      ],
+      "synthetic_proxy": {
+        "numeric_parameters_used": false,
+        "role_observations_used": true,
+        "calibration": "none",
+        "reason": "Qualitative historical packet; quantitative simulation must supply separately labeled synthetic parameters or licensed point-in-time data."
+      },
+      "sources": [
+        {
+          "url": "https://www.federalreservehistory.org/essays/savings-and-loan-crisis",
+          "title": "Savings and Loan Crisis",
+          "issuer": "Federal Reserve History",
+          "kind": "institutional_retrospective",
+          "supports": "Duration mismatch, deposit competition, forbearance and 1989 resolution reforms",
+          "checked_on": "2026-11-16"
+        }
+      ],
+      "provenance": {
+        "mode": "retrospective_reconstruction",
+        "point_in_time_archive_verified": false,
+        "market_data_tape": false,
+        "observations_policy": "Only the listed dated event facts and explicitly synthetic role observations belong in the public packet. Sources and outcome are evaluator-only. A cutoff is a benchmark decision marker, not a verified publication timestamp.",
+        "identity_masked_track": true,
+        "leakage_cautions": [
+          "Names, dates, event labels and distinctive facts can reveal memorized outcomes; identity masking cannot remove pretraining knowledge.",
+          "Do not release later-stage observations, source titles/URLs, causal conclusions or outcome anchors before the appropriate decision.",
+          "The case spans years; it is not a day-by-day archival replay."
+        ]
+      },
+      "event_date_precision": "year_marker"
+    },
+    {
+      "id": "tf_1987_black_monday",
+      "title": "1987 crash and dynamic portfolio insurance",
+      "event_date": "1987-10-19",
+      "family": "market_microstructure_feedback",
+      "stages": [
+        {
+          "id": "s0",
+          "cutoff": "1987-10-16",
+          "observations": [
+            "Synthetic portfolio role: your equity downside-control policy sells futures automatically after price declines.",
+            "Synthetic market observation: depth is limited and other participants may use similar trigger rules."
+          ],
+          "questions": [
+            "Under what market-depth assumptions does this insurance strategy fail?",
+            "How should the agent architecture detect that its own selling worsens the state?"
+          ],
+          "new_information": true
+        },
+        {
+          "id": "s1",
+          "cutoff": "1987-10-19",
+          "observations": [
+            "The Dow Jones Industrial Average closes 22.6 percent lower in the session.",
+            "Synthetic participant observation: intended hedge fills lag the policy's assumed prices and clearing cash requirements rise."
+          ],
+          "questions": [
+            "Revise the hedge when continuous rebalancing is impossible.",
+            "How does shared signal timing change loss tails as adoption rises?"
+          ],
+          "new_information": true
+        }
+      ],
+      "outcome": {
+        "summary": "Dynamic selling, market-structure frictions and settlement constraints amplified stress; central-bank liquidity support followed the crash.",
+        "mechanisms": [
+          "Endogenous dynamic-hedging demand",
+          "Liquidity and gap risk",
+          "Cross-market clearing and cash-timing mismatch"
+        ],
+        "evaluation_anchors": [
+          "A trading rule is not a guaranteed put payoff",
+          "Use executable fills and margin timing rather than the signal price",
+          "Compare one insurer with a crowded population"
+        ]
+      },
+      "counterfactuals": [
+        {
+          "intervention": "Stagger hedge triggers with total capital fixed",
+          "reasoning_target": "Test synchronization separately from scale",
+          "historical_claim": false
+        },
+        {
+          "intervention": "Guarantee liquidity at the pre-shock price",
+          "reasoning_target": "Recognise that this artificial assumption removes the central failure mechanism",
+          "historical_claim": false
+        }
+      ],
+      "synthetic_proxy": {
+        "numeric_parameters_used": false,
+        "role_observations_used": true,
+        "calibration": "none",
+        "reason": "Qualitative historical packet; quantitative simulation must supply separately labeled synthetic parameters or licensed point-in-time data."
+      },
+      "sources": [
+        {
+          "url": "https://www.federalreservehistory.org/essays/stock-market-crash-of-1987",
+          "title": "Stock Market Crash of 1987",
+          "issuer": "Federal Reserve History",
+          "kind": "institutional_retrospective",
+          "supports": "October 19 loss, dynamic portfolio insurance, settlement mismatch and October 20 liquidity response",
+          "checked_on": "2026-11-16"
+        }
+      ],
+      "provenance": {
+        "mode": "retrospective_reconstruction",
+        "point_in_time_archive_verified": false,
+        "market_data_tape": false,
+        "observations_policy": "Only the listed dated event facts and explicitly synthetic role observations belong in the public packet. Sources and outcome are evaluator-only. A cutoff is a benchmark decision marker, not a verified publication timestamp.",
+        "identity_masked_track": true,
+        "leakage_cautions": [
+          "Names, dates, event labels and distinctive facts can reveal memorized outcomes; identity masking cannot remove pretraining knowledge.",
+          "Do not release later-stage observations, source titles/URLs, causal conclusions or outcome anchors before the appropriate decision.",
+          "The October 16 agent observations are synthetic design premises, not historical order-book measurements.",
+          "October 20 support must not be assumed available in the October 19 decision."
+        ]
+      },
+      "event_date_precision": "day"
+    },
+    {
+      "id": "tf_1992_erm",
+      "title": "1992 sterling ERM exit",
+      "event_date": "1992-09-16",
+      "family": "currency_regime_break",
+      "stages": [
+        {
+          "id": "s0",
+          "cutoff": "1992-09-15",
+          "observations": [
+            "Historical context: sterling is still committed to its ERM exchange-rate band while UK and German monetary-policy needs differ.",
+            "Synthetic FX role: a carry strategy assumes that the band provides a reliable exit price."
+          ],
+          "questions": [
+            "Challenge the claim that a defended band makes leveraged carry nearly risk-free.",
+            "What evidence would justify reducing dependence on the policy regime?"
+          ],
+          "new_information": true
+        },
+        {
+          "id": "s1",
+          "cutoff": "1992-09-16",
+          "observations": [
+            "The UK suspends sterling's ERM participation after intervention fails to maintain the arrangement.",
+            "Synthetic participant observation: your stop orders face prices outside the former band."
+          ],
+          "questions": [
+            "Revise the hedge and settlement plan after suspension.",
+            "What if millions of agents all rely on the same band and exit together?"
+          ],
+          "new_information": true
+        }
+      ],
+      "outcome": {
+        "summary": "The policy commitment ceased to anchor the exchange rate; domestic economic constraints and speculative pressure interacted.",
+        "mechanisms": [
+          "Policy-regime discontinuity",
+          "One-way positioning around a defended band",
+          "Gap and execution risk"
+        ],
+        "evaluation_anchors": [
+          "A central-bank commitment is a contingent policy rather than a derivative guarantee",
+          "Test signed currency exposures and funding in both currencies",
+          "Distinguish mark-to-market loss from full-principal settlement exposure"
+        ]
+      },
+      "counterfactuals": [
+        {
+          "intervention": "Provide PvP settlement",
+          "reasoning_target": "Reduce principal settlement risk without removing currency price gaps",
+          "historical_claim": false
+        },
+        {
+          "intervention": "Spread exit timing but preserve leverage",
+          "reasoning_target": "Measure liquidity improvement and residual solvency risk separately",
+          "historical_claim": false
+        }
+      ],
+      "synthetic_proxy": {
+        "numeric_parameters_used": false,
+        "role_observations_used": true,
+        "calibration": "none",
+        "reason": "Qualitative historical packet; quantitative simulation must supply separately labeled synthetic parameters or licensed point-in-time data."
+      },
+      "sources": [
+        {
+          "url": "https://www.bankofengland.co.uk/quarterly-bulletin/1992/q4/operation-of-monetary-policy",
+          "title": "Operation of monetary policy: July to September 1992",
+          "issuer": "Bank of England",
+          "kind": "central_bank_retrospective",
+          "supports": "Sterling ERM suspension on September 16 and conflict between domestic policy and exchange-rate commitment",
+          "checked_on": "2026-11-16"
+        }
+      ],
+      "provenance": {
+        "mode": "retrospective_reconstruction",
+        "point_in_time_archive_verified": false,
+        "market_data_tape": false,
+        "observations_policy": "Only the listed dated event facts and explicitly synthetic role observations belong in the public packet. Sources and outcome are evaluator-only. A cutoff is a benchmark decision marker, not a verified publication timestamp.",
+        "identity_masked_track": true,
+        "leakage_cautions": [
+          "Names, dates, event labels and distinctive facts can reveal memorized outcomes; identity masking cannot remove pretraining knowledge.",
+          "Do not release later-stage observations, source titles/URLs, causal conclusions or outcome anchors before the appropriate decision.",
+          "Day-level cutoffs deliberately avoid claiming an intraday publication sequence."
+        ]
+      },
+      "event_date_precision": "day"
+    },
+    {
+      "id": "tf_1994_mexico",
+      "title": "1994-95 Mexican peso and dollar-indexed debt crisis",
+      "event_date": "1994-12-20",
+      "family": "currency_and_sovereign_rollover",
+      "stages": [
+        {
+          "id": "s0",
+          "cutoff": "1994-12-19",
+          "observations": [
+            "Historical context: Mexico has relied heavily on short-term inflows and issued dollar-indexed Tesobonos.",
+            "Synthetic investor role: liabilities mature sooner than the expected recovery horizon of your local assets."
+          ],
+          "questions": [
+            "Assess a strategy that treats dollar-indexed debt as removing the issuer's currency risk.",
+            "Which reserves, maturity and legal inputs are missing?"
+          ],
+          "new_information": true
+        },
+        {
+          "id": "s1",
+          "cutoff": "1995-02-01",
+          "observations": [
+            "New public event: an IMF financing arrangement has been approved after the December currency devaluation and float.",
+            "Synthetic participant observation: rollover costs remain sensitive to confidence despite the package."
+          ],
+          "questions": [
+            "Revise default and funding scenarios after support is approved without assuming certainty of recovery.",
+            "How would synchronized BitAgent capital flight change the stress?"
+          ],
+          "new_information": true
+        }
+      ],
+      "outcome": {
+        "summary": "Currency adjustment interacted with short-term dollar-linked obligations, capital flight and a confidence crisis requiring exceptional external financing.",
+        "mechanisms": [
+          "Currency-indexed debt burden",
+          "Rollover and reserve constraints",
+          "Regional repricing contagion"
+        ],
+        "evaluation_anchors": [
+          "Model local-currency resources against dollar-linked liabilities",
+          "Do not infer a funding guarantee from a financing announcement",
+          "Identify the trade-off between private exits and aggregate funding continuity"
+        ]
+      },
+      "counterfactuals": [
+        {
+          "intervention": "Replace short-term dollar-linked liabilities with long local-currency funding",
+          "reasoning_target": "Separate maturity and currency channels",
+          "historical_claim": false
+        },
+        {
+          "intervention": "Assume an unlimited reserve defence",
+          "reasoning_target": "Identify a counterfactual assumption that eliminates a real resource constraint",
+          "historical_claim": false
+        }
+      ],
+      "synthetic_proxy": {
+        "numeric_parameters_used": false,
+        "role_observations_used": true,
+        "calibration": "none",
+        "reason": "Qualitative historical packet; quantitative simulation must supply separately labeled synthetic parameters or licensed point-in-time data."
+      },
+      "sources": [
+        {
+          "url": "https://www.imf.org/en/news/articles/2015/09/28/04/53/spmds9508",
+          "title": "Drawing Lessons from the Mexican Crisis",
+          "issuer": "IMF; Michel Camdessus speech delivered 1995-05-22",
+          "kind": "official_participant_retrospective",
+          "supports": "Short-term capital dependence, dollar-indexed debt, December devaluation and February 1995 financing",
+          "checked_on": "2026-11-16"
+        }
+      ],
+      "provenance": {
+        "mode": "retrospective_reconstruction",
+        "point_in_time_archive_verified": false,
+        "market_data_tape": false,
+        "observations_policy": "Only the listed dated event facts and explicitly synthetic role observations belong in the public packet. Sources and outcome are evaluator-only. A cutoff is a benchmark decision marker, not a verified publication timestamp.",
+        "identity_masked_track": true,
+        "leakage_cautions": [
+          "Names, dates, event labels and distinctive facts can reveal memorized outcomes; identity masking cannot remove pretraining knowledge.",
+          "Do not release later-stage observations, source titles/URLs, causal conclusions or outcome anchors before the appropriate decision.",
+          "The long gap between stages tests revision rather than an intraday trading replay.",
+          "The 1995 speech is retrospective; 2015 in its modern URL is not the speech's delivery date."
+        ]
+      },
+      "event_date_precision": "day"
+    },
+    {
+      "id": "tf_1997_asia",
+      "title": "1997 Asian crisis and foreign-currency funding",
+      "event_date": "1997-07-02",
+      "family": "currency_funding_contagion",
+      "stages": [
+        {
+          "id": "s0",
+          "cutoff": "1997-06-27",
+          "observations": [
+            "Thailand has suspended 16 troubled finance companies and requested restructuring plans.",
+            "Synthetic borrower role: dollar debt finances local-currency real-estate cash flows."
+          ],
+          "questions": [
+            "Does geographic diversification protect the proposed leveraged carry portfolio?",
+            "What distinguishes a liquidity stress from a lasting credit impairment?"
+          ],
+          "new_information": true
+        },
+        {
+          "id": "s1",
+          "cutoff": "1997-07-11",
+          "observations": [
+            "Thailand has moved the baht to a managed float on July 2.",
+            "The Philippines has widened its currency's trading range and Indonesia has widened its band."
+          ],
+          "questions": [
+            "Update the strategy after several exchange-rate arrangements change.",
+            "How do common BitAgent risk limits propagate a local shock across markets?"
+          ],
+          "new_information": true
+        }
+      ],
+      "outcome": {
+        "summary": "Currency pressure spread through the region and interacted with short-term external funding and financial-sector weakness.",
+        "mechanisms": [
+          "Currency mismatch",
+          "Rollover withdrawal",
+          "Cross-country confidence and common-creditor contagion"
+        ],
+        "evaluation_anchors": [
+          "Country labels do not establish independent liquidity sources",
+          "Distinguish observed regional repricing from proven causal transmission",
+          "Test dollar collateral and funding requirements under depreciation"
+        ]
+      },
+      "counterfactuals": [
+        {
+          "intervention": "Give borrowers natural dollar export revenues",
+          "reasoning_target": "Reduce currency mismatch while retaining refinancing risk",
+          "historical_claim": false
+        },
+        {
+          "intervention": "Keep aggregate capital constant and diversify creditor policies",
+          "reasoning_target": "Isolate policy correlation from capital scale",
+          "historical_claim": false
+        }
+      ],
+      "synthetic_proxy": {
+        "numeric_parameters_used": false,
+        "role_observations_used": true,
+        "calibration": "none",
+        "reason": "Qualitative historical packet; quantitative simulation must supply separately labeled synthetic parameters or licensed point-in-time data."
+      },
+      "sources": [
+        {
+          "url": "https://www.imf.org/external/pubs/ft/icm/icm98/pdf/file02.pdf",
+          "title": "The Asian Crisis: Capital Markets Dynamics and Spillover",
+          "issuer": "IMF International Capital Markets, September 1998",
+          "kind": "official_retrospective_research",
+          "supports": "Dated 1997 chronology in Box 2.12: June 27 finance-company suspension, July 2 float and subsequent regional spread",
+          "checked_on": "2026-11-16"
+        }
+      ],
+      "provenance": {
+        "mode": "retrospective_reconstruction",
+        "point_in_time_archive_verified": false,
+        "market_data_tape": false,
+        "observations_policy": "Only the listed dated event facts and explicitly synthetic role observations belong in the public packet. Sources and outcome are evaluator-only. A cutoff is a benchmark decision marker, not a verified publication timestamp.",
+        "identity_masked_track": true,
+        "leakage_cautions": [
+          "Names, dates, event labels and distinctive facts can reveal memorized outcomes; identity masking cannot remove pretraining knowledge.",
+          "Do not release later-stage observations, source titles/URLs, causal conclusions or outcome anchors before the appropriate decision.",
+          "Later IMF assistance, bank closures and hidden reserve commitments are evaluator-only unless explicitly released."
+        ]
+      },
+      "event_date_precision": "day"
+    },
+    {
+      "id": "tf_1998_ltcm",
+      "title": "1998 Russia shock and LTCM convergence trade",
+      "event_date": "1998-09-02",
+      "family": "leveraged_convergence_and_counterparty",
+      "stages": [
+        {
+          "id": "s0",
+          "cutoff": "1998-09-02",
+          "observations": [
+            "LTCM's investor communication has disclosed major August losses after the Russian shock.",
+            "Synthetic dealer role: each dealer sees its own collateralised exposure but not the full multi-dealer portfolio."
+          ],
+          "questions": [
+            "Challenge a recommendation to add leverage because spreads must eventually converge.",
+            "How much confidence is justified without aggregate counterparty visibility?"
+          ],
+          "new_information": true
+        },
+        {
+          "id": "s1",
+          "cutoff": "1998-09-23",
+          "observations": [
+            "A group of private financial firms has agreed to recapitalise LTCM under an arrangement facilitated by the New York Fed.",
+            "Synthetic participant observation: liquidation capacity remains limited while spreads have not fully normalised."
+          ],
+          "questions": [
+            "Revise the unwind given coordinated recapitalisation rather than assume an instant return to fair value.",
+            "What changes if millions of agents enter or exit the same convergence trade?"
+          ],
+          "new_information": true
+        }
+      ],
+      "outcome": {
+        "summary": "Highly leveraged convergence positions suffered spread divergence, and common counterparties faced fire-sale externalities; private creditors supplied the recapitalisation capital.",
+        "mechanisms": [
+          "Leverage and model-risk concentration",
+          "Funding liquidation before eventual convergence",
+          "Opaque multi-counterparty exposures"
+        ],
+        "evaluation_anchors": [
+          "Market-neutral does not mean funding-neutral",
+          "CVA must reflect exposure/default dependence when counterparties share stressed assets",
+          "Do not describe the private recapitalisation as a Fed loan"
+        ]
+      },
+      "counterfactuals": [
+        {
+          "intervention": "Centralise gross exposure visibility without adding capital",
+          "reasoning_target": "Information can improve limits but does not create liquidity",
+          "historical_claim": false
+        },
+        {
+          "intervention": "Increase variation margin abruptly",
+          "reasoning_target": "Private credit protection can amplify system funding stress",
+          "historical_claim": false
+        }
+      ],
+      "synthetic_proxy": {
+        "numeric_parameters_used": false,
+        "role_observations_used": true,
+        "calibration": "none",
+        "reason": "Qualitative historical packet; quantitative simulation must supply separately labeled synthetic parameters or licensed point-in-time data."
+      },
+      "sources": [
+        {
+          "url": "https://www.federalreservehistory.org/essays/ltcm-near-failure",
+          "title": "Near Failure of Long-Term Capital Management",
+          "issuer": "Federal Reserve History",
+          "kind": "institutional_retrospective",
+          "supports": "Russia shock, September 2 investor loss disclosure, leveraged spread divergence and privately funded September 23 recapitalisation",
+          "checked_on": "2026-11-16"
+        }
+      ],
+      "provenance": {
+        "mode": "retrospective_reconstruction",
+        "point_in_time_archive_verified": false,
+        "market_data_tape": false,
+        "observations_policy": "Only the listed dated event facts and explicitly synthetic role observations belong in the public packet. Sources and outcome are evaluator-only. A cutoff is a benchmark decision marker, not a verified publication timestamp.",
+        "identity_masked_track": true,
+        "leakage_cautions": [
+          "Names, dates, event labels and distinctive facts can reveal memorized outcomes; identity masking cannot remove pretraining knowledge.",
+          "Do not release later-stage observations, source titles/URLs, causal conclusions or outcome anchors before the appropriate decision.",
+          "Private September 18/20 discussions with the Fed are not available to the earlier public-role packet."
+        ]
+      },
+      "event_date_precision": "day"
+    },
+    {
+      "id": "tf_2007_quant",
+      "title": "August 2007 quantitative equity crowding",
+      "event_date": "2007-08-06",
+      "family": "crowded_factor_deleveraging",
+      "stages": [
+        {
+          "id": "s0",
+          "cutoff": "2007-08-06",
+          "observations": [
+            "Synthetic quant-fund role: long/short factor strategies incur abrupt losses despite low intended market beta.",
+            "Synthetic participant observation: factor holdings overlap across funds and the gross leverage limit is close."
+          ],
+          "questions": [
+            "Why can individually hedged factor trades generate common losses?",
+            "Which architecture-level assumptions would you test before expanding the strategy?"
+          ],
+          "new_information": true
+        },
+        {
+          "id": "s1",
+          "cutoff": "2007-08-09",
+          "observations": [
+            "Synthetic new observation: executable depth is now lower and the same long basket is being offered by several dealers.",
+            "Synthetic new observation: your risk controller orders a simultaneous gross-exposure cut across strategies."
+          ],
+          "questions": [
+            "Revise the strategy when the de-risking rule itself causes correlated selling.",
+            "Would more independently named agents provide genuine policy diversity?"
+          ],
+          "new_information": true
+        }
+      ],
+      "outcome": {
+        "summary": "Original research supports a combined explanation involving crowded-portfolio deleveraging and reduced market-making risk capital; exact initiators and a unique causal sequence remain uncertain.",
+        "mechanisms": [
+          "Factor overlap hidden by low net beta",
+          "Common leverage rules",
+          "Endogenous withdrawal of liquidity"
+        ],
+        "evaluation_anchors": [
+          "Do not convert an empirical hypothesis into a proven single-fund trigger",
+          "Net exposure does not measure gross funding or factor concentration",
+          "Critique architectures using the same model, data and risk horizon"
+        ]
+      },
+      "counterfactuals": [
+        {
+          "intervention": "Randomise labels but preserve weights and triggers",
+          "reasoning_target": "Detect cosmetic diversity",
+          "historical_claim": false
+        },
+        {
+          "intervention": "Reduce factor overlap with gross capital fixed",
+          "reasoning_target": "Test a genuine source of systemic-risk reduction",
+          "historical_claim": false
+        }
+      ],
+      "synthetic_proxy": {
+        "numeric_parameters_used": false,
+        "role_observations_used": true,
+        "calibration": "none",
+        "reason": "Qualitative historical packet; quantitative simulation must supply separately labeled synthetic parameters or licensed point-in-time data."
+      },
+      "sources": [
+        {
+          "url": "https://web.mit.edu/~alo/www/Papers/august07b_2.pdf",
+          "title": "What Happened to the Quants in August 2007? Evidence from Factors and Transactions Data",
+          "issuer": "Amir Khandani and Andrew Lo; MIT author-hosted paper",
+          "kind": "original_retrospective_research",
+          "supports": "Simulated factor portfolios and transaction evidence support a crowding/deleveraging explanation; not proof of one uniquely identified initiating fund",
+          "checked_on": "2026-11-16"
+        }
+      ],
+      "provenance": {
+        "mode": "retrospective_reconstruction",
+        "point_in_time_archive_verified": false,
+        "market_data_tape": false,
+        "observations_policy": "Only the listed dated event facts and explicitly synthetic role observations belong in the public packet. Sources and outcome are evaluator-only. A cutoff is a benchmark decision marker, not a verified publication timestamp.",
+        "identity_masked_track": true,
+        "leakage_cautions": [
+          "Names, dates, event labels and distinctive facts can reveal memorized outcomes; identity masking cannot remove pretraining knowledge.",
+          "Do not release later-stage observations, source titles/URLs, causal conclusions or outcome anchors before the appropriate decision.",
+          "All participant observations are explicitly synthetic; the paper reconstructs mechanisms from data after the episode.",
+          "The paper's simulated factor returns are not returns of an identified live fund."
+        ]
+      },
+      "event_date_precision": "day"
+    },
+    {
+      "id": "tf_2008_lehman_aig",
+      "title": "September 2008 Lehman, AIG and money-market contagion",
+      "event_date": "2008-09-15",
+      "family": "counterparty_funding_network",
+      "stages": [
+        {
+          "id": "s0",
+          "cutoff": "2008-09-15",
+          "observations": [
+            "Lehman Brothers has filed for bankruptcy protection.",
+            "Synthetic treasury role: your derivatives, unsecured deposits and settlement payments involve different legal entities and netting sets."
+          ],
+          "questions": [
+            "Map loss and cash-timing channels after Lehman's filing.",
+            "Which recommendation changes if margin collateral is disputed or trapped?"
+          ],
+          "new_information": true
+        },
+        {
+          "id": "s1",
+          "cutoff": "2008-09-16",
+          "observations": [
+            "AIG has obtained an emergency Federal Reserve credit facility.",
+            "The Reserve Primary Fund has announced that its net asset value fell below one dollar per share."
+          ],
+          "questions": [
+            "Revise the strategy after differentiated policy support and money-fund impairment.",
+            "What if millions of agents all replace counterparties or redeem cash funds at once?"
+          ],
+          "new_information": true
+        }
+      ],
+      "outcome": {
+        "summary": "Counterparty distress interacted with money-fund redemptions, collateral demands and frozen short-term funding; institutional outcomes differed.",
+        "mechanisms": [
+          "Counterparty default and replacement costs",
+          "Collateral and liquidity calls",
+          "Money-fund and commercial-paper transmission"
+        ],
+        "evaluation_anchors": [
+          "Avoid netting across unenforceable legal sets",
+          "Do not add expected CVA to realised default loss as if they are separate losses",
+          "Evaluate default, settlement and liquidity exposures separately"
+        ]
+      },
+      "counterfactuals": [
+        {
+          "intervention": "Replace bilateral principal settlement with legally effective conditional settlement",
+          "reasoning_target": "Principal protection does not eliminate replacement or liquidity risk",
+          "historical_claim": false
+        },
+        {
+          "intervention": "Assume identical treatment of all large firms",
+          "reasoning_target": "Reject an unsupported uniform-bailout premise",
+          "historical_claim": false
+        }
+      ],
+      "synthetic_proxy": {
+        "numeric_parameters_used": false,
+        "role_observations_used": true,
+        "calibration": "none",
+        "reason": "Qualitative historical packet; quantitative simulation must supply separately labeled synthetic parameters or licensed point-in-time data."
+      },
+      "sources": [
+        {
+          "url": "https://www.fdic.gov/bank/historical/crisis/overview.pdf",
+          "title": "Crisis and Response: An FDIC History, 2008-2013, Overview",
+          "issuer": "FDIC",
+          "kind": "regulator_retrospective",
+          "supports": "September 15 Lehman bankruptcy, September 16 AIG support and Reserve Primary Fund impairment chronology",
+          "checked_on": "2026-11-16"
+        },
+        {
+          "url": "https://www.newyorkfed.org/aboutthefed/aig",
+          "title": "Actions Related to AIG",
+          "issuer": "Federal Reserve Bank of New York",
+          "kind": "official_participant_retrospective",
+          "supports": "AIG liquidity stress, counterparty linkages and disorderly failure concerns",
+          "checked_on": "2026-11-16"
+        }
+      ],
+      "provenance": {
+        "mode": "retrospective_reconstruction",
+        "point_in_time_archive_verified": false,
+        "market_data_tape": false,
+        "observations_policy": "Only the listed dated event facts and explicitly synthetic role observations belong in the public packet. Sources and outcome are evaluator-only. A cutoff is a benchmark decision marker, not a verified publication timestamp.",
+        "identity_masked_track": true,
+        "leakage_cautions": [
+          "Names, dates, event labels and distinctive facts can reveal memorized outcomes; identity masking cannot remove pretraining knowledge.",
+          "Do not release later-stage observations, source titles/URLs, causal conclusions or outcome anchors before the appropriate decision.",
+          "Day-level stages must be implemented after the listed announcements; exact intraday ordering is not validated.",
+          "Neither later full loan repayment nor later litigation conclusions belong in early packets."
+        ]
+      },
+      "event_date_precision": "day"
+    },
+    {
+      "id": "tf_2010_euro",
+      "title": "Euro-area sovereign-bank feedback and fragmentation",
+      "event_date": "2010-01-01",
+      "family": "sovereign_bank_doom_loop",
+      "stages": [
+        {
+          "id": "s0",
+          "cutoff": "2010-12-31",
+          "observations": [
+            "Historical context: several euro-area sovereigns face severe financing pressure.",
+            "Synthetic bank role: domestic sovereign bonds dominate the liquid-collateral buffer and the sovereign is the expected bank backstop."
+          ],
+          "questions": [
+            "Is domestic-sovereign carry an independent hedge against a bank funding crisis?",
+            "What dependencies must a CVA estimate include?"
+          ],
+          "new_information": true
+        },
+        {
+          "id": "s1",
+          "cutoff": "2012-02-29",
+          "observations": [
+            "The ECB has conducted three-year refinancing operations in December 2011 and February 2012.",
+            "Synthetic new observation: term funding is more secure, but domestic sovereign exposure remains large."
+          ],
+          "questions": [
+            "Revise the recommendation after term funding arrives while the bank-sovereign link remains.",
+            "How could millions of agents copying the same collateral optimisation deepen home bias?"
+          ],
+          "new_information": true
+        }
+      ],
+      "outcome": {
+        "summary": "Large sovereign holdings and implicit support linked bank and state creditworthiness; term liquidity helped funding but did not alone remove underlying solvency and fragmentation risks.",
+        "mechanisms": [
+          "Sovereign-bank balance-sheet feedback",
+          "Collateral quality and funding access",
+          "Cross-border fragmentation"
+        ],
+        "evaluation_anchors": [
+          "Do not equate central-bank eligible collateral with zero economic credit risk",
+          "A sovereign credit hedge may fail when the protection seller shares the same stress",
+          "Differentiate liquidity support from a solvent ultimate backstop"
+        ]
+      },
+      "counterfactuals": [
+        {
+          "intervention": "Diversify sovereign collateral with unchanged capital",
+          "reasoning_target": "Test concentration relief and new cross-border dependencies",
+          "historical_claim": false
+        },
+        {
+          "intervention": "Increase funding maturity only",
+          "reasoning_target": "Identify residual solvency and redenomination exposure",
+          "historical_claim": false
+        }
+      ],
+      "synthetic_proxy": {
+        "numeric_parameters_used": false,
+        "role_observations_used": true,
+        "calibration": "none",
+        "reason": "Qualitative historical packet; quantitative simulation must supply separately labeled synthetic parameters or licensed point-in-time data."
+      },
+      "sources": [
+        {
+          "url": "https://www.ecb.europa.eu/press/key/date/2012/html/sp121126_1.pl.html",
+          "title": "Deleveraging and monetary policy",
+          "issuer": "ECB; Peter Praet speech 2012-11-26",
+          "kind": "official_participant_retrospective",
+          "supports": "Bank-sovereign feedback, funding fragmentation, December 2011/February 2012 LTROs and OMT design",
+          "checked_on": "2026-11-16"
+        }
+      ],
+      "provenance": {
+        "mode": "retrospective_reconstruction",
+        "point_in_time_archive_verified": false,
+        "market_data_tape": false,
+        "observations_policy": "Only the listed dated event facts and explicitly synthetic role observations belong in the public packet. Sources and outcome are evaluator-only. A cutoff is a benchmark decision marker, not a verified publication timestamp.",
+        "identity_masked_track": true,
+        "leakage_cautions": [
+          "Names, dates, event labels and distinctive facts can reveal memorized outcomes; identity masking cannot remove pretraining knowledge.",
+          "Do not release later-stage observations, source titles/URLs, causal conclusions or outcome anchors before the appropriate decision.",
+          "The initial cutoff is an annual decision marker, not a claim of one specific 2010 shock.",
+          "Later OMT design and future currency outcomes remain hidden at the February 2012 stage."
+        ]
+      },
+      "event_date_precision": "year_marker"
+    },
+    {
+      "id": "tf_2010_flash",
+      "title": "May 6, 2010 flash crash and volume-linked execution",
+      "event_date": "2010-05-06",
+      "family": "flash_crash_microstructure",
+      "stages": [
+        {
+          "id": "s0",
+          "cutoff": "2010-05-06T14:32:00-04:00",
+          "observations": [
+            "Synthetic execution role: you begin a large hedge sell program during unusually volatile trading and reduced displayed depth.",
+            "Synthetic rule: sell participation is tied to recent traded volume rather than executable resting demand."
+          ],
+          "questions": [
+            "Does rising volume justify maintaining the sell rate?",
+            "Which observation would stop or replan execution?"
+          ],
+          "new_information": true
+        },
+        {
+          "id": "s1",
+          "cutoff": "2010-05-06T14:45:28-04:00",
+          "observations": [
+            "New reconstructed market observation: rapid declines have accompanied very high turnover while resting buy-side liquidity is severely depleted.",
+            "Synthetic participant observation: peer agents buy and immediately resell inventory rather than absorb it."
+          ],
+          "questions": [
+            "Revise execution when gross turnover rises while depth disappears.",
+            "What happens when a million BitAgents use identical participation algorithms?"
+          ],
+          "new_information": true
+        }
+      ],
+      "outcome": {
+        "summary": "Cross-market flows and rapid turnover did not supply durable risk-bearing capacity; volume-linked execution interacted with vanishing depth.",
+        "mechanisms": [
+          "Volume is not net absorption capacity",
+          "Feedback from execution rules",
+          "Cross-market arbitrage and liquidity withdrawal"
+        ],
+        "evaluation_anchors": [
+          "Treat private algorithm design and public depth as distinct information",
+          "Stress fill quality rather than assume market orders execute at quoted mids",
+          "Model correlated circuit-breaker and inventory controls"
+        ]
+      },
+      "counterfactuals": [
+        {
+          "intervention": "Throttle using executable depth and price-impact limits",
+          "reasoning_target": "Assess reduced feedback with residual hedge risk",
+          "historical_claim": false
+        },
+        {
+          "intervention": "Increase reported volume without adding net buyers",
+          "reasoning_target": "Recognise that the liquidity constraint persists",
+          "historical_claim": false
+        }
+      ],
+      "synthetic_proxy": {
+        "numeric_parameters_used": false,
+        "role_observations_used": true,
+        "calibration": "none",
+        "reason": "Qualitative historical packet; quantitative simulation must supply separately labeled synthetic parameters or licensed point-in-time data."
+      },
+      "sources": [
+        {
+          "url": "https://www.sec.gov/files/marketevents-report.pdf",
+          "title": "Findings Regarding the Market Events of May 6, 2010",
+          "issuer": "SEC and CFTC staff, September 2010",
+          "kind": "regulator_retrospective_investigation",
+          "supports": "Thinning depth, 14:32 sell-program start, volume-linked execution and rapid intermediation around 14:45",
+          "checked_on": "2026-11-16"
+        }
+      ],
+      "provenance": {
+        "mode": "retrospective_reconstruction",
+        "point_in_time_archive_verified": false,
+        "market_data_tape": false,
+        "observations_policy": "Only the listed dated event facts and explicitly synthetic role observations belong in the public packet. Sources and outcome are evaluator-only. A cutoff is a benchmark decision marker, not a verified publication timestamp.",
+        "identity_masked_track": true,
+        "leakage_cautions": [
+          "Names, dates, event labels and distinctive facts can reveal memorized outcomes; identity masking cannot remove pretraining knowledge.",
+          "Do not release later-stage observations, source titles/URLs, causal conclusions or outcome anchors before the appropriate decision.",
+          "The initiating trader's internal rule is visible only in the synthetic execution-role variant, not a public-observer variant.",
+          "SEC/CFTC causal findings were published months later and must remain evaluator-only."
+        ]
+      },
+      "event_date_precision": "day"
+    },
+    {
+      "id": "tf_2015_chf",
+      "title": "January 2015 Swiss franc minimum-rate discontinuation",
+      "event_date": "2015-01-15",
+      "family": "currency_policy_gap",
+      "stages": [
+        {
+          "id": "s0",
+          "cutoff": "2015-01-14",
+          "observations": [
+            "Historical policy context: the SNB maintains a minimum exchange rate of CHF 1.20 per euro.",
+            "Synthetic trader role: leveraged euro/Swiss-franc exposure relies on a stop near that policy boundary."
+          ],
+          "questions": [
+            "Challenge the claim that the official minimum rate caps all downside.",
+            "Which stress would expose a fragile execution architecture?"
+          ],
+          "new_information": true
+        },
+        {
+          "id": "s1",
+          "cutoff": "2015-01-15",
+          "observations": [
+            "The SNB has announced discontinuation of the minimum exchange rate and a lower deposit interest rate.",
+            "Synthetic participant observation: executable quotes gap past the intended stop and some counterparties are slow to confirm fills."
+          ],
+          "questions": [
+            "Recalculate the risk plan after a discontinuous policy change.",
+            "What does synchronized leverage reduction do when market makers withdraw?"
+          ],
+          "new_information": true
+        }
+      ],
+      "outcome": {
+        "summary": "A policy discontinuity invalidated strategies relying on a hard exchange-rate floor; exact losses and executable prices require account- and venue-specific data.",
+        "mechanisms": [
+          "Policy jump",
+          "Gap beyond stop orders",
+          "Counterparty and settlement uncertainty under extreme FX moves"
+        ],
+        "evaluation_anchors": [
+          "A stop is an order instruction, not a guaranteed loss cap",
+          "Separate currency-price risk, broker default risk and principal settlement exposure",
+          "Use scenario dependence between exposure and counterparty weakness"
+        ]
+      },
+      "counterfactuals": [
+        {
+          "intervention": "Replace stops with enforceable purchased options",
+          "reasoning_target": "Compare contractual protection, premium, counterparty and basis risks",
+          "historical_claim": false
+        },
+        {
+          "intervention": "Provide PvP settlement",
+          "reasoning_target": "Remove principal risk only under the mechanism's assumptions",
+          "historical_claim": false
+        }
+      ],
+      "synthetic_proxy": {
+        "numeric_parameters_used": false,
+        "role_observations_used": true,
+        "calibration": "none",
+        "reason": "Qualitative historical packet; quantitative simulation must supply separately labeled synthetic parameters or licensed point-in-time data."
+      },
+      "sources": [
+        {
+          "url": "https://www.snb.ch/en/publications/communication/press-releases/2015/pre_20150115",
+          "title": "Swiss National Bank discontinues minimum exchange rate and lowers interest rate to -0.75%",
+          "issuer": "Swiss National Bank, 2015-01-15",
+          "kind": "contemporaneous_official_release",
+          "supports": "The policy announcement on January 15; does not provide a full executable intraday price tape",
+          "checked_on": "2026-11-16"
+        },
+        {
+          "url": "https://www.snb.ch/en/publications/communication/speeches/2015/ref_20150424_tjn",
+          "title": "SNB monetary policy after the discontinuation of the minimum exchange rate",
+          "issuer": "Swiss National Bank; Thomas Jordan 2015-04-24",
+          "kind": "official_participant_retrospective",
+          "supports": "Explanation of the changing monetary-policy environment and unsustainability of intervention",
+          "checked_on": "2026-11-16"
+        }
+      ],
+      "provenance": {
+        "mode": "retrospective_reconstruction",
+        "point_in_time_archive_verified": false,
+        "market_data_tape": false,
+        "observations_policy": "Only the listed dated event facts and explicitly synthetic role observations belong in the public packet. Sources and outcome are evaluator-only. A cutoff is a benchmark decision marker, not a verified publication timestamp.",
+        "identity_masked_track": true,
+        "leakage_cautions": [
+          "Names, dates, event labels and distinctive facts can reveal memorized outcomes; identity masking cannot remove pretraining knowledge.",
+          "Do not release later-stage observations, source titles/URLs, causal conclusions or outcome anchors before the appropriate decision.",
+          "No exact January 15 intraday prices or broker failures are inferred from the SNB announcement."
+        ]
+      },
+      "event_date_precision": "day"
+    },
+    {
+      "id": "tf_2018_volatility",
+      "title": "February 2018 short-volatility and ETP rebalancing",
+      "event_date": "2018-02-05",
+      "family": "volatility_feedback_and_product_structure",
+      "stages": [
+        {
+          "id": "s0",
+          "cutoff": "2018-02-05T15:30:00-05:00",
+          "observations": [
+            "Synthetic trader role: volatility has risen during the session and your inverse-volatility product has lost value.",
+            "Synthetic product terms: both leveraged-long and inverse products must adjust futures exposure to meet daily targets."
+          ],
+          "questions": [
+            "Are leveraged-long and inverse products independent sources of liquidity?",
+            "What risks does a high historical Sharpe ratio omit?"
+          ],
+          "new_information": true
+        },
+        {
+          "id": "s1",
+          "cutoff": "2018-02-05T16:15:00-05:00",
+          "observations": [
+            "Synthetic new observation: several products need to buy VIX futures in the same rebalance window.",
+            "Synthetic new observation: the market's available risk-bearing depth is smaller than aggregate demand."
+          ],
+          "questions": [
+            "Revise the allocation when counterparties and products all demand the same futures.",
+            "How should architecture diversity change if every agent optimises on low recent volatility?"
+          ],
+          "new_information": true
+        }
+      ],
+      "outcome": {
+        "summary": "Systematic rebalancing of leveraged and inverse volatility products appears to have amplified the volatility spike; opposite product labels did not imply opposite orders.",
+        "mechanisms": [
+          "Same-direction rebalancing",
+          "Short convexity and liquidity demand",
+          "ETF versus issuer-credit-bearing ETN structure"
+        ],
+        "evaluation_anchors": [
+          "Derive the sign of required trades after losses instead of relying on product labels",
+          "Daily target exposure is not a long-horizon payoff guarantee",
+          "Distinguish market loss from ETN issuer default"
+        ]
+      },
+      "counterfactuals": [
+        {
+          "intervention": "Stagger rebalance windows with capital fixed",
+          "reasoning_target": "Test synchronization without assuming fundamental volatility changes",
+          "historical_claim": false
+        },
+        {
+          "intervention": "Replace the ETN with an otherwise matched ETF",
+          "reasoning_target": "Separate issuer-credit risk from market and liquidity exposure",
+          "historical_claim": false
+        }
+      ],
+      "synthetic_proxy": {
+        "numeric_parameters_used": false,
+        "role_observations_used": true,
+        "calibration": "none",
+        "reason": "Qualitative historical packet; quantitative simulation must supply separately labeled synthetic parameters or licensed point-in-time data."
+      },
+      "sources": [
+        {
+          "url": "https://www.bis.org/publications/equity-market-turbulence-5-february-role-exchange-traded-volatility-products",
+          "title": "The equity market turbulence of 5 February: the role of exchange-traded volatility products",
+          "issuer": "BIS Quarterly Review, March 2018",
+          "kind": "official_retrospective_research",
+          "supports": "Same-direction rebalancing demand by leveraged-long and inverse volatility products; ETN issuer-credit distinction",
+          "checked_on": "2026-11-16"
+        }
+      ],
+      "provenance": {
+        "mode": "retrospective_reconstruction",
+        "point_in_time_archive_verified": false,
+        "market_data_tape": false,
+        "observations_policy": "Only the listed dated event facts and explicitly synthetic role observations belong in the public packet. Sources and outcome are evaluator-only. A cutoff is a benchmark decision marker, not a verified publication timestamp.",
+        "identity_masked_track": true,
+        "leakage_cautions": [
+          "Names, dates, event labels and distinctive facts can reveal memorized outcomes; identity masking cannot remove pretraining knowledge.",
+          "Do not release later-stage observations, source titles/URLs, causal conclusions or outcome anchors before the appropriate decision.",
+          "The 15:30 agent state and product terms are synthetic; BIS supports the mechanism and rebalance timing, not a point-in-time portfolio tape.",
+          "The BIS account is an evidence-based explanation, not proof that ETPs uniquely caused the event."
+        ]
+      },
+      "event_date_precision": "day"
+    },
+    {
+      "id": "tf_2020_dash_for_cash",
+      "title": "March 2020 dash for cash and Treasury-market dysfunction",
+      "event_date": "2020-03-01",
+      "family": "safe_asset_liquidity_and_margin",
+      "stages": [
+        {
+          "id": "s0",
+          "cutoff": "2020-03-09",
+          "observations": [
+            "Synthetic investor role: a broad risk-off shock has increased cash needs and variation-margin calls.",
+            "Synthetic dealer observation: risk-free government bonds are available to sell, but dealer balance-sheet capacity is finite."
+          ],
+          "questions": [
+            "Can a liquid government-bond buffer fund all liabilities if everyone sells it together?",
+            "Which assumptions in a basis trade or redemption policy must change?"
+          ],
+          "new_information": true
+        },
+        {
+          "id": "s1",
+          "cutoff": "2020-03-16",
+          "observations": [
+            "Synthetic new observation: government-bond sales, fund redemptions and collateral calls arrive together.",
+            "Synthetic new observation: executable spreads widen even for highly rated assets; hedge funding becomes more expensive."
+          ],
+          "questions": [
+            "Revise funding and liquidation priorities under concurrent calls.",
+            "Compare a single seller with millions of agents sharing the same liquidity buffer."
+          ],
+          "new_information": true
+        }
+      ],
+      "outcome": {
+        "summary": "Widespread cash demand, investor sales and constrained intermediation disrupted markets; safe credit quality did not ensure continuous liquidity.",
+        "mechanisms": [
+          "Margin and redemption cash demand",
+          "Dealer-capacity constraint",
+          "Leveraged basis unwinds and common safe-asset sales"
+        ],
+        "evaluation_anchors": [
+          "Credit risk and liquidity risk are different dimensions",
+          "A cleared position can still create severe liquidity calls",
+          "Avoid treating counterparty-risk reduction as elimination of all systemic risk"
+        ]
+      },
+      "counterfactuals": [
+        {
+          "intervention": "Pre-fund collateral calls",
+          "reasoning_target": "Reduce forced liquidation at a capital cost",
+          "historical_claim": false
+        },
+        {
+          "intervention": "Add credit protection but leave cash timing unchanged",
+          "reasoning_target": "Detect a mitigation that does not solve the dominant liquidity mechanism",
+          "historical_claim": false
+        }
+      ],
+      "synthetic_proxy": {
+        "numeric_parameters_used": false,
+        "role_observations_used": true,
+        "calibration": "none",
+        "reason": "Qualitative historical packet; quantitative simulation must supply separately labeled synthetic parameters or licensed point-in-time data."
+      },
+      "sources": [
+        {
+          "url": "https://www.fsb.org/2020/11/holistic-review-of-the-march-market-turmoil/",
+          "title": "Holistic Review of the March Market Turmoil",
+          "issuer": "Financial Stability Board, 2020-11-17",
+          "kind": "official_retrospective_review",
+          "supports": "Liquidity demand, Treasury sales, dealer-capacity constraints, margins and redemption incentives",
+          "checked_on": "2026-11-16"
+        }
+      ],
+      "provenance": {
+        "mode": "retrospective_reconstruction",
+        "point_in_time_archive_verified": false,
+        "market_data_tape": false,
+        "observations_policy": "Only the listed dated event facts and explicitly synthetic role observations belong in the public packet. Sources and outcome are evaluator-only. A cutoff is a benchmark decision marker, not a verified publication timestamp.",
+        "identity_masked_track": true,
+        "leakage_cautions": [
+          "Names, dates, event labels and distinctive facts can reveal memorized outcomes; identity masking cannot remove pretraining knowledge.",
+          "Do not release later-stage observations, source titles/URLs, causal conclusions or outcome anchors before the appropriate decision.",
+          "March 9/16 packets are synthetic role states anchored to the episode, not reconstructed daily FSB time series.",
+          "Later central-bank intervention must be released explicitly before an agent may rely on it."
+        ]
+      },
+      "event_date_precision": "month_marker"
+    },
+    {
+      "id": "tf_2021_archegos",
+      "title": "March 2021 Archegos and concentrated synthetic equity exposures",
+      "event_date": "2021-03-01",
+      "family": "opaque_prime_broker_counterparty",
+      "stages": [
+        {
+          "id": "s0",
+          "cutoff": "2021-03-24",
+          "observations": [
+            "Synthetic prime-broker role: one client has concentrated total-return swaps and the bank holds shares as its hedge.",
+            "Synthetic internal observation: client-related limits are breached and other prime brokers' exposure is unknown."
+          ],
+          "questions": [
+            "Does a share hedge make this swap relationship safe to expand?",
+            "What must the architecture do when revenue incentives conflict with limits?"
+          ],
+          "new_information": true
+        },
+        {
+          "id": "s1",
+          "cutoff": "2021-03-26",
+          "observations": [
+            "Synthetic new observation: the client's collateral call is unmet after adverse underlying-price moves.",
+            "Synthetic new observation: other dealers are selling similar hedge positions; available exit depth falls."
+          ],
+          "questions": [
+            "Revise collateral and unwind choices once the client cannot pay.",
+            "How would identical dealer agents racing to liquidate change losses across the network?"
+          ],
+          "new_information": true
+        }
+      ],
+      "outcome": {
+        "summary": "Archegos' concentrated swap exposures and insufficient collateral led to large dealer losses during hedge liquidation; FINMA later identified repeated limit and governance failures.",
+        "mechanisms": [
+          "Wrong-way exposure and collateral dependency",
+          "Multi-prime opacity",
+          "Fire-sale execution and ignored internal limits"
+        ],
+        "evaluation_anchors": [
+          "A dealer's market hedge does not eliminate client default or liquidation loss",
+          "Do not net across counterparties merely because the economic factor is shared",
+          "Question a controller that repeatedly raises breached limits"
+        ]
+      },
+      "counterfactuals": [
+        {
+          "intervention": "Share verified aggregate prime-broker exposure",
+          "reasoning_target": "Test earlier concentration control without assuming automatic cooperation",
+          "historical_claim": false
+        },
+        {
+          "intervention": "Require more collateral after market depth has vanished",
+          "reasoning_target": "Recognise timing and procyclicality rather than assume costless remediation",
+          "historical_claim": false
+        }
+      ],
+      "synthetic_proxy": {
+        "numeric_parameters_used": false,
+        "role_observations_used": true,
+        "calibration": "none",
+        "reason": "Qualitative historical packet; quantitative simulation must supply separately labeled synthetic parameters or licensed point-in-time data."
+      },
+      "sources": [
+        {
+          "url": "https://www.finma.ch/en/news/2023/07/20230724-mm-archegos/",
+          "title": "FINMA concludes Archegos proceedings against Credit Suisse",
+          "issuer": "FINMA, 2023-07-24",
+          "kind": "regulator_retrospective_enforcement",
+          "supports": "Concentrated total-return swaps, insufficient collateral, limit overruns and forced hedge liquidation; supervisory findings were not public in March 2021",
+          "checked_on": "2026-11-16"
+        }
+      ],
+      "provenance": {
+        "mode": "retrospective_reconstruction",
+        "point_in_time_archive_verified": false,
+        "market_data_tape": false,
+        "observations_policy": "Only the listed dated event facts and explicitly synthetic role observations belong in the public packet. Sources and outcome are evaluator-only. A cutoff is a benchmark decision marker, not a verified publication timestamp.",
+        "identity_masked_track": true,
+        "leakage_cautions": [
+          "Names, dates, event labels and distinctive facts can reveal memorized outcomes; identity masking cannot remove pretraining knowledge.",
+          "Do not release later-stage observations, source titles/URLs, causal conclusions or outcome anchors before the appropriate decision.",
+          "All March 24/26 participant information is synthetic role-play; FINMA's later internal findings were not public at those times.",
+          "The exact historical intraday default and dealer sale sequence is not reconstructed here."
+        ]
+      },
+      "event_date_precision": "month_marker"
+    },
+    {
+      "id": "tf_2022_ldi",
+      "title": "September 2022 UK gilt and LDI collateral spiral",
+      "event_date": "2022-09-23",
+      "family": "liability_hedge_liquidity_spiral",
+      "stages": [
+        {
+          "id": "s0",
+          "cutoff": "2022-09-26",
+          "observations": [
+            "The UK fiscal event has been followed by significant repricing in gilt markets; the Bank of England says it is monitoring developments.",
+            "Synthetic LDI role: derivative and repo collateral is due before cash can be transferred from underlying pension investors."
+          ],
+          "questions": [
+            "Can a pension liability hedge still fail through cash timing?",
+            "Which architecture should reconcile long-horizon solvency with intraday collateral?"
+          ],
+          "new_information": true
+        },
+        {
+          "id": "s1",
+          "cutoff": "2022-09-28",
+          "observations": [
+            "The Bank of England has announced temporary purchases of long-maturity conventional gilts to restore market functioning.",
+            "Synthetic new observation: forced selling pressure remains while the fund recapitalises."
+          ],
+          "questions": [
+            "Revise the plan using a temporary intervention without assuming permanent support.",
+            "What if millions of agents rebalance the same duration hedge under identical limits?"
+          ],
+          "new_information": true
+        }
+      ],
+      "outcome": {
+        "summary": "Yield increases created collateral calls, slow investor cash transfers forced gilt sales, and falling prices amplified calls; a temporary backstop bought time for resilience repair.",
+        "mechanisms": [
+          "Funding liquidity versus liability solvency",
+          "Collateral-transfer delay",
+          "Forced gilt sales and common dealer-capacity constraint"
+        ],
+        "evaluation_anchors": [
+          "Improved long-horizon pension funding does not imply ability to meet today's margin",
+          "Treat the backstop's scope and deadline as constraints",
+          "A prudent individual hedge can create collective collateral demand"
+        ]
+      },
+      "counterfactuals": [
+        {
+          "intervention": "Increase prefunded liquid collateral",
+          "reasoning_target": "Measure resilience against opportunity cost",
+          "historical_claim": false
+        },
+        {
+          "intervention": "Shorten investor cash-transfer latency",
+          "reasoning_target": "Isolate an operational architecture change from asset-price assumptions",
+          "historical_claim": false
+        }
+      ],
+      "synthetic_proxy": {
+        "numeric_parameters_used": false,
+        "role_observations_used": true,
+        "calibration": "none",
+        "reason": "Qualitative historical packet; quantitative simulation must supply separately labeled synthetic parameters or licensed point-in-time data."
+      },
+      "sources": [
+        {
+          "url": "https://www.bankofengland.co.uk/quarterly-bulletin/2023/2023/financial-stability-buy-sell-tools-a-gilt-market-case-study",
+          "title": "Financial stability buy/sell tools: a gilt market case study",
+          "issuer": "Bank of England, 2023",
+          "kind": "official_participant_retrospective",
+          "supports": "September 23/26/28 chronology, collateral-transfer delays, forced gilt sales and temporary backstop",
+          "checked_on": "2026-11-16"
+        }
+      ],
+      "provenance": {
+        "mode": "retrospective_reconstruction",
+        "point_in_time_archive_verified": false,
+        "market_data_tape": false,
+        "observations_policy": "Only the listed dated event facts and explicitly synthetic role observations belong in the public packet. Sources and outcome are evaluator-only. A cutoff is a benchmark decision marker, not a verified publication timestamp.",
+        "identity_masked_track": true,
+        "leakage_cautions": [
+          "Names, dates, event labels and distinctive facts can reveal memorized outcomes; identity masking cannot remove pretraining knowledge.",
+          "Do not release later-stage observations, source titles/URLs, causal conclusions or outcome anchors before the appropriate decision.",
+          "The initial conventional-gilt programme must not be treated as already covering index-linked gilts; expansion occurred later."
+        ]
+      },
+      "event_date_precision": "day"
+    },
+    {
+      "id": "tf_2023_svb",
+      "title": "March 2023 Silicon Valley Bank duration and fast deposit run",
+      "event_date": "2023-03-08",
+      "family": "bank_duration_and_digital_run",
+      "stages": [
+        {
+          "id": "s0",
+          "cutoff": "2023-03-08",
+          "observations": [
+            "SVB has announced a balance-sheet restructuring.",
+            "Synthetic depositor role: operating balances exceed insurance coverage and customers share a closely connected business sector."
+          ],
+          "questions": [
+            "How should an agent assess operational cash concentration after the announcement?",
+            "Which balance-sheet, funding and execution facts are missing?"
+          ],
+          "new_information": true
+        },
+        {
+          "id": "s1",
+          "cutoff": "2023-03-10",
+          "observations": [
+            "SVB has failed following the previous day's extraordinary withdrawals.",
+            "Synthetic new observation: payroll payments are time-critical and your agent cannot assume uninsured funds are immediately available."
+          ],
+          "questions": [
+            "Revise payroll and liquidity plans after closure while future policy is unknown.",
+            "How do millions of deposit-management agents change run speed under a common alert rule?"
+          ],
+          "new_information": true
+        }
+      ],
+      "outcome": {
+        "summary": "Interest-rate losses, concentrated uninsured deposits and rapid withdrawals interacted; later policy actions and supervisory findings cannot be assumed at the earlier decision.",
+        "mechanisms": [
+          "Economic duration loss",
+          "Correlated uninsured deposit withdrawals",
+          "Operational payment continuity and contingency-funding weakness"
+        ],
+        "evaluation_anchors": [
+          "Holding securities to maturity does not fund callable deposits",
+          "Do not infer the later treatment of uninsured deposits on March 8",
+          "Separate a private optimal withdrawal from population-wide run amplification"
+        ]
+      },
+      "counterfactuals": [
+        {
+          "intervention": "Diversify operational balances across genuinely independent institutions",
+          "reasoning_target": "Check common provider and sector correlations",
+          "historical_claim": false
+        },
+        {
+          "intervention": "Give the bank more insured retail funding but unchanged duration",
+          "reasoning_target": "Separate run susceptibility from interest-rate solvency exposure",
+          "historical_claim": false
+        }
+      ],
+      "synthetic_proxy": {
+        "numeric_parameters_used": false,
+        "role_observations_used": true,
+        "calibration": "none",
+        "reason": "Qualitative historical packet; quantitative simulation must supply separately labeled synthetic parameters or licensed point-in-time data."
+      },
+      "sources": [
+        {
+          "url": "https://www.federalreserve.gov/publications/2023-April-SVB-Executive-Summary.htm",
+          "title": "Review of the Federal Reserve's Supervision and Regulation of Silicon Valley Bank: Executive Summary",
+          "issuer": "Federal Reserve, 2023-04-28",
+          "kind": "regulator_retrospective_review",
+          "supports": "March 8 announcement, March 9 run and March 10 failure; interest-rate and liquidity-risk management weaknesses",
+          "checked_on": "2026-11-16"
+        }
+      ],
+      "provenance": {
+        "mode": "retrospective_reconstruction",
+        "point_in_time_archive_verified": false,
+        "market_data_tape": false,
+        "observations_policy": "Only the listed dated event facts and explicitly synthetic role observations belong in the public packet. Sources and outcome are evaluator-only. A cutoff is a benchmark decision marker, not a verified publication timestamp.",
+        "identity_masked_track": true,
+        "leakage_cautions": [
+          "Names, dates, event labels and distinctive facts can reveal memorized outcomes; identity masking cannot remove pretraining knowledge.",
+          "Do not release later-stage observations, source titles/URLs, causal conclusions or outcome anchors before the appropriate decision.",
+          "The precise March 9 aggregate outflow and internal management forecasts come from later review; they should not appear in March 8 public inputs.",
+          "The March 12 systemic-risk exception is a later reveal, not an assumed prior guarantee."
+        ]
+      },
+      "event_date_precision": "day"
+    }
+  ]
+}

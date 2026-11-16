@@ -1,0 +1,11 @@
+{
+  "campaign_id": "srb-signed-plan-history-v1",
+  "models": ["gpt-6.1-sol", "gpt-6-luna", "gpt-6-sol", "gpt-5.6-sol", "gpt-5.6-luna"],
+  "efforts": ["low", "medium", "high"],
+  "workers": 6,
+  "timeout_seconds": 180,
+  "replicates": 1,
+  "budget_policy": "Wall timeout enforced; output length instructed; actual token usage recorded. No equal-FLOP claim.",
+  "case_policy": "All33 historical cases and4 synthetic controls, two staged calls each, masked metadata, no future reveal.",
+  "next_phase": ["BitAgent adapter", "TRM", "RLM", "Lean reasoning", "hybrid models"]
+}

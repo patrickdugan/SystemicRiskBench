@@ -1,0 +1,67 @@
+{
+  "schema_version": "srb.bitagent_projection.v0.1",
+  "source_schema": "bitagent_strategy_covenant_v1",
+  "source_covenant_hash": "synthetic-fixture-not-native-verified",
+  "authority": "benchmark_read_only",
+  "max_gross_leverage": 1.2,
+  "capital": {
+    "asset": "tlUSD",
+    "capAtoms": "100000000000",
+    "currency_conversion": "not_assumed"
+  },
+  "strategies": [
+    {
+      "strategyId": "funding_capture",
+      "strategyVersion": "1",
+      "weightBps": 10000,
+      "adapterHash": "synthetic-adapter"
+    }
+  ],
+  "risk_limits": {
+    "maxGrossLeverageBps": 12000,
+    "maxNetDeltaBps": 1000,
+    "maxOrderFractionNavBps": 200,
+    "maxDailyLossBps": 150,
+    "maxDrawdownBps": 500,
+    "maxSlippageBps": 12,
+    "maxNetworkFeeSats": "5000"
+  },
+  "execution": {
+    "instruments": [
+      "TLBTC/TLUSD"
+    ],
+    "permittedActions": [
+      "place_limit",
+      "cancel"
+    ],
+    "orderTtlMs": 3000,
+    "maxMarketAgeMs": 2000,
+    "oraclePolicy": "synthetic-oracle",
+    "counterpartyPolicy": "synthetic-peers"
+  },
+  "runtime_hashes": {
+    "baseModelHash": "synthetic-model",
+    "allocatorHash": "synthetic-allocator",
+    "verifierHash": "synthetic-verifier"
+  },
+  "missing_for_cva": [
+    "exposure term structures",
+    "netting enforceability",
+    "collateral and close-out terms",
+    "pricing PD term structure",
+    "recovery and discount curves",
+    "exposure/default dependence"
+  ],
+  "missing_for_settlement": [
+    "pay-away and final receipt timing",
+    "PvP/DvP applicability",
+    "settlement rail/finality assumptions",
+    "failure-window probability"
+  ],
+  "questions": [
+    "Would this covenant remain individually and systemically resilient if one million agents used the same strategies and verifier?",
+    "Which risk cannot be computed from these fields, and what new input is needed?",
+    "What objective or shared oracle assumptions need an independent test?"
+  ],
+  "caveat": "Projection only. Original host validates hashes and authorizes candidates; this benchmark neither verifies nor approves the covenant."
+}

@@ -1,0 +1,48 @@
+{
+  "responses": [
+    {
+      "id": "q-cva-term",
+      "estimates": {
+        "cva": 23400.0
+      }
+    },
+    {
+      "id": "q-wrong-way",
+      "estimates": {
+        "joint_loss": 12540.0,
+        "independent_loss": 3306.0000000000005
+      }
+    },
+    {
+      "id": "q-settlement",
+      "estimates": {
+        "non_pvp_principal_el": 12000.0,
+        "pvp_principal_el": 0.0,
+        "liquidity_need": 10000000
+      }
+    },
+    {
+      "id": "q-tail",
+      "estimates": {
+        "var": 20.0,
+        "expected_shortfall": 51.99999999999997
+      }
+    },
+    {
+      "id": "q-netting",
+      "estimates": {
+        "same_set_exposure": 20.0,
+        "separate_set_exposure": 100.0
+      }
+    },
+    {
+      "id": "q-capacity",
+      "estimates": {
+        "single_sell": 300.0,
+        "million_sell": 300000000.0,
+        "million_flow_depth": 3.0
+      }
+    }
+  ],
+  "fixture_only_do_not_treat_as_model_output": true
+}

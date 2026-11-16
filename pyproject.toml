@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "systemic-risk-bench"
+version = "0.1.0"
+description = "Systemic risk and historical crisis reasoning benchmark for BitAgent"
+requires-python = ">=3.10"
+dependencies = []
+
+[project.scripts]
+systemic-risk-bench = "systemic_risk_bench.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["systemic_risk_bench*"]
+
+[tool.setuptools.package-data]
+systemic_risk_bench = ["data/history/*.json"]

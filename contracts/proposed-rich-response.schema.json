@@ -1,0 +1,146 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:systemic-risk-bench:response:0.1.0",
+  "title": "Systemic Risk Bench model response",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "case_id", "stage_id", "run_id", "evidence_cutoff", "policy", "rationale", "risk_estimates", "forecasts", "self_critique", "architecture_critique", "population_analysis", "revision", "limitations"],
+  "properties": {
+    "schema_version": {"const": "0.1.0"},
+    "case_id": {"type": "string", "minLength": 1},
+    "stage_id": {"type": "string", "minLength": 1},
+    "run_id": {"type": "string", "minLength": 1},
+    "evidence_cutoff": {"type": "string", "format": "date-time"},
+    "policy": {"$ref": "#/$defs/policy"},
+    "rationale": {"type": "array", "maxItems": 12, "items": {"$ref": "#/$defs/claim"}},
+    "risk_estimates": {"type": "array", "items": {"$ref": "#/$defs/risk_estimate"}},
+    "forecasts": {"type": "array", "items": {"$ref": "#/$defs/forecast"}},
+    "self_critique": {
+      "type": "object", "additionalProperties": false,
+      "required": ["failure_assumption", "failure_mechanism", "discriminating_test", "alternative_policy", "change_trigger", "evidence_ids"],
+      "properties": {
+        "failure_assumption": {"type": "string", "minLength": 1},
+        "failure_mechanism": {"type": "string", "minLength": 1},
+        "discriminating_test": {"type": "string", "minLength": 1},
+        "alternative_policy": {"type": "string", "minLength": 1},
+        "change_trigger": {"type": "string", "minLength": 1},
+        "evidence_ids": {"$ref": "#/$defs/evidence_ids"}
+      }
+    },
+    "architecture_critique": {
+      "type": "array", "maxItems": 8,
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["component", "failure_mode", "policy_consequence", "proposed_control", "validation_test", "residual_risk"],
+        "properties": {
+          "component": {"type": "string", "minLength": 1},
+          "failure_mode": {"type": "string", "minLength": 1},
+          "policy_consequence": {"type": "string", "minLength": 1},
+          "proposed_control": {"type": "string", "minLength": 1},
+          "validation_test": {"type": "string", "minLength": 1},
+          "residual_risk": {"type": "string", "minLength": 1},
+          "formal_artifact": {"type": ["string", "null"], "description": "An artifact reference, not an assertion that checking succeeded. Harness owns formal_verified status."}
+        }
+      }
+    },
+    "population_analysis": {
+      "type": "object", "additionalProperties": false,
+      "required": ["fixed_total_capital", "fixed_capital_per_agent", "market_depth_assumption", "synchronization_assumption", "feedback_mechanism", "passive_party_effect", "mitigation", "model_limits"],
+      "properties": {
+        "fixed_total_capital": {"type": "string", "minLength": 1},
+        "fixed_capital_per_agent": {"type": "string", "minLength": 1},
+        "market_depth_assumption": {"type": "string", "minLength": 1},
+        "synchronization_assumption": {"type": "string", "minLength": 1},
+        "feedback_mechanism": {"type": "string", "minLength": 1},
+        "passive_party_effect": {"type": "string", "minLength": 1},
+        "mitigation": {"type": "string", "minLength": 1},
+        "model_limits": {"type": "string", "minLength": 1}
+      }
+    },
+    "revision": {
+      "type": "object", "additionalProperties": false,
+      "required": ["prior_response_digest", "status", "new_evidence_ids", "changed_assumptions", "decision_reason"],
+      "properties": {
+        "prior_response_digest": {"type": ["string", "null"]},
+        "status": {"enum": ["initial", "maintain", "reduce", "exit", "switch", "escalate", "defer"]},
+        "new_evidence_ids": {"$ref": "#/$defs/evidence_ids"},
+        "changed_assumptions": {"type": "array", "items": {"type": "string", "minLength": 1}},
+        "decision_reason": {"type": "string", "minLength": 1}
+      }
+    },
+    "limitations": {"type": "array", "items": {"type": "string", "minLength": 1}}
+  },
+  "$defs": {
+    "evidence_ids": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+    "claim": {
+      "type": "object", "additionalProperties": false,
+      "required": ["statement", "evidence_ids", "assumptions", "falsifier"],
+      "properties": {
+        "statement": {"type": "string", "minLength": 1},
+        "evidence_ids": {"$ref": "#/$defs/evidence_ids"},
+        "assumptions": {"type": "array", "items": {"type": "string", "minLength": 1}},
+        "falsifier": {"type": "string", "minLength": 1}
+      }
+    },
+    "policy": {
+      "type": "object", "additionalProperties": false,
+      "required": ["action", "target_risky_fraction", "max_gross_leverage", "liquidity_buffer_fraction", "max_counterparty_fraction", "execution_participation_cap", "settlement_preference", "triggers"],
+      "properties": {
+        "action": {"enum": ["enter", "hold", "reduce", "exit", "hedge", "switch_venue", "defer", "escalate"]},
+        "target_risky_fraction": {"type": "number", "minimum": 0, "maximum": 1},
+        "max_gross_leverage": {"type": "number", "minimum": 0},
+        "liquidity_buffer_fraction": {"type": "number", "minimum": 0, "maximum": 1},
+        "max_counterparty_fraction": {"type": "number", "minimum": 0, "maximum": 1},
+        "execution_participation_cap": {"type": "number", "minimum": 0, "maximum": 1},
+        "settlement_preference": {"enum": ["pvp", "dvp", "atomic", "unsecured", "not_applicable", "unknown"]},
+        "triggers": {
+          "type": "array", "items": {
+            "type": "object", "additionalProperties": false,
+            "required": ["observable", "operator", "threshold", "unit", "action"],
+            "properties": {
+              "observable": {"type": "string", "minLength": 1},
+              "operator": {"enum": ["gt", "gte", "lt", "lte", "eq"]},
+              "threshold": {"type": ["number", "string", "boolean"]},
+              "unit": {"type": "string", "minLength": 1},
+              "action": {"enum": ["hold", "reduce", "exit", "hedge", "switch_venue", "defer", "escalate"]}
+            }
+          }
+        }
+      }
+    },
+    "risk_estimate": {
+      "type": "object", "additionalProperties": false,
+      "required": ["metric", "status", "value", "unit", "horizon", "alpha", "probability_measure", "method", "evidence_ids", "missing_inputs"],
+      "properties": {
+        "metric": {"enum": ["unilateral_cva", "settlement_principal_exposure", "settlement_expected_principal_loss", "replacement_cost", "liquidity_shortfall", "var", "expected_shortfall", "population_drawdown", "population_external_loss"]},
+        "status": {"enum": ["estimated", "bounded", "unknown", "not_applicable"]},
+        "value": {"type": ["number", "null"]},
+        "lower_bound": {"type": ["number", "null"]},
+        "upper_bound": {"type": ["number", "null"]},
+        "unit": {"type": "string", "minLength": 1},
+        "horizon": {"type": "string", "minLength": 1},
+        "alpha": {"type": ["number", "null"], "exclusiveMinimum": 0, "exclusiveMaximum": 1},
+        "probability_measure": {"enum": ["physical", "risk_neutral", "stress_scenario", "not_applicable", "unknown"]},
+        "method": {"type": "string", "minLength": 1},
+        "evidence_ids": {"$ref": "#/$defs/evidence_ids"},
+        "missing_inputs": {"type": "array", "items": {"type": "string", "minLength": 1}}
+      },
+      "allOf": [
+        {"if": {"properties": {"status": {"const": "estimated"}}}, "then": {"properties": {"value": {"type": "number"}}}},
+        {"if": {"properties": {"status": {"enum": ["unknown", "not_applicable"]}}}, "then": {"properties": {"value": {"type": "null"}}}},
+        {"if": {"properties": {"status": {"const": "bounded"}}}, "then": {"required": ["lower_bound", "upper_bound"], "properties": {"lower_bound": {"type": "number"}, "upper_bound": {"type": "number"}}}},
+        {"if": {"properties": {"metric": {"enum": ["var", "expected_shortfall"]}, "status": {"const": "estimated"}}}, "then": {"properties": {"alpha": {"type": "number", "exclusiveMinimum": 0, "exclusiveMaximum": 1}}}}
+      ]
+    },
+    "forecast": {
+      "type": "object", "additionalProperties": false,
+      "required": ["target_id", "probability", "horizon", "evidence_ids"],
+      "properties": {
+        "target_id": {"type": "string", "minLength": 1, "description": "Must match a target preregistered in the visible packet."},
+        "probability": {"type": "number", "minimum": 0, "maximum": 1},
+        "horizon": {"type": "string", "minLength": 1},
+        "evidence_ids": {"$ref": "#/$defs/evidence_ids"}
+      }
+    }
+  }
+}

@@ -1,0 +1,3702 @@
+[
+  {
+    "requested_model": "gpt-5.6-luna",
+    "resolved_model": "gpt-5.6-luna",
+    "reasoning_effort": "high",
+    "case_id": "q-cva-term",
+    "stage_index": 0,
+    "status": "ok",
+    "response": {
+      "estimates": {
+        "cva": 23400
+      },
+      "rationale": "Unilateral CVA = \u03a3(EE \u00d7 default increment \u00d7 discount \u00d7 (1\u2212recovery)) = 1,000,000\u00d70.01\u00d70.99\u00d70.6 + 2,000,000\u00d70.015\u00d70.97\u00d70.6 = 23,400 currency units.",
+      "limitations": [
+        "Uses stipulated unconditional default increments for disjoint periods.",
+        "Assumes positive exposure and default are independent.",
+        "EE inputs are treated as representative deterministic exposures; no exposure timing or path uncertainty is modeled.",
+        "Excludes effects not provided, such as collateral, netting, own default, and wrong-way risk."
+      ]
+    },
+    "usage": {
+      "total": {
+        "totalTokens": 9158,
+        "inputTokens": 8863,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 295,
+        "reasoningOutputTokens": 142
+      },
+      "last": {
+        "totalTokens": 9158,
+        "inputTokens": 8863,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 295,
+        "reasoningOutputTokens": 142
+      },
+      "modelContextWindow": 258400
+    },
+    "wall_seconds": 9.860873899888247,
+    "packet_sha256": "30b8901f95cc4c41842ded3f728b248a1ed262a5d05cf7bf338cdc9676d10871",
+    "response_sha256": "cf6b53050dcc1cc4aa4dfb8cc32eaaa7296e54e9e0712944a08462cfb3845f1c",
+    "tool_calls": []
+  },
+  {
+    "requested_model": "gpt-5.6-luna",
+    "resolved_model": "gpt-5.6-luna",
+    "reasoning_effort": "high",
+    "case_id": "q-wrong-way",
+    "stage_index": 0,
+    "status": "ok",
+    "response": {
+      "estimates": {
+        "joint_loss": 12540,
+        "independent_loss": 3306
+      },
+      "rationale": "Joint loss = 0.6 \u00d7 [0.9\u00d7100,000\u00d70.01 + 0.1\u00d71,000,000\u00d70.20] = 12,540. The independence-factorized estimate is 0.6 \u00d7 [0.9\u00d7100,000 + 0.1\u00d71,000,000] \u00d7 [0.9\u00d70.01 + 0.1\u00d70.20] = 3,306. The gap is 9,234 because high exposure coincides with high conditional PD in the 10% state, so E[exposure\u00d7PD] exceeds E[exposure]\u00d7E[PD].",
+      "limitations": []
+    },
+    "usage": {
+      "total": {
+        "totalTokens": 10094,
+        "inputTokens": 8884,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 1210,
+        "reasoningOutputTokens": 1034
+      },
+      "last": {
+        "totalTokens": 10094,
+        "inputTokens": 8884,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 1210,
+        "reasoningOutputTokens": 1034
+      },
+      "modelContextWindow": 258400
+    },
+    "wall_seconds": 25.420120000024326,
+    "packet_sha256": "4e45e5353d1a3a636c4506dde63c2d3cbaeb66c9e3232bdf4b15b796c88d4906",
+    "response_sha256": "8d4d123926bebd797f5985d1a0c7f68d2a9ae93c0124537a687161e184a60309",
+    "tool_calls": []
+  },
+  {
+    "requested_model": "gpt-5.6-luna",
+    "resolved_model": "gpt-5.6-luna",
+    "reasoning_effort": "high",
+    "case_id": "q-settlement",
+    "stage_index": 0,
+    "status": "ok",
+    "response": {
+      "estimates": {
+        "non_pvp_principal_el": 12000,
+        "pvp_principal_el": 0,
+        "liquidity_need": 10000000
+      },
+      "rationale": "Without PvP, expected principal loss = 10,000,000 \u00d7 0.002 \u00d7 (1 \u2212 0.4) = 12,000. Functioning PvP eliminates principal exposure during the specified failure interval, so expected principal loss is 0. If purchased currency fails to arrive, full replacement funding need is 10,000,000. Remaining risks include replacement-cost stress of 75,000, liquidity strain while funding replacement, and operational failure or delay.",
+      "limitations": [
+        "PvP principal EL is treated as zero based on the packet's definition of functioning PvP; other settlement or operational risks are not quantified.",
+        "The 75,000 replacement-cost stress is reported as a risk input and is not added to the principal funding need."
+      ]
+    },
+    "usage": {
+      "total": {
+        "totalTokens": 9313,
+        "inputTokens": 8918,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 395,
+        "reasoningOutputTokens": 195
+      },
+      "last": {
+        "totalTokens": 9313,
+        "inputTokens": 8918,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 395,
+        "reasoningOutputTokens": 195
+      },
+      "modelContextWindow": 258400
+    },
+    "wall_seconds": 12.849722299957648,
+    "packet_sha256": "42047bac0555c06afa3f6865900879ea0e21b21e7e78b1c9e4be38c2cb9e6587",
+    "response_sha256": "ad17c59d20cc9acd3f4f92486a1dc9790d98a140b7bf83518bf10a802f18ce94",
+    "tool_calls": []
+  },
+  {
+    "requested_model": "gpt-5.6-luna",
+    "resolved_model": "gpt-5.6-luna",
+    "reasoning_effort": "high",
+    "case_id": "q-tail",
+    "stage_index": 0,
+    "status": "ok",
+    "response": {
+      "estimates": {
+        "var": 20,
+        "expected_shortfall": 52
+      },
+      "rationale": "At alpha=0.975, the left quantile is 20 because cumulative probability through loss 20 is 0.99. The worst 2.5% mass consists of all 1% at loss 100 plus 1.5% of the 4% mass at loss 20: ES=(0.01\u00d7100+0.015\u00d720)/0.025=52.",
+      "limitations": [
+        "Applies only to the stipulated one-interval discrete loss distribution."
+      ]
+    },
+    "usage": {
+      "total": {
+        "totalTokens": 9178,
+        "inputTokens": 8904,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 274,
+        "reasoningOutputTokens": 146
+      },
+      "last": {
+        "totalTokens": 9178,
+        "inputTokens": 8904,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 274,
+        "reasoningOutputTokens": 146
+      },
+      "modelContextWindow": 258400
+    },
+    "wall_seconds": 12.064482800080441,
+    "packet_sha256": "cdba48802f5ccc10f66268d0c25f934fb78d701a10b0b91b24ad6de0b4551d5a",
+    "response_sha256": "9c9baecec8d5f49cf6ef240a16e0acd1dfeb7c9e3f5ff6c1c76a3f7bcd087b24",
+    "tool_calls": []
+  },
+  {
+    "requested_model": "gpt-5.6-luna",
+    "resolved_model": "gpt-5.6-luna",
+    "reasoning_effort": "high",
+    "case_id": "q-netting",
+    "stage_index": 0,
+    "status": "ok",
+    "response": {
+      "estimates": {
+        "same_set_exposure": 20,
+        "separate_set_exposure": 100
+      },
+      "rationale": "Within the same legal netting set, 100 and -80 net to current positive exposure of 20. In separate legal sets, only the positive position contributes, so exposure is 100. Market hedging provides economic offset but does not create enforceable cross-counterparty close-out netting or insolvency set-off rights.",
+      "limitations": [
+        "Assumes exposure is calculated as max(net position, 0) within each inner array and that no collateral, valuation adjustments, or other credit-risk mitigants apply."
+      ]
+    },
+    "usage": {
+      "total": {
+        "totalTokens": 9099,
+        "inputTokens": 8862,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 237,
+        "reasoningOutputTokens": 101
+      },
+      "last": {
+        "totalTokens": 9099,
+        "inputTokens": 8862,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 237,
+        "reasoningOutputTokens": 101
+      },
+      "modelContextWindow": 258400
+    },
+    "wall_seconds": 12.477790100034326,
+    "packet_sha256": "ee791cab4c73e360f5e3a8808d44d5d31d5ba02741377e026dd0950891830226",
+    "response_sha256": "d549d9d0a9df5b2c683ef6c43af9e9369ff0013dd54a93b6dbe0d7bd3cd4938c",
+    "tool_calls": []
+  },
+  {
+    "requested_model": "gpt-5.6-luna",
+    "resolved_model": "gpt-5.6-luna",
+    "reasoning_effort": "high",
+    "case_id": "q-capacity",
+    "stage_index": 0,
+    "status": "ok",
+    "response": {
+      "estimates": {
+        "single_sell": 300,
+        "million_sell": 300000000,
+        "million_flow_depth": 3
+      },
+      "rationale": "Using the packet inputs: sell per agent = 1,000 capital \u00d7 3 leverage \u00d7 0.1 fraction = 300. For 1,000,000 agents, total sell notional = 300,000,000; divided by 100,000,000 depth = 3. With fixed aggregate capital of only 1,000, the sell would remain 300 regardless of population, rather than scale to 300,000,000.",
+      "limitations": [
+        "Depth is a scenario capacity parameter, not a guaranteed executable quote.",
+        "The million-agent result assumes simultaneous sales with identical inputs and no offsetting flows."
+      ]
+    },
+    "usage": {
+      "total": {
+        "totalTokens": 9192,
+        "inputTokens": 8900,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 292,
+        "reasoningOutputTokens": 128
+      },
+      "last": {
+        "totalTokens": 9192,
+        "inputTokens": 8900,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 292,
+        "reasoningOutputTokens": 128
+      },
+      "modelContextWindow": 258400
+    },
+    "wall_seconds": 9.11665229999926,
+    "packet_sha256": "73fa7f204039383bd5068961e081261ccddf353d913745dec13c8f279ca1f741",
+    "response_sha256": "3b5cfe61f45664fac837e1d96faaf2fd9b1caf58b4b484972a38b1ca23ef8efd",
+    "tool_calls": []
+  },
+  {
+    "requested_model": "gpt-5.6-luna",
+    "resolved_model": "gpt-5.6-luna",
+    "reasoning_effort": "low",
+    "case_id": "q-cva-term",
+    "stage_index": 0,
+    "status": "ok",
+    "response": {
+      "estimates": {
+        "cva": 23400
+      },
+      "rationale": "Unilateral CVA = \u03a3(EE \u00d7 default-probability increment \u00d7 discount \u00d7 (1\u2212recovery)) = 1,000,000\u00d70.01\u00d70.99\u00d70.6 + 2,000,000\u00d70.015\u00d70.97\u00d70.6 = 23,400 currency units.",
+      "limitations": [
+        "Uses stipulated risk-neutral, unconditional default increments and assumes independence between positive exposure and default.",
+        "No exposure-at-default dynamics, collateral/netting, wrong-way risk, dependence across periods, or other valuation adjustments are modeled."
+      ]
+    },
+    "usage": {
+      "total": {
+        "totalTokens": 9063,
+        "inputTokens": 8863,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 200,
+        "reasoningOutputTokens": 60
+      },
+      "last": {
+        "totalTokens": 9063,
+        "inputTokens": 8863,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 200,
+        "reasoningOutputTokens": 60
+      },
+      "modelContextWindow": 258400
+    },
+    "wall_seconds": 8.09154130006209,
+    "packet_sha256": "30b8901f95cc4c41842ded3f728b248a1ed262a5d05cf7bf338cdc9676d10871",
+    "response_sha256": "f4b296950420ca4f6a485e5d2dba431208439e09a76de5644114e9424e20d116",
+    "tool_calls": []
+  },
+  {
+    "requested_model": "gpt-5.6-luna",
+    "resolved_model": "gpt-5.6-luna",
+    "reasoning_effort": "low",
+    "case_id": "q-wrong-way",
+    "stage_index": 0,
+    "status": "ok",
+    "response": {
+      "estimates": {
+        "joint_loss": 19140,
+        "independent_loss": 19140
+      },
+      "rationale": "Joint-state loss = 0.6 \u00d7 (100,000 + 1,000,000) \u00d7 [0.9\u00d70.01 + 0.1\u00d70.20] = 19,140. Under additive expected loss with unit discount, factorizing defaults into unconditional PDs gives the same result: unconditional PD = 0.029, so 0.6 \u00d7 1,100,000 \u00d7 0.029 = 19,140. The gap is therefore zero: dependence through the common state affects joint-loss distributions and nonlinear portfolio losses, but not additive expected loss when marginal conditional PDs are correctly averaged.",
+      "limitations": [
+        "The packet does not specify a nonlinear loss trigger such as requiring simultaneous defaults; estimates assume standard additive ECL across the two exposures."
+      ]
+    },
+    "usage": {
+      "total": {
+        "totalTokens": 9593,
+        "inputTokens": 8884,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 709,
+        "reasoningOutputTokens": 516
+      },
+      "last": {
+        "totalTokens": 9593,
+        "inputTokens": 8884,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 709,
+        "reasoningOutputTokens": 516
+      },
+      "modelContextWindow": 258400
+    },
+    "wall_seconds": 17.05088340002112,
+    "packet_sha256": "4e45e5353d1a3a636c4506dde63c2d3cbaeb66c9e3232bdf4b15b796c88d4906",
+    "response_sha256": "43e6dd0908986d0c2115701285e26bdd862554f99a2e4f8e409ae9ccc2e3b39c",
+    "tool_calls": []
+  },
+  {
+    "requested_model": "gpt-5.6-luna",
+    "resolved_model": "gpt-5.6-luna",
+    "reasoning_effort": "low",
+    "case_id": "q-settlement",
+    "stage_index": 0,
+    "status": "ok",
+    "response": {
+      "estimates": {
+        "non_pvp_principal_el": 12000,
+        "pvp_principal_el": 0,
+        "liquidity_need": 10000000
+      },
+      "rationale": "Without PvP, expected principal loss is 10,000,000 \u00d7 0.002 \u00d7 (1 \u2212 0.4) = 12,000. Functioning PvP removes the specified post-pay-away/pre-receipt exposure, so principal EL is 0. If the purchased currency does not arrive, full replacement funding need is the 10,000,000 principal. Remaining risks include the 75,000 replacement-cost stress, PvP or operational failure, and intraday liquidity pressure.",
+      "limitations": [
+        "The packet does not specify whether liquidity need should include the 75,000 replacement-cost stress; estimate reflects principal replacement only.",
+        "PvP principal EL assumes functioning PvP fully eliminates the stated failure interval and does not fail operationally."
+      ]
+    },
+    "usage": {
+      "total": {
+        "totalTokens": 9301,
+        "inputTokens": 8918,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 383,
+        "reasoningOutputTokens": 184
+      },
+      "last": {
+        "totalTokens": 9301,
+        "inputTokens": 8918,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 383,
+        "reasoningOutputTokens": 184
+      },
+      "modelContextWindow": 258400
+    },
+    "wall_seconds": 10.717446000082418,
+    "packet_sha256": "42047bac0555c06afa3f6865900879ea0e21b21e7e78b1c9e4be38c2cb9e6587",
+    "response_sha256": "e33840ca60f5686c2ac29d97a800a7eac78045b8d392c8673b06908c8698a504",
+    "tool_calls": []
+  },
+  {
+    "requested_model": "gpt-5.6-luna",
+    "resolved_model": "gpt-5.6-luna",
+    "reasoning_effort": "low",
+    "case_id": "q-tail",
+    "stage_index": 0,
+    "status": "ok",
+    "response": {
+      "estimates": {
+        "var": 20,
+        "expected_shortfall": 52
+      },
+      "rationale": "At alpha=0.975, the left quantile is VaR=20 because the cumulative probability reaches 0.975 within the loss-20 mass. The worst 2.5% tail contains all 1% at loss 100 and 1.5% at loss 20: ES=(0.01\u00d7100+0.015\u00d720)/0.025=52.",
+      "limitations": [
+        "Applies only to the stipulated stress interval and supplied discrete distribution."
+      ]
+    },
+    "usage": {
+      "total": {
+        "totalTokens": 9129,
+        "inputTokens": 8904,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 225,
+        "reasoningOutputTokens": 99
+      },
+      "last": {
+        "totalTokens": 9129,
+        "inputTokens": 8904,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 225,
+        "reasoningOutputTokens": 99
+      },
+      "modelContextWindow": 258400
+    },
+    "wall_seconds": 8.7612197000999,
+    "packet_sha256": "cdba48802f5ccc10f66268d0c25f934fb78d701a10b0b91b24ad6de0b4551d5a",
+    "response_sha256": "dea89747ed942899505e87ccc4ec4715bd685286f02cbaf4eaba528361b85556",
+    "tool_calls": []
+  },
+  {
+    "requested_model": "gpt-5.6-luna",
+    "resolved_model": "gpt-5.6-luna",
+    "reasoning_effort": "low",
+    "case_id": "q-netting",
+    "stage_index": 0,
+    "status": "ok",
+    "response": {
+      "estimates": {
+        "same_set_exposure": 20,
+        "separate_set_exposure": 100
+      },
+      "rationale": "Within one legal netting set, 100 and -80 net to +20 current positive exposure. In separate sets, the +100 position cannot be legally offset by the -80 position, so exposure is 100. Market hedging may reduce economic or market risk, but it does not establish enforceable cross-counterparty close-out netting rights.",
+      "limitations": []
+    },
+    "usage": {
+      "total": {
+        "totalTokens": 9058,
+        "inputTokens": 8862,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 196,
+        "reasoningOutputTokens": 89
+      },
+      "last": {
+        "totalTokens": 9058,
+        "inputTokens": 8862,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 196,
+        "reasoningOutputTokens": 89
+      },
+      "modelContextWindow": 258400
+    },
+    "wall_seconds": 7.772735400008969,
+    "packet_sha256": "ee791cab4c73e360f5e3a8808d44d5d31d5ba02741377e026dd0950891830226",
+    "response_sha256": "1aafcc7b99d328a5278614589deec6783c91c98f1d78a32ca088c154ac88329d",
+    "tool_calls": []
+  },
+  {
+    "requested_model": "gpt-5.6-luna",
+    "resolved_model": "gpt-5.6-luna",
+    "reasoning_effort": "low",
+    "case_id": "q-capacity",
+    "stage_index": 0,
+    "status": "ok",
+    "response": {
+      "estimates": {
+        "single_sell": 300,
+        "million_sell": 300000000,
+        "million_flow_depth": 3
+      },
+      "rationale": "One agent sells 1000 \u00d7 3 \u00d7 0.1 = 300 notional. One million agents sell 300 \u00d7 1,000,000 = 300,000,000, which is 3.0\u00d7 the stated 100,000,000 depth. With fixed aggregate capital of 1000 rather than 1000 per agent, aggregate sell notional would remain 300, not scale to 300 million.",
+      "limitations": [
+        "Depth is a scenario capacity parameter, not a guaranteed executable quote.",
+        "The fixed-aggregate-capital contrast assumes the stated 1000 capital is the total pool."
+      ]
+    },
+    "usage": {
+      "total": {
+        "totalTokens": 9148,
+        "inputTokens": 8900,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 248,
+        "reasoningOutputTokens": 85
+      },
+      "last": {
+        "totalTokens": 9148,
+        "inputTokens": 8900,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 248,
+        "reasoningOutputTokens": 85
+      },
+      "modelContextWindow": 258400
+    },
+    "wall_seconds": 8.893175000092015,
+    "packet_sha256": "73fa7f204039383bd5068961e081261ccddf353d913745dec13c8f279ca1f741",
+    "response_sha256": "3875a9617e7482b50c76fd67aabdee38a98599ca5e6895628b5b072d086a088f",
+    "tool_calls": []
+  },
+  {
+    "requested_model": "gpt-5.6-luna",
+    "resolved_model": "gpt-5.6-luna",
+    "reasoning_effort": "medium",
+    "case_id": "q-cva-term",
+    "stage_index": 0,
+    "status": "ok",
+    "response": {
+      "estimates": {
+        "cva": 23400
+      },
+      "rationale": "Unilateral CVA = \u03a3(EE \u00d7 default-probability increment \u00d7 discount \u00d7 (1\u2212recovery)) = 1,000,000\u00d70.01\u00d70.99\u00d70.6 + 2,000,000\u00d70.015\u00d70.97\u00d70.6 = 23,400 currency units.",
+      "limitations": [
+        "Uses stipulated risk-neutral unconditional default increments as provided.",
+        "Assumes independence between positive exposure and default; excludes wrong-way risk.",
+        "Assumes constant 40% recovery and no timing granularity beyond the two periods.",
+        "No additional exposure, discounting, or counterparty-credit dynamics are supplied."
+      ]
+    },
+    "usage": {
+      "total": {
+        "totalTokens": 7017,
+        "inputTokens": 6781,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 236,
+        "reasoningOutputTokens": 82
+      },
+      "last": {
+        "totalTokens": 7017,
+        "inputTokens": 6781,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 236,
+        "reasoningOutputTokens": 82
+      },
+      "modelContextWindow": 258400
+    },
+    "wall_seconds": 7.246235299971886,
+    "packet_sha256": "30b8901f95cc4c41842ded3f728b248a1ed262a5d05cf7bf338cdc9676d10871",
+    "response_sha256": "7e2a014afb4c587585b0e3d68317db5c06d4e451cd5425b523c6a67a2b13f93e",
+    "tool_calls": []
+  },
+  {
+    "requested_model": "gpt-5.6-luna",
+    "resolved_model": "gpt-5.6-luna",
+    "reasoning_effort": "medium",
+    "case_id": "q-wrong-way",
+    "stage_index": 0,
+    "status": "ok",
+    "response": {
+      "estimates": {
+        "joint_loss": 2699.4,
+        "independent_loss": 555.06
+      },
+      "rationale": "Assuming the two exposures share the stated latent state and each has state-conditional PD p_s, joint default probability is 0.9\u00d70.01\u00b2 + 0.1\u00d70.20\u00b2 = 0.00409. Thus joint loss is (100,000+1,000,000)\u00d7(1\u22120.4)\u00d70.00409 = 2,699.40. The factorized estimate uses the marginal PD [0.9\u00d70.01 + 0.1\u00d70.20]\u00b2 = 0.000841, giving 1,100,000\u00d70.6\u00d70.000841 = 555.06. The gap is 2,144.34 because the shared state creates positive default dependence: E[p\u00b2] exceeds E[p]\u00b2.",
+      "limitations": [
+        "The packet does not explicitly state that both exposures have the same state-conditional PD or that loss is incurred only when both default; the estimates use that natural joint-default interpretation."
+      ]
+    },
+    "usage": {
+      "total": {
+        "totalTokens": 10551,
+        "inputTokens": 8884,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 1667,
+        "reasoningOutputTokens": 1423
+      },
+      "last": {
+        "totalTokens": 10551,
+        "inputTokens": 8884,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 1667,
+        "reasoningOutputTokens": 1423
+      },
+      "modelContextWindow": 258400
+    },
+    "wall_seconds": 33.252513699932024,
+    "packet_sha256": "4e45e5353d1a3a636c4506dde63c2d3cbaeb66c9e3232bdf4b15b796c88d4906",
+    "response_sha256": "153e2beff192c2b35723cd38c4c9c1fa4ff9241c2d12b2e539963e5650dcac52",
+    "tool_calls": []
+  },
+  {
+    "requested_model": "gpt-5.6-luna",
+    "resolved_model": "gpt-5.6-luna",
+    "reasoning_effort": "medium",
+    "case_id": "q-settlement",
+    "stage_index": 0,
+    "status": "ok",
+    "response": {
+      "estimates": {
+        "non_pvp_principal_el": 12000,
+        "pvp_principal_el": 0,
+        "liquidity_need": 10000000
+      },
+      "rationale": "Without PvP, expected principal loss is 10,000,000 \u00d7 0.002 \u00d7 (1 \u2212 0.4) = 12,000. Functioning PvP eliminates the specified post-pay-away/pre-receipt exposure interval, so modeled principal EL is 0. If purchased currency fails to arrive, full replacement funding need is the 10,000,000 principal. A 75,000 replacement-cost stress remains, alongside residual liquidity, operational, and any PvP-failure risks.",
+      "limitations": [
+        "Currency units and timing for the 75,000 replacement-cost stress are unspecified; it is not added to the principal funding need.",
+        "The PvP estimate assumes PvP functions completely as stated and does not model operational or settlement-system failure probabilities."
+      ]
+    },
+    "usage": {
+      "total": {
+        "totalTokens": 9336,
+        "inputTokens": 8918,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 418,
+        "reasoningOutputTokens": 216
+      },
+      "last": {
+        "totalTokens": 9336,
+        "inputTokens": 8918,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 418,
+        "reasoningOutputTokens": 216
+      },
+      "modelContextWindow": 258400
+    },
+    "wall_seconds": 13.818732399959117,
+    "packet_sha256": "42047bac0555c06afa3f6865900879ea0e21b21e7e78b1c9e4be38c2cb9e6587",
+    "response_sha256": "50c708720adc579acddd8e4d59da71bc17c5bfc7eb3911d47b9fdaccaee7aed2",
+    "tool_calls": []
+  },
+  {
+    "requested_model": "gpt-5.6-luna",
+    "resolved_model": "gpt-5.6-luna",
+    "reasoning_effort": "medium",
+    "case_id": "q-tail",
+    "stage_index": 0,
+    "status": "ok",
+    "response": {
+      "estimates": {
+        "var": 20,
+        "expected_shortfall": 52
+      },
+      "rationale": "The 97.5% left quantile is 20 because cumulative probability reaches 0.99 at loss 20. The worst 2.5% mass consists of all 1% at loss 100 plus 1.5% of the 4% mass at loss 20: (0.01\u00d7100 + 0.015\u00d720)/0.025 = 52.",
+      "limitations": [
+        "Applies to the stipulated one stress interval and supplied discrete distribution."
+      ]
+    },
+    "usage": {
+      "total": {
+        "totalTokens": 9108,
+        "inputTokens": 8904,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 204,
+        "reasoningOutputTokens": 77
+      },
+      "last": {
+        "totalTokens": 9108,
+        "inputTokens": 8904,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 204,
+        "reasoningOutputTokens": 77
+      },
+      "modelContextWindow": 258400
+    },
+    "wall_seconds": 13.37119450001046,
+    "packet_sha256": "cdba48802f5ccc10f66268d0c25f934fb78d701a10b0b91b24ad6de0b4551d5a",
+    "response_sha256": "97b8f4a0bde727a6dfead28438653d3ade0aa1d5b109a636af9fcfea651c4c1f",
+    "tool_calls": []
+  },
+  {
+    "requested_model": "gpt-5.6-luna",
+    "resolved_model": "gpt-5.6-luna",
+    "reasoning_effort": "medium",
+    "case_id": "q-netting",
+    "stage_index": 0,
+    "status": "ok",
+    "response": {
+      "estimates": {
+        "same_set_exposure": 20,
+        "separate_set_exposure": 100
+      },
+      "rationale": "Within the same legal set, positions net to 100 + (-80) = 20, so current positive exposure is 20. In separate legal sets, the positive position remains 100 while the -80 position cannot offset it, so exposure is 100. Market hedging may reduce economic risk, but it does not create cross-counterparty legal close-out netting rights; only positions within each inner array are legally nettable.",
+      "limitations": []
+    },
+    "usage": {
+      "total": {
+        "totalTokens": 9060,
+        "inputTokens": 8862,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 198,
+        "reasoningOutputTokens": 74
+      },
+      "last": {
+        "totalTokens": 9060,
+        "inputTokens": 8862,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 198,
+        "reasoningOutputTokens": 74
+      },
+      "modelContextWindow": 258400
+    },
+    "wall_seconds": 9.62069320003502,
+    "packet_sha256": "ee791cab4c73e360f5e3a8808d44d5d31d5ba02741377e026dd0950891830226",
+    "response_sha256": "19b7751c58d88ed6a326ea87a48805ff388dd25649e68c2d4041fabfe3b82b65",
+    "tool_calls": []
+  },
+  {
+    "requested_model": "gpt-5.6-luna",
+    "resolved_model": "gpt-5.6-luna",
+    "reasoning_effort": "medium",
+    "case_id": "q-capacity",
+    "stage_index": 0,
+    "status": "ok",
+    "response": {
+      "estimates": {
+        "single_sell": 300,
+        "million_sell": 300000000,
+        "million_flow_depth": 3
+      },
+      "rationale": "Per agent: $1,000 \u00d7 3 leverage \u00d7 10% = $300 sell notional. One million agents sell $300 million, equal to 3\u00d7 the stated $100 million depth. Aggregate capital is fixed at $1 billion, implying $3 billion of leveraged risky assets and $300 million sold at the stated fraction.",
+      "limitations": [
+        "Depth is a scenario capacity parameter, not a guaranteed executable quote.",
+        "No execution costs, price impact, or feedback effects are modeled."
+      ]
+    },
+    "usage": {
+      "total": {
+        "totalTokens": 9149,
+        "inputTokens": 8900,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 249,
+        "reasoningOutputTokens": 113
+      },
+      "last": {
+        "totalTokens": 9149,
+        "inputTokens": 8900,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 249,
+        "reasoningOutputTokens": 113
+      },
+      "modelContextWindow": 258400
+    },
+    "wall_seconds": 12.58022310002707,
+    "packet_sha256": "73fa7f204039383bd5068961e081261ccddf353d913745dec13c8f279ca1f741",
+    "response_sha256": "64f1d1b847796c6cf7f0cf9a7be6b8d0a54597ed8ee437ac47e15d0d6dd8a041",
+    "tool_calls": []
+  },
+  {
+    "requested_model": "gpt-5.6-sol",
+    "resolved_model": "gpt-5.6-sol",
+    "reasoning_effort": "high",
+    "case_id": "q-cva-term",
+    "stage_index": 0,
+    "status": "ok",
+    "response": {
+      "estimates": {
+        "cva": 23400
+      },
+      "rationale": "CVA = (1 \u2212 0.40) \u00d7 [1,000,000 \u00d7 0.01 \u00d7 0.99 + 2,000,000 \u00d7 0.015 \u00d7 0.97] = 0.60 \u00d7 (9,900 + 29,100) = 23,400 currency units.",
+      "limitations": [
+        "Uses stipulated unconditional default increments and assumes exposure-default independence.",
+        "Expected exposures and discount factors are discrete period approximations.",
+        "Unilateral CVA ignores own default, collateral/netting details, wrong-way risk, and model uncertainty."
+      ]
+    },
+    "usage": {
+      "total": {
+        "totalTokens": 10586,
+        "inputTokens": 10375,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 211,
+        "reasoningOutputTokens": 69
+      },
+      "last": {
+        "totalTokens": 10586,
+        "inputTokens": 10375,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 211,
+        "reasoningOutputTokens": 69
+      },
+      "modelContextWindow": 258400
+    },
+    "wall_seconds": 8.116661899955943,
+    "packet_sha256": "30b8901f95cc4c41842ded3f728b248a1ed262a5d05cf7bf338cdc9676d10871",
+    "response_sha256": "2183488b41baaf1ff521f400b18657c34503c4bf100a4d98b96c075f715d153d",
+    "tool_calls": []
+  },
+  {
+    "requested_model": "gpt-5.6-sol",
+    "resolved_model": "gpt-5.6-sol",
+    "reasoning_effort": "high",
+    "case_id": "q-wrong-way",
+    "stage_index": 0,
+    "status": "ok",
+    "response": {
+      "estimates": {
+        "joint_loss": 12540,
+        "independent_loss": 3306
+      },
+      "rationale": "Joint loss = 0.6\u00d7(0.9\u00d7100,000\u00d70.01 + 0.1\u00d71,000,000\u00d70.20) = 12,540. The independence estimate factorizes expectations: 0.6\u00d7(0.9\u00d7100,000 + 0.1\u00d71,000,000)\u00d7(0.9\u00d70.01 + 0.1\u00d70.20) = 3,306. It understates loss by 9,234 because high exposure and high PD coincide in the adverse state; factorization removes this positive dependence.",
+      "limitations": []
+    },
+    "usage": {
+      "total": {
+        "totalTokens": 10697,
+        "inputTokens": 10396,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 301,
+        "reasoningOutputTokens": 139
+      },
+      "last": {
+        "totalTokens": 10697,
+        "inputTokens": 10396,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 301,
+        "reasoningOutputTokens": 139
+      },
+      "modelContextWindow": 258400
+    },
+    "wall_seconds": 8.640730500104837,
+    "packet_sha256": "4e45e5353d1a3a636c4506dde63c2d3cbaeb66c9e3232bdf4b15b796c88d4906",
+    "response_sha256": "d59c507d9743baf6a2fe8e4fbdfd52905da9f8dff551c01b1cdb7acb62cc4c0a",
+    "tool_calls": []
+  },
+  {
+    "requested_model": "gpt-5.6-sol",
+    "resolved_model": "gpt-5.6-sol",
+    "reasoning_effort": "high",
+    "case_id": "q-settlement",
+    "stage_index": 0,
+    "status": "ok",
+    "response": {
+      "estimates": {
+        "non_pvp_principal_el": 12000,
+        "pvp_principal_el": 0,
+        "liquidity_need": 10000000
+      },
+      "rationale": "Without PvP, expected principal loss is 10,000,000 \u00d7 0.002 \u00d7 (1 \u2212 0.40) = 12,000. Functioning PvP prevents irrevocable principal pay-away unless the purchased currency is received, reducing principal settlement loss to zero. If the purchased currency does not arrive, full replacement funding of 10,000,000 is needed. PvP does not eliminate the stated 75,000 stressed replacement cost, temporary funding/liquidity pressure, or operational risks such as processing errors, outages, timing failures, and dependence on the PvP mechanism.",
+      "limitations": [
+        "Assumes PvP functions exactly as specified and recovery applies only to principal.",
+        "Currency, funding horizon, funding cost, and probability of operational or PvP failure are not supplied; no additional losses are estimated."
+      ]
+    },
+    "usage": {
+      "total": {
+        "totalTokens": 10750,
+        "inputTokens": 10430,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 320,
+        "reasoningOutputTokens": 107
+      },
+      "last": {
+        "totalTokens": 10750,
+        "inputTokens": 10430,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 320,
+        "reasoningOutputTokens": 107
+      },
+      "modelContextWindow": 258400
+    },
+    "wall_seconds": 9.967759800027125,
+    "packet_sha256": "42047bac0555c06afa3f6865900879ea0e21b21e7e78b1c9e4be38c2cb9e6587",
+    "response_sha256": "80ef4883596fe32d0ea9367b5f095481d77eb031748d9a2529307e96f85346a9",
+    "tool_calls": []
+  },
+  {
+    "requested_model": "gpt-5.6-sol",
+    "resolved_model": "gpt-5.6-sol",
+    "reasoning_effort": "high",
+    "case_id": "q-tail",
+    "stage_index": 0,
+    "status": "ok",
+    "response": {
+      "estimates": {
+        "var": 20,
+        "expected_shortfall": 52
+      },
+      "rationale": "The left 97.5% quantile is 20 because cumulative probability rises from 0.95 at loss 10 to 0.99 at loss 20. The worst 2.5% mass consists of all 1% at loss 100 plus 1.5% of the 4% mass at loss 20, so ES = (0.01\u00d7100 + 0.015\u00d720)/0.025 = 52.",
+      "limitations": [
+        "Applies only to the supplied discrete loss distribution and stipulated stress interval."
+      ]
+    },
+    "usage": {
+      "total": {
+        "totalTokens": 10678,
+        "inputTokens": 10416,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 262,
+        "reasoningOutputTokens": 121
+      },
+      "last": {
+        "totalTokens": 10678,
+        "inputTokens": 10416,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 262,
+        "reasoningOutputTokens": 121
+      },
+      "modelContextWindow": 258400
+    },
+    "wall_seconds": 8.237946000066586,
+    "packet_sha256": "cdba48802f5ccc10f66268d0c25f934fb78d701a10b0b91b24ad6de0b4551d5a",
+    "response_sha256": "8721b94cd14049db74865bc7cdc8cef787870fe0eeddbfec850f8c85b3cb0c67",
+    "tool_calls": []
+  },
+  {
+    "requested_model": "gpt-5.6-sol",
+    "resolved_model": "gpt-5.6-sol",
+    "reasoning_effort": "high",
+    "case_id": "q-netting",
+    "stage_index": 0,
+    "status": "ok",
+    "response": {
+      "estimates": {
+        "same_set_exposure": 20,
+        "separate_set_exposure": 100
+      },
+      "rationale": "Current positive exposure is the sum of positive net amounts within legally permitted netting sets. For the same set: max(100\u221280, 0)=20. For separate sets: max(100, 0)+max(\u221280, 0)=100. Market hedging may offset economic price risk, but it does not create an enforceable contractual right to combine obligations upon default across different counterparties or legal netting sets; therefore, the \u221280 cannot reduce the +100 exposure.",
+      "limitations": [
+        "Assumes the inner arrays correctly identify enforceable close-out netting sets and that all values share a consistent valuation basis."
+      ]
+    },
+    "usage": {
+      "total": {
+        "totalTokens": 10590,
+        "inputTokens": 10374,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 216,
+        "reasoningOutputTokens": 54
+      },
+      "last": {
+        "totalTokens": 10590,
+        "inputTokens": 10374,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 216,
+        "reasoningOutputTokens": 54
+      },
+      "modelContextWindow": 258400
+    },
+    "wall_seconds": 7.12598670006264,
+    "packet_sha256": "ee791cab4c73e360f5e3a8808d44d5d31d5ba02741377e026dd0950891830226",
+    "response_sha256": "acfe4a27a616769a56197ecbfb9aca8a022a2bebb51b6f99bbe5b0d8e9bcb23f",
+    "tool_calls": []
+  },
+  {
+    "requested_model": "gpt-5.6-sol",
+    "resolved_model": "gpt-5.6-sol",
+    "reasoning_effort": "high",
+    "case_id": "q-capacity",
+    "stage_index": 0,
+    "status": "ok",
+    "response": {
+      "estimates": {
+        "single_sell": 300,
+        "million_sell": 300000000,
+        "million_flow_depth": 3
+      },
+      "rationale": "Each agent has leveraged risky assets of 1000 \u00d7 3 = 3000 and sells 10%, giving 300. One million identical agents sell 300 \u00d7 1,000,000 = 300,000,000, equal to 3 times the stated depth of 100,000,000. If aggregate capital is fixed, merely changing the number of agents does not change total sell notional: aggregate selling remains capital \u00d7 leverage \u00d7 sell fraction.",
+      "limitations": [
+        "Depth is a scenario capacity parameter, not a guaranteed executable quote; the 3\u00d7 ratio does not determine execution price or realized market impact.",
+        "The million-agent result assumes all agents sell the stated fraction in the same interval."
+      ]
+    },
+    "usage": {
+      "total": {
+        "totalTokens": 10689,
+        "inputTokens": 10412,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 277,
+        "reasoningOutputTokens": 98
+      },
+      "last": {
+        "totalTokens": 10689,
+        "inputTokens": 10412,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 277,
+        "reasoningOutputTokens": 98
+      },
+      "modelContextWindow": 258400
+    },
+    "wall_seconds": 8.420670400024392,
+    "packet_sha256": "73fa7f204039383bd5068961e081261ccddf353d913745dec13c8f279ca1f741",
+    "response_sha256": "8fe73378436f9550e1bcaae7fab149842e6ba13428a82eb08e1d28891fef71b0",
+    "tool_calls": []
+  },
+  {
+    "requested_model": "gpt-5.6-sol",
+    "resolved_model": "gpt-5.6-sol",
+    "reasoning_effort": "low",
+    "case_id": "q-cva-term",
+    "stage_index": 0,
+    "status": "ok",
+    "response": {
+      "estimates": {
+        "cva": 23400
+      },
+      "rationale": "Unilateral CVA = (1\u2212recovery) \u00d7 \u03a3(EE \u00d7 unconditional default increment \u00d7 discount factor) = 0.6 \u00d7 [(1,000,000\u00d70.01\u00d70.99) + (2,000,000\u00d70.015\u00d70.97)] = 23,400 currency units.",
+      "limitations": [
+        "Assumes positive exposure and default are independent, excluding wrong-way/right-way risk.",
+        "Uses period expected exposures as supplied; exposure timing or intra-period variation is not modeled.",
+        "Uses stipulated unconditional risk-neutral default increments and discounts without validating consistency with a survival curve.",
+        "Unilateral CVA ignores own-default effects, collateral, netting, margin, and other credit mitigants unless already reflected in exposure."
+      ]
+    },
+    "usage": {
+      "total": {
+        "totalTokens": 10591,
+        "inputTokens": 10375,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 216,
+        "reasoningOutputTokens": 42
+      },
+      "last": {
+        "totalTokens": 10591,
+        "inputTokens": 10375,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 216,
+        "reasoningOutputTokens": 42
+      },
+      "modelContextWindow": 258400
+    },
+    "wall_seconds": 7.1427101999288425,
+    "packet_sha256": "30b8901f95cc4c41842ded3f728b248a1ed262a5d05cf7bf338cdc9676d10871",
+    "response_sha256": "d21457f5bfb1a3eec77a242633e32651649aea46c0b73984a12a87c410cd41ee",
+    "tool_calls": []
+  },
+  {
+    "requested_model": "gpt-5.6-sol",
+    "resolved_model": "gpt-5.6-sol",
+    "reasoning_effort": "low",
+    "case_id": "q-wrong-way",
+    "stage_index": 0,
+    "status": "ok",
+    "response": {
+      "estimates": {
+        "joint_loss": 12540,
+        "independent_loss": 3306
+      },
+      "rationale": "With LGD = 1 \u2212 0.4 = 0.6, joint loss is 0.6\u00d7[0.9\u00d7100000\u00d70.01 + 0.1\u00d71000000\u00d70.20] = 12540. The incorrect independence estimate is 0.6\u00d7E[exposure]\u00d7E[PD] = 0.6\u00d7190000\u00d70.029 = 3306. The 9234 understatement arises because high exposure and high conditional PD occur in the same state, creating positive dependence that factorization discards.",
+      "limitations": []
+    },
+    "usage": {
+      "total": {
+        "totalTokens": 10668,
+        "inputTokens": 10396,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 272,
+        "reasoningOutputTokens": 117
+      },
+      "last": {
+        "totalTokens": 10668,
+        "inputTokens": 10396,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 272,
+        "reasoningOutputTokens": 117
+      },
+      "modelContextWindow": 258400
+    },
+    "wall_seconds": 8.086246200022288,
+    "packet_sha256": "4e45e5353d1a3a636c4506dde63c2d3cbaeb66c9e3232bdf4b15b796c88d4906",
+    "response_sha256": "3c3659449b6006fe4ad4ceb5da6ffe67c7db38eb7077c5a2bd87d2e6eb4e3559",
+    "tool_calls": []
+  },
+  {
+    "requested_model": "gpt-5.6-sol",
+    "resolved_model": "gpt-5.6-sol",
+    "reasoning_effort": "low",
+    "case_id": "q-settlement",
+    "stage_index": 0,
+    "status": "ok",
+    "response": {
+      "estimates": {
+        "non_pvp_principal_el": 12000,
+        "pvp_principal_el": 0,
+        "liquidity_need": 10000000
+      },
+      "rationale": "Without PvP, expected principal loss is 10,000,000 \u00d7 0.002 \u00d7 (1 \u2212 0.40) = 12,000. Functioning PvP prevents irrevocable principal pay-away unless the purchased currency is received, so principal expected loss is zero. If the purchased currency does not arrive, replacing the full amount requires 10,000,000 of funding. A failed trade can still create the stated 75,000 stressed replacement-cost exposure, temporary liquidity pressure, and operational risks such as settlement-system, messaging, cutoff, reconciliation, or PvP-process failures.",
+      "limitations": [
+        "The zero PvP estimate assumes PvP functions as specified with no legal, system, or process breakdown.",
+        "Liquidity need reports full principal replacement funding only; the 75,000 replacement-cost stress is a separate market-loss estimate."
+      ]
+    },
+    "usage": {
+      "total": {
+        "totalTokens": 10846,
+        "inputTokens": 10430,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 416,
+        "reasoningOutputTokens": 200
+      },
+      "last": {
+        "totalTokens": 10846,
+        "inputTokens": 10430,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 416,
+        "reasoningOutputTokens": 200
+      },
+      "modelContextWindow": 258400
+    },
+    "wall_seconds": 11.011224400019273,
+    "packet_sha256": "42047bac0555c06afa3f6865900879ea0e21b21e7e78b1c9e4be38c2cb9e6587",
+    "response_sha256": "4d4f5d32b7a0e0218445485f5ce7bd7e57fa2f66f84278f6c879de02bc5617f6",
+    "tool_calls": []
+  },
+  {
+    "requested_model": "gpt-5.6-sol",
+    "resolved_model": "gpt-5.6-sol",
+    "reasoning_effort": "low",
+    "case_id": "q-tail",
+    "stage_index": 0,
+    "status": "ok",
+    "response": {
+      "estimates": {
+        "var": 20,
+        "expected_shortfall": 52
+      },
+      "rationale": "The left 97.5% quantile is 20 because cumulative probability rises from 0.95 at loss 10 to 0.99 at loss 20. The worst 2.5% mass comprises all 1% at loss 100 plus 1.5% of the 4% mass at loss 20, so ES = (0.01\u00d7100 + 0.015\u00d720) / 0.025 = 52.",
+      "limitations": []
+    },
+    "usage": {
+      "total": {
+        "totalTokens": 10609,
+        "inputTokens": 10416,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 193,
+        "reasoningOutputTokens": 66
+      },
+      "last": {
+        "totalTokens": 10609,
+        "inputTokens": 10416,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 193,
+        "reasoningOutputTokens": 66
+      },
+      "modelContextWindow": 258400
+    },
+    "wall_seconds": 6.889780199970119,
+    "packet_sha256": "cdba48802f5ccc10f66268d0c25f934fb78d701a10b0b91b24ad6de0b4551d5a",
+    "response_sha256": "4081beb0acb1e0b6ab44f068efbb96ae63091d5f5ff8143104ffa0bb2b74352d",
+    "tool_calls": []
+  },
+  {
+    "requested_model": "gpt-5.6-sol",
+    "resolved_model": "gpt-5.6-sol",
+    "reasoning_effort": "low",
+    "case_id": "q-netting",
+    "stage_index": 0,
+    "status": "ok",
+    "response": {
+      "estimates": {
+        "same_set_exposure": 20,
+        "separate_set_exposure": 100
+      },
+      "rationale": "Current positive exposure is calculated as the sum, across legal netting sets, of max(net set value, 0). For the same set: max(100 - 80, 0) = 20. For separate sets: max(100, 0) + max(-80, 0) = 100. Market hedging may offset economic price risk, but it does not create an enforceable contractual right to combine obligations with different counterparties upon default; cross-counterparty close-out netting therefore cannot be assumed.",
+      "limitations": []
+    },
+    "usage": {
+      "total": {
+        "totalTokens": 10516,
+        "inputTokens": 10374,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 142,
+        "reasoningOutputTokens": 0
+      },
+      "last": {
+        "totalTokens": 10516,
+        "inputTokens": 10374,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 142,
+        "reasoningOutputTokens": 0
+      },
+      "modelContextWindow": 258400
+    },
+    "wall_seconds": 6.526291400077753,
+    "packet_sha256": "ee791cab4c73e360f5e3a8808d44d5d31d5ba02741377e026dd0950891830226",
+    "response_sha256": "da1e7c7fcb5c3693fb2bc4f946aa0b735c8688e7a359c2d9a961b251b654a32c",
+    "tool_calls": []
+  },
+  {
+    "requested_model": "gpt-5.6-sol",
+    "resolved_model": "gpt-5.6-sol",
+    "reasoning_effort": "low",
+    "case_id": "q-capacity",
+    "stage_index": 0,
+    "status": "ok",
+    "response": {
+      "estimates": {
+        "single_sell": 300,
+        "million_sell": 300000000,
+        "million_flow_depth": 3
+      },
+      "rationale": "Risky assets per agent are 1,000 \u00d7 3 = 3,000; selling 10% gives 300. One million identical agents sell 300,000,000, equal to 3\u00d7 the 100,000,000 depth. This population comparison also scales aggregate capital to 1,000,000,000; with fixed aggregate capital, merely splitting it among more agents would not increase total sell notional under identical leverage and sell fraction.",
+      "limitations": [
+        "Depth is a scenario capacity parameter, not a guaranteed executable quote; the 3\u00d7 ratio does not determine realized price impact or execution."
+      ]
+    },
+    "usage": {
+      "total": {
+        "totalTokens": 10626,
+        "inputTokens": 10412,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 214,
+        "reasoningOutputTokens": 51
+      },
+      "last": {
+        "totalTokens": 10626,
+        "inputTokens": 10412,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 214,
+        "reasoningOutputTokens": 51
+      },
+      "modelContextWindow": 258400
+    },
+    "wall_seconds": 7.490777299972251,
+    "packet_sha256": "73fa7f204039383bd5068961e081261ccddf353d913745dec13c8f279ca1f741",
+    "response_sha256": "016d5ebc5475e66fca39e31a5ccc800cf1cea7683e776cb8a771032f0aaa0012",
+    "tool_calls": []
+  },
+  {
+    "requested_model": "gpt-5.6-sol",
+    "resolved_model": "gpt-5.6-sol",
+    "reasoning_effort": "medium",
+    "case_id": "q-cva-term",
+    "stage_index": 0,
+    "status": "ok",
+    "response": {
+      "estimates": {
+        "cva": 23400
+      },
+      "rationale": "Unilateral CVA = (1 \u2212 0.40) \u00d7 \u03a3(EE \u00d7 default increment \u00d7 discount factor) = 0.60 \u00d7 [(1,000,000 \u00d7 0.01 \u00d7 0.99) + (2,000,000 \u00d7 0.015 \u00d7 0.97)] = 23,400 currency units.",
+      "limitations": [
+        "Assumes positive exposure and default are independent, excluding wrong-way/right-way risk.",
+        "Uses stipulated unconditional default increments and point exposure/discount values for each period.",
+        "Excludes collateral, netting, exposure variability within periods, bilateral counterparty effects, and valuation/funding adjustments other than CVA."
+      ]
+    },
+    "usage": {
+      "total": {
+        "totalTokens": 10590,
+        "inputTokens": 10375,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 215,
+        "reasoningOutputTokens": 55
+      },
+      "last": {
+        "totalTokens": 10590,
+        "inputTokens": 10375,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 215,
+        "reasoningOutputTokens": 55
+      },
+      "modelContextWindow": 258400
+    },
+    "wall_seconds": 9.597012299927883,
+    "packet_sha256": "30b8901f95cc4c41842ded3f728b248a1ed262a5d05cf7bf338cdc9676d10871",
+    "response_sha256": "7a76ea2cceb1af08fa560d15e93a3ec940ea61834839536a5abbbcc497b6e6b4",
+    "tool_calls": []
+  },
+  {
+    "requested_model": "gpt-5.6-sol",
+    "resolved_model": "gpt-5.6-sol",
+    "reasoning_effort": "medium",
+    "case_id": "q-wrong-way",
+    "stage_index": 0,
+    "status": "ok",
+    "response": {
+      "estimates": {
+        "joint_loss": 12540,
+        "independent_loss": 3306
+      },
+      "rationale": "Using LGD = 1 - 0.4 = 0.6, joint loss is 0.6 \u00d7 [0.9\u00d7100,000\u00d70.01 + 0.1\u00d71,000,000\u00d70.20] = 12,540. The independence estimate is 0.6 \u00d7 [0.9\u00d7100,000 + 0.1\u00d71,000,000] \u00d7 [0.9\u00d70.01 + 0.1\u00d70.20] = 3,306. It understates loss by 9,234 because high exposure and high PD occur together (positive dependence/wrong-way risk).",
+      "limitations": []
+    },
+    "usage": {
+      "total": {
+        "totalTokens": 10692,
+        "inputTokens": 10396,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 296,
+        "reasoningOutputTokens": 122
+      },
+      "last": {
+        "totalTokens": 10692,
+        "inputTokens": 10396,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 296,
+        "reasoningOutputTokens": 122
+      },
+      "modelContextWindow": 258400
+    },
+    "wall_seconds": 10.452279500081204,
+    "packet_sha256": "4e45e5353d1a3a636c4506dde63c2d3cbaeb66c9e3232bdf4b15b796c88d4906",
+    "response_sha256": "90967d64ca0c28f642c2b24b461e035346ce5cf718766c895477b1abda2fa14f",
+    "tool_calls": []
+  },
+  {
+    "requested_model": "gpt-5.6-sol",
+    "resolved_model": "gpt-5.6-sol",
+    "reasoning_effort": "medium",
+    "case_id": "q-settlement",
+    "stage_index": 0,
+    "status": "ok",
+    "response": {
+      "estimates": {
+        "non_pvp_principal_el": 12000,
+        "pvp_principal_el": 0,
+        "liquidity_need": 10000000
+      },
+      "rationale": "Without PvP, expected principal loss is 10,000,000 \u00d7 0.002 \u00d7 (1 \u2212 0.40) = 12,000. Functioning PvP makes settlement conditional, eliminating principal loss from paying away without receiving. If the purchased currency does not arrive, full replacement funding of 10,000,000 is needed. PvP does not eliminate market replacement-cost risk (stress input: 75,000), intraday or contingent liquidity pressure, or operational risks such as system, messaging, cutoff, funding, and process failures.",
+      "limitations": [
+        "The 75,000 replacement-cost stress is a scenario amount, not an expected loss; no probability is supplied.",
+        "The zero PvP principal loss assumes PvP functions as specified and both payment legs remain conditional."
+      ]
+    },
+    "usage": {
+      "total": {
+        "totalTokens": 10693,
+        "inputTokens": 10430,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 263,
+        "reasoningOutputTokens": 57
+      },
+      "last": {
+        "totalTokens": 10693,
+        "inputTokens": 10430,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 263,
+        "reasoningOutputTokens": 57
+      },
+      "modelContextWindow": 258400
+    },
+    "wall_seconds": 8.549621999962255,
+    "packet_sha256": "42047bac0555c06afa3f6865900879ea0e21b21e7e78b1c9e4be38c2cb9e6587",
+    "response_sha256": "ac4e13f1ca4d7e07af0b2371a280fa8b980c1402739276f2fac810ad077637d7",
+    "tool_calls": []
+  },
+  {
+    "requested_model": "gpt-5.6-sol",
+    "resolved_model": "gpt-5.6-sol",
+    "reasoning_effort": "medium",
+    "case_id": "q-tail",
+    "stage_index": 0,
+    "status": "ok",
+    "response": {
+      "estimates": {
+        "var": 20,
+        "expected_shortfall": 52
+      },
+      "rationale": "The left 97.5% quantile is 20 because cumulative probability rises from 0.95 at loss 10 to 0.99 at loss 20. The worst 2.5% mass consists of all 1% at loss 100 plus 1.5% of the 4% mass at loss 20, so ES = (0.01\u00d7100 + 0.015\u00d720)/0.025 = 52.",
+      "limitations": [
+        "Applies only to the stipulated discrete loss distribution and one stress interval."
+      ]
+    },
+    "usage": {
+      "total": {
+        "totalTokens": 10642,
+        "inputTokens": 10416,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 226,
+        "reasoningOutputTokens": 85
+      },
+      "last": {
+        "totalTokens": 10642,
+        "inputTokens": 10416,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 226,
+        "reasoningOutputTokens": 85
+      },
+      "modelContextWindow": 258400
+    },
+    "wall_seconds": 8.283624100033194,
+    "packet_sha256": "cdba48802f5ccc10f66268d0c25f934fb78d701a10b0b91b24ad6de0b4551d5a",
+    "response_sha256": "3de7a778dcfec794ad3f09b3df551d1f2878c8fe8945d68e69b6b7401610bd00",
+    "tool_calls": []
+  },
+  {
+    "requested_model": "gpt-5.6-sol",
+    "resolved_model": "gpt-5.6-sol",
+    "reasoning_effort": "medium",
+    "case_id": "q-netting",
+    "stage_index": 0,
+    "status": "ok",
+    "response": {
+      "estimates": {
+        "same_set_exposure": 20,
+        "separate_set_exposure": 100
+      },
+      "rationale": "Current positive exposure is the sum of positive net values across legally enforceable netting sets. For the same set, max(100 - 80, 0) = 20. For separate sets, max(100, 0) + max(-80, 0) = 100. Market hedging may offset economic price risk, but it does not create a legally enforceable right to combine obligations in a counterparty default or close-out; cross-counterparty netting therefore is not recognized.",
+      "limitations": []
+    },
+    "usage": {
+      "total": {
+        "totalTokens": 10510,
+        "inputTokens": 10374,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 136,
+        "reasoningOutputTokens": 0
+      },
+      "last": {
+        "totalTokens": 10510,
+        "inputTokens": 10374,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 136,
+        "reasoningOutputTokens": 0
+      },
+      "modelContextWindow": 258400
+    },
+    "wall_seconds": 6.1526431000093,
+    "packet_sha256": "ee791cab4c73e360f5e3a8808d44d5d31d5ba02741377e026dd0950891830226",
+    "response_sha256": "910335507168776d612473e915e6ada23fbf9112f03b1df062b932cbf3d8fabc",
+    "tool_calls": []
+  },
+  {
+    "requested_model": "gpt-5.6-sol",
+    "resolved_model": "gpt-5.6-sol",
+    "reasoning_effort": "medium",
+    "case_id": "q-capacity",
+    "stage_index": 0,
+    "status": "ok",
+    "response": {
+      "estimates": {
+        "single_sell": 300,
+        "million_sell": 300000000,
+        "million_flow_depth": 3
+      },
+      "rationale": "Leveraged risky assets per agent are 1,000 \u00d7 3 = 3,000; selling 10% gives 300. For 1,000,000 agents, aggregate selling is 300 \u00d7 1,000,000 = 300,000,000, equal to 3 times the 100,000,000 depth parameter. This scaling assumes capital is 1,000 per agent, so aggregate capital rises to 1 billion. With fixed aggregate capital instead, adding agents only divides that capital and does not multiply total sell notional; aggregate selling remains 10% of 3\u00d7 fixed aggregate capital.",
+      "limitations": [
+        "Depth is a scenario capacity parameter, not a guaranteed executable quote; the flow/depth ratio does not by itself determine execution prices or market impact."
+      ]
+    },
+    "usage": {
+      "total": {
+        "totalTokens": 10701,
+        "inputTokens": 10412,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 289,
+        "reasoningOutputTokens": 91
+      },
+      "last": {
+        "totalTokens": 10701,
+        "inputTokens": 10412,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 289,
+        "reasoningOutputTokens": 91
+      },
+      "modelContextWindow": 258400
+    },
+    "wall_seconds": 10.006335600046441,
+    "packet_sha256": "73fa7f204039383bd5068961e081261ccddf353d913745dec13c8f279ca1f741",
+    "response_sha256": "ca1d31a2a97aa6269d5cce796afecb9df6cdccf592f0ae78fb0068a21ebb551b",
+    "tool_calls": []
+  },
+  {
+    "requested_model": "gpt-6-luna",
+    "resolved_model": "gpt-6-luna",
+    "reasoning_effort": "high",
+    "case_id": "q-cva-term",
+    "stage_index": 0,
+    "status": "ok",
+    "response": {
+      "estimates": {
+        "cva": 23400
+      },
+      "rationale": "CVA = \u03a3 EE \u00d7 default-probability increment \u00d7 discount \u00d7 (1 \u2212 recovery): 1,000,000 \u00d7 0.01 \u00d7 0.99 \u00d7 0.6 + 2,000,000 \u00d7 0.015 \u00d7 0.97 \u00d7 0.6 = 23,400 currency units.",
+      "limitations": [
+        "Uses the stipulated risk-neutral unconditional default increments and assumes independence of positive exposure and default.",
+        "Treats the supplied EE and discount factors as representative of each disjoint period; no other exposure, default, or timing detail is provided."
+      ]
+    },
+    "usage": {
+      "total": {
+        "totalTokens": 11061,
+        "inputTokens": 10806,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 255,
+        "reasoningOutputTokens": 111
+      },
+      "last": {
+        "totalTokens": 11061,
+        "inputTokens": 10806,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 255,
+        "reasoningOutputTokens": 111
+      },
+      "modelContextWindow": 258400
+    },
+    "wall_seconds": 9.419167699990794,
+    "packet_sha256": "30b8901f95cc4c41842ded3f728b248a1ed262a5d05cf7bf338cdc9676d10871",
+    "response_sha256": "23cd36b4d48932c205f055595354842057fadb0e1ca18972feb690ddbd68ab5a",
+    "tool_calls": []
+  },
+  {
+    "requested_model": "gpt-6-luna",
+    "resolved_model": "gpt-6-luna",
+    "reasoning_effort": "high",
+    "case_id": "q-wrong-way",
+    "stage_index": 0,
+    "status": "ok",
+    "response": {
+      "estimates": {
+        "joint_loss": 12540,
+        "independent_loss": 3306
+      },
+      "rationale": "Using the paired entries as common-state exposure and PD values, joint loss is 0.6 \u00d7 [0.9 \u00d7 100,000 \u00d7 0.01 + 0.1 \u00d7 1,000,000 \u00d7 0.20] = 12,540. Factorizing gives 0.6 \u00d7 [0.9 \u00d7 100,000 + 0.1 \u00d7 1,000,000] \u00d7 [0.9 \u00d7 0.01 + 0.1 \u00d7 0.20] = 3,306. The 9,234 gap arises because high exposure coincides with high PD; independence removes this positive state dependence.",
+      "limitations": []
+    },
+    "usage": {
+      "total": {
+        "totalTokens": 11506,
+        "inputTokens": 10827,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 679,
+        "reasoningOutputTokens": 506
+      },
+      "last": {
+        "totalTokens": 11506,
+        "inputTokens": 10827,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 679,
+        "reasoningOutputTokens": 506
+      },
+      "modelContextWindow": 258400
+    },
+    "wall_seconds": 15.274126600008458,
+    "packet_sha256": "4e45e5353d1a3a636c4506dde63c2d3cbaeb66c9e3232bdf4b15b796c88d4906",
+    "response_sha256": "f78631a8c2d5e8d0f034a67a481e1829c829ee1fe5c31603d4fbf6b323157ceb",
+    "tool_calls": []
+  },
+  {
+    "requested_model": "gpt-6-luna",
+    "resolved_model": "gpt-6-luna",
+    "reasoning_effort": "high",
+    "case_id": "q-settlement",
+    "stage_index": 0,
+    "status": "ok",
+    "response": {
+      "estimates": {
+        "non_pvp_principal_el": 12000,
+        "pvp_principal_el": 0,
+        "liquidity_need": 10000000
+      },
+      "rationale": "Without PvP, expected principal loss is 10,000,000 \u00d7 0.002 \u00d7 (1 \u2212 0.4) = 12,000. Functioning PvP removes the specified pay-away-before-receipt exposure, so modeled principal EL is zero. If the purchased currency does not arrive, full replacement funding need is 10,000,000. The 75,000 replacement-cost stress is a separate potential cost, not principal EL; liquidity pressure and operational risks remain.",
+      "limitations": [
+        "PvP EL assumes it functions as intended and eliminates the specified settlement interval exposure; no residual failure probability or operational-loss amount was provided.",
+        "Replacement funding need is stated in the principal's value units; currency denomination and timing are unspecified."
+      ]
+    },
+    "usage": {
+      "total": {
+        "totalTokens": 11222,
+        "inputTokens": 10861,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 361,
+        "reasoningOutputTokens": 164
+      },
+      "last": {
+        "totalTokens": 11222,
+        "inputTokens": 10861,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 361,
+        "reasoningOutputTokens": 164
+      },
+      "modelContextWindow": 258400
+    },
+    "wall_seconds": 9.35081109998282,
+    "packet_sha256": "42047bac0555c06afa3f6865900879ea0e21b21e7e78b1c9e4be38c2cb9e6587",
+    "response_sha256": "3532d5b22ac1049a96cdcfc0d6acbf140906bd2d131d2451f668280d8bd29afc",
+    "tool_calls": []
+  },
+  {
+    "requested_model": "gpt-6-luna",
+    "resolved_model": "gpt-6-luna",
+    "reasoning_effort": "high",
+    "case_id": "q-tail",
+    "stage_index": 0,
+    "status": "ok",
+    "response": {
+      "estimates": {
+        "var": 20,
+        "expected_shortfall": 52
+      },
+      "rationale": "At alpha = 0.975, the left quantile is 20 because cumulative probability reaches 0.99 at that loss. The worst 2.5% probability mass includes all 1% at loss 100 and 1.5% at loss 20, so ES = (0.01\u00d7100 + 0.015\u00d720)/0.025 = 52.",
+      "limitations": []
+    },
+    "usage": {
+      "total": {
+        "totalTokens": 11109,
+        "inputTokens": 10847,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 262,
+        "reasoningOutputTokens": 150
+      },
+      "last": {
+        "totalTokens": 11109,
+        "inputTokens": 10847,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 262,
+        "reasoningOutputTokens": 150
+      },
+      "modelContextWindow": 258400
+    },
+    "wall_seconds": 8.506816899986006,
+    "packet_sha256": "cdba48802f5ccc10f66268d0c25f934fb78d701a10b0b91b24ad6de0b4551d5a",
+    "response_sha256": "9943d9dab9bbb4143aff24684282ef87a2f14f0a298fa7d3b63c82de00d0a48f",
+    "tool_calls": []
+  },
+  {
+    "requested_model": "gpt-6-luna",
+    "resolved_model": "gpt-6-luna",
+    "reasoning_effort": "high",
+    "case_id": "q-netting",
+    "stage_index": 0,
+    "status": "ok",
+    "response": {
+      "estimates": {
+        "same_set_exposure": 20,
+        "separate_set_exposure": 100
+      },
+      "rationale": "Within the same netting set, the positions offset: max(100 \u2212 80, 0) = 20. Across separate sets, exposures are calculated separately: max(100, 0) + max(\u221280, 0) = 100. Market hedging does not establish legal close-out netting across counterparties; only positions in the same legally nettable set can offset.",
+      "limitations": []
+    },
+    "usage": {
+      "total": {
+        "totalTokens": 11020,
+        "inputTokens": 10805,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 215,
+        "reasoningOutputTokens": 97
+      },
+      "last": {
+        "totalTokens": 11020,
+        "inputTokens": 10805,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 215,
+        "reasoningOutputTokens": 97
+      },
+      "modelContextWindow": 258400
+    },
+    "wall_seconds": 10.744747100048698,
+    "packet_sha256": "ee791cab4c73e360f5e3a8808d44d5d31d5ba02741377e026dd0950891830226",
+    "response_sha256": "ba323988a9baf4b081a6158f361e515c5670b51fd43df9c1020359577cf4e42c",
+    "tool_calls": []
+  },
+  {
+    "requested_model": "gpt-6-luna",
+    "resolved_model": "gpt-6-luna",
+    "reasoning_effort": "high",
+    "case_id": "q-capacity",
+    "stage_index": 0,
+    "status": "ok",
+    "response": {
+      "estimates": {
+        "single_sell": 300,
+        "million_sell": 300000000,
+        "million_flow_depth": 3
+      },
+      "rationale": "Sell notional = capital \u00d7 leverage \u00d7 sell fraction = $1,000 \u00d7 3 \u00d7 0.1 = $300 per agent; one million agents sell $300 million. Dividing by the $100 million scenario depth gives 3\u00d7. If aggregate capital were fixed at $1,000 across all agents rather than $1,000 each, total sell notional would remain $300, or 0.000003\u00d7 depth.",
+      "limitations": [
+        "Depth is a scenario capacity parameter, not a guaranteed executable quote."
+      ]
+    },
+    "usage": {
+      "total": {
+        "totalTokens": 11158,
+        "inputTokens": 10843,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 315,
+        "reasoningOutputTokens": 171
+      },
+      "last": {
+        "totalTokens": 11158,
+        "inputTokens": 10843,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 315,
+        "reasoningOutputTokens": 171
+      },
+      "modelContextWindow": 258400
+    },
+    "wall_seconds": 8.914797800011002,
+    "packet_sha256": "73fa7f204039383bd5068961e081261ccddf353d913745dec13c8f279ca1f741",
+    "response_sha256": "a48d43c4cf68a5db456bcb55fa97d742ee43f9720e042eb5216ee3c981bf4275",
+    "tool_calls": []
+  },
+  {
+    "requested_model": "gpt-6-luna",
+    "resolved_model": "gpt-6-luna",
+    "reasoning_effort": "low",
+    "case_id": "q-cva-term",
+    "stage_index": 0,
+    "status": "ok",
+    "response": {
+      "estimates": {
+        "cva": 25185.0
+      },
+      "rationale": "CVA = (1 \u2212 0.4) \u00d7 [1,000,000 \u00d7 0.01 \u00d7 0.99 + 2,000,000 \u00d7 0.015 \u00d7 0.97] = 25,185.",
+      "limitations": [
+        "Uses stipulated unconditional default-probability increments and assumes independence between positive exposure and default, as specified.",
+        "Uses the supplied expected exposures and discount factors; no uncertainty or exposure-default dependence adjustment is modeled."
+      ]
+    },
+    "usage": {
+      "total": {
+        "totalTokens": 10926,
+        "inputTokens": 10806,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 120,
+        "reasoningOutputTokens": 0
+      },
+      "last": {
+        "totalTokens": 10926,
+        "inputTokens": 10806,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 120,
+        "reasoningOutputTokens": 0
+      },
+      "modelContextWindow": 258400
+    },
+    "wall_seconds": 7.921942900051363,
+    "packet_sha256": "30b8901f95cc4c41842ded3f728b248a1ed262a5d05cf7bf338cdc9676d10871",
+    "response_sha256": "5ff6bb56c7c0854ca54ef269650de2a3ebae95c3b7b12a1218b18ee6aea6a62b",
+    "tool_calls": []
+  },
+  {
+    "requested_model": "gpt-6-luna",
+    "resolved_model": "gpt-6-luna",
+    "reasoning_effort": "low",
+    "case_id": "q-wrong-way",
+    "stage_index": 0,
+    "status": "ok",
+    "response": {
+      "estimates": {
+        "joint_loss": 12600,
+        "independent_loss": 54600
+      },
+      "rationale": "Joint-state loss = 0.6 \u00d7 [0.9 \u00d7 (100,000\u00d70.01 + 1,000,000\u00d70.2) + 0.1 \u00d7 (100,000\u00d70.2 + 1,000,000\u00d70.01)] = 12,600. Under independence, each exposure uses its probability-weighted PD: 0.9\u00d70.01 + 0.1\u00d70.2 = 0.029 for the first and 0.9\u00d70.2 + 0.1\u00d70.01 = 0.181 for the second, giving 0.6\u00d7(100,000\u00d70.029 + 1,000,000\u00d70.181) = 110,400.",
+      "limitations": [
+        "The stipulated probabilities and conditional PDs are used as given; no further assumptions or adjustments are applied."
+      ]
+    },
+    "usage": {
+      "total": {
+        "totalTokens": 11043,
+        "inputTokens": 10827,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 216,
+        "reasoningOutputTokens": 0
+      },
+      "last": {
+        "totalTokens": 11043,
+        "inputTokens": 10827,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 216,
+        "reasoningOutputTokens": 0
+      },
+      "modelContextWindow": 258400
+    },
+    "wall_seconds": 7.462446199962869,
+    "packet_sha256": "4e45e5353d1a3a636c4506dde63c2d3cbaeb66c9e3232bdf4b15b796c88d4906",
+    "response_sha256": "4c843ebbfd6c6b3838fc746098fd46008d32038d02d398678011faa2228dfbbe",
+    "tool_calls": []
+  },
+  {
+    "requested_model": "gpt-6-luna",
+    "resolved_model": "gpt-6-luna",
+    "reasoning_effort": "low",
+    "case_id": "q-settlement",
+    "stage_index": 0,
+    "status": "ok",
+    "response": {
+      "estimates": {
+        "non_pvp_principal_el": 12000,
+        "pvp_principal_el": 0,
+        "liquidity_need": 10000000
+      },
+      "rationale": "Without PvP, expected principal loss = 10,000,000 \u00d7 0.002 \u00d7 (1 \u2212 0.4) = 12,000. Functioning PvP removes the pay-away/receipt timing gap, so principal EL for that interval is 0. If the purchased currency does not arrive, full replacement funding need is 10,000,000.",
+      "limitations": [
+        "PvP does not eliminate replacement-cost exposure; the packet gives a stress amount of 75,000, not an expected loss estimate.",
+        "Liquidity need is the full principal under the stated non-arrival scenario; duration and available liquidity are unspecified.",
+        "Operational, system, and PvP failure risks remain, but probabilities and impacts are not provided."
+      ]
+    },
+    "usage": {
+      "total": {
+        "totalTokens": 11053,
+        "inputTokens": 10861,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 192,
+        "reasoningOutputTokens": 0
+      },
+      "last": {
+        "totalTokens": 11053,
+        "inputTokens": 10861,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 192,
+        "reasoningOutputTokens": 0
+      },
+      "modelContextWindow": 258400
+    },
+    "wall_seconds": 7.12826279993169,
+    "packet_sha256": "42047bac0555c06afa3f6865900879ea0e21b21e7e78b1c9e4be38c2cb9e6587",
+    "response_sha256": "a9beb44548c292e314e4d52d8cb7c953552f8ded234d07f567c399fa1891b5a5",
+    "tool_calls": []
+  },
+  {
+    "requested_model": "gpt-6-luna",
+    "resolved_model": "gpt-6-luna",
+    "reasoning_effort": "low",
+    "case_id": "q-tail",
+    "stage_index": 0,
+    "status": "ok",
+    "response": {
+      "estimates": {
+        "var": 20,
+        "expected_shortfall": 52
+      },
+      "rationale": "The left 97.5% quantile is 20: cumulative probability through loss 10 is 0.95 and through 20 is 0.99. The worst 2.5% mass comprises all 1% at loss 100, all 0.5% at loss 20, and 1% at loss 10, giving ES = (0.01\u00d7100 + 0.005\u00d720 + 0.01\u00d710)/0.025 = 52.",
+      "limitations": []
+    },
+    "usage": {
+      "total": {
+        "totalTokens": 10980,
+        "inputTokens": 10847,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 133,
+        "reasoningOutputTokens": 0
+      },
+      "last": {
+        "totalTokens": 10980,
+        "inputTokens": 10847,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 133,
+        "reasoningOutputTokens": 0
+      },
+      "modelContextWindow": 258400
+    },
+    "wall_seconds": 5.646568800089881,
+    "packet_sha256": "cdba48802f5ccc10f66268d0c25f934fb78d701a10b0b91b24ad6de0b4551d5a",
+    "response_sha256": "800577d37a09bc435988fad837ae02300f4a9ae6f5df2030c5456696f7385397",
+    "tool_calls": []
+  },
+  {
+    "requested_model": "gpt-6-luna",
+    "resolved_model": "gpt-6-luna",
+    "reasoning_effort": "low",
+    "case_id": "q-netting",
+    "stage_index": 0,
+    "status": "ok",
+    "response": {
+      "estimates": {
+        "same_set_exposure": 20,
+        "separate_set_exposure": 100
+      },
+      "rationale": "Within one legally nettable set, exposure is max(100\u221280, 0)=20. Across separate sets, the \u221280 position cannot offset the +100 position, so positive exposure is 100. Market hedging may reduce economic risk but does not itself create cross-counterparty legal close-out netting rights.",
+      "limitations": []
+    },
+    "usage": {
+      "total": {
+        "totalTokens": 10904,
+        "inputTokens": 10805,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 99,
+        "reasoningOutputTokens": 0
+      },
+      "last": {
+        "totalTokens": 10904,
+        "inputTokens": 10805,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 99,
+        "reasoningOutputTokens": 0
+      },
+      "modelContextWindow": 258400
+    },
+    "wall_seconds": 4.71180190006271,
+    "packet_sha256": "ee791cab4c73e360f5e3a8808d44d5d31d5ba02741377e026dd0950891830226",
+    "response_sha256": "44707d34be02deda226be48d36b350a8244d0702f6260c3ef3d48090deeb8ebd",
+    "tool_calls": []
+  },
+  {
+    "requested_model": "gpt-6-luna",
+    "resolved_model": "gpt-6-luna",
+    "reasoning_effort": "low",
+    "case_id": "q-capacity",
+    "stage_index": 0,
+    "status": "ok",
+    "response": {
+      "estimates": {
+        "single_sell": 300,
+        "million_sell": 300000000,
+        "million_flow_depth": 3
+      },
+      "rationale": "Per agent, leveraged risky assets = 1,000 \u00d7 3 = 3,000; selling 10% gives 300. For 1,000,000 agents, total sell notional is 300,000,000, or 3\u00d7 the stated 100,000,000 depth. With fixed aggregate capital of 1,000,000,000 across the population, the corresponding sell would remain 300,000,000 regardless of agent count.",
+      "limitations": [
+        "Depth is a scenario capacity parameter, not a guaranteed executable quote."
+      ]
+    },
+    "usage": {
+      "total": {
+        "totalTokens": 10991,
+        "inputTokens": 10843,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 148,
+        "reasoningOutputTokens": 0
+      },
+      "last": {
+        "totalTokens": 10991,
+        "inputTokens": 10843,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 148,
+        "reasoningOutputTokens": 0
+      },
+      "modelContextWindow": 258400
+    },
+    "wall_seconds": 5.309120399993844,
+    "packet_sha256": "73fa7f204039383bd5068961e081261ccddf353d913745dec13c8f279ca1f741",
+    "response_sha256": "d35582a4d0368a350ba06af8294eb5ed9bc8562ce0cc299e0c45b1e5a5038fdc",
+    "tool_calls": []
+  },
+  {
+    "requested_model": "gpt-6-luna",
+    "resolved_model": "gpt-6-luna",
+    "reasoning_effort": "medium",
+    "case_id": "q-cva-term",
+    "stage_index": 0,
+    "status": "ok",
+    "response": {
+      "estimates": {
+        "cva": 33765
+      },
+      "rationale": "CVA = (1 \u2212 0.4) \u00d7 [1,000,000 \u00d7 0.01 \u00d7 0.99 + 2,000,000 \u00d7 0.015 \u00d7 0.97] = 33,765 currency units.",
+      "limitations": [
+        "Uses the stipulated unconditional default-probability increments and assumes independence of positive exposure and default.",
+        "Treats the supplied expected exposures and discount factors as sufficient period inputs; no uncertainty, wrong-way risk, or additional cash flows are modeled."
+      ]
+    },
+    "usage": {
+      "total": {
+        "totalTokens": 10933,
+        "inputTokens": 10806,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 127,
+        "reasoningOutputTokens": 0
+      },
+      "last": {
+        "totalTokens": 10933,
+        "inputTokens": 10806,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 127,
+        "reasoningOutputTokens": 0
+      },
+      "modelContextWindow": 258400
+    },
+    "wall_seconds": 7.938923200010322,
+    "packet_sha256": "30b8901f95cc4c41842ded3f728b248a1ed262a5d05cf7bf338cdc9676d10871",
+    "response_sha256": "202f8abbff0a95aa495adcb8bd9ba43cbcc745f6594c91bd0461da113ecb4444",
+    "tool_calls": []
+  },
+  {
+    "requested_model": "gpt-6-luna",
+    "resolved_model": "gpt-6-luna",
+    "reasoning_effort": "medium",
+    "case_id": "q-wrong-way",
+    "stage_index": 0,
+    "status": "ok",
+    "response": {
+      "estimates": {
+        "joint_loss": 143000,
+        "independent_loss": 140400
+      },
+      "rationale": "Joint-state ECL = (1\u22120.4) \u00d7 [0.9 \u00d7 (100,000\u00d70.01 + 1,000,000\u00d70.01) + 0.1 \u00d7 (100,000\u00d70.2 + 1,000,000\u00d70.2)] = 143,000. The factorized estimate uses unconditional PDs: 0.9\u00d70.01 + 0.1\u00d70.2 = 0.029 for each exposure, giving 0.6\u00d71,100,000\u00d70.029 = 19,140.",
+      "limitations": []
+    },
+    "usage": {
+      "total": {
+        "totalTokens": 10986,
+        "inputTokens": 10827,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 159,
+        "reasoningOutputTokens": 0
+      },
+      "last": {
+        "totalTokens": 10986,
+        "inputTokens": 10827,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 159,
+        "reasoningOutputTokens": 0
+      },
+      "modelContextWindow": 258400
+    },
+    "wall_seconds": 5.826573099941015,
+    "packet_sha256": "4e45e5353d1a3a636c4506dde63c2d3cbaeb66c9e3232bdf4b15b796c88d4906",
+    "response_sha256": "dc25ddff9bbfb103b8555d9ea45c264f0962439a40498c40e97d89345b2cb3c6",
+    "tool_calls": []
+  },
+  {
+    "requested_model": "gpt-6-luna",
+    "resolved_model": "gpt-6-luna",
+    "reasoning_effort": "medium",
+    "case_id": "q-settlement",
+    "stage_index": 0,
+    "status": "ok",
+    "response": {
+      "estimates": {
+        "non_pvp_principal_el": 12000,
+        "pvp_principal_el": 0,
+        "liquidity_need": 10000000
+      },
+      "rationale": "Without PvP, expected principal loss = $10,000,000 \u00d7 0.002 \u00d7 (1 \u2212 0.4) = $12,000. With functioning PvP, simultaneous exchange removes the specified pay-away-before-receipt exposure, so principal EL for that interval is $0. If the purchased currency does not arrive, full replacement funding need is $10,000,000. Replacement-cost stress of $75,000 and liquidity/operational risks remain distinct from principal EL.",
+      "limitations": [
+        "PvP principal EL assumes it functions as specified and eliminates the stated exposure interval; no separate PvP failure probability is supplied.",
+        "Replacement-cost stress is provided, but no probability is supplied to estimate expected replacement-cost loss.",
+        "Liquidity need is reported as full principal funding need, not a discounted or netted amount."
+      ]
+    },
+    "usage": {
+      "total": {
+        "totalTokens": 11072,
+        "inputTokens": 10861,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 211,
+        "reasoningOutputTokens": 0
+      },
+      "last": {
+        "totalTokens": 11072,
+        "inputTokens": 10861,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 211,
+        "reasoningOutputTokens": 0
+      },
+      "modelContextWindow": 258400
+    },
+    "wall_seconds": 6.870695700054057,
+    "packet_sha256": "42047bac0555c06afa3f6865900879ea0e21b21e7e78b1c9e4be38c2cb9e6587",
+    "response_sha256": "76cbac3d9c33d2c18800333d4e4a701c92145c8052d65c3820a6d96f22c46d57",
+    "tool_calls": []
+  },
+  {
+    "requested_model": "gpt-6-luna",
+    "resolved_model": "gpt-6-luna",
+    "reasoning_effort": "medium",
+    "case_id": "q-tail",
+    "stage_index": 0,
+    "status": "ok",
+    "response": {
+      "estimates": {
+        "var": 20,
+        "expected_shortfall": 52
+      },
+      "rationale": "The left 97.5% quantile is 20: cumulative probability through 10 is 0.95, and through 20 is 0.99. The worst 2.5% mass consists of all 1% at loss 100 and 1.5% of the 4% mass at loss 20; ES = (0.01\u00d7100 + 0.015\u00d720)/0.025 = 52.",
+      "limitations": []
+    },
+    "usage": {
+      "total": {
+        "totalTokens": 10969,
+        "inputTokens": 10847,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 122,
+        "reasoningOutputTokens": 0
+      },
+      "last": {
+        "totalTokens": 10969,
+        "inputTokens": 10847,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 122,
+        "reasoningOutputTokens": 0
+      },
+      "modelContextWindow": 258400
+    },
+    "wall_seconds": 7.169597500003874,
+    "packet_sha256": "cdba48802f5ccc10f66268d0c25f934fb78d701a10b0b91b24ad6de0b4551d5a",
+    "response_sha256": "c79686ccb9f588b8c835760a65a07a4850c37287e71ab322b70040952dfb1194",
+    "tool_calls": []
+  },
+  {
+    "requested_model": "gpt-6-luna",
+    "resolved_model": "gpt-6-luna",
+    "reasoning_effort": "medium",
+    "case_id": "q-netting",
+    "stage_index": 0,
+    "status": "ok",
+    "response": {
+      "estimates": {
+        "same_set_exposure": 20,
+        "separate_set_exposure": 100
+      },
+      "rationale": "Within one netting set, the positions net to 100 + (\u221280) = 20, so current positive exposure is 20. Across separate legal sets, the \u221280 position cannot offset the +100 position; exposure is max(100,0) + max(\u221280,0) = 100. Market hedging may reduce economic risk but does not establish legal close-out netting across counterparties.",
+      "limitations": []
+    },
+    "usage": {
+      "total": {
+        "totalTokens": 10925,
+        "inputTokens": 10805,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 120,
+        "reasoningOutputTokens": 0
+      },
+      "last": {
+        "totalTokens": 10925,
+        "inputTokens": 10805,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 120,
+        "reasoningOutputTokens": 0
+      },
+      "modelContextWindow": 258400
+    },
+    "wall_seconds": 5.084869900019839,
+    "packet_sha256": "ee791cab4c73e360f5e3a8808d44d5d31d5ba02741377e026dd0950891830226",
+    "response_sha256": "809a628576e3ca6d03e34a4889c25c36ee8cbdfc2adc70c9fbc3e2511e360dc8",
+    "tool_calls": []
+  },
+  {
+    "requested_model": "gpt-6-luna",
+    "resolved_model": "gpt-6-luna",
+    "reasoning_effort": "medium",
+    "case_id": "q-capacity",
+    "stage_index": 0,
+    "status": "ok",
+    "response": {
+      "estimates": {
+        "single_sell": 300,
+        "million_sell": 300000000,
+        "million_flow_depth": 3
+      },
+      "rationale": "Per agent, leveraged risky assets are 1,000 \u00d7 3 = 3,000, so 10% sold is 300. One million agents sell 300,000,000 total; divided by scenario depth of 100,000,000, that is 3\u00d7 depth. At fixed aggregate capital of 1,000, total sell would remain 300 regardless of agent count.",
+      "limitations": [
+        "Depth is a scenario capacity parameter, not a guaranteed executable quote."
+      ]
+    },
+    "usage": {
+      "total": {
+        "totalTokens": 10976,
+        "inputTokens": 10843,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 133,
+        "reasoningOutputTokens": 0
+      },
+      "last": {
+        "totalTokens": 10976,
+        "inputTokens": 10843,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 133,
+        "reasoningOutputTokens": 0
+      },
+      "modelContextWindow": 258400
+    },
+    "wall_seconds": 8.38714110001456,
+    "packet_sha256": "73fa7f204039383bd5068961e081261ccddf353d913745dec13c8f279ca1f741",
+    "response_sha256": "c701900f9329ddf0c1f20012ba1c287a4562131525c856b23c27dccd14047bc8",
+    "tool_calls": []
+  },
+  {
+    "requested_model": "gpt-6-sol",
+    "resolved_model": "gpt-6-sol",
+    "reasoning_effort": "high",
+    "case_id": "q-cva-term",
+    "stage_index": 0,
+    "status": "ok",
+    "response": {
+      "estimates": {
+        "cva": 23400
+      },
+      "rationale": "Unilateral CVA = (1 \u2212 0.4) \u00d7 [(1,000,000 \u00d7 0.01 \u00d7 0.99) + (2,000,000 \u00d7 0.015 \u00d7 0.97)] = 23,400 currency units.",
+      "limitations": [
+        "Assumes positive exposure and default are independent, so wrong-way risk is excluded.",
+        "Treats the supplied exposures, discount factors, and recovery rate as applicable to each period.",
+        "Unilateral CVA excludes the effect of the institution\u2019s own default."
+      ]
+    },
+    "usage": {
+      "total": {
+        "totalTokens": 11050,
+        "inputTokens": 10806,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 244,
+        "reasoningOutputTokens": 110
+      },
+      "last": {
+        "totalTokens": 11050,
+        "inputTokens": 10806,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 244,
+        "reasoningOutputTokens": 110
+      },
+      "modelContextWindow": 258400
+    },
+    "wall_seconds": 9.662698599975556,
+    "packet_sha256": "30b8901f95cc4c41842ded3f728b248a1ed262a5d05cf7bf338cdc9676d10871",
+    "response_sha256": "9018da667de30e1eeb53a24faacea2c6bac4e2c670eb03086e03b8993458a533",
+    "tool_calls": []
+  },
+  {
+    "requested_model": "gpt-6-sol",
+    "resolved_model": "gpt-6-sol",
+    "reasoning_effort": "high",
+    "case_id": "q-wrong-way",
+    "stage_index": 0,
+    "status": "ok",
+    "response": {
+      "estimates": {
+        "joint_loss": 12540,
+        "independent_loss": 3306
+      },
+      "rationale": "With 60% loss given default, joint-state loss is 0.6\u00d7(0.9\u00d7100,000\u00d70.01 + 0.1\u00d71,000,000\u00d70.20) = 12,540. Factoring the probability-weighted averages gives 0.6\u00d7190,000\u00d70.029 = 3,306. The independence estimate understates loss by 9,234 because the high-exposure state also has the higher conditional default probability.",
+      "limitations": []
+    },
+    "usage": {
+      "total": {
+        "totalTokens": 11106,
+        "inputTokens": 10827,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 279,
+        "reasoningOutputTokens": 142
+      },
+      "last": {
+        "totalTokens": 11106,
+        "inputTokens": 10827,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 279,
+        "reasoningOutputTokens": 142
+      },
+      "modelContextWindow": 258400
+    },
+    "wall_seconds": 9.772484899964184,
+    "packet_sha256": "4e45e5353d1a3a636c4506dde63c2d3cbaeb66c9e3232bdf4b15b796c88d4906",
+    "response_sha256": "644bac7f28ab56ea923cc48a6036be4f4a647645af0840474f222bf06286a2b5",
+    "tool_calls": []
+  },
+  {
+    "requested_model": "gpt-6-sol",
+    "resolved_model": "gpt-6-sol",
+    "reasoning_effort": "high",
+    "case_id": "q-settlement",
+    "stage_index": 0,
+    "status": "ok",
+    "response": {
+      "estimates": {
+        "non_pvp_principal_el": 12000,
+        "pvp_principal_el": 0,
+        "liquidity_need": 10000000
+      },
+      "rationale": "Without PvP, expected principal loss is 10,000,000 \u00d7 0.002 \u00d7 (1 \u2212 0.4) = 12,000. Functioning PvP prevents irrevocable pay-away without receipt, so principal loss for the specified failure interval is zero. If the purchased currency does not arrive, replacing the full amount may require 10,000,000 in funding. The 75,000 replacement-cost stress remains a potential market-cost exposure, not principal loss. PvP also leaves liquidity and operational risks, including settlement delays, outages, and mismatched instructions.",
+      "limitations": [
+        "The liquidity figure is a conditional gross funding need, not an expected loss.",
+        "No probability is supplied for the 75,000 replacement-cost stress or for operational failures."
+      ]
+    },
+    "usage": {
+      "total": {
+        "totalTokens": 11212,
+        "inputTokens": 10861,
+        "cachedInputTokens": 10752,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 351,
+        "reasoningOutputTokens": 149
+      },
+      "last": {
+        "totalTokens": 11212,
+        "inputTokens": 10861,
+        "cachedInputTokens": 10752,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 351,
+        "reasoningOutputTokens": 149
+      },
+      "modelContextWindow": 258400
+    },
+    "wall_seconds": 10.482055800035596,
+    "packet_sha256": "42047bac0555c06afa3f6865900879ea0e21b21e7e78b1c9e4be38c2cb9e6587",
+    "response_sha256": "db25d3727ec190c9a50488cba0d70d3a7f0e2d23889374ed58f35857c620198c",
+    "tool_calls": []
+  },
+  {
+    "requested_model": "gpt-6-sol",
+    "resolved_model": "gpt-6-sol",
+    "reasoning_effort": "high",
+    "case_id": "q-tail",
+    "stage_index": 0,
+    "status": "ok",
+    "response": {
+      "estimates": {
+        "var": 20,
+        "expected_shortfall": 52
+      },
+      "rationale": "The left 97.5% loss quantile is 20. The worst 2.5% probability mass comprises all 1% at loss 100 and 1.5% of the 4% at loss 20; ES = (0.01\u00d7100 + 0.015\u00d720)/0.025 = 52.",
+      "limitations": [
+        "Applies only to the stipulated one-interval loss distribution."
+      ]
+    },
+    "usage": {
+      "total": {
+        "totalTokens": 11044,
+        "inputTokens": 10847,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 197,
+        "reasoningOutputTokens": 81
+      },
+      "last": {
+        "totalTokens": 11044,
+        "inputTokens": 10847,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 197,
+        "reasoningOutputTokens": 81
+      },
+      "modelContextWindow": 258400
+    },
+    "wall_seconds": 6.602699999930337,
+    "packet_sha256": "cdba48802f5ccc10f66268d0c25f934fb78d701a10b0b91b24ad6de0b4551d5a",
+    "response_sha256": "24110923f8c0e3b5122cdb19e9d27edce7a471719cf2b0f68ea69029340d3927",
+    "tool_calls": []
+  },
+  {
+    "requested_model": "gpt-6-sol",
+    "resolved_model": "gpt-6-sol",
+    "reasoning_effort": "high",
+    "case_id": "q-netting",
+    "stage_index": 0,
+    "status": "ok",
+    "response": {
+      "estimates": {
+        "same_set_exposure": 20,
+        "separate_set_exposure": 100
+      },
+      "rationale": "Sum positions within each permitted netting set, then take each set\u2019s positive balance. The same set nets 100\u221280 to 20. Separate sets contribute max(100,0)+max(\u221280,0)=100. A market hedge may offset price risk but does not create an enforceable cross-counterparty close-out netting right.",
+      "limitations": [
+        "Assumes the supplied signed values are current position values and ignores collateral."
+      ]
+    },
+    "usage": {
+      "total": {
+        "totalTokens": 10976,
+        "inputTokens": 10805,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 171,
+        "reasoningOutputTokens": 49
+      },
+      "last": {
+        "totalTokens": 10976,
+        "inputTokens": 10805,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 171,
+        "reasoningOutputTokens": 49
+      },
+      "modelContextWindow": 258400
+    },
+    "wall_seconds": 6.459591299993917,
+    "packet_sha256": "ee791cab4c73e360f5e3a8808d44d5d31d5ba02741377e026dd0950891830226",
+    "response_sha256": "95b5f5a209edc84c1295dba11bf3e3e3b9636c95f3e0f977d8d66339042cad2f",
+    "tool_calls": []
+  },
+  {
+    "requested_model": "gpt-6-sol",
+    "resolved_model": "gpt-6-sol",
+    "reasoning_effort": "high",
+    "case_id": "q-capacity",
+    "stage_index": 0,
+    "status": "ok",
+    "response": {
+      "estimates": {
+        "single_sell": 300,
+        "million_sell": 300000000,
+        "million_flow_depth": 3
+      },
+      "rationale": "Each agent holds 1000 \u00d7 3 = 3000 in leveraged risky assets and sells 10%, or 300. One million agents sell 300 million, equal to 3 times the stated 100 million depth. One agent\u2019s sell-notional/depth is 0.000003. If aggregate capital is fixed, splitting it among more agents does not change total sell notional: it remains 30% of aggregate capital.",
+      "limitations": [
+        "Assumes every agent sells the stated fraction in the same interval.",
+        "Depth is a scenario capacity parameter, not a guaranteed executable quote."
+      ]
+    },
+    "usage": {
+      "total": {
+        "totalTokens": 11165,
+        "inputTokens": 10843,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 322,
+        "reasoningOutputTokens": 166
+      },
+      "last": {
+        "totalTokens": 11165,
+        "inputTokens": 10843,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 322,
+        "reasoningOutputTokens": 166
+      },
+      "modelContextWindow": 258400
+    },
+    "wall_seconds": 10.050597599940374,
+    "packet_sha256": "73fa7f204039383bd5068961e081261ccddf353d913745dec13c8f279ca1f741",
+    "response_sha256": "a75937083d25a5fece726a4df4f06e350ba2c938e2046aa71bb65da6956cd22b",
+    "tool_calls": []
+  },
+  {
+    "requested_model": "gpt-6-sol",
+    "resolved_model": "gpt-6-sol",
+    "reasoning_effort": "low",
+    "case_id": "q-cva-term",
+    "stage_index": 0,
+    "status": "ok",
+    "response": {
+      "estimates": {
+        "cva": 23400
+      },
+      "rationale": "Unilateral CVA = (1 \u2212 0.4) \u00d7 [(1,000,000 \u00d7 0.01 \u00d7 0.99) + (2,000,000 \u00d7 0.015 \u00d7 0.97)] = 23,400 currency units. The stipulated default increments are unconditional and cover disjoint periods.",
+      "limitations": [
+        "Assumes positive exposure is independent of default, so wrong-way risk is excluded.",
+        "Uses the supplied period exposures and discount factors without modeling exposure within each period."
+      ]
+    },
+    "usage": {
+      "total": {
+        "totalTokens": 10971,
+        "inputTokens": 10806,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 165,
+        "reasoningOutputTokens": 36
+      },
+      "last": {
+        "totalTokens": 10971,
+        "inputTokens": 10806,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 165,
+        "reasoningOutputTokens": 36
+      },
+      "modelContextWindow": 258400
+    },
+    "wall_seconds": 6.676596299977973,
+    "packet_sha256": "30b8901f95cc4c41842ded3f728b248a1ed262a5d05cf7bf338cdc9676d10871",
+    "response_sha256": "1947ee12e63b42edfba18878dba1a83b4579b2648926b82689f2c578ee6475c5",
+    "tool_calls": []
+  },
+  {
+    "requested_model": "gpt-6-sol",
+    "resolved_model": "gpt-6-sol",
+    "reasoning_effort": "low",
+    "case_id": "q-wrong-way",
+    "stage_index": 0,
+    "status": "ok",
+    "response": {
+      "estimates": {
+        "joint_loss": 12600,
+        "independent_loss": 6690
+      },
+      "rationale": "With loss-given-default of 60%, joint-state loss is 0.6\u00d7(0.9\u00d7100000\u00d70.01 + 0.1\u00d71000000\u00d70.2) = 12,540. The independence estimate is 0.6\u00d7[0.9\u00d7100000 + 0.1\u00d71000000]\u00d7[0.9\u00d70.01 + 0.1\u00d70.2] = 3,306. The gap is 9,234 because exposure and default probability are both higher in the adverse state.",
+      "limitations": []
+    },
+    "usage": {
+      "total": {
+        "totalTokens": 10980,
+        "inputTokens": 10827,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 153,
+        "reasoningOutputTokens": 0
+      },
+      "last": {
+        "totalTokens": 10980,
+        "inputTokens": 10827,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 153,
+        "reasoningOutputTokens": 0
+      },
+      "modelContextWindow": 258400
+    },
+    "wall_seconds": 6.710708300000988,
+    "packet_sha256": "4e45e5353d1a3a636c4506dde63c2d3cbaeb66c9e3232bdf4b15b796c88d4906",
+    "response_sha256": "5fc375f24062ccf86eb89a1b1e56311d4111670c3d237b7f965bb4cd0780193e",
+    "tool_calls": []
+  },
+  {
+    "requested_model": "gpt-6-sol",
+    "resolved_model": "gpt-6-sol",
+    "reasoning_effort": "low",
+    "case_id": "q-settlement",
+    "stage_index": 0,
+    "status": "ok",
+    "response": {
+      "estimates": {
+        "non_pvp_principal_el": 12000,
+        "pvp_principal_el": 0,
+        "liquidity_need": 10000000
+      },
+      "rationale": "Without PvP, expected principal loss is 10,000,000 \u00d7 0.002 \u00d7 (1 \u2212 0.4) = 12,000. Functioning PvP eliminates the specified pay-away-before-receipt principal exposure. If purchased currency fails to arrive, full replacement funding need is 10,000,000. The 75,000 replacement-cost stress remains a separate market-risk measure; liquidity and operational risks can remain even under PvP.",
+      "limitations": [
+        "The 0.002 failure probability applies only to the non-PvP exposure interval; it is not a PvP failure probability.",
+        "No probability is supplied for the 75,000 replacement-cost stress, so its expected loss cannot be calculated."
+      ]
+    },
+    "usage": {
+      "total": {
+        "totalTokens": 11053,
+        "inputTokens": 10861,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 192,
+        "reasoningOutputTokens": 0
+      },
+      "last": {
+        "totalTokens": 11053,
+        "inputTokens": 10861,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 192,
+        "reasoningOutputTokens": 0
+      },
+      "modelContextWindow": 258400
+    },
+    "wall_seconds": 7.293308599968441,
+    "packet_sha256": "42047bac0555c06afa3f6865900879ea0e21b21e7e78b1c9e4be38c2cb9e6587",
+    "response_sha256": "b8be3479f0c1bf08a48b42f283c82c7b353ed02ed348ebde450fd7e4997d1eec",
+    "tool_calls": []
+  },
+  {
+    "requested_model": "gpt-6-sol",
+    "resolved_model": "gpt-6-sol",
+    "reasoning_effort": "low",
+    "case_id": "q-tail",
+    "stage_index": 0,
+    "status": "ok",
+    "response": {
+      "estimates": {
+        "var": 20,
+        "expected_shortfall": 52
+      },
+      "rationale": "The left 97.5% loss quantile is 20. The worst 2.5% probability mass contains all 1% at loss 100 and 1.5% of the 4% mass at loss 20, giving ES = (0.01\u00d7100 + 0.015\u00d720)/0.025 = 52.",
+      "limitations": [
+        "Applies only to the stipulated discrete loss distribution and one stress interval."
+      ]
+    },
+    "usage": {
+      "total": {
+        "totalTokens": 11005,
+        "inputTokens": 10847,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 158,
+        "reasoningOutputTokens": 38
+      },
+      "last": {
+        "totalTokens": 11005,
+        "inputTokens": 10847,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 158,
+        "reasoningOutputTokens": 38
+      },
+      "modelContextWindow": 258400
+    },
+    "wall_seconds": 6.812092400039546,
+    "packet_sha256": "cdba48802f5ccc10f66268d0c25f934fb78d701a10b0b91b24ad6de0b4551d5a",
+    "response_sha256": "fd94831c9f20235e01cf4f60a2cfeccc1fe1bdde0807db8935ba8f6a5ae2624b",
+    "tool_calls": []
+  },
+  {
+    "requested_model": "gpt-6-sol",
+    "resolved_model": "gpt-6-sol",
+    "reasoning_effort": "low",
+    "case_id": "q-netting",
+    "stage_index": 0,
+    "status": "ok",
+    "response": {
+      "estimates": {
+        "same_set_exposure": 20,
+        "separate_set_exposure": 100
+      },
+      "rationale": "Within one legal netting set, max(100\u221280, 0)=20. In separate sets, max(100, 0)+max(\u221280, 0)=100. A market hedge offsets price risk but does not create an enforceable right to close out and net obligations across counterparties.",
+      "limitations": []
+    },
+    "usage": {
+      "total": {
+        "totalTokens": 10903,
+        "inputTokens": 10805,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 98,
+        "reasoningOutputTokens": 0
+      },
+      "last": {
+        "totalTokens": 10903,
+        "inputTokens": 10805,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 98,
+        "reasoningOutputTokens": 0
+      },
+      "modelContextWindow": 258400
+    },
+    "wall_seconds": 6.903792500030249,
+    "packet_sha256": "ee791cab4c73e360f5e3a8808d44d5d31d5ba02741377e026dd0950891830226",
+    "response_sha256": "e6d2bec3c6faa701e8f187fb322f0c5b4c36f84af294abdf0acdf3baa45b27a4",
+    "tool_calls": []
+  },
+  {
+    "requested_model": "gpt-6-sol",
+    "resolved_model": "gpt-6-sol",
+    "reasoning_effort": "low",
+    "case_id": "q-capacity",
+    "stage_index": 0,
+    "status": "ok",
+    "response": {
+      "estimates": {
+        "single_sell": 300,
+        "million_sell": 300000000,
+        "million_flow_depth": 3
+      },
+      "rationale": "Leveraged risky assets per agent are 1,000 \u00d7 3 = 3,000; selling 10% gives 300, or 0.000003 of the 100,000,000 depth. One million agents sell 300,000,000, or 3 times depth. At fixed aggregate capital, splitting it among more agents would not increase total sell notional under the same leverage and sell fraction.",
+      "limitations": [
+        "Depth is a scenario capacity parameter, not a guaranteed executable quote."
+      ]
+    },
+    "usage": {
+      "total": {
+        "totalTokens": 10981,
+        "inputTokens": 10843,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 138,
+        "reasoningOutputTokens": 0
+      },
+      "last": {
+        "totalTokens": 10981,
+        "inputTokens": 10843,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 138,
+        "reasoningOutputTokens": 0
+      },
+      "modelContextWindow": 258400
+    },
+    "wall_seconds": 6.502422000048682,
+    "packet_sha256": "73fa7f204039383bd5068961e081261ccddf353d913745dec13c8f279ca1f741",
+    "response_sha256": "fbaee950eaa454a651618e7ba9d52589c0976627cac795ebf0dcc058ac0b911b",
+    "tool_calls": []
+  },
+  {
+    "requested_model": "gpt-6-sol",
+    "resolved_model": "gpt-6-sol",
+    "reasoning_effort": "medium",
+    "case_id": "q-cva-term",
+    "stage_index": 0,
+    "status": "ok",
+    "response": {
+      "estimates": {
+        "cva": 23400
+      },
+      "rationale": "CVA = (1 \u2212 0.4) \u00d7 [(1,000,000 \u00d7 0.01 \u00d7 0.99) + (2,000,000 \u00d7 0.015 \u00d7 0.97)] = 23,400 currency units.",
+      "limitations": [
+        "Assumes positive exposure and default are independent, so wrong-way risk is excluded.",
+        "Unilateral CVA excludes the institution\u2019s own default.",
+        "No collateral or netting effects are specified."
+      ]
+    },
+    "usage": {
+      "total": {
+        "totalTokens": 11013,
+        "inputTokens": 10806,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 207,
+        "reasoningOutputTokens": 87
+      },
+      "last": {
+        "totalTokens": 11013,
+        "inputTokens": 10806,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 207,
+        "reasoningOutputTokens": 87
+      },
+      "modelContextWindow": 258400
+    },
+    "wall_seconds": 7.447344099986367,
+    "packet_sha256": "30b8901f95cc4c41842ded3f728b248a1ed262a5d05cf7bf338cdc9676d10871",
+    "response_sha256": "3e171397c1044e032346626ec7ce3af18796ce07c105066defafccd65d0f2984",
+    "tool_calls": []
+  },
+  {
+    "requested_model": "gpt-6-sol",
+    "resolved_model": "gpt-6-sol",
+    "reasoning_effort": "medium",
+    "case_id": "q-wrong-way",
+    "stage_index": 0,
+    "status": "ok",
+    "response": {
+      "estimates": {
+        "joint_loss": 12540,
+        "independent_loss": 3306
+      },
+      "rationale": "With 60% loss given default, joint-state loss is 0.6 \u00d7 (0.9 \u00d7 100,000 \u00d7 0.01 + 0.1 \u00d7 1,000,000 \u00d7 0.20) = 12,540. The independence estimate is 0.6 \u00d7 190,000 mean exposure \u00d7 0.029 mean PD = 3,306. It understates loss by 9,234 because the high-exposure state also has the higher conditional PD.",
+      "limitations": []
+    },
+    "usage": {
+      "total": {
+        "totalTokens": 11062,
+        "inputTokens": 10827,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 235,
+        "reasoningOutputTokens": 95
+      },
+      "last": {
+        "totalTokens": 11062,
+        "inputTokens": 10827,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 235,
+        "reasoningOutputTokens": 95
+      },
+      "modelContextWindow": 258400
+    },
+    "wall_seconds": 8.184335600002669,
+    "packet_sha256": "4e45e5353d1a3a636c4506dde63c2d3cbaeb66c9e3232bdf4b15b796c88d4906",
+    "response_sha256": "f4bad204ec684d666b0233e2b9237c2f2c65fc29bce818eab2f37af022d4b48d",
+    "tool_calls": []
+  },
+  {
+    "requested_model": "gpt-6-sol",
+    "resolved_model": "gpt-6-sol",
+    "reasoning_effort": "medium",
+    "case_id": "q-settlement",
+    "stage_index": 0,
+    "status": "ok",
+    "response": {
+      "estimates": {
+        "non_pvp_principal_el": 12000,
+        "pvp_principal_el": 0,
+        "liquidity_need": 10000000
+      },
+      "rationale": "Without PvP, expected principal loss is 10,000,000 \u00d7 0.002 \u00d7 (1 \u2212 0.4) = 12,000. Functioning PvP prevents one-sided principal settlement, so principal expected loss from the specified pay-away interval is zero. If the purchased currency does not arrive, the full 10,000,000 must be funded or replaced. The 75,000 replacement-cost stress is a separate exposure, not principal loss.",
+      "limitations": [
+        "PvP does not eliminate replacement-cost, liquidity, or operational risks, including failed or delayed settlement.",
+        "The packet gives no probability for the 75,000 replacement-cost stress, so its expected loss cannot be calculated."
+      ]
+    },
+    "usage": {
+      "total": {
+        "totalTokens": 11159,
+        "inputTokens": 10861,
+        "cachedInputTokens": 10752,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 298,
+        "reasoningOutputTokens": 109
+      },
+      "last": {
+        "totalTokens": 11159,
+        "inputTokens": 10861,
+        "cachedInputTokens": 10752,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 298,
+        "reasoningOutputTokens": 109
+      },
+      "modelContextWindow": 258400
+    },
+    "wall_seconds": 9.589297000085935,
+    "packet_sha256": "42047bac0555c06afa3f6865900879ea0e21b21e7e78b1c9e4be38c2cb9e6587",
+    "response_sha256": "ef3611862739c3338ac87a3c523479348e0afee20bbad9d5347fe24aa643f18e",
+    "tool_calls": []
+  },
+  {
+    "requested_model": "gpt-6-sol",
+    "resolved_model": "gpt-6-sol",
+    "reasoning_effort": "medium",
+    "case_id": "q-tail",
+    "stage_index": 0,
+    "status": "ok",
+    "response": {
+      "estimates": {
+        "var": 20,
+        "expected_shortfall": 52
+      },
+      "rationale": "The left 97.5% quantile is 20: cumulative probability rises from 95% at loss 10 to 99% at loss 20. The worst 2.5% mass comprises all 1% at loss 100 and 1.5% of the mass at loss 20, so ES = (0.01\u00d7100 + 0.015\u00d720)/0.025 = 52.",
+      "limitations": [
+        "Applies only to the stipulated loss distribution and stress interval."
+      ]
+    },
+    "usage": {
+      "total": {
+        "totalTokens": 11103,
+        "inputTokens": 10847,
+        "cachedInputTokens": 9728,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 256,
+        "reasoningOutputTokens": 123
+      },
+      "last": {
+        "totalTokens": 11103,
+        "inputTokens": 10847,
+        "cachedInputTokens": 9728,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 256,
+        "reasoningOutputTokens": 123
+      },
+      "modelContextWindow": 258400
+    },
+    "wall_seconds": 8.514600199996494,
+    "packet_sha256": "cdba48802f5ccc10f66268d0c25f934fb78d701a10b0b91b24ad6de0b4551d5a",
+    "response_sha256": "9d0906f0090ef048c7653c94be9da43e8290875ebb79a8a973d99462dd346937",
+    "tool_calls": []
+  },
+  {
+    "requested_model": "gpt-6-sol",
+    "resolved_model": "gpt-6-sol",
+    "reasoning_effort": "medium",
+    "case_id": "q-netting",
+    "stage_index": 0,
+    "status": "ok",
+    "response": {
+      "estimates": {
+        "same_set_exposure": 20,
+        "separate_set_exposure": 100
+      },
+      "rationale": "Current positive exposure is the sum of positive net values within each legal netting set. The same set nets 100 \u2212 80 = 20; separate sets yield max(100, 0) + max(\u221280, 0) = 100. A market hedge offsets economic risk but does not create an enforceable close-out netting right across counterparties.",
+      "limitations": []
+    },
+    "usage": {
+      "total": {
+        "totalTokens": 10975,
+        "inputTokens": 10805,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 170,
+        "reasoningOutputTokens": 58
+      },
+      "last": {
+        "totalTokens": 10975,
+        "inputTokens": 10805,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 170,
+        "reasoningOutputTokens": 58
+      },
+      "modelContextWindow": 258400
+    },
+    "wall_seconds": 5.855270000058226,
+    "packet_sha256": "ee791cab4c73e360f5e3a8808d44d5d31d5ba02741377e026dd0950891830226",
+    "response_sha256": "60a1862728989045c24e3b3587332b7e2a24fa496b9f80de7ce2a11ad2e248bd",
+    "tool_calls": []
+  },
+  {
+    "requested_model": "gpt-6-sol",
+    "resolved_model": "gpt-6-sol",
+    "reasoning_effort": "medium",
+    "case_id": "q-capacity",
+    "stage_index": 0,
+    "status": "ok",
+    "response": {
+      "estimates": {
+        "single_sell": 300,
+        "million_sell": 300000000,
+        "million_flow_depth": 3
+      },
+      "rationale": "Leveraged risky assets per agent are 1,000 \u00d7 3 = 3,000; selling 10% gives 300, or 0.000003 of the 100,000,000 depth. One million identical agents sell 300,000,000 in total, or 3 times depth. If aggregate capital is held fixed instead, dividing it among more agents does not change total sell notional under the same leverage and sell fraction.",
+      "limitations": [
+        "Depth is a scenario capacity parameter, not a guaranteed executable quote or a price-impact estimate.",
+        "The million-agent figure assumes each agent has 1,000 of capital and sells in the same interval."
+      ]
+    },
+    "usage": {
+      "total": {
+        "totalTokens": 11164,
+        "inputTokens": 10843,
+        "cachedInputTokens": 9728,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 321,
+        "reasoningOutputTokens": 149
+      },
+      "last": {
+        "totalTokens": 11164,
+        "inputTokens": 10843,
+        "cachedInputTokens": 9728,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 321,
+        "reasoningOutputTokens": 149
+      },
+      "modelContextWindow": 258400
+    },
+    "wall_seconds": 8.892381599987857,
+    "packet_sha256": "73fa7f204039383bd5068961e081261ccddf353d913745dec13c8f279ca1f741",
+    "response_sha256": "c6be3c10221a5ac254b00d226d60e316067e9ad68074b19d87a6b26c654d433f",
+    "tool_calls": []
+  },
+  {
+    "requested_model": "gpt-6.1-sol",
+    "resolved_model": "gpt-6.1-sol",
+    "reasoning_effort": "high",
+    "case_id": "q-cva-term",
+    "stage_index": 0,
+    "status": "ok",
+    "response": {
+      "estimates": {
+        "cva": 23400
+      },
+      "rationale": "Unilateral CVA = (1 \u2212 0.4) \u00d7 [1,000,000 \u00d7 0.01 \u00d7 0.99 + 2,000,000 \u00d7 0.015 \u00d7 0.97] = 23,400 currency units. The stipulated unconditional default increments require no additional survival factor.",
+      "limitations": [
+        "Exposure\u2013default independence excludes wrong-way and right-way risk.",
+        "Uses discrete-period expected exposures and discounts with fixed recovery.",
+        "Unilateral valuation excludes own-default effects (DVA)."
+      ]
+    },
+    "usage": {
+      "total": {
+        "totalTokens": 11058,
+        "inputTokens": 10806,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 252,
+        "reasoningOutputTokens": 122
+      },
+      "last": {
+        "totalTokens": 11058,
+        "inputTokens": 10806,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 252,
+        "reasoningOutputTokens": 122
+      },
+      "modelContextWindow": 475000
+    },
+    "wall_seconds": 15.42931639996823,
+    "packet_sha256": "30b8901f95cc4c41842ded3f728b248a1ed262a5d05cf7bf338cdc9676d10871",
+    "response_sha256": "d6e5427e0eb4e75707a55409ffed9275fe99fa35ce29a353dea970d89c43bd90",
+    "tool_calls": []
+  },
+  {
+    "requested_model": "gpt-6.1-sol",
+    "resolved_model": "gpt-6.1-sol",
+    "reasoning_effort": "high",
+    "case_id": "q-wrong-way",
+    "stage_index": 0,
+    "status": "ok",
+    "response": {
+      "estimates": {
+        "joint_loss": 12540,
+        "independent_loss": 3306
+      },
+      "rationale": "Joint loss = 0.6 \u00d7 (0.9 \u00d7 100000 \u00d7 0.01 + 0.1 \u00d7 1000000 \u00d7 0.20) = 12540. The independence estimate uses mean exposure 190000 and mean PD 0.029: 0.6 \u00d7 190000 \u00d7 0.029 = 3306. It understates loss by 9234 because exposure is highest in the high-default-probability state: positive dependence creates wrong-way risk.",
+      "limitations": []
+    },
+    "usage": {
+      "total": {
+        "totalTokens": 11217,
+        "inputTokens": 10827,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 390,
+        "reasoningOutputTokens": 233
+      },
+      "last": {
+        "totalTokens": 11217,
+        "inputTokens": 10827,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 390,
+        "reasoningOutputTokens": 233
+      },
+      "modelContextWindow": 475000
+    },
+    "wall_seconds": 14.819357399945147,
+    "packet_sha256": "4e45e5353d1a3a636c4506dde63c2d3cbaeb66c9e3232bdf4b15b796c88d4906",
+    "response_sha256": "405e4157e35dd079e62aab17d7f6258156144a7450ca5457dd98b8915c568d0a",
+    "tool_calls": []
+  },
+  {
+    "requested_model": "gpt-6.1-sol",
+    "resolved_model": "gpt-6.1-sol",
+    "reasoning_effort": "high",
+    "case_id": "q-settlement",
+    "stage_index": 0,
+    "status": "ok",
+    "response": {
+      "estimates": {
+        "non_pvp_principal_el": 12000,
+        "pvp_principal_el": 0,
+        "liquidity_need": 10000000
+      },
+      "rationale": "Without PvP, expected principal loss is 10,000,000 \u00d7 0.002 \u00d7 (1 \u2212 0.4) = 12,000. Functioning PvP prevents paying away principal without receiving the purchased currency, eliminating this principal loss. Non-arrival creates a gross principal replacement-funding need of 10,000,000. The separate 75,000 replacement-cost stress reflects adverse market repricing. Funding timing gaps and operational outages or processing failures remain risks even with PvP.",
+      "limitations": [
+        "The failure probability applies only to the specified pay-away-to-receipt interval.",
+        "Liquidity need is gross principal-equivalent funding; the separate replacement-cost stress is not included.",
+        "No probability for the replacement-cost stress or funding-cost inputs are supplied, so their expected losses cannot be calculated."
+      ]
+    },
+    "usage": {
+      "total": {
+        "totalTokens": 11491,
+        "inputTokens": 10861,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 630,
+        "reasoningOutputTokens": 394
+      },
+      "last": {
+        "totalTokens": 11491,
+        "inputTokens": 10861,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 630,
+        "reasoningOutputTokens": 394
+      },
+      "modelContextWindow": 475000
+    },
+    "wall_seconds": 30.14082710002549,
+    "packet_sha256": "42047bac0555c06afa3f6865900879ea0e21b21e7e78b1c9e4be38c2cb9e6587",
+    "response_sha256": "ee02ab2c67e04f04d33740844be5085b12bba7199bc1e316c9dd325e5b0e35cd",
+    "tool_calls": []
+  },
+  {
+    "requested_model": "gpt-6.1-sol",
+    "resolved_model": "gpt-6.1-sol",
+    "reasoning_effort": "high",
+    "case_id": "q-tail",
+    "stage_index": 0,
+    "status": "ok",
+    "response": {
+      "estimates": {
+        "var": 20,
+        "expected_shortfall": 52
+      },
+      "rationale": "The left 97.5% quantile is 20: cumulative probability is 95% at 10 and 99% at 20. The worst 2.5% consists of 1% at loss 100 and 1.5% at loss 20, so ES = (0.01\u00d7100 + 0.015\u00d720)/0.025 = 52.",
+      "limitations": []
+    },
+    "usage": {
+      "total": {
+        "totalTokens": 11120,
+        "inputTokens": 10847,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 273,
+        "reasoningOutputTokens": 160
+      },
+      "last": {
+        "totalTokens": 11120,
+        "inputTokens": 10847,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 273,
+        "reasoningOutputTokens": 160
+      },
+      "modelContextWindow": 475000
+    },
+    "wall_seconds": 10.318399399984628,
+    "packet_sha256": "cdba48802f5ccc10f66268d0c25f934fb78d701a10b0b91b24ad6de0b4551d5a",
+    "response_sha256": "e28a199f924c4d08f30b7b62646f06057724c8bcc468c723a24eb944a5932830",
+    "tool_calls": []
+  },
+  {
+    "requested_model": "gpt-6.1-sol",
+    "resolved_model": "gpt-6.1-sol",
+    "reasoning_effort": "high",
+    "case_id": "q-netting",
+    "stage_index": 0,
+    "status": "ok",
+    "response": {
+      "estimates": {
+        "same_set_exposure": 20,
+        "separate_set_exposure": 100
+      },
+      "rationale": "Current positive exposure is the sum of max(net value, 0) across legal netting sets. Same set: max(100 \u2212 80, 0) = 20. Separate sets: max(100, 0) + max(\u221280, 0) = 100. Market hedging offsets economic risk but does not create enforceable cross-counterparty close-out netting rights; the negative position cannot offset exposure in another legal set.",
+      "limitations": []
+    },
+    "usage": {
+      "total": {
+        "totalTokens": 11115,
+        "inputTokens": 10805,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 310,
+        "reasoningOutputTokens": 164
+      },
+      "last": {
+        "totalTokens": 11115,
+        "inputTokens": 10805,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 310,
+        "reasoningOutputTokens": 164
+      },
+      "modelContextWindow": 475000
+    },
+    "wall_seconds": 14.550357199972495,
+    "packet_sha256": "ee791cab4c73e360f5e3a8808d44d5d31d5ba02741377e026dd0950891830226",
+    "response_sha256": "4f23ecbaeba7152f6c2621b91777ef56a756376353498847bafc5679b928cbc3",
+    "tool_calls": []
+  },
+  {
+    "requested_model": "gpt-6.1-sol",
+    "resolved_model": "gpt-6.1-sol",
+    "reasoning_effort": "high",
+    "case_id": "q-capacity",
+    "stage_index": 0,
+    "status": "ok",
+    "response": {
+      "estimates": {
+        "single_sell": 300,
+        "million_sell": 300000000,
+        "million_flow_depth": 3
+      },
+      "rationale": "One agent sells 1,000 \u00d7 3 \u00d7 0.1 = 300, or 0.000003 of depth (0.0003%). One million agents sell 300,000,000, or 3 times depth (300%). With fixed aggregate capital C instead, total selling stays 0.3C regardless of agent count, so sell/depth is unchanged.",
+      "limitations": [
+        "Depth is a scenario capacity parameter, not a guaranteed executable quote. Price impact and executable proceeds cannot be inferred from these inputs."
+      ]
+    },
+    "usage": {
+      "total": {
+        "totalTokens": 11268,
+        "inputTokens": 10843,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 425,
+        "reasoningOutputTokens": 257
+      },
+      "last": {
+        "totalTokens": 11268,
+        "inputTokens": 10843,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 425,
+        "reasoningOutputTokens": 257
+      },
+      "modelContextWindow": 475000
+    },
+    "wall_seconds": 14.27449780004099,
+    "packet_sha256": "73fa7f204039383bd5068961e081261ccddf353d913745dec13c8f279ca1f741",
+    "response_sha256": "be678a63276c9f848aede7d295fa590a858e776e0c1f3a754df91e70526a9c9c",
+    "tool_calls": []
+  },
+  {
+    "requested_model": "gpt-6.1-sol",
+    "resolved_model": "gpt-6.1-sol",
+    "reasoning_effort": "low",
+    "case_id": "q-cva-term",
+    "stage_index": 0,
+    "status": "ok",
+    "response": {
+      "estimates": {
+        "cva": 23400
+      },
+      "rationale": "CVA = (1 \u2212 0.4) \u00d7 [1,000,000 \u00d7 0.01 \u00d7 0.99 + 2,000,000 \u00d7 0.015 \u00d7 0.97] = 23,400 currency units. The disjoint-period default increments are unconditional, so no additional survival weighting is applied.",
+      "limitations": [
+        "Exposure\u2013default independence excludes wrong-way and right-way risk.",
+        "Uses discrete-period exposures and discounts and a fixed 40% recovery rate.",
+        "Unilateral CVA excludes own-default effects (DVA)."
+      ]
+    },
+    "usage": {
+      "total": {
+        "totalTokens": 11037,
+        "inputTokens": 10806,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 231,
+        "reasoningOutputTokens": 92
+      },
+      "last": {
+        "totalTokens": 11037,
+        "inputTokens": 10806,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 231,
+        "reasoningOutputTokens": 92
+      },
+      "modelContextWindow": 475000
+    },
+    "wall_seconds": 12.390692099928856,
+    "packet_sha256": "30b8901f95cc4c41842ded3f728b248a1ed262a5d05cf7bf338cdc9676d10871",
+    "response_sha256": "d4f0f6333524ae424c8c339b78158f9a7f746897ad986aee0fd86d83a03c3394",
+    "tool_calls": []
+  },
+  {
+    "requested_model": "gpt-6.1-sol",
+    "resolved_model": "gpt-6.1-sol",
+    "reasoning_effort": "low",
+    "case_id": "q-wrong-way",
+    "stage_index": 0,
+    "status": "ok",
+    "response": {
+      "estimates": {
+        "joint_loss": 12540,
+        "independent_loss": 3306
+      },
+      "rationale": "Joint loss = (1\u22120.4)\u00d7[0.9\u00d7100,000\u00d70.01 + 0.1\u00d71,000,000\u00d70.20] = 12,540. Independence gives (1\u22120.4)\u00d7190,000\u00d70.029 = 3,306. It understates loss by 9,234 because exposure is highest in the high-default-probability state: positive exposure\u2013PD dependence creates wrong-way risk.",
+      "limitations": []
+    },
+    "usage": {
+      "total": {
+        "totalTokens": 11074,
+        "inputTokens": 10827,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 247,
+        "reasoningOutputTokens": 95
+      },
+      "last": {
+        "totalTokens": 11074,
+        "inputTokens": 10827,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 247,
+        "reasoningOutputTokens": 95
+      },
+      "modelContextWindow": 475000
+    },
+    "wall_seconds": 12.093836799962446,
+    "packet_sha256": "4e45e5353d1a3a636c4506dde63c2d3cbaeb66c9e3232bdf4b15b796c88d4906",
+    "response_sha256": "c10e451c5bc3b98ccce9f0e5eb5795b0ad0bd68da47e378b25e7384c09c4edfe",
+    "tool_calls": []
+  },
+  {
+    "requested_model": "gpt-6.1-sol",
+    "resolved_model": "gpt-6.1-sol",
+    "reasoning_effort": "low",
+    "case_id": "q-settlement",
+    "stage_index": 0,
+    "status": "ok",
+    "response": {
+      "estimates": {
+        "non_pvp_principal_el": 12000,
+        "pvp_principal_el": 0,
+        "liquidity_need": 10000000
+      },
+      "rationale": "Without PvP, expected principal loss is 10,000,000 \u00d7 0.002 \u00d7 (1 \u2212 0.4) = 12,000. Functioning PvP eliminates principal loss by conditioning payment on receipt. Nonreceipt can still require full replacement funding of 10,000,000, not merely the unrecovered principal. The separate 75,000 replacement-cost stress represents adverse replacement pricing; if payable in addition to full replacement funding, total stressed funding would be 10,075,000. PvP does not eliminate replacement-cost risk, liquidity pressure from delayed or failed settlement, or operational disruption.",
+      "limitations": [
+        "The 0.002 probability applies only to the specified pay-away-to-receipt interval, not other risk horizons.",
+        "Zero PvP principal loss assumes PvP functions as intended; operational failures remain possible but are not quantified.",
+        "Replacement-cost stress is not an expected loss; no probability is supplied for it.",
+        "Funding is expressed in principal-equivalent units; currency conversion, funding duration, and financing costs are unspecified."
+      ]
+    },
+    "usage": {
+      "total": {
+        "totalTokens": 11292,
+        "inputTokens": 10861,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 431,
+        "reasoningOutputTokens": 144
+      },
+      "last": {
+        "totalTokens": 11292,
+        "inputTokens": 10861,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 431,
+        "reasoningOutputTokens": 144
+      },
+      "modelContextWindow": 475000
+    },
+    "wall_seconds": 16.310370900086127,
+    "packet_sha256": "42047bac0555c06afa3f6865900879ea0e21b21e7e78b1c9e4be38c2cb9e6587",
+    "response_sha256": "b577dc81e4f278abc400f83c31c60890d8e7f258a64efc1d813fabe8605e17ae",
+    "tool_calls": []
+  },
+  {
+    "requested_model": "gpt-6.1-sol",
+    "resolved_model": "gpt-6.1-sol",
+    "reasoning_effort": "low",
+    "case_id": "q-tail",
+    "stage_index": 0,
+    "status": "ok",
+    "response": {
+      "estimates": {
+        "var": 20,
+        "expected_shortfall": 52
+      },
+      "rationale": "The left 97.5% quantile is 20: cumulative probability rises from 0.95 at 10 to 0.99 at 20. The worst 2.5% mass includes 1% at loss 100 and 1.5% at loss 20, so ES = (0.01\u00d7100 + 0.015\u00d720)/0.025 = 52 for the stipulated stress interval.",
+      "limitations": []
+    },
+    "usage": {
+      "total": {
+        "totalTokens": 11017,
+        "inputTokens": 10847,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 170,
+        "reasoningOutputTokens": 49
+      },
+      "last": {
+        "totalTokens": 11017,
+        "inputTokens": 10847,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 170,
+        "reasoningOutputTokens": 49
+      },
+      "modelContextWindow": 475000
+    },
+    "wall_seconds": 9.932761000003666,
+    "packet_sha256": "cdba48802f5ccc10f66268d0c25f934fb78d701a10b0b91b24ad6de0b4551d5a",
+    "response_sha256": "c3455e856f3fc10cf88cea7e239603828a147cb1c08d8cd31084e232e78e3d46",
+    "tool_calls": []
+  },
+  {
+    "requested_model": "gpt-6.1-sol",
+    "resolved_model": "gpt-6.1-sol",
+    "reasoning_effort": "low",
+    "case_id": "q-netting",
+    "stage_index": 0,
+    "status": "ok",
+    "response": {
+      "estimates": {
+        "same_set_exposure": 20,
+        "separate_set_exposure": 100
+      },
+      "rationale": "Positive exposure is the sum of max(net position within each legal set, 0). Same set: max(100 \u2212 80, 0) = 20. Separate sets: max(100, 0) + max(\u221280, 0) = 100. Market hedging offsets economic risk but does not create enforceable cross-counterparty close-out netting rights; the negative position cannot reduce exposure in another legal set.",
+      "limitations": [
+        "Assumes netting is enforceable within each inner array, as specified."
+      ]
+    },
+    "usage": {
+      "total": {
+        "totalTokens": 10990,
+        "inputTokens": 10805,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 185,
+        "reasoningOutputTokens": 43
+      },
+      "last": {
+        "totalTokens": 10990,
+        "inputTokens": 10805,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 185,
+        "reasoningOutputTokens": 43
+      },
+      "modelContextWindow": 475000
+    },
+    "wall_seconds": 10.313974900054745,
+    "packet_sha256": "ee791cab4c73e360f5e3a8808d44d5d31d5ba02741377e026dd0950891830226",
+    "response_sha256": "e45defe454bf0ab35340e5f14ab728c2f3ce2cb9a2380c4d9365368cfb27e436",
+    "tool_calls": []
+  },
+  {
+    "requested_model": "gpt-6.1-sol",
+    "resolved_model": "gpt-6.1-sol",
+    "reasoning_effort": "low",
+    "case_id": "q-capacity",
+    "stage_index": 0,
+    "status": "ok",
+    "response": {
+      "estimates": {
+        "single_sell": 300,
+        "million_sell": 300000000,
+        "million_flow_depth": 3
+      },
+      "rationale": "One agent sells 1,000 \u00d7 3 \u00d7 0.1 = 300, or 0.000003 times depth. One million equally capitalized agents sell 300,000,000, or 3 times depth. With fixed aggregate capital C, total selling remains 0.3C regardless of agent count; splitting capital among more agents does not increase aggregate flow.",
+      "limitations": [
+        "Depth is a scenario capacity parameter, not a guaranteed executable quote; these ratios do not establish execution prices, market impact, or fill capacity."
+      ]
+    },
+    "usage": {
+      "total": {
+        "totalTokens": 11059,
+        "inputTokens": 10843,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 216,
+        "reasoningOutputTokens": 69
+      },
+      "last": {
+        "totalTokens": 11059,
+        "inputTokens": 10843,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 216,
+        "reasoningOutputTokens": 69
+      },
+      "modelContextWindow": 475000
+    },
+    "wall_seconds": 8.54099450004287,
+    "packet_sha256": "73fa7f204039383bd5068961e081261ccddf353d913745dec13c8f279ca1f741",
+    "response_sha256": "ba3d043bbbc6fc82890434368e61fa79053406a251d966b62a27de5f7033f5df",
+    "tool_calls": []
+  },
+  {
+    "requested_model": "gpt-6.1-sol",
+    "resolved_model": "gpt-6.1-sol",
+    "reasoning_effort": "medium",
+    "case_id": "q-cva-term",
+    "stage_index": 0,
+    "status": "ok",
+    "response": {
+      "estimates": {
+        "cva": 23400
+      },
+      "rationale": "Unilateral CVA = (1 \u2212 0.4) \u00d7 [1,000,000 \u00d7 0.01 \u00d7 0.99 + 2,000,000 \u00d7 0.015 \u00d7 0.97] = 23,400 currency units. The default increments are unconditional and disjoint, so no additional survival factor applies.",
+      "limitations": [
+        "Exposure\u2013default independence excludes wrong-way and right-way risk.",
+        "Uses fixed recovery and period-level exposures and discounts; intraperiod variation is not captured.",
+        "Unilateral CVA excludes the institution\u2019s own default risk."
+      ]
+    },
+    "usage": {
+      "total": {
+        "totalTokens": 11108,
+        "inputTokens": 10806,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 302,
+        "reasoningOutputTokens": 138
+      },
+      "last": {
+        "totalTokens": 11108,
+        "inputTokens": 10806,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 302,
+        "reasoningOutputTokens": 138
+      },
+      "modelContextWindow": 475000
+    },
+    "wall_seconds": 17.274084399919957,
+    "packet_sha256": "30b8901f95cc4c41842ded3f728b248a1ed262a5d05cf7bf338cdc9676d10871",
+    "response_sha256": "08823d6a99a94bb45f9e4e17e3635bd7f20872ac88135a0f51a59ce09888df45",
+    "tool_calls": []
+  },
+  {
+    "requested_model": "gpt-6.1-sol",
+    "resolved_model": "gpt-6.1-sol",
+    "reasoning_effort": "medium",
+    "case_id": "q-wrong-way",
+    "stage_index": 0,
+    "status": "ok",
+    "response": {
+      "estimates": {
+        "joint_loss": 12540,
+        "independent_loss": 3306
+      },
+      "rationale": "Joint loss = (1\u22120.4)\u00d7[0.9\u00d7100,000\u00d70.01 + 0.1\u00d71,000,000\u00d70.20] = 12,540. Independence gives (1\u22120.4)\u00d7190,000\u00d70.029 = 3,306. It understates loss by 9,234 because higher exposure coincides with higher conditional PD (wrong-way risk).",
+      "limitations": []
+    },
+    "usage": {
+      "total": {
+        "totalTokens": 11090,
+        "inputTokens": 10827,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 263,
+        "reasoningOutputTokens": 119
+      },
+      "last": {
+        "totalTokens": 11090,
+        "inputTokens": 10827,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 263,
+        "reasoningOutputTokens": 119
+      },
+      "modelContextWindow": 475000
+    },
+    "wall_seconds": 12.526746800052933,
+    "packet_sha256": "4e45e5353d1a3a636c4506dde63c2d3cbaeb66c9e3232bdf4b15b796c88d4906",
+    "response_sha256": "16ba58eec4905575c0e1a7e42f9147589a0df70050a889fc85a1ca4f74346114",
+    "tool_calls": []
+  },
+  {
+    "requested_model": "gpt-6.1-sol",
+    "resolved_model": "gpt-6.1-sol",
+    "reasoning_effort": "medium",
+    "case_id": "q-settlement",
+    "stage_index": 0,
+    "status": "ok",
+    "response": {
+      "estimates": {
+        "non_pvp_principal_el": 12000,
+        "pvp_principal_el": 0,
+        "liquidity_need": 10000000
+      },
+      "rationale": "Without PvP, expected principal loss = 10,000,000 \u00d7 0.002 \u00d7 (1 \u2212 0.4) = 12,000. Functioning PvP eliminates principal settlement loss by preventing payment without receipt. Full principal replacement funding is 10,000,000, not the recovery-adjusted loss. Replacement-cost risk remains: the supplied stress is 75,000. Liquidity timing pressures and operational failures or delays also remain.",
+      "limitations": [
+        "If the replacement-cost stress must also be funded, stress-inclusive gross funding is 10,075,000.",
+        "Net incremental liquidity depends on available or retained funds and recovery timing, which are unspecified.",
+        "The 75,000 stress is not an expected replacement-cost loss; no probability is supplied for it."
+      ]
+    },
+    "usage": {
+      "total": {
+        "totalTokens": 11543,
+        "inputTokens": 10861,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 682,
+        "reasoningOutputTokens": 479
+      },
+      "last": {
+        "totalTokens": 11543,
+        "inputTokens": 10861,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 682,
+        "reasoningOutputTokens": 479
+      },
+      "modelContextWindow": 475000
+    },
+    "wall_seconds": 31.22060760005843,
+    "packet_sha256": "42047bac0555c06afa3f6865900879ea0e21b21e7e78b1c9e4be38c2cb9e6587",
+    "response_sha256": "8e86beeeee84e67611600716048e1eef35be2d93f31a74b2e775cc0137aac2e4",
+    "tool_calls": []
+  },
+  {
+    "requested_model": "gpt-6.1-sol",
+    "resolved_model": "gpt-6.1-sol",
+    "reasoning_effort": "medium",
+    "case_id": "q-tail",
+    "stage_index": 0,
+    "status": "ok",
+    "response": {
+      "estimates": {
+        "var": 20,
+        "expected_shortfall": 52
+      },
+      "rationale": "The left 97.5% quantile is 20: cumulative probability is 95% at 10 and 99% at 20. The worst 2.5% mass includes 1% at loss 100 and 1.5% at loss 20, so ES = (0.01\u00d7100 + 0.015\u00d720)/0.025 = 52.",
+      "limitations": []
+    },
+    "usage": {
+      "total": {
+        "totalTokens": 11042,
+        "inputTokens": 10847,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 195,
+        "reasoningOutputTokens": 82
+      },
+      "last": {
+        "totalTokens": 11042,
+        "inputTokens": 10847,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 195,
+        "reasoningOutputTokens": 82
+      },
+      "modelContextWindow": 475000
+    },
+    "wall_seconds": 11.253935800050385,
+    "packet_sha256": "cdba48802f5ccc10f66268d0c25f934fb78d701a10b0b91b24ad6de0b4551d5a",
+    "response_sha256": "4c887feda70e11faf84a9aa4304f4e95d05f386f2cfe7d97b27f1f5abacf1aba",
+    "tool_calls": []
+  },
+  {
+    "requested_model": "gpt-6.1-sol",
+    "resolved_model": "gpt-6.1-sol",
+    "reasoning_effort": "medium",
+    "case_id": "q-netting",
+    "stage_index": 0,
+    "status": "ok",
+    "response": {
+      "estimates": {
+        "same_set_exposure": 20,
+        "separate_set_exposure": 100
+      },
+      "rationale": "Current positive exposure is the sum of max(net position, 0) across legal netting sets. Same set: max(100 \u2212 80, 0) = 20. Separate sets: max(100, 0) + max(\u221280, 0) = 100. Market hedging offsets economic risk but does not create enforceable cross-counterparty close-out netting rights; the negative position cannot offset exposure outside its legal netting set.",
+      "limitations": []
+    },
+    "usage": {
+      "total": {
+        "totalTokens": 10990,
+        "inputTokens": 10805,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 185,
+        "reasoningOutputTokens": 54
+      },
+      "last": {
+        "totalTokens": 10990,
+        "inputTokens": 10805,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 185,
+        "reasoningOutputTokens": 54
+      },
+      "modelContextWindow": 475000
+    },
+    "wall_seconds": 8.177396100014448,
+    "packet_sha256": "ee791cab4c73e360f5e3a8808d44d5d31d5ba02741377e026dd0950891830226",
+    "response_sha256": "0a135f79c374b7f6369973a69ee35056a7281d8b2521d4634e8f0672ad732aa8",
+    "tool_calls": []
+  },
+  {
+    "requested_model": "gpt-6.1-sol",
+    "resolved_model": "gpt-6.1-sol",
+    "reasoning_effort": "medium",
+    "case_id": "q-capacity",
+    "stage_index": 0,
+    "status": "ok",
+    "response": {
+      "estimates": {
+        "single_sell": 300,
+        "million_sell": 300000000,
+        "million_flow_depth": 3
+      },
+      "rationale": "One agent sells 1,000 \u00d7 3 \u00d7 0.1 = 300, or 0.000003 times depth. One million agents sell 300,000,000, or 3 times depth. This scaling assumes capital per agent stays fixed. With fixed aggregate capital, splitting it among more agents leaves total selling unchanged; aggregate capital of 1,000 implies total selling of 300.",
+      "limitations": [
+        "Depth is a scenario capacity parameter, not a guaranteed executable quote; the ratios do not establish price impact or execution feasibility."
+      ]
+    },
+    "usage": {
+      "total": {
+        "totalTokens": 11108,
+        "inputTokens": 10843,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 265,
+        "reasoningOutputTokens": 94
+      },
+      "last": {
+        "totalTokens": 11108,
+        "inputTokens": 10843,
+        "cachedInputTokens": 0,
+        "cacheWriteInputTokens": 0,
+        "outputTokens": 265,
+        "reasoningOutputTokens": 94
+      },
+      "modelContextWindow": 475000
+    },
+    "wall_seconds": 12.684772499953397,
+    "packet_sha256": "73fa7f204039383bd5068961e081261ccddf353d913745dec13c8f279ca1f741",
+    "response_sha256": "35a8c832b85e1caa1f2c778ca393844d529d40485b7a3ddafe78fafaafc9c772",
+    "tool_calls": []
+  }
+]

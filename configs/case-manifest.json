@@ -1,0 +1,270 @@
+{
+  "schema_version": "srb.corpus.v0.1",
+  "created_on": "2026-11-16",
+  "historical_cases": 33,
+  "synthetic_controls": 4,
+  "decision_stages": 74,
+  "protected_holdout_cases": 0,
+  "assignments": [
+    {
+      "case_id": "control_funding_buffer",
+      "family": "synthetic_adequate_funding",
+      "episode_group": "control_funding_buffer",
+      "split": "public_development",
+      "mode": "synthetic_counterfactual"
+    },
+    {
+      "case_id": "control_orderly_volatility",
+      "family": "synthetic_orderly_market_volatility",
+      "episode_group": "control_orderly_volatility",
+      "split": "public_development",
+      "mode": "synthetic_counterfactual"
+    },
+    {
+      "case_id": "control_pvp_prefunded",
+      "family": "synthetic_conditional_settlement",
+      "episode_group": "control_pvp_prefunded",
+      "split": "public_development",
+      "mode": "synthetic_counterfactual"
+    },
+    {
+      "case_id": "control_redeemable_basis",
+      "family": "synthetic_redeemability_resolution",
+      "episode_group": "control_redeemable_basis",
+      "split": "public_development",
+      "mode": "synthetic_counterfactual"
+    },
+    {
+      "case_id": "crypto_bybit_2025",
+      "family": "custody_supply_chain",
+      "episode_group": "crypto_bybit_2025",
+      "split": "public_development",
+      "mode": "retrospective_reconstruction"
+    },
+    {
+      "case_id": "crypto_celsius_2022",
+      "family": "custody_exchange_run",
+      "episode_group": "crypto_credit_chain_2022",
+      "split": "public_development",
+      "mode": "retrospective_reconstruction"
+    },
+    {
+      "case_id": "crypto_curve_vyper_2023",
+      "family": "shared_code_dependency",
+      "episode_group": "crypto_curve_vyper_2023",
+      "split": "public_development",
+      "mode": "retrospective_reconstruction"
+    },
+    {
+      "case_id": "crypto_dao_2016",
+      "family": "smart_contract_governance",
+      "episode_group": "crypto_dao_2016",
+      "split": "public_development",
+      "mode": "retrospective_reconstruction"
+    },
+    {
+      "case_id": "crypto_euler_2023",
+      "family": "smart_contract_governance",
+      "episode_group": "crypto_euler_2023",
+      "split": "public_development",
+      "mode": "retrospective_reconstruction"
+    },
+    {
+      "case_id": "crypto_february_flash_2021",
+      "family": "venue_flash_crash",
+      "episode_group": "crypto_february_flash_2021",
+      "split": "public_development",
+      "mode": "retrospective_reconstruction"
+    },
+    {
+      "case_id": "crypto_ftx_2022",
+      "family": "custody_exchange_run",
+      "episode_group": "crypto_credit_chain_2022",
+      "split": "public_development",
+      "mode": "retrospective_reconstruction"
+    },
+    {
+      "case_id": "crypto_gdax_flash_2017",
+      "family": "venue_flash_crash",
+      "episode_group": "crypto_gdax_flash_2017",
+      "split": "public_development",
+      "mode": "retrospective_reconstruction"
+    },
+    {
+      "case_id": "crypto_maker_black_thursday_2020",
+      "family": "collateral_liquidation_infrastructure",
+      "episode_group": "crypto_maker_black_thursday_2020",
+      "split": "public_development",
+      "mode": "retrospective_reconstruction"
+    },
+    {
+      "case_id": "crypto_mango_2022",
+      "family": "oracle_collateral_manipulation",
+      "episode_group": "crypto_mango_2022",
+      "split": "public_development",
+      "mode": "retrospective_reconstruction"
+    },
+    {
+      "case_id": "crypto_mtgox_2014",
+      "family": "custody_exchange_run",
+      "episode_group": "crypto_mtgox_2014",
+      "split": "public_development",
+      "mode": "retrospective_reconstruction"
+    },
+    {
+      "case_id": "crypto_ronin_bridge_2022",
+      "family": "bridge_signer_failure",
+      "episode_group": "crypto_ronin_bridge_2022",
+      "split": "public_development",
+      "mode": "retrospective_reconstruction"
+    },
+    {
+      "case_id": "crypto_terra_ust_2022",
+      "family": "stablecoin_reflexive_run",
+      "episode_group": "crypto_credit_chain_2022",
+      "split": "public_development",
+      "mode": "retrospective_reconstruction"
+    },
+    {
+      "case_id": "crypto_three_arrows_2022",
+      "family": "counterparty_network_contagion",
+      "episode_group": "crypto_credit_chain_2022",
+      "split": "public_development",
+      "mode": "retrospective_reconstruction"
+    },
+    {
+      "case_id": "crypto_usdc_svb_2023",
+      "family": "stablecoin_bank_contagion",
+      "episode_group": "bank_stablecoin_funding_chain_2023",
+      "split": "public_development",
+      "mode": "retrospective_reconstruction"
+    },
+    {
+      "case_id": "tf_1980s_thrift",
+      "family": "bank_duration_and_forbearance",
+      "episode_group": "tf_1980s_thrift",
+      "split": "public_development",
+      "mode": "retrospective_reconstruction"
+    },
+    {
+      "case_id": "tf_1982_latam",
+      "family": "sovereign_external_funding",
+      "episode_group": "tf_1982_latam",
+      "split": "public_development",
+      "mode": "retrospective_reconstruction"
+    },
+    {
+      "case_id": "tf_1984_continental",
+      "family": "bank_wholesale_funding_run",
+      "episode_group": "tf_1984_continental",
+      "split": "public_development",
+      "mode": "retrospective_reconstruction"
+    },
+    {
+      "case_id": "tf_1987_black_monday",
+      "family": "market_microstructure_feedback",
+      "episode_group": "tf_1987_black_monday",
+      "split": "public_development",
+      "mode": "retrospective_reconstruction"
+    },
+    {
+      "case_id": "tf_1992_erm",
+      "family": "currency_regime_break",
+      "episode_group": "tf_1992_erm",
+      "split": "public_development",
+      "mode": "retrospective_reconstruction"
+    },
+    {
+      "case_id": "tf_1994_mexico",
+      "family": "currency_and_sovereign_rollover",
+      "episode_group": "tf_1994_mexico",
+      "split": "public_development",
+      "mode": "retrospective_reconstruction"
+    },
+    {
+      "case_id": "tf_1997_asia",
+      "family": "currency_funding_contagion",
+      "episode_group": "tf_1997_asia",
+      "split": "public_development",
+      "mode": "retrospective_reconstruction"
+    },
+    {
+      "case_id": "tf_1998_ltcm",
+      "family": "leveraged_convergence_and_counterparty",
+      "episode_group": "tf_1998_ltcm",
+      "split": "public_development",
+      "mode": "retrospective_reconstruction"
+    },
+    {
+      "case_id": "tf_2007_quant",
+      "family": "crowded_factor_deleveraging",
+      "episode_group": "tf_2007_quant",
+      "split": "public_development",
+      "mode": "retrospective_reconstruction"
+    },
+    {
+      "case_id": "tf_2008_lehman_aig",
+      "family": "counterparty_funding_network",
+      "episode_group": "tf_2008_lehman_aig",
+      "split": "public_development",
+      "mode": "retrospective_reconstruction"
+    },
+    {
+      "case_id": "tf_2010_euro",
+      "family": "sovereign_bank_doom_loop",
+      "episode_group": "tf_2010_euro",
+      "split": "public_development",
+      "mode": "retrospective_reconstruction"
+    },
+    {
+      "case_id": "tf_2010_flash",
+      "family": "flash_crash_microstructure",
+      "episode_group": "tf_2010_flash",
+      "split": "public_development",
+      "mode": "retrospective_reconstruction"
+    },
+    {
+      "case_id": "tf_2015_chf",
+      "family": "currency_policy_gap",
+      "episode_group": "tf_2015_chf",
+      "split": "public_development",
+      "mode": "retrospective_reconstruction"
+    },
+    {
+      "case_id": "tf_2018_volatility",
+      "family": "volatility_feedback_and_product_structure",
+      "episode_group": "tf_2018_volatility",
+      "split": "public_development",
+      "mode": "retrospective_reconstruction"
+    },
+    {
+      "case_id": "tf_2020_dash_for_cash",
+      "family": "safe_asset_liquidity_and_margin",
+      "episode_group": "tf_2020_dash_for_cash",
+      "split": "public_development",
+      "mode": "retrospective_reconstruction"
+    },
+    {
+      "case_id": "tf_2021_archegos",
+      "family": "opaque_prime_broker_counterparty",
+      "episode_group": "tf_2021_archegos",
+      "split": "public_development",
+      "mode": "retrospective_reconstruction"
+    },
+    {
+      "case_id": "tf_2022_ldi",
+      "family": "liability_hedge_liquidity_spiral",
+      "episode_group": "tf_2022_ldi",
+      "split": "public_development",
+      "mode": "retrospective_reconstruction"
+    },
+    {
+      "case_id": "tf_2023_svb",
+      "family": "bank_duration_and_digital_run",
+      "episode_group": "bank_stablecoin_funding_chain_2023",
+      "split": "public_development",
+      "mode": "retrospective_reconstruction"
+    }
+  ],
+  "note": "All cards are public development diagnostics. Assign whole episode/family groups when creating new protected tests."
+}

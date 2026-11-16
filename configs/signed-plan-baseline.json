@@ -1,0 +1,11 @@
+{
+  "campaign_id": "srb-signed-plan-baseline-v1",
+  "models": ["gpt-6.1-sol", "gpt-6-luna", "gpt-6-sol", "gpt-5.6-sol", "gpt-5.6-luna"],
+  "efforts": ["low", "medium", "high"],
+  "workers": 4,
+  "timeout_seconds": 180,
+  "replicates": 1,
+  "budget_policy": "Wall timeout enforced; output length instructed; actual token usage recorded. No equal-FLOP claim.",
+  "next_phase": ["BitAgent adapter", "TRM", "RLM", "Lean reasoning", "hybrid models"],
+  "phase_policy": "Baseline first. Next-phase adapters require identified endpoints/checkpoints."
+}

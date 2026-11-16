@@ -1,0 +1,24 @@
+{
+  "experiment_id": "replace-with-registered-experiment-id",
+  "architecture_label": "Lean reasoner / RLT / HRM / CGRT: choose one",
+  "checkpoint_sha256": null,
+  "code_commit": null,
+  "tokenizer": null,
+  "parameter_count": null,
+  "precision": null,
+  "device": null,
+  "decoding": {"seed": 0, "temperature": 0, "top_p": 1},
+  "declared_budget": {
+    "max_input_tokens": 4096,
+    "max_output_tokens": 1024,
+    "max_tool_calls": 0,
+    "wall_seconds_per_call": 60,
+    "max_internal_steps": null,
+    "memory_bytes": null
+  },
+  "ablation": "full",
+  "memory_policy": "explicit_prior_responses_only; wrapper must enforce",
+  "split": "public_development",
+  "unknown_reason": "Actual model interface and independent resource meters not yet attached",
+  "budget_enforcement": "Only CLI wall timeout is host enforced; wrapper enforces other limits"
+}

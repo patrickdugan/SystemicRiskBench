@@ -1,0 +1,47 @@
+{
+  "schema": "bitagent_strategy_covenant_v1",
+  "covenantHash": "synthetic-fixture-not-native-verified",
+  "owner": {
+    "walletAccount": "synthetic-account",
+    "walletProvider": "bitcoin_wallet"
+  },
+  "capital": {
+    "asset": "tlUSD",
+    "capAtoms": "100000000000"
+  },
+  "strategies": [
+    {
+      "strategyId": "funding_capture",
+      "strategyVersion": "1",
+      "weightBps": 10000,
+      "adapterHash": "synthetic-adapter"
+    }
+  ],
+  "risk": {
+    "maxGrossLeverageBps": 12000,
+    "maxNetDeltaBps": 1000,
+    "maxOrderFractionNavBps": 200,
+    "maxDailyLossBps": 150,
+    "maxDrawdownBps": 500,
+    "maxSlippageBps": 12,
+    "maxNetworkFeeSats": "5000"
+  },
+  "execution": {
+    "instruments": [
+      "TLBTC/TLUSD"
+    ],
+    "permittedActions": [
+      "place_limit",
+      "cancel"
+    ],
+    "orderTtlMs": 3000,
+    "maxMarketAgeMs": 2000,
+    "oraclePolicy": "synthetic-oracle",
+    "counterpartyPolicy": "synthetic-peers"
+  },
+  "runtime": {
+    "baseModelHash": "synthetic-model",
+    "allocatorHash": "synthetic-allocator",
+    "verifierHash": "synthetic-verifier"
+  }
+}

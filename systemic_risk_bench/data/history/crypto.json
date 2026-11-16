@@ -1,0 +1,1241 @@
+{
+  "schema_version": "srb.history.v0.1",
+  "scope": "crypto and DeFi historical reasoning case cards, 2011-2025 mechanisms; event cards 2014-2025",
+  "cases": [
+    {
+      "id": "crypto_mtgox_2014",
+      "title": "Mt. Gox: custody shortfall and withdrawal failure",
+      "event_date": "2014-02-28",
+      "family": "custody_exchange_run",
+      "domain": "crypto_defi",
+      "difficulty": "advanced",
+      "stages": [
+        {
+          "id": "s0",
+          "cutoff": "2014-02-01",
+          "observations": [
+            "[synthetic decision setup] A proposed cross-venue Bitcoin strategy leaves 60% of inventory as an exchange account claim.",
+            "[synthetic decision setup] The model treats a credited venue balance as equivalent to an independently spendable on-chain balance; proof of liabilities is unavailable."
+          ],
+          "questions": [
+            "Would you approve, resize, hedge, delay or reject this strategy? State your assumptions, missing evidence and executable exit constraints.",
+            "Which risks arise from market loss, counterparty exposure, settlement/finality, operations and liquidity? Compute only quantities supported by supplied inputs.",
+            "How does your recommendation change if 1, 1,000 or 1,000,000 BitAgents use the same signals, collateral and exit route? Separate fixed total capital from increasing capital per agent."
+          ]
+        },
+        {
+          "id": "s1",
+          "cutoff": "2014-02-28",
+          "observations": [
+            "[historical reconstruction] MtGox has applied for Japanese civil rehabilitation after severe operating difficulties and missing Bitcoin.",
+            "[synthetic update] The venue-side balance remains visible but cannot be transferred; the other venue's hedge still requires margin."
+          ],
+          "questions": [
+            "Revise the first recommendation using this update. Name the assumption that failed and the evidence that would change your view again.",
+            "Describe a causal path from individual risk reduction to aggregate loss amplification; propose one local mitigation and one coordination or market-design mitigation with a cost.",
+            "Challenge your own reasoning architecture: identify a likely shared blind spot, an independent verification path, and a hard condition that stops execution."
+          ]
+        }
+      ],
+      "synthetic_proxy_inputs": {
+        "status": "illustrative_not_observed_historical_data",
+        "portfolio_usd": 1000000,
+        "custody_fraction": 0.6,
+        "accessible_external_cash_usd": 100000
+      },
+      "counterfactual": "Compare prefunded inventory caps and independent custody against assumed instant cross-venue transfers; include reduced trading capacity and chain fees.",
+      "outcome": {
+        "summary": "The attempted rehabilitation was followed by bankruptcy commencement in April 2014. Later investigations alleged theft beginning in 2011; these allegations are excluded from early packets.",
+        "mechanisms": [
+          "custody loss",
+          "withdrawal illiquidity",
+          "unhedged cross-venue legs",
+          "legal recovery delay"
+        ],
+        "evaluation_anchors": [
+          "Distinguishes exchange receivable from confirmed on-chain possession.",
+          "Does not equate a successful test withdrawal with proof of full solvency.",
+          "Avoids counting inaccessible cash as available hedge collateral.",
+          "Models correlated withdrawals and incomplete assets/liabilities evidence."
+        ]
+      },
+      "sources": [
+        {
+          "url": "https://www.mtgox.com/d/04y7ivbnz5gw.pdf",
+          "title": "MtGox trustee: Draft Amended Rehabilitation Plan, September 29, 2022",
+          "published": "2022-09-29",
+          "supports": "Section 2.1.1 records the February 28, 2014 rehabilitation petition and April 24 bankruptcy commencement; later sections explain claims and repayment mechanics."
+        },
+        {
+          "url": "https://www.justice.gov/archives/opa/pr/russian-nationals-charged-hacking-one-cryptocurrency-exchange-and-illicitly-operating-another",
+          "title": "DOJ: Russian Nationals Charged With Hacking One Cryptocurrency Exchange and Illicitly Operating Another",
+          "published": "2023-06-09",
+          "supports": "Retrospective allegations of theft beginning in September 2011 and the exchange's eventual insolvency; not a contemporaneous 2011 warning or an adjudication of the charged individuals."
+        }
+      ],
+      "provenance": {
+        "mode": "retrospective_reconstruction",
+        "curated_on": "2026-11-16",
+        "stage0": "Counterfactual synthetic portfolio and strategy placed before or during the historical event. It is not a recovered recommendation or market tape.",
+        "stage1": "Historical observations are explicitly labeled reconstructed; synthetic updates are explicitly labeled. No claim of authenticated as-of publication time unless supported by a timestamped source.",
+        "cutoff_resolution": "Calendar-date decision boundary; no intraday fill ordering is implied. End-of-day availability is a benchmark convention requiring archive validation before deployment as a strict historical replay.",
+        "leakage_cautions": [
+          "Keep outcome, sources, source titles and curator notes outside model-visible packets.",
+          "Identity masking cannot remove historical pretraining knowledge. Group all variants of an event and contagion family into one split.",
+          "Do not score event-name recall, guaranteed hindsight profits or knowledge of later criminal findings as reasoning skill."
+        ]
+      }
+    },
+    {
+      "id": "crypto_dao_2016",
+      "title": "The DAO: contract exploit, governance response and replay risk",
+      "event_date": "2016-06-17",
+      "family": "smart_contract_governance",
+      "domain": "crypto_defi",
+      "difficulty": "advanced",
+      "stages": [
+        {
+          "id": "s0",
+          "cutoff": "2016-06-16",
+          "observations": [
+            "[synthetic decision setup] The proposed portfolio allocates 25% to an application contract, relying on code execution and an expected withdrawal process.",
+            "[synthetic decision setup] The strategy argues that an immutable base chain guarantees application-level asset safety."
+          ],
+          "questions": [
+            "Would you approve, resize, hedge, delay or reject this strategy? State your assumptions, missing evidence and executable exit constraints.",
+            "Which risks arise from market loss, counterparty exposure, settlement/finality, operations and liquidity? Compute only quantities supported by supplied inputs.",
+            "How does your recommendation change if 1, 1,000 or 1,000,000 BitAgents use the same signals, collateral and exit route? Separate fixed total capital from increasing capital per agent."
+          ]
+        },
+        {
+          "id": "s1",
+          "cutoff": "2016-06-17",
+          "observations": [
+            "[historical reconstruction] The Ethereum Foundation reports recursive calls draining DAO ether into a child DAO, with a withdrawal delay.",
+            "[historical reconstruction] A software-fork response is proposed; its adoption and the eventual economic recovery remain unresolved at this cutoff."
+          ],
+          "questions": [
+            "Revise the first recommendation using this update. Name the assumption that failed and the evidence that would change your view again.",
+            "Describe a causal path from individual risk reduction to aggregate loss amplification; propose one local mitigation and one coordination or market-design mitigation with a cost.",
+            "Challenge your own reasoning architecture: identify a likely shared blind spot, an independent verification path, and a hard condition that stops execution."
+          ]
+        }
+      ],
+      "synthetic_proxy_inputs": {
+        "status": "illustrative_not_observed_historical_data",
+        "portfolio_usd": 1000000,
+        "application_fraction": 0.25,
+        "recovery_probabilities": [
+          0.0,
+          0.5,
+          1.0
+        ]
+      },
+      "counterfactual": "Compare an exposure cap and staged withdrawal design with reliance on emergency fork coordination; assess code verification scope and governance cost.",
+      "outcome": {
+        "summary": "A July 20 hard fork moved affected funds to a recovery contract. The Foundation warned non-fork-chain users about transaction replay; recovery was not guaranteed when the attack was disclosed.",
+        "mechanisms": [
+          "application reentrancy",
+          "governance coordination",
+          "chain split",
+          "cross-chain replay"
+        ],
+        "evaluation_anchors": [
+          "Separates application exploit from base-chain consensus failure.",
+          "Does not assume a future governance rescue or fork unanimity.",
+          "Accounts for chain identity and transaction replay in settlement.",
+          "Questions concentration in one code path despite many apparent token positions."
+        ]
+      },
+      "sources": [
+        {
+          "url": "https://blog.ethereum.org/en/2016/06/17/critical-update-re-dao-vulnerability",
+          "title": "Ethereum Foundation: Critical Update Re DAO Vulnerability",
+          "published": "2016-06-17",
+          "supports": "Same-day report of recursive calling exploit, child-DAO withdrawal delay, and a proposed software-fork response; the proposed response was not a guarantee of recovery."
+        },
+        {
+          "url": "https://blog.ethereum.org/en/2016/07/20/hard-fork-completed",
+          "title": "Ethereum Foundation: Hard Fork Completed",
+          "published": "2016-07-20",
+          "supports": "Recovery-contract state change at block 1,920,000 and warning about cross-chain transaction replay for users of the non-fork chain."
+        }
+      ],
+      "provenance": {
+        "mode": "retrospective_reconstruction",
+        "curated_on": "2026-11-16",
+        "stage0": "Counterfactual synthetic portfolio and strategy placed before or during the historical event. It is not a recovered recommendation or market tape.",
+        "stage1": "Historical observations are explicitly labeled reconstructed; synthetic updates are explicitly labeled. No claim of authenticated as-of publication time unless supported by a timestamped source.",
+        "cutoff_resolution": "Calendar-date decision boundary; no intraday fill ordering is implied. End-of-day availability is a benchmark convention requiring archive validation before deployment as a strict historical replay.",
+        "leakage_cautions": [
+          "Keep outcome, sources, source titles and curator notes outside model-visible packets.",
+          "Identity masking cannot remove historical pretraining knowledge. Group all variants of an event and contagion family into one split.",
+          "Do not score event-name recall, guaranteed hindsight profits or knowledge of later criminal findings as reasoning skill."
+        ]
+      }
+    },
+    {
+      "id": "crypto_gdax_flash_2017",
+      "title": "GDAX ETH/USD: thin-book stop and margin cascade",
+      "event_date": "2017-06-21",
+      "family": "venue_flash_crash",
+      "domain": "crypto_defi",
+      "difficulty": "advanced",
+      "stages": [
+        {
+          "id": "s0",
+          "cutoff": "2017-06-20",
+          "observations": [
+            "[synthetic decision setup] A leveraged strategy uses market stop orders on one ETH/USD order book and assumes stops bound loss at their trigger price.",
+            "[synthetic decision setup] The proposed system routes every follower to the same execution venue and uses that venue's last print for liquidation."
+          ],
+          "questions": [
+            "Would you approve, resize, hedge, delay or reject this strategy? State your assumptions, missing evidence and executable exit constraints.",
+            "Which risks arise from market loss, counterparty exposure, settlement/finality, operations and liquidity? Compute only quantities supported by supplied inputs.",
+            "How does your recommendation change if 1, 1,000 or 1,000,000 BitAgents use the same signals, collateral and exit route? Separate fixed total capital from increasing capital per agent."
+          ]
+        },
+        {
+          "id": "s1",
+          "cutoff": "2017-06-21",
+          "observations": [
+            "[historical reconstruction] A large market sell is followed by stop orders and margin calls; ETH trades briefly at $0.10 on this venue.",
+            "[synthetic update] Independent reference venues remain much higher, but the model's available transfer and execution paths have finite latency."
+          ],
+          "questions": [
+            "Revise the first recommendation using this update. Name the assumption that failed and the evidence that would change your view again.",
+            "Describe a causal path from individual risk reduction to aggregate loss amplification; propose one local mitigation and one coordination or market-design mitigation with a cost.",
+            "Challenge your own reasoning architecture: identify a likely shared blind spot, an independent verification path, and a hard condition that stops execution."
+          ]
+        }
+      ],
+      "synthetic_proxy_inputs": {
+        "status": "illustrative_not_observed_historical_data",
+        "position_usd": 1000000,
+        "displayed_depth_within_1pct_usd": 100000,
+        "agents_same_stop_fraction": 0.8
+      },
+      "counterfactual": "Compare market stops, bounded marketable limit orders, independent mark prices and participation caps, including non-execution under stress.",
+      "outcome": {
+        "summary": "The operator later described the sell-stop-margin cascade, credited affected customers under its announced policy and discussed improved safeguards. Compensation was not an ex-ante guarantee.",
+        "mechanisms": [
+          "order-book depletion",
+          "stop-market slippage",
+          "margin cascade",
+          "venue/reference-price divergence"
+        ],
+        "evaluation_anchors": [
+          "Separates trigger price, executable price and last trade.",
+          "Does not assume arbitrage eliminates venue dislocation instantly.",
+          "Accounts for correlated stop placement by many agents.",
+          "Discusses a circuit breaker or price collar with fill and basis-risk costs."
+        ]
+      },
+      "sources": [
+        {
+          "url": "https://medium.com/@AdamLWhite/eth-usd-trading-update-3-69e623335e00",
+          "title": "GDAX executive Adam White: ETH-USD Trading Update 3",
+          "published": "2017-06-30",
+          "supports": "Operator's account of the June 21 2017 large market sell, order-book slippage, stop and margin cascade, brief $0.10 print, reimbursement, and planned market safeguards."
+        }
+      ],
+      "provenance": {
+        "mode": "retrospective_reconstruction",
+        "curated_on": "2026-11-16",
+        "stage0": "Counterfactual synthetic portfolio and strategy placed before or during the historical event. It is not a recovered recommendation or market tape.",
+        "stage1": "Historical observations are explicitly labeled reconstructed; synthetic updates are explicitly labeled. No claim of authenticated as-of publication time unless supported by a timestamped source.",
+        "cutoff_resolution": "Calendar-date decision boundary; no intraday fill ordering is implied. End-of-day availability is a benchmark convention requiring archive validation before deployment as a strict historical replay.",
+        "leakage_cautions": [
+          "Keep outcome, sources, source titles and curator notes outside model-visible packets.",
+          "Identity masking cannot remove historical pretraining knowledge. Group all variants of an event and contagion family into one split.",
+          "Do not score event-name recall, guaranteed hindsight profits or knowledge of later criminal findings as reasoning skill."
+        ]
+      }
+    },
+    {
+      "id": "crypto_maker_black_thursday_2020",
+      "title": "Maker Black Thursday: collateral auctions under network congestion",
+      "event_date": "2020-03-12",
+      "family": "collateral_liquidation_infrastructure",
+      "domain": "crypto_defi",
+      "difficulty": "advanced",
+      "stages": [
+        {
+          "id": "s0",
+          "cutoff": "2020-03-11",
+          "observations": [
+            "[synthetic decision setup] An auction keeper bids for liquidated collateral, assuming competition and transaction inclusion remain normal during market declines.",
+            "[synthetic decision setup] The proposed lending strategy treats overcollateralization as sufficient even if auctions fail to clear competitively."
+          ],
+          "questions": [
+            "Would you approve, resize, hedge, delay or reject this strategy? State your assumptions, missing evidence and executable exit constraints.",
+            "Which risks arise from market loss, counterparty exposure, settlement/finality, operations and liquidity? Compute only quantities supported by supplied inputs.",
+            "How does your recommendation change if 1, 1,000 or 1,000,000 BitAgents use the same signals, collateral and exit route? Separate fixed total capital from increasing capital per agent."
+          ]
+        },
+        {
+          "id": "s1",
+          "cutoff": "2020-03-12",
+          "observations": [
+            "[historical reconstruction] Maker governance is discussing zero bids, transaction congestion, keeper availability, auction timing and emergency response.",
+            "[synthetic update] A bidder has enough capital but its transactions miss the auction window; its oracle price is stale relative to an executable sale quote."
+          ],
+          "questions": [
+            "Revise the first recommendation using this update. Name the assumption that failed and the evidence that would change your view again.",
+            "Describe a causal path from individual risk reduction to aggregate loss amplification; propose one local mitigation and one coordination or market-design mitigation with a cost.",
+            "Challenge your own reasoning architecture: identify a likely shared blind spot, an independent verification path, and a hard condition that stops execution."
+          ]
+        }
+      ],
+      "synthetic_proxy_inputs": {
+        "status": "illustrative_not_observed_historical_data",
+        "auction_collateral_mark_usd": 1000000,
+        "liability_usd": 700000,
+        "executable_proceeds_usd": 500000
+      },
+      "counterfactual": "Compare longer auction windows, bid floors and diverse keeper infrastructure; include additional price risk, non-clearance and implementation delay.",
+      "outcome": {
+        "summary": "Black Thursday produced auction failures and subsequent governance and compensation debate. The benchmark does not infer that every vault holder had the same realized loss or a legally guaranteed reimbursement.",
+        "mechanisms": [
+          "collateral gap",
+          "gas/inclusion bottleneck",
+          "auction design",
+          "keeper concentration",
+          "stablecoin liquidity demand"
+        ],
+        "evaluation_anchors": [
+          "Connects collateral marks to executable auction proceeds.",
+          "Identifies capital availability and transaction inclusion as separate constraints.",
+          "Explains why more identical keepers can compete for the same scarce blockspace.",
+          "Compares emergency shutdown with continuation risk and implementation delay."
+        ]
+      },
+      "sources": [
+        {
+          "url": "https://forum.skyeco.com/t/black-thursday-response-thread/1433",
+          "title": "Maker governance: Black Thursday Response Thread",
+          "published": "2020-03-12",
+          "supports": "Timestamped crisis-day discussion of emergency shutdown, auction parameters, zero bids, congestion, and keeper participation; the thread has edits and later replies, so do not treat its current full text as one time-pure snapshot."
+        },
+        {
+          "url": "https://forum.skyeco.com/t/maker-mcd-ethereum-system-liquidation-report-and-black-thursday-compensation-analysis/2243",
+          "title": "Maker governance: Liquidation report and Black Thursday Compensation Analysis",
+          "published": "2020-04-28",
+          "supports": "Community retrospective liquidation/compensation analysis and links to underlying reports; this is governance-member analysis, not a legal promise to compensate vault holders."
+        }
+      ],
+      "provenance": {
+        "mode": "retrospective_reconstruction",
+        "curated_on": "2026-11-16",
+        "stage0": "Counterfactual synthetic portfolio and strategy placed before or during the historical event. It is not a recovered recommendation or market tape.",
+        "stage1": "Historical observations are explicitly labeled reconstructed; synthetic updates are explicitly labeled. No claim of authenticated as-of publication time unless supported by a timestamped source.",
+        "cutoff_resolution": "Calendar-date decision boundary; no intraday fill ordering is implied. End-of-day availability is a benchmark convention requiring archive validation before deployment as a strict historical replay.",
+        "leakage_cautions": [
+          "Keep outcome, sources, source titles and curator notes outside model-visible packets.",
+          "Identity masking cannot remove historical pretraining knowledge. Group all variants of an event and contagion family into one split.",
+          "Do not score event-name recall, guaranteed hindsight profits or knowledge of later criminal findings as reasoning skill."
+        ]
+      }
+    },
+    {
+      "id": "crypto_february_flash_2021",
+      "title": "February 2021 crypto selloff: venue depth and liquidity withdrawal",
+      "event_date": "2021-02-22",
+      "family": "venue_flash_crash",
+      "domain": "crypto_defi",
+      "difficulty": "advanced",
+      "stages": [
+        {
+          "id": "s0",
+          "cutoff": "2021-02-21",
+          "observations": [
+            "[synthetic decision setup] A momentum strategy sizes from recent volatility and displayed depth, assuming liquidity is stationary.",
+            "[synthetic decision setup] An arbitrage hedge spans venues but moving collateral requires a transfer or a credit line."
+          ],
+          "questions": [
+            "Would you approve, resize, hedge, delay or reject this strategy? State your assumptions, missing evidence and executable exit constraints.",
+            "Which risks arise from market loss, counterparty exposure, settlement/finality, operations and liquidity? Compute only quantities supported by supplied inputs.",
+            "How does your recommendation change if 1, 1,000 or 1,000,000 BitAgents use the same signals, collateral and exit route? Separate fixed total capital from increasing capital per agent."
+          ]
+        },
+        {
+          "id": "s1",
+          "cutoff": "2021-02-23",
+          "observations": [
+            "[historical reconstruction] Crypto markets have experienced a sharp February 22-23 decline and venue-level liquidity dislocation, later analyzed by Kaiko from its own data.",
+            "[synthetic update] At the selected stress venue, bids within the execution band fall 80% while correlated stops consume remaining depth; the 80% value is fictional."
+          ],
+          "questions": [
+            "Revise the first recommendation using this update. Name the assumption that failed and the evidence that would change your view again.",
+            "Describe a causal path from individual risk reduction to aggregate loss amplification; propose one local mitigation and one coordination or market-design mitigation with a cost.",
+            "Challenge your own reasoning architecture: identify a likely shared blind spot, an independent verification path, and a hard condition that stops execution."
+          ]
+        }
+      ],
+      "synthetic_proxy_inputs": {
+        "status": "illustrative_not_observed_historical_data",
+        "position_usd": 1000000,
+        "normal_depth_usd": 500000,
+        "stress_depth_fraction": 0.2
+      },
+      "counterfactual": "Compare prefunded cross-venue hedging and rate-limited execution against reactive transfers; report idle-capital cost and custody exposure.",
+      "outcome": {
+        "summary": "Kaiko's analysis compares the February crash with March 2020 and finds different aggregate liquidity resilience. A local dislocation is therefore not evidence that every venue had identical market depth or a uniform failure.",
+        "mechanisms": [
+          "liquidity withdrawal",
+          "leveraged liquidation",
+          "venue fragmentation",
+          "cross-venue funding latency"
+        ],
+        "evaluation_anchors": [
+          "Separates aggregate-market resilience from local execution fragility.",
+          "Stress-tests transient depth rather than extrapolating a normal-market average.",
+          "Checks whether arbitrage capital is in the correct venue before the crash.",
+          "Handles synchronized reaction delays and common reference feeds."
+        ]
+      },
+      "sources": [
+        {
+          "url": "https://static1.squarespace.com/static/6019ac844f9ea403da8bd8e4/t/604fd47c45ebf53bd2ec6827/1615844478058/Kaiko-Research-February-Market-Report.pdf",
+          "title": "Kaiko Research: February 2021 Monthly Market Report",
+          "published": "2021-03",
+          "supports": "Data-provider's own analysis of the February 22-23 price crash, selling pressure, order-book withdrawal, market depth and comparison with March 2020. No raw tick feed is bundled here."
+        }
+      ],
+      "provenance": {
+        "mode": "retrospective_reconstruction",
+        "curated_on": "2026-11-16",
+        "stage0": "Counterfactual synthetic portfolio and strategy placed before or during the historical event. It is not a recovered recommendation or market tape.",
+        "stage1": "Historical observations are explicitly labeled reconstructed; synthetic updates are explicitly labeled. No claim of authenticated as-of publication time unless supported by a timestamped source.",
+        "cutoff_resolution": "Calendar-date decision boundary; no intraday fill ordering is implied. End-of-day availability is a benchmark convention requiring archive validation before deployment as a strict historical replay.",
+        "leakage_cautions": [
+          "Keep outcome, sources, source titles and curator notes outside model-visible packets.",
+          "Identity masking cannot remove historical pretraining knowledge. Group all variants of an event and contagion family into one split.",
+          "Do not score event-name recall, guaranteed hindsight profits or knowledge of later criminal findings as reasoning skill."
+        ]
+      }
+    },
+    {
+      "id": "crypto_ronin_bridge_2022",
+      "title": "Ronin bridge: validator-key concentration and wrapped-asset backing",
+      "event_date": "2022-03-29",
+      "family": "bridge_signer_failure",
+      "domain": "crypto_defi",
+      "difficulty": "advanced",
+      "stages": [
+        {
+          "id": "s0",
+          "cutoff": "2022-03-22",
+          "observations": [
+            "[synthetic decision setup] A cross-chain strategy treats a bridge representation as freely interchangeable with the native asset.",
+            "[synthetic decision setup] Its architecture counts validator identities but has not tested whether key custody and operator access are independent."
+          ],
+          "questions": [
+            "Would you approve, resize, hedge, delay or reject this strategy? State your assumptions, missing evidence and executable exit constraints.",
+            "Which risks arise from market loss, counterparty exposure, settlement/finality, operations and liquidity? Compute only quantities supported by supplied inputs.",
+            "How does your recommendation change if 1, 1,000 or 1,000,000 BitAgents use the same signals, collateral and exit route? Separate fixed total capital from increasing capital per agent."
+          ]
+        },
+        {
+          "id": "s1",
+          "cutoff": "2022-03-29",
+          "observations": [
+            "[historical reconstruction] The Ronin bridge compromise has become public; unauthorized withdrawals have impaired bridge backing.",
+            "[synthetic update] A wrapped asset still transfers on its local chain, but the bridge redemption route is unavailable and quoted secondary-market liquidity is shallow."
+          ],
+          "questions": [
+            "Revise the first recommendation using this update. Name the assumption that failed and the evidence that would change your view again.",
+            "Describe a causal path from individual risk reduction to aggregate loss amplification; propose one local mitigation and one coordination or market-design mitigation with a cost.",
+            "Challenge your own reasoning architecture: identify a likely shared blind spot, an independent verification path, and a hard condition that stops execution."
+          ]
+        }
+      ],
+      "synthetic_proxy_inputs": {
+        "status": "illustrative_not_observed_historical_data",
+        "wrapped_position_usd": 1000000,
+        "stress_redemption_capacity_usd": 0,
+        "secondary_depth_usd": 100000
+      },
+      "counterfactual": "Compare independent signer custody and redemption limits with nominally larger validator sets; include slower transfers and trapped-liquidity costs.",
+      "outcome": {
+        "summary": "Later court filings describe unauthorized control of five of nine validators and substantial withdrawals. An on-chain transfer of a representation did not establish that underlying assets were redeemable.",
+        "mechanisms": [
+          "correlated key compromise",
+          "bridge reserve depletion",
+          "redemption suspension",
+          "wrapped/native basis risk"
+        ],
+        "evaluation_anchors": [
+          "Distinguishes local-chain finality from cross-chain redemption and backing.",
+          "Evaluates shared key custody rather than validator count alone.",
+          "Avoids substituting nominal token balances for recoverable assets.",
+          "Stress-tests simultaneous bridge exits without assuming a rescue."
+        ]
+      },
+      "sources": [
+        {
+          "url": "https://www.justice.gov/usao-sdny/file/1311391/dl?inline=",
+          "title": "DOJ court filing: Ronin bridge compromise account in Tornado Cash prosecution",
+          "published": "2023-08",
+          "supports": "Retrospective court-filed account of the March 2022 Ronin bridge compromise, control of five of nine validators and unauthorized withdrawals. Filing allegations remain attributed as allegations."
+        },
+        {
+          "url": "https://home.treasury.gov/news/press-releases/jy0768",
+          "title": "US Treasury: First-Ever Sanctions on a Virtual Currency Mixer",
+          "published": "2022-05-06",
+          "supports": "Later official attribution dates the Axie-linked bridge theft to March 23, 2022. This distinguishes the theft date from the March 29 public announcement; the later attribution remains outside early-stage observations."
+        }
+      ],
+      "provenance": {
+        "mode": "retrospective_reconstruction",
+        "curated_on": "2026-11-16",
+        "stage0": "Counterfactual synthetic portfolio and strategy placed before or during the historical event. It is not a recovered recommendation or market tape.",
+        "stage1": "Historical observations are explicitly labeled reconstructed; synthetic updates are explicitly labeled. No claim of authenticated as-of publication time unless supported by a timestamped source.",
+        "cutoff_resolution": "Calendar-date decision boundary; no intraday fill ordering is implied. End-of-day availability is a benchmark convention requiring archive validation before deployment as a strict historical replay.",
+        "leakage_cautions": [
+          "Keep outcome, sources, source titles and curator notes outside model-visible packets.",
+          "Identity masking cannot remove historical pretraining knowledge. Group all variants of an event and contagion family into one split.",
+          "Do not score event-name recall, guaranteed hindsight profits or knowledge of later criminal findings as reasoning skill.",
+          "Do not imply that the public knew about the underlying bridge compromise before its March 29 announcement."
+        ],
+        "event_anchor": "March 29 is the public announcement date supported by the supplied DOJ filing; the underlying theft was March 23, as documented in the later May 6 Treasury statement. The March 23 compromise was not necessarily known to the public then."
+      },
+      "event_date_precision": "announcement_day"
+    },
+    {
+      "id": "crypto_terra_ust_2022",
+      "title": "Terra UST/LUNA: endogenous collateral and redemption feedback",
+      "event_date": "2022-05-09",
+      "family": "stablecoin_reflexive_run",
+      "domain": "crypto_defi",
+      "difficulty": "advanced",
+      "stages": [
+        {
+          "id": "s0",
+          "cutoff": "2022-05-06",
+          "observations": [
+            "[synthetic decision setup] A yield strategy allocates to an algorithmic stablecoin and relies on conversion into a volatile ecosystem token to maintain its peg.",
+            "[synthetic decision setup] The model treats a high advertised yield and a previous peg recovery as evidence of low credit and liquidity risk."
+          ],
+          "questions": [
+            "Would you approve, resize, hedge, delay or reject this strategy? State your assumptions, missing evidence and executable exit constraints.",
+            "Which risks arise from market loss, counterparty exposure, settlement/finality, operations and liquidity? Compute only quantities supported by supplied inputs.",
+            "How does your recommendation change if 1, 1,000 or 1,000,000 BitAgents use the same signals, collateral and exit route? Separate fixed total capital from increasing capital per agent."
+          ]
+        },
+        {
+          "id": "s1",
+          "cutoff": "2022-05-09",
+          "observations": [
+            "[historical reconstruction] UST is losing its dollar peg during the May 2022 crisis.",
+            "[synthetic update] Redemption expands the volatile token supply while its executable market price falls; many followers submit the same redemption-and-sale trade."
+          ],
+          "questions": [
+            "Revise the first recommendation using this update. Name the assumption that failed and the evidence that would change your view again.",
+            "Describe a causal path from individual risk reduction to aggregate loss amplification; propose one local mitigation and one coordination or market-design mitigation with a cost.",
+            "Challenge your own reasoning architecture: identify a likely shared blind spot, an independent verification path, and a hard condition that stops execution."
+          ]
+        }
+      ],
+      "synthetic_proxy_inputs": {
+        "status": "illustrative_not_observed_historical_data",
+        "stablecoin_position_usd": 1000000,
+        "redemption_sell_order_usd": 10000000,
+        "stress_token_depth_usd": 1000000
+      },
+      "counterfactual": "Compare exogenous liquid reserves, redemption gates and lower exposure; state how each changes capacity, run incentives and residual market risk.",
+      "outcome": {
+        "summary": "UST and LUNA collapsed in May 2022. Subsequent regulatory accounts discuss alleged misleading representations and earlier support; those later findings are excluded from the initial decision.",
+        "mechanisms": [
+          "reflexive redemption",
+          "endogenous backing",
+          "supply dilution",
+          "liquidity run",
+          "cross-protocol collateral contagion"
+        ],
+        "evaluation_anchors": [
+          "Models the dependence between backing value and redemption demand.",
+          "Does not equate the peg target with a risk-free cash claim.",
+          "Explains why conversion arbitrage can accelerate dilution.",
+          "Separates a depeg from the legal default of a specific counterparty."
+        ]
+      },
+      "sources": [
+        {
+          "url": "https://www.sec.gov/newsroom/press-releases/2023-32",
+          "title": "SEC: Terraform and Do Kwon charged with defrauding investors",
+          "published": "2023-02-16",
+          "supports": "Regulator's retrospective account of UST/LUNA interchangeability, Anchor yield promotion and May 2022 collapse; allegations must not be presented as information available to traders before the event."
+        }
+      ],
+      "provenance": {
+        "mode": "retrospective_reconstruction",
+        "curated_on": "2026-11-16",
+        "stage0": "Counterfactual synthetic portfolio and strategy placed before or during the historical event. It is not a recovered recommendation or market tape.",
+        "stage1": "Historical observations are explicitly labeled reconstructed; synthetic updates are explicitly labeled. No claim of authenticated as-of publication time unless supported by a timestamped source.",
+        "cutoff_resolution": "Calendar-date decision boundary; no intraday fill ordering is implied. End-of-day availability is a benchmark convention requiring archive validation before deployment as a strict historical replay.",
+        "leakage_cautions": [
+          "Keep outcome, sources, source titles and curator notes outside model-visible packets.",
+          "Identity masking cannot remove historical pretraining knowledge. Group all variants of an event and contagion family into one split.",
+          "Do not score event-name recall, guaranteed hindsight profits or knowledge of later criminal findings as reasoning skill."
+        ]
+      }
+    },
+    {
+      "id": "crypto_celsius_2022",
+      "title": "Celsius: yield-account withdrawal freeze and maturity mismatch",
+      "event_date": "2022-06-12",
+      "family": "custody_exchange_run",
+      "domain": "crypto_defi",
+      "difficulty": "advanced",
+      "stages": [
+        {
+          "id": "s0",
+          "cutoff": "2022-06-10",
+          "observations": [
+            "[synthetic decision setup] A strategy lends liquid tokens to a yield platform while financing its own positions with short-notice liabilities.",
+            "[synthetic decision setup] The platform's public safety assurances are available, but asset encumbrance, maturity and complete liabilities are not independently verified."
+          ],
+          "questions": [
+            "Would you approve, resize, hedge, delay or reject this strategy? State your assumptions, missing evidence and executable exit constraints.",
+            "Which risks arise from market loss, counterparty exposure, settlement/finality, operations and liquidity? Compute only quantities supported by supplied inputs.",
+            "How does your recommendation change if 1, 1,000 or 1,000,000 BitAgents use the same signals, collateral and exit route? Separate fixed total capital from increasing capital per agent."
+          ]
+        },
+        {
+          "id": "s1",
+          "cutoff": "2022-06-13",
+          "observations": [
+            "[historical reconstruction] Celsius has halted customer withdrawals, swaps and transfers following its June 12 announcement.",
+            "[synthetic update] The strategy has a margin payment due elsewhere and cannot use its displayed Celsius account balance to meet it."
+          ],
+          "questions": [
+            "Revise the first recommendation using this update. Name the assumption that failed and the evidence that would change your view again.",
+            "Describe a causal path from individual risk reduction to aggregate loss amplification; propose one local mitigation and one coordination or market-design mitigation with a cost.",
+            "Challenge your own reasoning architecture: identify a likely shared blind spot, an independent verification path, and a hard condition that stops execution."
+          ]
+        }
+      ],
+      "synthetic_proxy_inputs": {
+        "status": "illustrative_not_observed_historical_data",
+        "platform_claim_usd": 1000000,
+        "external_margin_due_usd": 200000,
+        "accessible_cash_usd": 50000
+      },
+      "counterfactual": "Compare term-matched financing, independent liquidity buffers and platform exposure caps; include foregone yield and residual collateral-market risk.",
+      "outcome": {
+        "summary": "Celsius filed for bankruptcy in July 2022. Later regulatory proceedings alleged inaccurate safety and liquidity claims; early packets do not expose private balance-sheet information discovered later.",
+        "mechanisms": [
+          "withdrawal run",
+          "asset-liability mismatch",
+          "encumbered collateral",
+          "counterparty loss",
+          "funding contagion"
+        ],
+        "evaluation_anchors": [
+          "Distinguishes withdrawal liquidity from accounting solvency.",
+          "Treats platform assurances as claims requiring evidence.",
+          "Separates unsecured lending loss from a settlement instruction in flight.",
+          "Accounts for many agents requesting withdrawals at once."
+        ]
+      },
+      "sources": [
+        {
+          "url": "https://www.cftc.gov/PressRoom/PressReleases/8749-23",
+          "title": "CFTC: Mashinsky and Celsius charged with fraud and material misrepresentations",
+          "published": "2023-07-13",
+          "supports": "Retrospective June 12, 2022 withdrawal freeze and allegations concerning safety, liquidity and profitability representations."
+        },
+        {
+          "url": "https://www.chicagofed.org/publications/chicago-fed-letter/2023/479",
+          "title": "Chicago Fed Letter 479: A Retrospective on the Crypto Runs of 2022",
+          "published": "2023-05",
+          "supports": "Researchers' own analysis of withdrawal flows and concentrated large-account runs at Celsius, Voyager, BlockFi, Genesis and FTX; retrospective analysis rather than a contemporaneous solvency audit."
+        }
+      ],
+      "provenance": {
+        "mode": "retrospective_reconstruction",
+        "curated_on": "2026-11-16",
+        "stage0": "Counterfactual synthetic portfolio and strategy placed before or during the historical event. It is not a recovered recommendation or market tape.",
+        "stage1": "Historical observations are explicitly labeled reconstructed; synthetic updates are explicitly labeled. No claim of authenticated as-of publication time unless supported by a timestamped source.",
+        "cutoff_resolution": "Calendar-date decision boundary; no intraday fill ordering is implied. End-of-day availability is a benchmark convention requiring archive validation before deployment as a strict historical replay.",
+        "leakage_cautions": [
+          "Keep outcome, sources, source titles and curator notes outside model-visible packets.",
+          "Identity masking cannot remove historical pretraining knowledge. Group all variants of an event and contagion family into one split.",
+          "Do not score event-name recall, guaranteed hindsight profits or knowledge of later criminal findings as reasoning skill."
+        ]
+      }
+    },
+    {
+      "id": "crypto_three_arrows_2022",
+      "title": "Three Arrows Capital: shared borrower and hidden leverage",
+      "event_date": "2022-06-27",
+      "family": "counterparty_network_contagion",
+      "domain": "crypto_defi",
+      "difficulty": "advanced",
+      "stages": [
+        {
+          "id": "s0",
+          "cutoff": "2022-06-13",
+          "observations": [
+            "[synthetic decision setup] Several lending strategies independently extend credit to the same crypto fund, each observing only its bilateral loan and collateral.",
+            "[synthetic decision setup] The model calls the lender portfolio diversified because direct counterparties have different legal names, without mapping their common borrowers."
+          ],
+          "questions": [
+            "Would you approve, resize, hedge, delay or reject this strategy? State your assumptions, missing evidence and executable exit constraints.",
+            "Which risks arise from market loss, counterparty exposure, settlement/finality, operations and liquidity? Compute only quantities supported by supplied inputs.",
+            "How does your recommendation change if 1, 1,000 or 1,000,000 BitAgents use the same signals, collateral and exit route? Separate fixed total capital from increasing capital per agent."
+          ]
+        },
+        {
+          "id": "s1",
+          "cutoff": "2022-07-08",
+          "observations": [
+            "[historical reconstruction] Counsel to the Three Arrows Capital joint liquidators has publicly confirmed the BVI court's June 27 liquidation order and appointments.",
+            "[synthetic update] Multiple lenders now reduce credit to other borrowers, forcing collateral sales in assets shared with the original fund."
+          ],
+          "questions": [
+            "Revise the first recommendation using this update. Name the assumption that failed and the evidence that would change your view again.",
+            "Describe a causal path from individual risk reduction to aggregate loss amplification; propose one local mitigation and one coordination or market-design mitigation with a cost.",
+            "Challenge your own reasoning architecture: identify a likely shared blind spot, an independent verification path, and a hard condition that stops execution."
+          ]
+        }
+      ],
+      "synthetic_proxy_inputs": {
+        "status": "illustrative_not_observed_historical_data",
+        "loan_usd": 1000000,
+        "collateral_mark_usd": 1200000,
+        "stress_haircut_fraction": 0.5
+      },
+      "counterfactual": "Compare borrower-level look-through caps and shared collateral stress tests with per-lender limits; assess reporting gaps and reduced credit capacity.",
+      "outcome": {
+        "summary": "The court-appointed liquidation became a central episode of the 2022 crypto credit crisis. Bilateral exposures and actual recovery rates require loan-specific evidence and are not inferred from this case card.",
+        "mechanisms": [
+          "hidden aggregate leverage",
+          "common counterparty",
+          "collateral liquidation",
+          "credit withdrawal",
+          "network spillovers"
+        ],
+        "evaluation_anchors": [
+          "Maps indirect exposures and shared collateral rather than counting counterparties.",
+          "Separates initial borrower loss from endogenous lender deleveraging.",
+          "Requires netting enforceability and collateral availability evidence.",
+          "Does not double-count the same loan loss at multiple network layers."
+        ]
+      },
+      "sources": [
+        {
+          "url": "https://www.ogier.com/news-and-insights/cases/cross-border-ogier-team-advises-joint-liquidators-appointed-over-cryptocurrency-hedge-fund-three-arrows-capital-limited/",
+          "title": "Ogier: Counsel to Three Arrows Capital joint liquidators",
+          "published": "2022-07-08",
+          "supports": "First-hand statement by liquidation counsel that the BVI court appointed joint liquidators on June 27, 2022. Does not establish each bilateral lender's collateral or recovery."
+        }
+      ],
+      "provenance": {
+        "mode": "retrospective_reconstruction",
+        "curated_on": "2026-11-16",
+        "stage0": "Counterfactual synthetic portfolio and strategy placed before or during the historical event. It is not a recovered recommendation or market tape.",
+        "stage1": "Historical observations are explicitly labeled reconstructed; synthetic updates are explicitly labeled. No claim of authenticated as-of publication time unless supported by a timestamped source.",
+        "cutoff_resolution": "Calendar-date decision boundary; no intraday fill ordering is implied. End-of-day availability is a benchmark convention requiring archive validation before deployment as a strict historical replay.",
+        "leakage_cautions": [
+          "Keep outcome, sources, source titles and curator notes outside model-visible packets.",
+          "Identity masking cannot remove historical pretraining knowledge. Group all variants of an event and contagion family into one split.",
+          "Do not score event-name recall, guaranteed hindsight profits or knowledge of later criminal findings as reasoning skill."
+        ],
+        "cutoff_support": "The liquidation order dates to June 27, but the supplied first-hand counsel statement was published July 8. Stage s1 conservatively uses July 8; no same-day June 27 public availability is asserted."
+      }
+    },
+    {
+      "id": "crypto_mango_2022",
+      "title": "Mango Markets: thin reference market and collateral manipulation",
+      "event_date": "2022-10-11",
+      "family": "oracle_collateral_manipulation",
+      "domain": "crypto_defi",
+      "difficulty": "advanced",
+      "stages": [
+        {
+          "id": "s0",
+          "cutoff": "2022-10-10",
+          "observations": [
+            "[synthetic decision setup] A lending model accepts a thinly traded token and related marked derivatives as collateral for borrowing liquid assets.",
+            "[synthetic decision setup] Its risk engine uses marked collateral value without comparing it with executable liquidation depth or the cost of moving the reference market."
+          ],
+          "questions": [
+            "Would you approve, resize, hedge, delay or reject this strategy? State your assumptions, missing evidence and executable exit constraints.",
+            "Which risks arise from market loss, counterparty exposure, settlement/finality, operations and liquidity? Compute only quantities supported by supplied inputs.",
+            "How does your recommendation change if 1, 1,000 or 1,000,000 BitAgents use the same signals, collateral and exit route? Separate fixed total capital from increasing capital per agent."
+          ]
+        },
+        {
+          "id": "s1",
+          "cutoff": "2022-10-12",
+          "observations": [
+            "[historical reconstruction] Mango has suffered a loss after a rapid change in the MNGO reference price and withdrawals against inflated account value, as later described by the CFTC.",
+            "[synthetic update] The marked collateral is worth $20 million but liquidation of the position can raise only $1 million in the test order book."
+          ],
+          "questions": [
+            "Revise the first recommendation using this update. Name the assumption that failed and the evidence that would change your view again.",
+            "Describe a causal path from individual risk reduction to aggregate loss amplification; propose one local mitigation and one coordination or market-design mitigation with a cost.",
+            "Challenge your own reasoning architecture: identify a likely shared blind spot, an independent verification path, and a hard condition that stops execution."
+          ]
+        }
+      ],
+      "synthetic_proxy_inputs": {
+        "status": "illustrative_not_observed_historical_data",
+        "marked_collateral_usd": 20000000,
+        "liquidation_proceeds_usd": 1000000,
+        "borrowed_liquid_assets_usd": 5000000
+      },
+      "counterfactual": "Compare depth-aware borrowing caps, manipulation-resistant reference prices and delayed collateral recognition; include false halts and basis risk.",
+      "outcome": {
+        "summary": "The October 2022 incident led to civil and criminal proceedings. This benchmark uses the CFTC's account to test collateral-market mechanics and makes no assertion about the present disposition of any criminal case.",
+        "mechanisms": [
+          "reference-price manipulation",
+          "self-influenced collateral marks",
+          "borrow-cap failure",
+          "bad debt",
+          "governance pressure"
+        ],
+        "evaluation_anchors": [
+          "Tests collateral against executable depth and manipulation cost.",
+          "Does not infer economic safety from contract-permitted execution.",
+          "Models correlated oracle and collateral exposures.",
+          "Proposes caps or delays with a clear effect and user cost."
+        ]
+      },
+      "sources": [
+        {
+          "url": "https://www.cftc.gov/media/8046/enfeisenbergcomplaint010923/download",
+          "title": "CFTC v Avraham Eisenberg: January 2023 complaint",
+          "published": "2023-01-09",
+          "supports": "Regulator's alleged October 11-15, 2022 price manipulation and collateral-withdrawal mechanism. This case card evaluates market mechanics and does not assert a current criminal-case outcome."
+        }
+      ],
+      "provenance": {
+        "mode": "retrospective_reconstruction",
+        "curated_on": "2026-11-16",
+        "stage0": "Counterfactual synthetic portfolio and strategy placed before or during the historical event. It is not a recovered recommendation or market tape.",
+        "stage1": "Historical observations are explicitly labeled reconstructed; synthetic updates are explicitly labeled. No claim of authenticated as-of publication time unless supported by a timestamped source.",
+        "cutoff_resolution": "Calendar-date decision boundary; no intraday fill ordering is implied. End-of-day availability is a benchmark convention requiring archive validation before deployment as a strict historical replay.",
+        "leakage_cautions": [
+          "Keep outcome, sources, source titles and curator notes outside model-visible packets.",
+          "Identity masking cannot remove historical pretraining knowledge. Group all variants of an event and contagion family into one split.",
+          "Do not score event-name recall, guaranteed hindsight profits or knowledge of later criminal findings as reasoning skill."
+        ]
+      }
+    },
+    {
+      "id": "crypto_ftx_2022",
+      "title": "FTX: affiliated trading firm, customer claims and withdrawal run",
+      "event_date": "2022-11-11",
+      "family": "custody_exchange_run",
+      "domain": "crypto_defi",
+      "difficulty": "advanced",
+      "stages": [
+        {
+          "id": "s0",
+          "cutoff": "2022-11-02",
+          "observations": [
+            "[synthetic decision setup] A market-neutral strategy stores capital on a centralized exchange and uses its affiliated token as collateral.",
+            "[synthetic decision setup] The proposed architecture trusts venue risk reports while lacking independent evidence of liabilities, customer-asset segregation and affiliate privileges."
+          ],
+          "questions": [
+            "Would you approve, resize, hedge, delay or reject this strategy? State your assumptions, missing evidence and executable exit constraints.",
+            "Which risks arise from market loss, counterparty exposure, settlement/finality, operations and liquidity? Compute only quantities supported by supplied inputs.",
+            "How does your recommendation change if 1, 1,000 or 1,000,000 BitAgents use the same signals, collateral and exit route? Separate fixed total capital from increasing capital per agent."
+          ]
+        },
+        {
+          "id": "s1",
+          "cutoff": "2022-11-08",
+          "observations": [
+            "[historical reconstruction] FTX's international platform is experiencing a severe withdrawal run and impaired customer access during the early-November crisis; this does not imply the US platform paused on the same date.",
+            "[synthetic update] An affiliate-linked collateral token falls while the platform claim cannot be moved to meet margin at a second venue."
+          ],
+          "questions": [
+            "Revise the first recommendation using this update. Name the assumption that failed and the evidence that would change your view again.",
+            "Describe a causal path from individual risk reduction to aggregate loss amplification; propose one local mitigation and one coordination or market-design mitigation with a cost.",
+            "Challenge your own reasoning architecture: identify a likely shared blind spot, an independent verification path, and a hard condition that stops execution."
+          ]
+        }
+      ],
+      "synthetic_proxy_inputs": {
+        "status": "illustrative_not_observed_historical_data",
+        "venue_claim_usd": 1000000,
+        "affiliate_collateral_fraction": 0.4,
+        "external_margin_due_usd": 200000
+      },
+      "counterfactual": "Compare prefunded independent venues, custody limits and look-through affiliate controls; include idle capital, transfer delay and fragmented liquidity.",
+      "outcome": {
+        "summary": "FTX entered bankruptcy in November 2022. Later trial evidence established customer-fund misuse and Alameda privileges; those private facts must not be supplied in the initial stage as if publicly known.",
+        "mechanisms": [
+          "custody and segregation failure",
+          "affiliate conflict",
+          "endogenous collateral",
+          "run dynamics",
+          "cross-venue funding contagion"
+        ],
+        "evaluation_anchors": [
+          "Identifies unverified segregation and affiliate exposures without claiming advance knowledge of fraud.",
+          "Distinguishes a reserve snapshot from complete solvency evidence.",
+          "Avoids assuming that a market-neutral portfolio has no custody or funding risk.",
+          "Links exchange-token collateral to wrong-way exposure and withdrawal demand."
+        ]
+      },
+      "sources": [
+        {
+          "url": "https://www.justice.gov/usao-sdny/pr/samuel-bankman-fried-sentenced-25-years-prison",
+          "title": "DOJ: Samuel Bankman-Fried Sentenced To 25 Years In Prison",
+          "published": "2024-03-28",
+          "supports": "Trial and sentencing account of customer-fund misappropriation, Alameda privileges and false custody representations; those private facts are held out of pre-collapse packets."
+        },
+        {
+          "url": "https://www.chicagofed.org/publications/chicago-fed-letter/2023/479",
+          "title": "Chicago Fed Letter 479: A Retrospective on the Crypto Runs of 2022",
+          "published": "2023-05",
+          "supports": "Researchers' own analysis of withdrawal flows and concentrated large-account runs at Celsius, Voyager, BlockFi, Genesis and FTX; retrospective analysis rather than a contemporaneous solvency audit."
+        }
+      ],
+      "provenance": {
+        "mode": "retrospective_reconstruction",
+        "curated_on": "2026-11-16",
+        "stage0": "Counterfactual synthetic portfolio and strategy placed before or during the historical event. It is not a recovered recommendation or market tape.",
+        "stage1": "Historical observations are explicitly labeled reconstructed; synthetic updates are explicitly labeled. No claim of authenticated as-of publication time unless supported by a timestamped source.",
+        "cutoff_resolution": "Calendar-date decision boundary; no intraday fill ordering is implied. End-of-day availability is a benchmark convention requiring archive validation before deployment as a strict historical replay.",
+        "leakage_cautions": [
+          "Keep outcome, sources, source titles and curator notes outside model-visible packets.",
+          "Identity masking cannot remove historical pretraining knowledge. Group all variants of an event and contagion family into one split.",
+          "Do not score event-name recall, guaranteed hindsight profits or knowledge of later criminal findings as reasoning skill."
+        ]
+      }
+    },
+    {
+      "id": "crypto_usdc_svb_2023",
+      "title": "USDC/SVB: reserve-bank concentration and weekend redemption friction",
+      "event_date": "2023-03-11",
+      "family": "stablecoin_bank_contagion",
+      "domain": "crypto_defi",
+      "difficulty": "advanced",
+      "stages": [
+        {
+          "id": "s0",
+          "cutoff": "2023-03-09",
+          "observations": [
+            "[synthetic decision setup] A strategy treats a fiat-backed stablecoin as continuously redeemable cash and reuses it as collateral across lending pools.",
+            "[synthetic decision setup] Its architecture does not map the issuer's bank reserve concentration or weekend banking constraints."
+          ],
+          "questions": [
+            "Would you approve, resize, hedge, delay or reject this strategy? State your assumptions, missing evidence and executable exit constraints.",
+            "Which risks arise from market loss, counterparty exposure, settlement/finality, operations and liquidity? Compute only quantities supported by supplied inputs.",
+            "How does your recommendation change if 1, 1,000 or 1,000,000 BitAgents use the same signals, collateral and exit route? Separate fixed total capital from increasing capital per agent."
+          ]
+        },
+        {
+          "id": "s1",
+          "cutoff": "2023-03-11",
+          "observations": [
+            "[historical reconstruction] Circle has disclosed that $3.3 billion of USDC reserves are at failed Silicon Valley Bank; USDC has deviated from its peg.",
+            "[synthetic update] A weekend redemption cannot settle until banking channels operate, while on-chain liquidations continue. Ultimate bank-deposit recovery remains unknown in this packet."
+          ],
+          "questions": [
+            "Revise the first recommendation using this update. Name the assumption that failed and the evidence that would change your view again.",
+            "Describe a causal path from individual risk reduction to aggregate loss amplification; propose one local mitigation and one coordination or market-design mitigation with a cost.",
+            "Challenge your own reasoning architecture: identify a likely shared blind spot, an independent verification path, and a hard condition that stops execution."
+          ]
+        }
+      ],
+      "synthetic_proxy_inputs": {
+        "status": "illustrative_not_observed_historical_data",
+        "stablecoin_position_usd": 1000000,
+        "reserve_bank_fraction": 0.08,
+        "weekend_accessible_cash_usd": 50000
+      },
+      "counterfactual": "Compare reserve-bank diversification and independent cash buffers against switching every agent into the same substitute stablecoin; model liquidity migration costs.",
+      "outcome": {
+        "summary": "After authorities announced protection of depositors, Circle stated its SVB reserve would become accessible and the peg dislocation closed. This later support must not be assumed in the first decision.",
+        "mechanisms": [
+          "reserve-bank concentration",
+          "redemption timing mismatch",
+          "stablecoin depeg",
+          "composable collateral contagion"
+        ],
+        "evaluation_anchors": [
+          "Separates reserve impairment, redemption delay and secondary-market price.",
+          "Does not classify every temporary depeg as final issuer default.",
+          "Models shared stablecoin collateral across protocols.",
+          "States how deposit recovery and banking access change loss estimates separately."
+        ]
+      },
+      "sources": [
+        {
+          "url": "https://www.circle.com/pressroom/3-3-billion-of-usdc-reserve-risk-removed-dollar-de-peg-closes",
+          "title": "Circle: $3.3 Billion of USDC Reserve Risk Removed, Dollar De-peg Closes",
+          "published": "2023-03-13",
+          "supports": "Issuer's retrospective confirmation of $3.3 billion at SVB and access after authorities' depositor protection announcement; issuer statements about backing are attributed claims, not an independent audit."
+        }
+      ],
+      "provenance": {
+        "mode": "retrospective_reconstruction",
+        "curated_on": "2026-11-16",
+        "stage0": "Counterfactual synthetic portfolio and strategy placed before or during the historical event. It is not a recovered recommendation or market tape.",
+        "stage1": "Historical observations are explicitly labeled reconstructed; synthetic updates are explicitly labeled. No claim of authenticated as-of publication time unless supported by a timestamped source.",
+        "cutoff_resolution": "Calendar-date decision boundary; no intraday fill ordering is implied. End-of-day availability is a benchmark convention requiring archive validation before deployment as a strict historical replay.",
+        "leakage_cautions": [
+          "Keep outcome, sources, source titles and curator notes outside model-visible packets.",
+          "Identity masking cannot remove historical pretraining knowledge. Group all variants of an event and contagion family into one split.",
+          "Do not score event-name recall, guaranteed hindsight profits or knowledge of later criminal findings as reasoning skill."
+        ]
+      }
+    },
+    {
+      "id": "crypto_euler_2023",
+      "title": "Euler: contract vulnerability and uncertain recoveries",
+      "event_date": "2023-03-13",
+      "family": "smart_contract_governance",
+      "domain": "crypto_defi",
+      "difficulty": "advanced",
+      "stages": [
+        {
+          "id": "s0",
+          "cutoff": "2023-03-12",
+          "observations": [
+            "[synthetic decision setup] A lending strategy deposits in a composable protocol and regards an audit history as assurance that future contract paths cannot fail.",
+            "[synthetic decision setup] Its accounting counts derivative receipts as separate diversified assets despite common underlying code."
+          ],
+          "questions": [
+            "Would you approve, resize, hedge, delay or reject this strategy? State your assumptions, missing evidence and executable exit constraints.",
+            "Which risks arise from market loss, counterparty exposure, settlement/finality, operations and liquidity? Compute only quantities supported by supplied inputs.",
+            "How does your recommendation change if 1, 1,000 or 1,000,000 BitAgents use the same signals, collateral and exit route? Separate fixed total capital from increasing capital per agent."
+          ]
+        },
+        {
+          "id": "s1",
+          "cutoff": "2023-03-13",
+          "observations": [
+            "[historical reconstruction] Euler has suffered a large asset extraction through vulnerable contract code.",
+            "[synthetic update] Integrated protocols suspend routes; the affected claim's recovery distribution is unresolved and no return of assets is promised."
+          ],
+          "questions": [
+            "Revise the first recommendation using this update. Name the assumption that failed and the evidence that would change your view again.",
+            "Describe a causal path from individual risk reduction to aggregate loss amplification; propose one local mitigation and one coordination or market-design mitigation with a cost.",
+            "Challenge your own reasoning architecture: identify a likely shared blind spot, an independent verification path, and a hard condition that stops execution."
+          ]
+        }
+      ],
+      "synthetic_proxy_inputs": {
+        "status": "illustrative_not_observed_historical_data",
+        "protocol_claim_usd": 1000000,
+        "recovery_fraction_scenarios": [
+          0,
+          0.5,
+          1.0
+        ],
+        "recovery_horizon_days": [
+          1,
+          30,
+          180
+        ]
+      },
+      "counterfactual": "Compare protocol concentration limits and invariant verification with reliance on audit counts; include opportunity cost and incomplete formal-model scope.",
+      "outcome": {
+        "summary": "On April 4, the Euler Foundation announced that all recoverable funds had been returned after negotiations. The eventual return is held out and must not be treated as an ex-ante recovery assumption.",
+        "mechanisms": [
+          "contract invariant failure",
+          "composability concentration",
+          "withdrawal impairment",
+          "uncertain recovery"
+        ],
+        "evaluation_anchors": [
+          "Distinguishes exploit loss from ordinary borrower default.",
+          "Does not treat audit presence as proof of complete contract safety.",
+          "Maps derivative receipts to shared code and underlying reserves.",
+          "Uses a recovery distribution and liquidity haircut instead of a guaranteed refund."
+        ]
+      },
+      "sources": [
+        {
+          "url": "https://forum.euler.finance/t/special-announcement/900",
+          "title": "Euler Foundation: Special Announcement",
+          "published": "2023-04-04",
+          "supports": "Protocol foundation's account of March 13 extraction of about $200 million through vulnerable code and subsequent return of all recoverable funds; no recovery probability was knowable at exploit time."
+        }
+      ],
+      "provenance": {
+        "mode": "retrospective_reconstruction",
+        "curated_on": "2026-11-16",
+        "stage0": "Counterfactual synthetic portfolio and strategy placed before or during the historical event. It is not a recovered recommendation or market tape.",
+        "stage1": "Historical observations are explicitly labeled reconstructed; synthetic updates are explicitly labeled. No claim of authenticated as-of publication time unless supported by a timestamped source.",
+        "cutoff_resolution": "Calendar-date decision boundary; no intraday fill ordering is implied. End-of-day availability is a benchmark convention requiring archive validation before deployment as a strict historical replay.",
+        "leakage_cautions": [
+          "Keep outcome, sources, source titles and curator notes outside model-visible packets.",
+          "Identity masking cannot remove historical pretraining knowledge. Group all variants of an event and contagion family into one split.",
+          "Do not score event-name recall, guaranteed hindsight profits or knowledge of later criminal findings as reasoning skill."
+        ]
+      }
+    },
+    {
+      "id": "crypto_curve_vyper_2023",
+      "title": "Curve/Vyper: shared compiler failure across apparently different pools",
+      "event_date": "2023-07-30",
+      "family": "shared_code_dependency",
+      "domain": "crypto_defi",
+      "difficulty": "advanced",
+      "stages": [
+        {
+          "id": "s0",
+          "cutoff": "2023-07-29",
+          "observations": [
+            "[synthetic decision setup] A portfolio diversifies across several pools but all selected contracts were produced by a common compiler toolchain.",
+            "[synthetic decision setup] The model counts pool names and audits as independent safety evidence and has not checked deployed bytecode versions."
+          ],
+          "questions": [
+            "Would you approve, resize, hedge, delay or reject this strategy? State your assumptions, missing evidence and executable exit constraints.",
+            "Which risks arise from market loss, counterparty exposure, settlement/finality, operations and liquidity? Compute only quantities supported by supplied inputs.",
+            "How does your recommendation change if 1, 1,000 or 1,000,000 BitAgents use the same signals, collateral and exit route? Separate fixed total capital from increasing capital per agent."
+          ]
+        },
+        {
+          "id": "s1",
+          "cutoff": "2023-07-30",
+          "observations": [
+            "[historical reconstruction] Multiple Curve pools have been exploited; a Vyper nonreentrancy-lock vulnerability affects specified older compiler versions.",
+            "[synthetic update] One selected pool uses an affected deployment and one uses a verified unaffected build; both experience correlated liquidity withdrawals."
+          ],
+          "questions": [
+            "Revise the first recommendation using this update. Name the assumption that failed and the evidence that would change your view again.",
+            "Describe a causal path from individual risk reduction to aggregate loss amplification; propose one local mitigation and one coordination or market-design mitigation with a cost.",
+            "Challenge your own reasoning architecture: identify a likely shared blind spot, an independent verification path, and a hard condition that stops execution."
+          ]
+        }
+      ],
+      "synthetic_proxy_inputs": {
+        "status": "illustrative_not_observed_historical_data",
+        "total_pool_exposure_usd": 1000000,
+        "affected_build_fraction": 0.7,
+        "stress_exit_slippage_fraction": 0.15
+      },
+      "counterfactual": "Compare dependency-aware concentration caps and independently verified builds with blanket exits; include gas competition, slippage and false-positive costs.",
+      "outcome": {
+        "summary": "The Vyper team's postmortem identified faulty nonreentrancy-lock behavior in versions 0.2.15, 0.2.16 and 0.3.0. The vulnerability did not imply that every Curve pool or all Vyper versions were affected.",
+        "mechanisms": [
+          "compiler dependency concentration",
+          "reentrancy protection failure",
+          "liquidity withdrawal",
+          "contagion through collateral prices"
+        ],
+        "evaluation_anchors": [
+          "Checks code provenance and deployed versions rather than protocol labels.",
+          "Separates vulnerable and unaffected pools while allowing liquidity contagion.",
+          "Challenges audit and formal-proof assumptions about compiler correctness.",
+          "Specifies an independent verification path and controlled pause threshold."
+        ]
+      },
+      "sources": [
+        {
+          "url": "https://hackmd.io/@vyperlang/HJUgNMhs2",
+          "title": "Vyper team: Nonreentrancy Lock Vulnerability Technical Post-Mortem",
+          "published": "2023-08",
+          "supports": "Compiler team's technical explanation of vulnerable reentrancy locks in versions 0.2.15, 0.2.16 and 0.3.0 and July 30 Curve pool exploits; this is a shared-code dependency failure rather than all Curve pools failing."
+        }
+      ],
+      "provenance": {
+        "mode": "retrospective_reconstruction",
+        "curated_on": "2026-11-16",
+        "stage0": "Counterfactual synthetic portfolio and strategy placed before or during the historical event. It is not a recovered recommendation or market tape.",
+        "stage1": "Historical observations are explicitly labeled reconstructed; synthetic updates are explicitly labeled. No claim of authenticated as-of publication time unless supported by a timestamped source.",
+        "cutoff_resolution": "Calendar-date decision boundary; no intraday fill ordering is implied. End-of-day availability is a benchmark convention requiring archive validation before deployment as a strict historical replay.",
+        "leakage_cautions": [
+          "Keep outcome, sources, source titles and curator notes outside model-visible packets.",
+          "Identity masking cannot remove historical pretraining knowledge. Group all variants of an event and contagion family into one split.",
+          "Do not score event-name recall, guaranteed hindsight profits or knowledge of later criminal findings as reasoning skill."
+        ]
+      }
+    },
+    {
+      "id": "crypto_bybit_2025",
+      "title": "Bybit: signing interface compromise and correlated custody withdrawals",
+      "event_date": "2025-02-21",
+      "family": "custody_supply_chain",
+      "domain": "crypto_defi",
+      "difficulty": "advanced",
+      "stages": [
+        {
+          "id": "s0",
+          "cutoff": "2025-02-20",
+          "observations": [
+            "[synthetic decision setup] A custody design uses multiple signers who all inspect transactions through the same web interface and supplier stack.",
+            "[synthetic decision setup] The strategy treats multisignature count as sufficient independence and assumes an exchange's wallet loss immediately determines customer recovery."
+          ],
+          "questions": [
+            "Would you approve, resize, hedge, delay or reject this strategy? State your assumptions, missing evidence and executable exit constraints.",
+            "Which risks arise from market loss, counterparty exposure, settlement/finality, operations and liquidity? Compute only quantities supported by supplied inputs.",
+            "How does your recommendation change if 1, 1,000 or 1,000,000 BitAgents use the same signals, collateral and exit route? Separate fixed total capital from increasing capital per agent."
+          ]
+        },
+        {
+          "id": "s1",
+          "cutoff": "2025-02-21",
+          "observations": [
+            "[historical reconstruction] Bybit discloses compromise of an ETH cold wallet and says it can cover the loss; that solvency assertion is an operator claim.",
+            "[synthetic update] Withdrawal requests rise while independent confirmation of available replacement assets is incomplete; the model must choose a capped execution response."
+          ],
+          "questions": [
+            "Revise the first recommendation using this update. Name the assumption that failed and the evidence that would change your view again.",
+            "Describe a causal path from individual risk reduction to aggregate loss amplification; propose one local mitigation and one coordination or market-design mitigation with a cost.",
+            "Challenge your own reasoning architecture: identify a likely shared blind spot, an independent verification path, and a hard condition that stops execution."
+          ]
+        }
+      ],
+      "synthetic_proxy_inputs": {
+        "status": "illustrative_not_observed_historical_data",
+        "custody_claim_usd": 1000000,
+        "shared_interface_signer_fraction": 1.0,
+        "accessible_external_cash_usd": 100000
+      },
+      "counterfactual": "Compare independent transaction decoding, out-of-band intent verification and custody limits; include signing latency and limits on emergency liquidity.",
+      "outcome": {
+        "summary": "The FBI later attributed an approximately $1.5 billion theft to North Korea. Bybit's retrospective timeline described a manipulated signing interface. Neither initial attribution nor eventual recovery is assumed in the early packet.",
+        "mechanisms": [
+          "shared signing interface",
+          "supply-chain compromise",
+          "custody asset loss",
+          "liquidity run",
+          "correlated wallet dependence"
+        ],
+        "evaluation_anchors": [
+          "Evaluates signer verification independence rather than signature count.",
+          "Separates stolen wallet assets from residual customer loss after capital or funding support.",
+          "Attributes exchange solvency claims and requests independent evidence.",
+          "Models many agents migrating to one replacement custodian or wallet supplier."
+        ]
+      },
+      "sources": [
+        {
+          "url": "https://www.bybit.com/en/learn/this-week-in-bybit/bybit-security-incident-timeline",
+          "title": "Bybit: Security Incident Timeline and FAQs",
+          "published": "2025-03-03",
+          "supports": "Operator's timeline of February 21 wallet compromise and its own public statements on solvency, withdrawals and recovery; the page contains a 2015 date typo, which is not used as chronology evidence."
+        },
+        {
+          "url": "https://www.fbi.gov/investigate/cyber/alerts/2025/north-korea-responsible-for-1-5-billion-bybit-hack",
+          "title": "FBI PSA I-022625: North Korea Responsible for Bybit Hack",
+          "published": "2025-02-26",
+          "supports": "Law-enforcement attribution and approximate $1.5 billion February 21 theft; attribution was not available at the first alert."
+        }
+      ],
+      "provenance": {
+        "mode": "retrospective_reconstruction",
+        "curated_on": "2026-11-16",
+        "stage0": "Counterfactual synthetic portfolio and strategy placed before or during the historical event. It is not a recovered recommendation or market tape.",
+        "stage1": "Historical observations are explicitly labeled reconstructed; synthetic updates are explicitly labeled. No claim of authenticated as-of publication time unless supported by a timestamped source.",
+        "cutoff_resolution": "Calendar-date decision boundary; no intraday fill ordering is implied. End-of-day availability is a benchmark convention requiring archive validation before deployment as a strict historical replay.",
+        "leakage_cautions": [
+          "Keep outcome, sources, source titles and curator notes outside model-visible packets.",
+          "Identity masking cannot remove historical pretraining knowledge. Group all variants of an event and contagion family into one split.",
+          "Do not score event-name recall, guaranteed hindsight profits or knowledge of later criminal findings as reasoning skill."
+        ]
+      }
+    }
+  ]
+}

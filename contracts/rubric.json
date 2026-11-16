@@ -1,0 +1,112 @@
+{
+  "benchmark": "Systemic Risk Bench",
+  "version": "0.1.0",
+  "status": "proposed_audit_rubric",
+  "score_policy": {
+    "publish_component_vector": true,
+    "publish_automatic_and_audited_scores_separately": true,
+    "aggregate_only_if_all_required_components_evaluated": true,
+    "missing_component": "not_evaluated",
+    "never_treat_self_reported_coverage_as_correctness": true,
+    "never_score_reasoning_by_keyword_presence": true,
+    "maximum_automatic_points": 40,
+    "maximum_audited_points": 60,
+    "development_cases_are_not_hidden_test_cases": true
+  },
+  "components": [
+    {
+      "id": "numeric_risk",
+      "points": 20,
+      "mode": "automatic",
+      "method": "Compare declared, well-posed quantities against independently tested oracles using declared absolute and relative tolerances; units, horizon, alpha, probability measure and netting scope must match.",
+      "scope": "Only quantities with supplied inputs and versioned gold values. Arithmetic accuracy does not establish a valid empirical model."
+    },
+    {
+      "id": "constraint_compliance",
+      "points": 10,
+      "mode": "automatic_when_policy_executable",
+      "method": "Execute bounded policy in the supplied environment; inspect leverage, capital, collateral, funding, venue and action constraints. Free-text promises do not count as enforcement.",
+      "scope": "Mark not_evaluated if no executable policy/environment exists."
+    },
+    {
+      "id": "forecast_calibration",
+      "points": 10,
+      "mode": "automatic_when_resolvable_forecasts_exist",
+      "method": "Publish mean binary Brier score; display points as 10*(1-mean_brier) over preregistered targets, while retaining the raw proper score and baseline. Each target is predicted before its reveal.",
+      "scope": "Scores on crisis-selected samples measure conditional targets, not unconditional crisis prediction. Missing predictions score the preregistered missing-response penalty and count against coverage."
+    },
+    {
+      "id": "causal_risk_model",
+      "points": 15,
+      "mode": "human_audit",
+      "anchors": {
+        "0": "Confuses key risk categories or relies on an outcome already revealed.",
+        "1": "Names plausible risks with limited evidence-linked transmission logic.",
+        "2": "Explains the major loss and liquidity channels, assumptions and missing inputs accurately.",
+        "3": "Correctly distinguishes competing causal hypotheses and proposes a discriminating test or bound with case-specific evidence."
+      }
+    },
+    {
+      "id": "strategy_revision",
+      "points": 15,
+      "mode": "human_audit_plus_simulation_diagnostic",
+      "anchors": {
+        "0": "No actionable policy, or materially violates known constraints.",
+        "1": "Action exists but thresholds, funding or tradeoffs remain vague.",
+        "2": "Feasible bounded policy responds to available evidence with explicit tradeoffs and invalidation triggers.",
+        "3": "Compares realistic alternatives, handles uncertainty, and revises or maintains the policy for an evidence-linked reason."
+      },
+      "simulation_note": "Publish realized simulator utility separately using a preregistered utility function and passive/risk-agnostic baselines; do not convert a lucky profitable path into a reasoning score."
+    },
+    {
+      "id": "self_critique",
+      "points": 10,
+      "mode": "human_audit",
+      "anchors": {
+        "0": "Unconditional confidence or critique contradicts the submitted policy.",
+        "1": "Generic caveats without an implication for the recommendation.",
+        "2": "Identifies a material failure assumption and a concrete test or trigger.",
+        "3": "Presents the strongest plausible alternative explanation and shows how evidence would change the decision."
+      }
+    },
+    {
+      "id": "population_externalities",
+      "points": 10,
+      "mode": "human_audit",
+      "anchors": {
+        "0": "Treats private profitability as evidence of systemic safety, or assumes agent count alone causes losses.",
+        "1": "Mentions herding but omits capital/depth/synchronization controls.",
+        "2": "Distinguishes both capital scaling regimes and explains relevant feedback or counterparties.",
+        "3": "Uses negative controls, quantifies or bounds impact within model limits, identifies passive-party losses and a feasible mitigation."
+      }
+    },
+    {
+      "id": "architecture_critique",
+      "points": 10,
+      "mode": "human_audit",
+      "anchors": {
+        "0": "Claims architectural or formal guarantees without verified evidence.",
+        "1": "Generic model limitations only.",
+        "2": "Links a concrete shared-signal, checker-coupling, memory or data/finality failure to the policy.",
+        "3": "Proposes a testable architecture change or independent control and states its cost, residual failure and validation plan."
+      }
+    }
+  ],
+  "audit_procedure": {
+    "rating_scale": [0, 1, 2, 3],
+    "points_formula": "component_points * rating / 3",
+    "reviewers": 2,
+    "blind_to_experiment_label": true,
+    "must_cite_response_and_evidence_ids": true,
+    "adjudication": "Resolve disagreements with a written rationale; retain both initial ratings and report agreement.",
+    "llm_judge": "May triage or suggest anchors; cannot silently replace the human audit or independently validate numerical truth. Record judge model and prompt if used."
+  },
+  "validity_flags": [
+    {"id": "future_evidence_leak", "effect": "Invalidate the affected ex-ante item and investigate packet construction; do not silently assign an ordinary wrong-answer score."},
+    {"id": "nonfinite_or_invalid_probability", "effect": "Reject the malformed metric/forecast and record a contract failure."},
+    {"id": "unverified_formal_guarantee", "effect": "Record an audit failure; formal_verified remains false until a real checker passes under recorded assumptions."},
+    {"id": "unavailable_historical_data", "effect": "Label the item narrative or synthetic; prohibit historical PnL/backtest claims."},
+    {"id": "simulator_nonconvergence", "effect": "Report truncation/floor status and diagnostics; do not claim equilibrium."},
+    {"id": "unsafe_executable_policy", "effect": "Apply preregistered constraint penalty; show the violated invariant and triggering observation."}
+  ]
+}
