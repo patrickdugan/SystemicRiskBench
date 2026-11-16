@@ -125,6 +125,26 @@ replicates. Compare no-critique, no-architecture-critique, no-population-reasoni
 memory-reset and internal-step ablations where the actual models support them.
 See [the full protocol](docs/protocol.md).
 
+## EvalMath causal-risk replay (synthetic simulator)
+
+The [SRB-EM-01 live bridge](docs/evalmath-bridge.md) exports 30 registered
+scenario worlds and 60 paired depth-intervention simulations, with investor
+losses and creditor shortfall separately accounted for. It connects the
+existing cohort fire-sale simulator to
+[EvalMath SRB-01](https://github.com/MoralityLabAI/EvalMath/pull/38),
+which scores observable-policy regret, counterfactual loss, exact
+fractional-tail harm and the effect of score disclosure on a registered
+synthetic exogenous-only safety checker.
+
+```powershell
+python -m systemic_risk_bench evalmath-export --config configs/evalmath-simulation-v1.json --output artifacts/evalmath_bank.json
+```
+
+The exporter is evaluator-only and contains privileged counterfactual
+outcomes. It has no model calls, calibrated market frequencies, or historical
+replay claims. The cross-repository CI pins the EvalMath scorer at an exact
+commit and archives both the input bank and exact score output.
+
 ## Risk and BitAgent integration
 
 [Risk conventions](docs/risk-and-simulation.md) distinguish unilateral CVA,
