@@ -77,5 +77,33 @@ class PairedComparisonTests(unittest.TestCase):
                 paired_numeric_report(left, right)
 
 
+    def test_cli_marks_unmatched_pairs_as_ineligible(self):
+        import json
+        from pathlib import Path
+        from tempfile import TemporaryDirectory
+        from systemic_risk_bench.cli import main
+
+        left = run_fixture(solved=False)
+        right = run_fixture(solved=True)
+        left["host_measured_wall_seconds"] = 1.0
+        right["host_measured_wall_seconds"] = 2.0
+        with TemporaryDirectory() as folder:
+            first, second, output = (Path(folder) / filename for filename in
+                                     ("left.json", "right.json", "compare.json"))
+            first.write_text(json.dumps(left), encoding="utf-8")
+            second.write_text(json.dumps(right), encoding="utf-8")
+            argv = ["compare", "--runs", str(first), str(second), "--output", str(output)]
+            self.assertEqual(main(argv), 0)
+            report = json.loads(output.read_text(encoding="utf-8"))
+            self.assertTrue(report["identical_packets"])
+            self.assertEqual(report["paired_numeric"]["field_count"], 13)
+            right["receipts"][0]["packet_sha256"] = "a" * 64
+            second.write_text(json.dumps(right), encoding="utf-8")
+            self.assertEqual(main(argv), 0)
+            report = json.loads(output.read_text(encoding="utf-8"))
+            self.assertFalse(report["identical_packets"])
+            self.assertEqual(report["paired_numeric"]["status"], "not_applicable")
+
+
 if __name__ == "__main__":
     unittest.main()
