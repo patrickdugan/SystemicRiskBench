@@ -93,6 +93,18 @@ trusted adapter code can read host files. For a defensible blind evaluation,
 serve only exported packets to the inference process in an independently
 isolated environment with evaluator files inaccessible.
 
+## Agent continuation and evidence-revision evaluation
+
+[SRB-REV-01](docs/agent-revision-continuation.md) adds a **two-process bounded-memory agent eval** inspired by [Beyond Bayes BB-CQ-05](https://github.com/patrickdugan/beyond-bayes/pull/24) and [LoopedTransformers LRM-REV-03](https://github.com/MoralityLabAI/LoopedTransformers/pull/209). The agent receives twelve named evidence reports, compresses them to a declared numeric state, then receives six host-verified corrections in a fresh process. Its previous transcript and replies are withheld from the update packet.
+
+Compare a **4-bit count** contract with a **12-bit named bitmap** using the exact Bayesian reference matching each arm's information. The count-only information loss is recorded separately from model approximation error. A deterministic [fixture adapter](examples/agent_revision_fixture_adapter.py) checks the transport and oracle; it is not an AI agent or a model result. The underlying trusted adapter could use external persistence, so physical memory enforcement and source authenticity require separate isolation.
+
+~~~bash
+python -m unittest discover -s tests -p 'test_agent_revision.py' -v
+python -m systemic_risk_bench agent-revision --adapter-argv '["python","-m","examples.agent_revision_fixture_adapter"]' --experiment configs/experiment.template.json --mode count --cases 16 --output artifacts/revision-count.json
+python -m systemic_risk_bench agent-revision --adapter-argv '["python","-m","examples.agent_revision_fixture_adapter"]' --experiment configs/experiment.template.json --mode bitmap --cases 16 --output artifacts/revision-bitmap.json
+~~~
+
 ## Compare reasoning
 
 Publish a vector: numerical family accuracy, human-audited reasoning,
