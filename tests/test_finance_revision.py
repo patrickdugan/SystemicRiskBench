@@ -73,8 +73,8 @@ class FinanceRevisionTests(unittest.TestCase):
                 self.assertEqual(later["prior_responses"], "not_replayed")
                 self.assertEqual(len(later["corrections"]), 6)
                 self.assertNotIn("corrections", first)
-                self.assertNotIn("regime", json.dumps(first))
-                self.assertNotIn("regime", json.dumps(later))
+                self.assertNotIn("regime", first)
+                self.assertNotIn("regime", later)
                 self.assertNotIn(world.host_key.hex(), json.dumps(later))
                 self.assertEqual(
                     [record["record_id"] for record in first["old"]],
