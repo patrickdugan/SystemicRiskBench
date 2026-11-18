@@ -33,7 +33,7 @@ SCENARIOS = {
     "collateral": {
         "description": "Synthetic secured loan book; twelve collateral eligibility and haircut checks. Six valuations are revised.",
         "evidence_kind": "collateral_eligibility_check",
-        "loss": {"continue": (0.0, 2.0, 18.0),
+        "loss": {"continue": (0.0, 4.0, 18.0),
                  "de_risk": (1.0, 2.0, 5.0),
                  "halt_and_escalate": (3.0, 3.0, 3.0)},
     },
