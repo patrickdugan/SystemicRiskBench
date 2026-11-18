@@ -37,6 +37,7 @@ def _integer(value: int, minimum: int, maximum: int) -> None:
 
 
 def _weights_to_posterior(weights) -> tuple[Q, Q, Q]:
+    weights = tuple(weights)
     denominator = sum(weights, Q(0))
     if denominator <= 0:
         raise ValueError("zero-probability observation")
