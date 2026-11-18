@@ -328,7 +328,7 @@ def run_agent_revision(adapter_argv: list[str], experiment: dict, *,
     scored=[row for row in rows if row["status"]=="scored"]
     return {
         "schema":SCHEMA,"evidence_class":"public_deterministic_development_only",
-        "model_evaluation_claim":True, "scientific_confirmation_claim":False,
+        "model_evaluation_claim":False, "scientific_confirmation_claim":False,
         "physical_memory_enforced":False, "adapter_process_sandboxed":False,
         "authority":"read_only_no_execution",
         "experiment":experiment,"experiment_sha256":canonical_sha(experiment),
