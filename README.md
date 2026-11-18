@@ -74,8 +74,8 @@ Each stage starts a new process; prior replies preserve the decision history.
 The adapter is responsible for inference, checkpoint loading and memory policy.
 
 ```powershell
-python -m systemic_risk_bench run --adapter-argv '["python","examples/fixture_adapter.py"]' --experiment configs/experiment.template.json --output artifacts/fixture-quant.json
-python -m systemic_risk_bench run --adapter-argv '["python","examples/fixture_adapter.py"]' --experiment configs/experiment.template.json --track history --cases tf_1982_latam --masked --output artifacts/fixture-history.json
+python -m systemic_risk_bench run --adapter-argv '["python","examples/fixture_adapter.py"]' --experiment configs/agent-revision-fixture.json --output artifacts/fixture-quant.json
+python -m systemic_risk_bench run --adapter-argv '["python","examples/fixture_adapter.py"]' --experiment configs/agent-revision-fixture.json --track history --cases tf_1982_latam --masked --output artifacts/fixture-history.json
 python -m systemic_risk_bench compare --runs artifacts/fixture-quant.json artifacts/fixture-quant.json --output artifacts/comparison.json
 ```
 
@@ -101,8 +101,8 @@ Compare a **4-bit count** contract with a **12-bit named bitmap** using the exac
 
 ~~~bash
 python -m unittest discover -s tests -p 'test_agent_revision.py' -v
-python -m systemic_risk_bench agent-revision --adapter-argv '["python","-m","examples.agent_revision_fixture_adapter"]' --experiment configs/experiment.template.json --mode count --cases 16 --output artifacts/revision-count.json
-python -m systemic_risk_bench agent-revision --adapter-argv '["python","-m","examples.agent_revision_fixture_adapter"]' --experiment configs/experiment.template.json --mode bitmap --cases 16 --output artifacts/revision-bitmap.json
+python -m systemic_risk_bench agent-revision --adapter-argv '["python","-m","examples.agent_revision_fixture_adapter"]' --experiment configs/agent-revision-fixture.json --mode count --cases 16 --output artifacts/revision-count.json
+python -m systemic_risk_bench agent-revision --adapter-argv '["python","-m","examples.agent_revision_fixture_adapter"]' --experiment configs/agent-revision-fixture.json --mode bitmap --cases 16 --output artifacts/revision-bitmap.json
 ~~~
 
 ## Compare reasoning
