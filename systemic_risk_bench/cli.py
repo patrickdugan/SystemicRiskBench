@@ -63,6 +63,13 @@ def main(argv=None):
     runner.add_argument("--masked", action="store_true")
     runner.add_argument("--timeout", type=float, default=60)
     runner.add_argument("--output", required=True)
+    revise = commands.add_parser("agent-revision", help="bounded-memory delayed-evidence agent eval")
+    revise.add_argument("--adapter-argv", required=True, help="JSON array, no shell expansion")
+    revise.add_argument("--experiment", required=True, help="experiment JSON with experiment_id")
+    revise.add_argument("--mode", choices=("count","bitmap"), required=True)
+    revise.add_argument("--cases", type=int, default=16, help="public development issuer roots")
+    revise.add_argument("--timeout", type=float, default=30)
+    revise.add_argument("--output", required=True)
     bridge = commands.add_parser("bitagent-packet", help="read-only covenant v1 risk projection")
     bridge.add_argument("--input", required=True)
     bridge.add_argument("--output", required=True)
@@ -107,6 +114,11 @@ def main(argv=None):
         elif args.command == "evalmath-export":
             from .evalmath import export_bank
             write(args.output, export_bank(args.config))
+        elif args.command == "agent-revision":
+            from .agent_revision import run_agent_revision
+            write(args.output, run_agent_revision(
+                json.loads(args.adapter_argv), read_json(args.experiment),
+                mode=args.mode, cases=args.cases, timeout=args.timeout))
         elif args.command == "calibration":
             write(args.output, brier(read_json(args.input)["forecasts"]))
         elif args.command == "bitagent-packet":

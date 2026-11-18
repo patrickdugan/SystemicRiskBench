@@ -1,0 +1,51 @@
+name: SRB-REV-01 agent evidence-revision continuation
+on:
+  push:
+    paths:
+      - 'systemic_risk_bench/agent_revision.py'
+      - 'systemic_risk_bench/cli.py'
+      - 'tests/test_agent_revision.py'
+      - 'examples/agent_revision_fixture_adapter.py'
+      - 'configs/agent-revision-fixture.json'
+      - 'docs/agent-revision-continuation.md'
+      - '.github/workflows/agent-revision-continuation.yml'
+  pull_request:
+    paths:
+      - 'systemic_risk_bench/agent_revision.py'
+      - 'systemic_risk_bench/cli.py'
+      - 'tests/test_agent_revision.py'
+      - 'examples/agent_revision_fixture_adapter.py'
+      - 'configs/agent-revision-fixture.json'
+      - 'docs/agent-revision-continuation.md'
+      - '.github/workflows/agent-revision-continuation.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  source-only:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Independent source-only Bayesian and real subprocess tests
+        run: python -m unittest discover -s tests -p 'test_agent_revision.py' -v
+      - name: Full SystemicRiskBench regression tests
+        run: python -m unittest discover -s tests -q
+      - name: Fixture adapter count-only and bitmap end-to-end CLI
+        run: |
+          python -m systemic_risk_bench agent-revision --adapter-argv '["python","-m","examples.agent_revision_fixture_adapter"]' --experiment configs/agent-revision-fixture.json --mode count --cases 16 --output /tmp/srb-rev-count.json
+          python -m systemic_risk_bench agent-revision --adapter-argv '["python","-m","examples.agent_revision_fixture_adapter"]' --experiment configs/agent-revision-fixture.json --mode bitmap --cases 16 --output /tmp/srb-rev-bitmap.json
+          python - <<'PY'
+          import json
+          for path, bits in (('/tmp/srb-rev-count.json',4),('/tmp/srb-rev-bitmap.json',12)):
+              r=json.load(open(path,encoding='utf-8'))
+              assert r['coverage']==1 and r['n_scored']==16 and r['memory_logical_bits']==bits
+              assert r['mean_excess_brier_with_missing_penalty']<1e-20
+              assert r['model_evaluation_claim'] is False
+              assert r['scientific_confirmation_claim'] is False
+              assert r['adapter_process_sandboxed'] is False
+          print('PASS: both information-matched reference-only tracks')
+          PY

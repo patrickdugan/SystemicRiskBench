@@ -1,0 +1,14 @@
+{
+  "experiment_id": "SRB-REV-01-public-fixture",
+  "architecture_label": "deterministic_reference_fixture_not_a_model",
+  "memory_policy": "declared_bounded_integer_state_no_inband_prior_responses",
+  "split": "public_development",
+  "checkpoint_sha256": null,
+  "independent_model_roots": 0,
+  "confirmation_roots_allocated": 0,
+  "claimed_model_evaluation": false,
+  "agent_action_authorized": false,
+  "measurement": "two independent subprocess calls per issuer; no physical memory isolation",
+  "scoring": "information_matched_exact_Bayes_posterior_squared_L2",
+  "notes": "This config is for the fixture oracle and transport test. Replace with a registered model-specific experiment for actual agent evaluation."
+}
