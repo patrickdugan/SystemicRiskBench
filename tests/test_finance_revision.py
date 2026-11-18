@@ -184,7 +184,8 @@ class LocalRevisionModelTransportTests(unittest.TestCase):
         self.assertEqual(len(request["messages"]), 2)
         supplied = json.loads(request["messages"][1]["content"])
         self.assertEqual(supplied, {"packet": update})
-        self.assertNotIn("old", json.dumps(supplied).replace('"old": "not_replayed"', ""))
+        self.assertEqual(supplied["packet"]["old"], "not_replayed")
+        self.assertNotIn("initial_forecast", supplied["packet"])
         self.assertEqual(request["response_format"]["type"], "json_schema")
         self.assertEqual(set(request["response_format"]["schema"]["required"]),
                          {"posterior", "action"})
