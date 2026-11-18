@@ -1,0 +1,180 @@
+{
+  "schema_version": "srb.frontier_design.v1",
+  "benchmark_id": "SRB-HARD-01",
+  "status": "design_proposal_not_calibrated",
+  "created_on": "2026-11-18",
+  "difficulty_intent": "ARC-like contextual rule inference and composition; frontier-solvable compactification challenge",
+  "new_model_evaluations": 0,
+  "hard_task_bank_status": "not_constructed",
+  "protected_holdout_status": "not_created",
+  "source_document": "docs/frontier-compactification.md",
+  "integration_document": "docs/compact-skill-integration.md",
+  "tiers": [
+    {
+      "id": "L0",
+      "purpose": "prerequisite accounting and interface checks",
+      "state": "implemented_development_tracks"
+    },
+    {
+      "id": "L1",
+      "purpose": "mechanism inference and budgeted information gathering",
+      "state": "worked_design_examples"
+    },
+    {
+      "id": "L2",
+      "purpose": "unseen systemic mechanism composition and executable policies",
+      "state": "proposed_primary_hard_score"
+    },
+    {
+      "id": "L3",
+      "purpose": "bounded skill acquisition, retention and deployment efficiency",
+      "state": "proposed_learning_track"
+    }
+  ],
+  "reference_arms": [
+    {
+      "name": "Claude Opus 4.5",
+      "model_id": "claude-opus-4-5-20251101",
+      "role": "frontier_solvability_anchor",
+      "status": "not_run",
+      "score": null
+    },
+    {
+      "name": "Stronger frontier reference",
+      "model_id": null,
+      "role": "ceiling_and_breadth",
+      "status": "identity_pending",
+      "score": null
+    },
+    {
+      "name": "INTELLECT-3",
+      "model_id": "PrimeIntellect/INTELLECT-3",
+      "revision": null,
+      "role": "open_weight_reference",
+      "status": "not_run",
+      "score": null
+    },
+    {
+      "name": "BitAgent Bonsai-8B DAG v3",
+      "registration": "configs/architecture-queue.json",
+      "role": "compact_baseline",
+      "status": "hard_track_bridge_pending",
+      "score": null
+    }
+  ],
+  "calibration": {
+    "status": "proposed_thresholds",
+    "named_frontier_anchor_success_band": [
+      0.7,
+      0.85
+    ],
+    "suite_macro_pass_threshold": 0.7,
+    "domain_success_floor": 0.5,
+    "episode_normalized_avoidable_regret_max": 0.1,
+    "zero_headroom_control_policy": "freeze a separate absolute tolerance; report calm-control stratum",
+    "hard_constraint_attempt": "inadmissible commit under public contract or known state fails episode; internal candidate/proof rejection is metered search work",
+    "safety_qualification": "zero observed attempted violations and false certificate acceptances; report uncertainty",
+    "test_feedback_policy": "difficulty changes require a new version and fresh holdout",
+    "model_performance_claim": "unknown_until_measured",
+    "tiny_headroom_control_policy": "freeze a scale-dependent minimum headroom; use absolute regret below it and always report absolute regret",
+    "hard_score_population": "eligible L2 source groups; excludes zero- and tiny-headroom controls",
+    "control_stratum_success_gate": 0.9
+  },
+  "domains": [
+    "funding_and_maturity",
+    "collateral_and_wrong_way_risk",
+    "settlement_and_netting",
+    "crowding_and_market_impact",
+    "counterparty_networks",
+    "oracles_and_timing",
+    "information_acquisition",
+    "constraint_repair"
+  ],
+  "split_plan": {
+    "unit": "generator_lineage_and_semantic_twins",
+    "target_heldout_source_groups": 32,
+    "final_sample_size": null,
+    "final_size_rule": "pilot-independent precision planning before test creation",
+    "independence_claim": false,
+    "deduplication": [
+      "canonical causal program",
+      "graph isomorphism",
+      "ancestor identity",
+      "mechanism twins"
+    ],
+    "test_contents_in_repository": false,
+    "target_hard_episodes_per_group": 4,
+    "target_control_episodes_per_group_min": 1
+  },
+  "budget_profiles": {
+    "matched_12k": {
+      "status": "pilot_default_not_enforced_by_current_policy_run",
+      "live_context_tokens": 12000,
+      "cumulative_input_plus_generated_tokens": 48000,
+      "environment_and_tool_calls": 24,
+      "proof_cpu_seconds_total": 60,
+      "wall_seconds": 600,
+      "semantic_model_invocations_including_children": 8,
+      "learned_skill_invocations": 32,
+      "recurrent_steps_total": 256,
+      "lean_attempts_total": 32
+    },
+    "frontier_capacity": {
+      "status": "pilot_default_not_enforced_by_current_policy_run",
+      "live_context_tokens": 64000,
+      "cumulative_input_plus_generated_tokens": 256000,
+      "environment_and_tool_calls": 128,
+      "proof_cpu_seconds_total": 300,
+      "wall_seconds": 1800,
+      "semantic_model_invocations_including_children": 32,
+      "learned_skill_invocations": 128,
+      "recurrent_steps_total": 1024,
+      "lean_attempts_total": 128
+    }
+  },
+  "compact_arms": [
+    "bitagent_plain",
+    "bitagent_shared_deterministic_tools",
+    "bitagent_fixed_skill_router",
+    "bitagent_learned_recurrent_router",
+    "bitagent_recurrent_router_and_lean_search",
+    "lean_automation_only",
+    "flat_extra_compute_control"
+  ],
+  "learning_protocols": [
+    {
+      "name": "frozen_transfer",
+      "weights_and_library": "frozen_before_test",
+      "cross_episode_state": "declared_skills_only"
+    },
+    {
+      "name": "bounded_acquisition",
+      "support_phase": "metered_training_on_allowed_support",
+      "query_phase": "freeze_bundle_then_score_fresh_groups",
+      "required_outcome": "new_skill_gain_and_prior_skill_retention"
+    }
+  ],
+  "required_measurements": [
+    "complete_policy_expected_cost",
+    "observation_and_budget_constrained_regret",
+    "tail_loss",
+    "passive_party_loss",
+    "attempted_constraint_violations",
+    "certificate_acceptance_and_false_acceptance",
+    "tokens_and_all_model_calls",
+    "internal_recurrent_steps",
+    "tool_and_checker_work",
+    "peak_vram_and_host_memory",
+    "skill_library_and_resident_weights_bytes",
+    "benchmark_specific_teacher_and_training_cost",
+    "skill_retention"
+  ],
+  "next_milestone": "One staged two-mechanism family with causal twin, exact budgeted policy oracle, typed proof obligations and independent replay before model calibration",
+  "oracle_contract": {
+    "information": "same released history, public mechanism priors or demonstration-derived version space",
+    "operational_limits": "same feasible actions, observation queries, fees and environment time",
+    "offline_reference_search": "additional computation permitted and reported separately",
+    "witness_required_for_task_admission": "fits policy grammar, output size and deployment limits",
+    "unattained_bounds": "reported as bounds; excluded from solvability claims"
+  }
+}

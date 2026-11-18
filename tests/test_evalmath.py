@@ -8,10 +8,11 @@ import json
 from pathlib import Path
 from tempfile import TemporaryDirectory
 import unittest
+from unittest.mock import patch
 
 from systemic_risk_bench.cli import main
 from systemic_risk_bench.evalmath import (
-    CONFIG_SCHEMA, DEFAULT_CONFIG, SCHEMA, build_bank, cents, export_bank,
+    CONFIG_SCHEMA, DEFAULT_CONFIG, SCHEMA, build_bank, cents, exact, export_bank,
     money, validate_config,
 )
 from systemic_risk_bench.simulation import simulate
@@ -116,9 +117,6 @@ class EvalMathExportTests(unittest.TestCase):
         for key, val in (("schema_version", "unknown"), ("tail_alpha", "1"),
                          ("harm_threshold", "3/1000"), ("observation", "perfect"),
                          ("claimed_safe_checker", "actual_model")):
-            if key == "harm_threshold":
-                # Tiny, but valid threshold. Test negative separately.
-                continue
             d = copy.deepcopy(self.config); d[key] = val; bad.append(d)
         for key, val in (("impact", -1), ("depths", ["0"]), ("shocks", [".99"]),
                          ("cohort_profiles", ["unknown"]), ("agents_represented", True),
@@ -131,6 +129,47 @@ class EvalMathExportTests(unittest.TestCase):
             with self.subTest(config=d), self.assertRaises(ValueError):
                 validate_config(d)
         self.assertEqual(self.config["schema_version"], CONFIG_SCHEMA)
+
+    def test_threshold_requires_exact_whole_cents(self):
+        for value in ("0.001", "0.003", "0.005", "0.009", "1.001", "300000.001"):
+            config = copy.deepcopy(self.config)
+            config["harm_threshold"] = value
+            with self.subTest(value=value), self.assertRaisesRegex(ValueError, "whole cents"):
+                validate_config(config)
+        for value in ("0.01", "123/100", "300000", str(2**53 + 1)):
+            config = copy.deepcopy(self.config)
+            config["harm_threshold"] = value
+            with self.subTest(value=value):
+                validate_config(config)
+
+    def test_threshold_comparison_preserves_integer_precision(self):
+        config = copy.deepcopy(self.config)
+        config.update(harm_threshold=str(2**53 + 1), shocks=["0.04"],
+                      depths=["300000"], cohort_profiles=["homogeneous"])
+        # The classifier must retain the one-dollar gap above this exact integer.
+        outcome = {"converged": True, "termination_reason": "flow_tolerance",
+                   "limited_liability_investor_loss": 2**53, "creditor_shortfall": 0,
+                   "uncapped_book_equity_loss": 2**53, "exogenous_book_loss": 2**53}
+        with patch("systemic_risk_bench.evalmath.simulate", return_value=outcome):
+            bank = build_bank(config)
+        self.assertTrue(all(row["claimed_safe"]
+                            for row in bank["worlds"][0]["outcomes"].values()))
+
+    def test_semantically_duplicate_grid_values_are_rejected(self):
+        for field, values in (("shocks", ["0.04", "1/25"]),
+                              ("depths", ["300000", "300000/1"])):
+            config = copy.deepcopy(self.config)
+            config[field] = values
+            with self.subTest(field=field), self.assertRaisesRegex(ValueError, "distinct rational"):
+                validate_config(config)
+
+    def test_out_of_range_rational_is_a_validation_error(self):
+        with self.assertRaisesRegex(ValueError, "finite"):
+            exact("1e309", "amount")
+        config = copy.deepcopy(self.config)
+        config["initial_capital"] = "1e309"
+        with self.assertRaises(ValueError):
+            validate_config(config)
 
     def test_cli_round_trip(self):
         with TemporaryDirectory() as tmp:

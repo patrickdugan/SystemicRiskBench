@@ -1,0 +1,1683 @@
+{
+  "schema_version": "srb.policy.run.v1",
+  "experiment_id": "SRB-CF-02-DEV",
+  "run_status": "complete",
+  "evaluation_error": null,
+  "created_at": "2026-11-18T10:17:08.241673+00:00",
+  "run_kind": "fixture",
+  "evidence_status": "public_development",
+  "fixture": "always_support",
+  "adapter_argv": null,
+  "timeout_seconds_per_call": 60,
+  "model_calls": 0,
+  "model_call_count_status": "known_fixture_zero",
+  "adapter_invocations": 0,
+  "policy_decisions": 5,
+  "failed_decisions": 0,
+  "decision_freeze": {
+    "sha256": "4c711f3af39f081079bcc36914c6d32204e1afbe9349d173ab66de25939ad79e",
+    "completed_before_counterfactual_simulation": true
+  },
+  "config": {
+    "schema_version": "srb.policy.config.v1",
+    "experiment_id": "SRB-CF-02-DEV",
+    "action_budget": "10000",
+    "simulation": {
+      "schema_version": "srb.evalmath.simulation_config.v1",
+      "experiment_id": "SRB-CF-02-DEV",
+      "evidence_level": "public synthetic development grid; model calls determined by policy source",
+      "initial_capital": "1000000",
+      "agents_represented": 1000000,
+      "impact": "0.08",
+      "max_rounds": 50,
+      "shocks": [
+        "0.04",
+        "0.08",
+        "0.12",
+        "0.30",
+        "0.38"
+      ],
+      "depths": [
+        "300000",
+        "1000000",
+        "5000000"
+      ],
+      "cohort_profiles": [
+        "homogeneous",
+        "heterogeneous"
+      ],
+      "actions": [
+        {
+          "name": "no_liquidity_support",
+          "depth_multiplier": 1,
+          "cost": "0"
+        },
+        {
+          "name": "triple_depth_backstop",
+          "depth_multiplier": 3,
+          "cost": "10000"
+        }
+      ],
+      "baseline": "no_liquidity_support",
+      "observation": "shock_index_only",
+      "query_names": [
+        "depth_tier",
+        "cohort_profile"
+      ],
+      "mass_per_scenario": 1,
+      "harm_threshold": "300000",
+      "tail_alpha": "4/5",
+      "claimed_safe_checker": "exogenous_only_v1",
+      "quantization": "Decimal(str(float_value)) nearest cent, ROUND_HALF_EVEN",
+      "scenario_horizon": "one stipulated shock plus simulator liquidation rounds",
+      "regime_probability_status": "illustrative equal-mass grid; no estimated scenario frequencies",
+      "restrictions": "All outcomes evaluator-only; never include intervention losses or regime labels in model's visible packet"
+    }
+  },
+  "config_sha256": "5d60bb5406b029d8a9b3427391af2987d38e1557c64d474f44daa8f38c71aa5c",
+  "receipts": [
+    {
+      "status": "ok",
+      "response": {
+        "action": "triple_depth_backstop"
+      },
+      "wall_seconds": 0.0,
+      "fallback_used": false,
+      "selected_action": "triple_depth_backstop",
+      "observation_index": 0,
+      "packet": {
+        "schema_version": "srb.policy.packet.v1",
+        "observation": {
+          "shock": "1/25"
+        },
+        "initial_capital": "1000000",
+        "action_budget": "10000",
+        "available_actions": [
+          {
+            "name": "no_liquidity_support",
+            "depth_multiplier": 1,
+            "cost": "0"
+          },
+          {
+            "name": "triple_depth_backstop",
+            "depth_multiplier": 3,
+            "cost": "10000"
+          }
+        ],
+        "action_effect": "Depth multiplier applies before all liquidation rounds.",
+        "objective": "Minimize limited-liability investor loss plus creditor shortfall plus the action cost paid once by an external sponsor.",
+        "response_contract": {
+          "required": {
+            "action": "an available action name"
+          },
+          "optional": {
+            "rationale": "string"
+          }
+        }
+      },
+      "packet_sha256": "4a76f7d4655d6fc8f3d0941e2693bcab219c1681837cf55878c8d6ca185f810b"
+    },
+    {
+      "status": "ok",
+      "response": {
+        "action": "triple_depth_backstop"
+      },
+      "wall_seconds": 0.0,
+      "fallback_used": false,
+      "selected_action": "triple_depth_backstop",
+      "observation_index": 1,
+      "packet": {
+        "schema_version": "srb.policy.packet.v1",
+        "observation": {
+          "shock": "2/25"
+        },
+        "initial_capital": "1000000",
+        "action_budget": "10000",
+        "available_actions": [
+          {
+            "name": "no_liquidity_support",
+            "depth_multiplier": 1,
+            "cost": "0"
+          },
+          {
+            "name": "triple_depth_backstop",
+            "depth_multiplier": 3,
+            "cost": "10000"
+          }
+        ],
+        "action_effect": "Depth multiplier applies before all liquidation rounds.",
+        "objective": "Minimize limited-liability investor loss plus creditor shortfall plus the action cost paid once by an external sponsor.",
+        "response_contract": {
+          "required": {
+            "action": "an available action name"
+          },
+          "optional": {
+            "rationale": "string"
+          }
+        }
+      },
+      "packet_sha256": "e01850dcacc784de396c28f430bdfe3ec914a3cd38225cf42ab25ed810b9d420"
+    },
+    {
+      "status": "ok",
+      "response": {
+        "action": "triple_depth_backstop"
+      },
+      "wall_seconds": 0.0,
+      "fallback_used": false,
+      "selected_action": "triple_depth_backstop",
+      "observation_index": 2,
+      "packet": {
+        "schema_version": "srb.policy.packet.v1",
+        "observation": {
+          "shock": "3/25"
+        },
+        "initial_capital": "1000000",
+        "action_budget": "10000",
+        "available_actions": [
+          {
+            "name": "no_liquidity_support",
+            "depth_multiplier": 1,
+            "cost": "0"
+          },
+          {
+            "name": "triple_depth_backstop",
+            "depth_multiplier": 3,
+            "cost": "10000"
+          }
+        ],
+        "action_effect": "Depth multiplier applies before all liquidation rounds.",
+        "objective": "Minimize limited-liability investor loss plus creditor shortfall plus the action cost paid once by an external sponsor.",
+        "response_contract": {
+          "required": {
+            "action": "an available action name"
+          },
+          "optional": {
+            "rationale": "string"
+          }
+        }
+      },
+      "packet_sha256": "340dd08a917cc647d655b9864908243475d49d2358921537d909c707203f2044"
+    },
+    {
+      "status": "ok",
+      "response": {
+        "action": "triple_depth_backstop"
+      },
+      "wall_seconds": 0.0,
+      "fallback_used": false,
+      "selected_action": "triple_depth_backstop",
+      "observation_index": 3,
+      "packet": {
+        "schema_version": "srb.policy.packet.v1",
+        "observation": {
+          "shock": "3/10"
+        },
+        "initial_capital": "1000000",
+        "action_budget": "10000",
+        "available_actions": [
+          {
+            "name": "no_liquidity_support",
+            "depth_multiplier": 1,
+            "cost": "0"
+          },
+          {
+            "name": "triple_depth_backstop",
+            "depth_multiplier": 3,
+            "cost": "10000"
+          }
+        ],
+        "action_effect": "Depth multiplier applies before all liquidation rounds.",
+        "objective": "Minimize limited-liability investor loss plus creditor shortfall plus the action cost paid once by an external sponsor.",
+        "response_contract": {
+          "required": {
+            "action": "an available action name"
+          },
+          "optional": {
+            "rationale": "string"
+          }
+        }
+      },
+      "packet_sha256": "3ce0a28308e8a3763f5aa32cf860d58dd2ba8c3d2c2a7e0bd65da60bee7b922e"
+    },
+    {
+      "status": "ok",
+      "response": {
+        "action": "triple_depth_backstop"
+      },
+      "wall_seconds": 0.0,
+      "fallback_used": false,
+      "selected_action": "triple_depth_backstop",
+      "observation_index": 4,
+      "packet": {
+        "schema_version": "srb.policy.packet.v1",
+        "observation": {
+          "shock": "19/50"
+        },
+        "initial_capital": "1000000",
+        "action_budget": "10000",
+        "available_actions": [
+          {
+            "name": "no_liquidity_support",
+            "depth_multiplier": 1,
+            "cost": "0"
+          },
+          {
+            "name": "triple_depth_backstop",
+            "depth_multiplier": 3,
+            "cost": "10000"
+          }
+        ],
+        "action_effect": "Depth multiplier applies before all liquidation rounds.",
+        "objective": "Minimize limited-liability investor loss plus creditor shortfall plus the action cost paid once by an external sponsor.",
+        "response_contract": {
+          "required": {
+            "action": "an available action name"
+          },
+          "optional": {
+            "rationale": "string"
+          }
+        }
+      },
+      "packet_sha256": "310a7abd2d92a0f77797765c6fe42b6bb39ea1be4d52b8102ed5b0848d092550"
+    }
+  ],
+  "scores": {
+    "selected_policy": {
+      "expected_investor_loss": "657835163/1500",
+      "expected_creditor_shortfall": "13143",
+      "expected_action_cost": "10000",
+      "expected_total_cost": "692549663/1500",
+      "expected_shortfall_total_cost": "100287277/100",
+      "max_total_cost": "1104400"
+    },
+    "baseline": {
+      "expected_investor_loss": "183029857/375",
+      "expected_creditor_shortfall": "2719901/200",
+      "expected_action_cost": "0",
+      "expected_total_cost": "1505037371/3000",
+      "expected_shortfall_total_cost": "304509031/300",
+      "max_total_cost": "1094400"
+    },
+    "observation_oracle": {
+      "expected_investor_loss": "657835163/1500",
+      "expected_creditor_shortfall": "13143",
+      "expected_action_cost": "8000",
+      "expected_total_cost": "689549663/1500",
+      "expected_shortfall_total_cost": "100287277/100",
+      "max_total_cost": "1104400"
+    },
+    "perfect_information_bound": {
+      "expected_investor_loss": "109915901/250",
+      "expected_creditor_shortfall": "13143",
+      "expected_action_cost": "14000/3",
+      "expected_total_cost": "343104953/750",
+      "expected_shortfall_total_cost": "598458941/600",
+      "max_total_cost": "1094400"
+    },
+    "expected_regret_vs_observation_oracle": "2000",
+    "expected_total_cost_change_vs_baseline": "-23987609/600",
+    "information_gap": "3339757/1500",
+    "oracle_objective": "mass-weighted mean total cost; tail statistics are descriptive",
+    "observation_oracle_status": "ex_post_optimum_on_public_grid_with_stipulated_masses",
+    "world_results": [
+      {
+        "world_id": "shock0_depth0_profile0",
+        "observation_index": 0,
+        "mass": 1,
+        "selected_action": "triple_depth_backstop",
+        "investor_loss": "115200",
+        "creditor_shortfall": "0",
+        "action_cost": "10000",
+        "total_cost": "125200",
+        "baseline_total_cost": "115200",
+        "observation_oracle_action": "no_liquidity_support",
+        "observation_oracle_total_cost": "115200",
+        "perfect_information_action": "no_liquidity_support",
+        "perfect_information_total_cost": "115200",
+        "regret_vs_observation_oracle": "10000"
+      },
+      {
+        "world_id": "shock0_depth0_profile1",
+        "observation_index": 0,
+        "mass": 1,
+        "selected_action": "triple_depth_backstop",
+        "investor_loss": "74380",
+        "creditor_shortfall": "0",
+        "action_cost": "10000",
+        "total_cost": "84380",
+        "baseline_total_cost": "74380",
+        "observation_oracle_action": "no_liquidity_support",
+        "observation_oracle_total_cost": "74380",
+        "perfect_information_action": "no_liquidity_support",
+        "perfect_information_total_cost": "74380",
+        "regret_vs_observation_oracle": "10000"
+      },
+      {
+        "world_id": "shock0_depth1_profile0",
+        "observation_index": 0,
+        "mass": 1,
+        "selected_action": "triple_depth_backstop",
+        "investor_loss": "115200",
+        "creditor_shortfall": "0",
+        "action_cost": "10000",
+        "total_cost": "125200",
+        "baseline_total_cost": "115200",
+        "observation_oracle_action": "no_liquidity_support",
+        "observation_oracle_total_cost": "115200",
+        "perfect_information_action": "no_liquidity_support",
+        "perfect_information_total_cost": "115200",
+        "regret_vs_observation_oracle": "10000"
+      },
+      {
+        "world_id": "shock0_depth1_profile1",
+        "observation_index": 0,
+        "mass": 1,
+        "selected_action": "triple_depth_backstop",
+        "investor_loss": "74380",
+        "creditor_shortfall": "0",
+        "action_cost": "10000",
+        "total_cost": "84380",
+        "baseline_total_cost": "74380",
+        "observation_oracle_action": "no_liquidity_support",
+        "observation_oracle_total_cost": "74380",
+        "perfect_information_action": "no_liquidity_support",
+        "perfect_information_total_cost": "74380",
+        "regret_vs_observation_oracle": "10000"
+      },
+      {
+        "world_id": "shock0_depth2_profile0",
+        "observation_index": 0,
+        "mass": 1,
+        "selected_action": "triple_depth_backstop",
+        "investor_loss": "115200",
+        "creditor_shortfall": "0",
+        "action_cost": "10000",
+        "total_cost": "125200",
+        "baseline_total_cost": "115200",
+        "observation_oracle_action": "no_liquidity_support",
+        "observation_oracle_total_cost": "115200",
+        "perfect_information_action": "no_liquidity_support",
+        "perfect_information_total_cost": "115200",
+        "regret_vs_observation_oracle": "10000"
+      },
+      {
+        "world_id": "shock0_depth2_profile1",
+        "observation_index": 0,
+        "mass": 1,
+        "selected_action": "triple_depth_backstop",
+        "investor_loss": "74380",
+        "creditor_shortfall": "0",
+        "action_cost": "10000",
+        "total_cost": "84380",
+        "baseline_total_cost": "74380",
+        "observation_oracle_action": "no_liquidity_support",
+        "observation_oracle_total_cost": "74380",
+        "perfect_information_action": "no_liquidity_support",
+        "perfect_information_total_cost": "74380",
+        "regret_vs_observation_oracle": "10000"
+      },
+      {
+        "world_id": "shock1_depth0_profile0",
+        "observation_index": 1,
+        "mass": 1,
+        "selected_action": "triple_depth_backstop",
+        "investor_loss": "7599272/25",
+        "creditor_shortfall": "0",
+        "action_cost": "10000",
+        "total_cost": "7849272/25",
+        "baseline_total_cost": "79233493/100",
+        "observation_oracle_action": "triple_depth_backstop",
+        "observation_oracle_total_cost": "7849272/25",
+        "perfect_information_action": "triple_depth_backstop",
+        "perfect_information_total_cost": "7849272/25",
+        "regret_vs_observation_oracle": "0"
+      },
+      {
+        "world_id": "shock1_depth0_profile1",
+        "observation_index": 1,
+        "mass": 1,
+        "selected_action": "triple_depth_backstop",
+        "investor_loss": "811166/5",
+        "creditor_shortfall": "0",
+        "action_cost": "10000",
+        "total_cost": "861166/5",
+        "baseline_total_cost": "5292608/25",
+        "observation_oracle_action": "triple_depth_backstop",
+        "observation_oracle_total_cost": "861166/5",
+        "perfect_information_action": "triple_depth_backstop",
+        "perfect_information_total_cost": "861166/5",
+        "regret_vs_observation_oracle": "0"
+      },
+      {
+        "world_id": "shock1_depth1_profile0",
+        "observation_index": 1,
+        "mass": 1,
+        "selected_action": "triple_depth_backstop",
+        "investor_loss": "6116749/25",
+        "creditor_shortfall": "0",
+        "action_cost": "10000",
+        "total_cost": "6366749/25",
+        "baseline_total_cost": "29210961/100",
+        "observation_oracle_action": "triple_depth_backstop",
+        "observation_oracle_total_cost": "6366749/25",
+        "perfect_information_action": "triple_depth_backstop",
+        "perfect_information_total_cost": "6366749/25",
+        "regret_vs_observation_oracle": "0"
+      },
+      {
+        "world_id": "shock1_depth1_profile1",
+        "observation_index": 1,
+        "mass": 1,
+        "selected_action": "triple_depth_backstop",
+        "investor_loss": "3808029/25",
+        "creditor_shortfall": "0",
+        "action_cost": "10000",
+        "total_cost": "4058029/25",
+        "baseline_total_cost": "4016469/25",
+        "observation_oracle_action": "triple_depth_backstop",
+        "observation_oracle_total_cost": "4058029/25",
+        "perfect_information_action": "no_liquidity_support",
+        "perfect_information_total_cost": "4016469/25",
+        "regret_vs_observation_oracle": "0"
+      },
+      {
+        "world_id": "shock1_depth2_profile0",
+        "observation_index": 1,
+        "mass": 1,
+        "selected_action": "triple_depth_backstop",
+        "investor_loss": "23292611/100",
+        "creditor_shortfall": "0",
+        "action_cost": "10000",
+        "total_cost": "24292611/100",
+        "baseline_total_cost": "11922159/50",
+        "observation_oracle_action": "triple_depth_backstop",
+        "observation_oracle_total_cost": "24292611/100",
+        "perfect_information_action": "no_liquidity_support",
+        "perfect_information_total_cost": "11922159/50",
+        "regret_vs_observation_oracle": "0"
+      },
+      {
+        "world_id": "shock1_depth2_profile1",
+        "observation_index": 1,
+        "mass": 1,
+        "selected_action": "triple_depth_backstop",
+        "investor_loss": "2988879/20",
+        "creditor_shortfall": "0",
+        "action_cost": "10000",
+        "total_cost": "3188879/20",
+        "baseline_total_cost": "15085347/100",
+        "observation_oracle_action": "triple_depth_backstop",
+        "observation_oracle_total_cost": "3188879/20",
+        "perfect_information_action": "no_liquidity_support",
+        "perfect_information_total_cost": "15085347/100",
+        "regret_vs_observation_oracle": "0"
+      },
+      {
+        "world_id": "shock2_depth0_profile0",
+        "observation_index": 2,
+        "mass": 1,
+        "selected_action": "triple_depth_backstop",
+        "investor_loss": "46926759/100",
+        "creditor_shortfall": "0",
+        "action_cost": "10000",
+        "total_cost": "47926759/100",
+        "baseline_total_cost": "21506574/25",
+        "observation_oracle_action": "triple_depth_backstop",
+        "observation_oracle_total_cost": "47926759/100",
+        "perfect_information_action": "triple_depth_backstop",
+        "perfect_information_total_cost": "47926759/100",
+        "regret_vs_observation_oracle": "0"
+      },
+      {
+        "world_id": "shock2_depth0_profile1",
+        "observation_index": 2,
+        "mass": 1,
+        "selected_action": "triple_depth_backstop",
+        "investor_loss": "24829591/100",
+        "creditor_shortfall": "0",
+        "action_cost": "10000",
+        "total_cost": "25829591/100",
+        "baseline_total_cost": "32514031/100",
+        "observation_oracle_action": "triple_depth_backstop",
+        "observation_oracle_total_cost": "25829591/100",
+        "perfect_information_action": "triple_depth_backstop",
+        "perfect_information_total_cost": "25829591/100",
+        "regret_vs_observation_oracle": "0"
+      },
+      {
+        "world_id": "shock2_depth1_profile0",
+        "observation_index": 2,
+        "mass": 1,
+        "selected_action": "triple_depth_backstop",
+        "investor_loss": "9332971/25",
+        "creditor_shortfall": "0",
+        "action_cost": "10000",
+        "total_cost": "9582971/25",
+        "baseline_total_cost": "45241423/100",
+        "observation_oracle_action": "triple_depth_backstop",
+        "observation_oracle_total_cost": "9582971/25",
+        "perfect_information_action": "triple_depth_backstop",
+        "perfect_information_total_cost": "9582971/25",
+        "regret_vs_observation_oracle": "0"
+      },
+      {
+        "world_id": "shock2_depth1_profile1",
+        "observation_index": 2,
+        "mass": 1,
+        "selected_action": "triple_depth_backstop",
+        "investor_loss": "22997159/100",
+        "creditor_shortfall": "0",
+        "action_cost": "10000",
+        "total_cost": "23997159/100",
+        "baseline_total_cost": "6136344/25",
+        "observation_oracle_action": "triple_depth_backstop",
+        "observation_oracle_total_cost": "23997159/100",
+        "perfect_information_action": "triple_depth_backstop",
+        "perfect_information_total_cost": "23997159/100",
+        "regret_vs_observation_oracle": "0"
+      },
+      {
+        "world_id": "shock2_depth2_profile0",
+        "observation_index": 2,
+        "mass": 1,
+        "selected_action": "triple_depth_backstop",
+        "investor_loss": "8765867/25",
+        "creditor_shortfall": "0",
+        "action_cost": "10000",
+        "total_cost": "9015867/25",
+        "baseline_total_cost": "36144231/100",
+        "observation_oracle_action": "triple_depth_backstop",
+        "observation_oracle_total_cost": "9015867/25",
+        "perfect_information_action": "triple_depth_backstop",
+        "perfect_information_total_cost": "9015867/25",
+        "regret_vs_observation_oracle": "0"
+      },
+      {
+        "world_id": "shock2_depth2_profile1",
+        "observation_index": 2,
+        "mass": 1,
+        "selected_action": "triple_depth_backstop",
+        "investor_loss": "5611552/25",
+        "creditor_shortfall": "0",
+        "action_cost": "10000",
+        "total_cost": "5861552/25",
+        "baseline_total_cost": "5679293/25",
+        "observation_oracle_action": "triple_depth_backstop",
+        "observation_oracle_total_cost": "5861552/25",
+        "perfect_information_action": "no_liquidity_support",
+        "perfect_information_total_cost": "5679293/25",
+        "regret_vs_observation_oracle": "0"
+      },
+      {
+        "world_id": "shock3_depth0_profile0",
+        "observation_index": 3,
+        "mass": 1,
+        "selected_action": "triple_depth_backstop",
+        "investor_loss": "4619967/5",
+        "creditor_shortfall": "0",
+        "action_cost": "10000",
+        "total_cost": "4669967/5",
+        "baseline_total_cost": "20273903/20",
+        "observation_oracle_action": "triple_depth_backstop",
+        "observation_oracle_total_cost": "4669967/5",
+        "perfect_information_action": "triple_depth_backstop",
+        "perfect_information_total_cost": "4669967/5",
+        "regret_vs_observation_oracle": "0"
+      },
+      {
+        "world_id": "shock3_depth0_profile1",
+        "observation_index": 3,
+        "mass": 1,
+        "selected_action": "triple_depth_backstop",
+        "investor_loss": "59547819/100",
+        "creditor_shortfall": "0",
+        "action_cost": "10000",
+        "total_cost": "60547819/100",
+        "baseline_total_cost": "68059957/100",
+        "observation_oracle_action": "triple_depth_backstop",
+        "observation_oracle_total_cost": "60547819/100",
+        "perfect_information_action": "triple_depth_backstop",
+        "perfect_information_total_cost": "60547819/100",
+        "regret_vs_observation_oracle": "0"
+      },
+      {
+        "world_id": "shock3_depth1_profile0",
+        "observation_index": 3,
+        "mass": 1,
+        "selected_action": "triple_depth_backstop",
+        "investor_loss": "44118563/50",
+        "creditor_shortfall": "0",
+        "action_cost": "10000",
+        "total_cost": "44618563/50",
+        "baseline_total_cost": "22956518/25",
+        "observation_oracle_action": "triple_depth_backstop",
+        "observation_oracle_total_cost": "44618563/50",
+        "perfect_information_action": "triple_depth_backstop",
+        "perfect_information_total_cost": "44618563/50",
+        "regret_vs_observation_oracle": "0"
+      },
+      {
+        "world_id": "shock3_depth1_profile1",
+        "observation_index": 3,
+        "mass": 1,
+        "selected_action": "triple_depth_backstop",
+        "investor_loss": "14224519/25",
+        "creditor_shortfall": "0",
+        "action_cost": "10000",
+        "total_cost": "14474519/25",
+        "baseline_total_cost": "59149271/100",
+        "observation_oracle_action": "triple_depth_backstop",
+        "observation_oracle_total_cost": "14474519/25",
+        "perfect_information_action": "triple_depth_backstop",
+        "perfect_information_total_cost": "14474519/25",
+        "regret_vs_observation_oracle": "0"
+      },
+      {
+        "world_id": "shock3_depth2_profile0",
+        "observation_index": 3,
+        "mass": 1,
+        "selected_action": "triple_depth_backstop",
+        "investor_loss": "21691799/25",
+        "creditor_shortfall": "0",
+        "action_cost": "10000",
+        "total_cost": "21941799/25",
+        "baseline_total_cost": "3500099/4",
+        "observation_oracle_action": "triple_depth_backstop",
+        "observation_oracle_total_cost": "21941799/25",
+        "perfect_information_action": "no_liquidity_support",
+        "perfect_information_total_cost": "3500099/4",
+        "regret_vs_observation_oracle": "0"
+      },
+      {
+        "world_id": "shock3_depth2_profile1",
+        "observation_index": 3,
+        "mass": 1,
+        "selected_action": "triple_depth_backstop",
+        "investor_loss": "28003757/50",
+        "creditor_shortfall": "0",
+        "action_cost": "10000",
+        "total_cost": "28503757/50",
+        "baseline_total_cost": "56452709/100",
+        "observation_oracle_action": "triple_depth_backstop",
+        "observation_oracle_total_cost": "28503757/50",
+        "perfect_information_action": "no_liquidity_support",
+        "perfect_information_total_cost": "56452709/100",
+        "regret_vs_observation_oracle": "0"
+      },
+      {
+        "world_id": "shock4_depth0_profile0",
+        "observation_index": 4,
+        "mass": 1,
+        "selected_action": "triple_depth_backstop",
+        "investor_loss": "1000000",
+        "creditor_shortfall": "94400",
+        "action_cost": "10000",
+        "total_cost": "1104400",
+        "baseline_total_cost": "1094400",
+        "observation_oracle_action": "triple_depth_backstop",
+        "observation_oracle_total_cost": "1104400",
+        "perfect_information_action": "no_liquidity_support",
+        "perfect_information_total_cost": "1094400",
+        "regret_vs_observation_oracle": "0"
+      },
+      {
+        "world_id": "shock4_depth0_profile1",
+        "observation_index": 4,
+        "mass": 1,
+        "selected_action": "triple_depth_backstop",
+        "investor_loss": "34921751/50",
+        "creditor_shortfall": "37030",
+        "action_cost": "10000",
+        "total_cost": "37273251/50",
+        "baseline_total_cost": "19813674/25",
+        "observation_oracle_action": "triple_depth_backstop",
+        "observation_oracle_total_cost": "37273251/50",
+        "perfect_information_action": "triple_depth_backstop",
+        "perfect_information_total_cost": "37273251/50",
+        "regret_vs_observation_oracle": "0"
+      },
+      {
+        "world_id": "shock4_depth1_profile0",
+        "observation_index": 4,
+        "mass": 1,
+        "selected_action": "triple_depth_backstop",
+        "investor_loss": "1000000",
+        "creditor_shortfall": "94400",
+        "action_cost": "10000",
+        "total_cost": "1104400",
+        "baseline_total_cost": "1094400",
+        "observation_oracle_action": "triple_depth_backstop",
+        "observation_oracle_total_cost": "1104400",
+        "perfect_information_action": "no_liquidity_support",
+        "perfect_information_total_cost": "1094400",
+        "regret_vs_observation_oracle": "0"
+      },
+      {
+        "world_id": "shock4_depth1_profile1",
+        "observation_index": 4,
+        "mass": 1,
+        "selected_action": "triple_depth_backstop",
+        "investor_loss": "67815457/100",
+        "creditor_shortfall": "37030",
+        "action_cost": "10000",
+        "total_cost": "72518457/100",
+        "baseline_total_cost": "7325539/10",
+        "observation_oracle_action": "triple_depth_backstop",
+        "observation_oracle_total_cost": "72518457/100",
+        "perfect_information_action": "triple_depth_backstop",
+        "perfect_information_total_cost": "72518457/100",
+        "regret_vs_observation_oracle": "0"
+      },
+      {
+        "world_id": "shock4_depth2_profile0",
+        "observation_index": 4,
+        "mass": 1,
+        "selected_action": "triple_depth_backstop",
+        "investor_loss": "1000000",
+        "creditor_shortfall": "94400",
+        "action_cost": "10000",
+        "total_cost": "1104400",
+        "baseline_total_cost": "1094400",
+        "observation_oracle_action": "triple_depth_backstop",
+        "observation_oracle_total_cost": "1104400",
+        "perfect_information_action": "no_liquidity_support",
+        "perfect_information_total_cost": "1094400",
+        "regret_vs_observation_oracle": "0"
+      },
+      {
+        "world_id": "shock4_depth2_profile1",
+        "observation_index": 4,
+        "mass": 1,
+        "selected_action": "triple_depth_backstop",
+        "investor_loss": "67128701/100",
+        "creditor_shortfall": "37030",
+        "action_cost": "10000",
+        "total_cost": "71831701/100",
+        "baseline_total_cost": "7117433/10",
+        "observation_oracle_action": "triple_depth_backstop",
+        "observation_oracle_total_cost": "71831701/100",
+        "perfect_information_action": "no_liquidity_support",
+        "perfect_information_total_cost": "7117433/10",
+        "regret_vs_observation_oracle": "0"
+      }
+    ]
+  },
+  "counterfactual_bank": {
+    "schema": "SRB-EvalMath-01",
+    "nodes": [
+      "limited_liability_investor_loss",
+      "creditor_shortfall"
+    ],
+    "actions": [
+      {
+        "name": "no_liquidity_support",
+        "cost": "0"
+      },
+      {
+        "name": "triple_depth_backstop",
+        "cost": "10000"
+      }
+    ],
+    "baseline": "no_liquidity_support",
+    "query_names": [
+      "depth_tier",
+      "cohort_profile"
+    ],
+    "harm_threshold": "300000",
+    "tail_alpha": "4/5",
+    "worlds": [
+      {
+        "id": "shock0_depth0_profile0",
+        "mass": 1,
+        "visible": [
+          0
+        ],
+        "queries": [
+          0,
+          0
+        ],
+        "outcomes": {
+          "no_liquidity_support": {
+            "node_loss": [
+              "115200",
+              "0"
+            ],
+            "claimed_safe": true
+          },
+          "triple_depth_backstop": {
+            "node_loss": [
+              "115200",
+              "0"
+            ],
+            "claimed_safe": true
+          }
+        }
+      },
+      {
+        "id": "shock0_depth0_profile1",
+        "mass": 1,
+        "visible": [
+          0
+        ],
+        "queries": [
+          0,
+          1
+        ],
+        "outcomes": {
+          "no_liquidity_support": {
+            "node_loss": [
+              "74380",
+              "0"
+            ],
+            "claimed_safe": true
+          },
+          "triple_depth_backstop": {
+            "node_loss": [
+              "74380",
+              "0"
+            ],
+            "claimed_safe": true
+          }
+        }
+      },
+      {
+        "id": "shock0_depth1_profile0",
+        "mass": 1,
+        "visible": [
+          0
+        ],
+        "queries": [
+          1,
+          0
+        ],
+        "outcomes": {
+          "no_liquidity_support": {
+            "node_loss": [
+              "115200",
+              "0"
+            ],
+            "claimed_safe": true
+          },
+          "triple_depth_backstop": {
+            "node_loss": [
+              "115200",
+              "0"
+            ],
+            "claimed_safe": true
+          }
+        }
+      },
+      {
+        "id": "shock0_depth1_profile1",
+        "mass": 1,
+        "visible": [
+          0
+        ],
+        "queries": [
+          1,
+          1
+        ],
+        "outcomes": {
+          "no_liquidity_support": {
+            "node_loss": [
+              "74380",
+              "0"
+            ],
+            "claimed_safe": true
+          },
+          "triple_depth_backstop": {
+            "node_loss": [
+              "74380",
+              "0"
+            ],
+            "claimed_safe": true
+          }
+        }
+      },
+      {
+        "id": "shock0_depth2_profile0",
+        "mass": 1,
+        "visible": [
+          0
+        ],
+        "queries": [
+          2,
+          0
+        ],
+        "outcomes": {
+          "no_liquidity_support": {
+            "node_loss": [
+              "115200",
+              "0"
+            ],
+            "claimed_safe": true
+          },
+          "triple_depth_backstop": {
+            "node_loss": [
+              "115200",
+              "0"
+            ],
+            "claimed_safe": true
+          }
+        }
+      },
+      {
+        "id": "shock0_depth2_profile1",
+        "mass": 1,
+        "visible": [
+          0
+        ],
+        "queries": [
+          2,
+          1
+        ],
+        "outcomes": {
+          "no_liquidity_support": {
+            "node_loss": [
+              "74380",
+              "0"
+            ],
+            "claimed_safe": true
+          },
+          "triple_depth_backstop": {
+            "node_loss": [
+              "74380",
+              "0"
+            ],
+            "claimed_safe": true
+          }
+        }
+      },
+      {
+        "id": "shock1_depth0_profile0",
+        "mass": 1,
+        "visible": [
+          1
+        ],
+        "queries": [
+          0,
+          0
+        ],
+        "outcomes": {
+          "no_liquidity_support": {
+            "node_loss": [
+              "79233493/100",
+              "0"
+            ],
+            "claimed_safe": true
+          },
+          "triple_depth_backstop": {
+            "node_loss": [
+              "7599272/25",
+              "0"
+            ],
+            "claimed_safe": true
+          }
+        }
+      },
+      {
+        "id": "shock1_depth0_profile1",
+        "mass": 1,
+        "visible": [
+          1
+        ],
+        "queries": [
+          0,
+          1
+        ],
+        "outcomes": {
+          "no_liquidity_support": {
+            "node_loss": [
+              "5292608/25",
+              "0"
+            ],
+            "claimed_safe": true
+          },
+          "triple_depth_backstop": {
+            "node_loss": [
+              "811166/5",
+              "0"
+            ],
+            "claimed_safe": true
+          }
+        }
+      },
+      {
+        "id": "shock1_depth1_profile0",
+        "mass": 1,
+        "visible": [
+          1
+        ],
+        "queries": [
+          1,
+          0
+        ],
+        "outcomes": {
+          "no_liquidity_support": {
+            "node_loss": [
+              "29210961/100",
+              "0"
+            ],
+            "claimed_safe": true
+          },
+          "triple_depth_backstop": {
+            "node_loss": [
+              "6116749/25",
+              "0"
+            ],
+            "claimed_safe": true
+          }
+        }
+      },
+      {
+        "id": "shock1_depth1_profile1",
+        "mass": 1,
+        "visible": [
+          1
+        ],
+        "queries": [
+          1,
+          1
+        ],
+        "outcomes": {
+          "no_liquidity_support": {
+            "node_loss": [
+              "4016469/25",
+              "0"
+            ],
+            "claimed_safe": true
+          },
+          "triple_depth_backstop": {
+            "node_loss": [
+              "3808029/25",
+              "0"
+            ],
+            "claimed_safe": true
+          }
+        }
+      },
+      {
+        "id": "shock1_depth2_profile0",
+        "mass": 1,
+        "visible": [
+          1
+        ],
+        "queries": [
+          2,
+          0
+        ],
+        "outcomes": {
+          "no_liquidity_support": {
+            "node_loss": [
+              "11922159/50",
+              "0"
+            ],
+            "claimed_safe": true
+          },
+          "triple_depth_backstop": {
+            "node_loss": [
+              "23292611/100",
+              "0"
+            ],
+            "claimed_safe": true
+          }
+        }
+      },
+      {
+        "id": "shock1_depth2_profile1",
+        "mass": 1,
+        "visible": [
+          1
+        ],
+        "queries": [
+          2,
+          1
+        ],
+        "outcomes": {
+          "no_liquidity_support": {
+            "node_loss": [
+              "15085347/100",
+              "0"
+            ],
+            "claimed_safe": true
+          },
+          "triple_depth_backstop": {
+            "node_loss": [
+              "2988879/20",
+              "0"
+            ],
+            "claimed_safe": true
+          }
+        }
+      },
+      {
+        "id": "shock2_depth0_profile0",
+        "mass": 1,
+        "visible": [
+          2
+        ],
+        "queries": [
+          0,
+          0
+        ],
+        "outcomes": {
+          "no_liquidity_support": {
+            "node_loss": [
+              "21506574/25",
+              "0"
+            ],
+            "claimed_safe": false
+          },
+          "triple_depth_backstop": {
+            "node_loss": [
+              "46926759/100",
+              "0"
+            ],
+            "claimed_safe": false
+          }
+        }
+      },
+      {
+        "id": "shock2_depth0_profile1",
+        "mass": 1,
+        "visible": [
+          2
+        ],
+        "queries": [
+          0,
+          1
+        ],
+        "outcomes": {
+          "no_liquidity_support": {
+            "node_loss": [
+              "32514031/100",
+              "0"
+            ],
+            "claimed_safe": true
+          },
+          "triple_depth_backstop": {
+            "node_loss": [
+              "24829591/100",
+              "0"
+            ],
+            "claimed_safe": true
+          }
+        }
+      },
+      {
+        "id": "shock2_depth1_profile0",
+        "mass": 1,
+        "visible": [
+          2
+        ],
+        "queries": [
+          1,
+          0
+        ],
+        "outcomes": {
+          "no_liquidity_support": {
+            "node_loss": [
+              "45241423/100",
+              "0"
+            ],
+            "claimed_safe": false
+          },
+          "triple_depth_backstop": {
+            "node_loss": [
+              "9332971/25",
+              "0"
+            ],
+            "claimed_safe": false
+          }
+        }
+      },
+      {
+        "id": "shock2_depth1_profile1",
+        "mass": 1,
+        "visible": [
+          2
+        ],
+        "queries": [
+          1,
+          1
+        ],
+        "outcomes": {
+          "no_liquidity_support": {
+            "node_loss": [
+              "6136344/25",
+              "0"
+            ],
+            "claimed_safe": true
+          },
+          "triple_depth_backstop": {
+            "node_loss": [
+              "22997159/100",
+              "0"
+            ],
+            "claimed_safe": true
+          }
+        }
+      },
+      {
+        "id": "shock2_depth2_profile0",
+        "mass": 1,
+        "visible": [
+          2
+        ],
+        "queries": [
+          2,
+          0
+        ],
+        "outcomes": {
+          "no_liquidity_support": {
+            "node_loss": [
+              "36144231/100",
+              "0"
+            ],
+            "claimed_safe": false
+          },
+          "triple_depth_backstop": {
+            "node_loss": [
+              "8765867/25",
+              "0"
+            ],
+            "claimed_safe": false
+          }
+        }
+      },
+      {
+        "id": "shock2_depth2_profile1",
+        "mass": 1,
+        "visible": [
+          2
+        ],
+        "queries": [
+          2,
+          1
+        ],
+        "outcomes": {
+          "no_liquidity_support": {
+            "node_loss": [
+              "5679293/25",
+              "0"
+            ],
+            "claimed_safe": true
+          },
+          "triple_depth_backstop": {
+            "node_loss": [
+              "5611552/25",
+              "0"
+            ],
+            "claimed_safe": true
+          }
+        }
+      },
+      {
+        "id": "shock3_depth0_profile0",
+        "mass": 1,
+        "visible": [
+          3
+        ],
+        "queries": [
+          0,
+          0
+        ],
+        "outcomes": {
+          "no_liquidity_support": {
+            "node_loss": [
+              "1000000",
+              "273903/20"
+            ],
+            "claimed_safe": false
+          },
+          "triple_depth_backstop": {
+            "node_loss": [
+              "4619967/5",
+              "0"
+            ],
+            "claimed_safe": false
+          }
+        }
+      },
+      {
+        "id": "shock3_depth0_profile1",
+        "mass": 1,
+        "visible": [
+          3
+        ],
+        "queries": [
+          0,
+          1
+        ],
+        "outcomes": {
+          "no_liquidity_support": {
+            "node_loss": [
+              "68059957/100",
+              "0"
+            ],
+            "claimed_safe": false
+          },
+          "triple_depth_backstop": {
+            "node_loss": [
+              "59547819/100",
+              "0"
+            ],
+            "claimed_safe": false
+          }
+        }
+      },
+      {
+        "id": "shock3_depth1_profile0",
+        "mass": 1,
+        "visible": [
+          3
+        ],
+        "queries": [
+          1,
+          0
+        ],
+        "outcomes": {
+          "no_liquidity_support": {
+            "node_loss": [
+              "22956518/25",
+              "0"
+            ],
+            "claimed_safe": false
+          },
+          "triple_depth_backstop": {
+            "node_loss": [
+              "44118563/50",
+              "0"
+            ],
+            "claimed_safe": false
+          }
+        }
+      },
+      {
+        "id": "shock3_depth1_profile1",
+        "mass": 1,
+        "visible": [
+          3
+        ],
+        "queries": [
+          1,
+          1
+        ],
+        "outcomes": {
+          "no_liquidity_support": {
+            "node_loss": [
+              "59149271/100",
+              "0"
+            ],
+            "claimed_safe": false
+          },
+          "triple_depth_backstop": {
+            "node_loss": [
+              "14224519/25",
+              "0"
+            ],
+            "claimed_safe": false
+          }
+        }
+      },
+      {
+        "id": "shock3_depth2_profile0",
+        "mass": 1,
+        "visible": [
+          3
+        ],
+        "queries": [
+          2,
+          0
+        ],
+        "outcomes": {
+          "no_liquidity_support": {
+            "node_loss": [
+              "3500099/4",
+              "0"
+            ],
+            "claimed_safe": false
+          },
+          "triple_depth_backstop": {
+            "node_loss": [
+              "21691799/25",
+              "0"
+            ],
+            "claimed_safe": false
+          }
+        }
+      },
+      {
+        "id": "shock3_depth2_profile1",
+        "mass": 1,
+        "visible": [
+          3
+        ],
+        "queries": [
+          2,
+          1
+        ],
+        "outcomes": {
+          "no_liquidity_support": {
+            "node_loss": [
+              "56452709/100",
+              "0"
+            ],
+            "claimed_safe": false
+          },
+          "triple_depth_backstop": {
+            "node_loss": [
+              "28003757/50",
+              "0"
+            ],
+            "claimed_safe": false
+          }
+        }
+      },
+      {
+        "id": "shock4_depth0_profile0",
+        "mass": 1,
+        "visible": [
+          4
+        ],
+        "queries": [
+          0,
+          0
+        ],
+        "outcomes": {
+          "no_liquidity_support": {
+            "node_loss": [
+              "1000000",
+              "94400"
+            ],
+            "claimed_safe": false
+          },
+          "triple_depth_backstop": {
+            "node_loss": [
+              "1000000",
+              "94400"
+            ],
+            "claimed_safe": false
+          }
+        }
+      },
+      {
+        "id": "shock4_depth0_profile1",
+        "mass": 1,
+        "visible": [
+          4
+        ],
+        "queries": [
+          0,
+          1
+        ],
+        "outcomes": {
+          "no_liquidity_support": {
+            "node_loss": [
+              "18887924/25",
+              "37030"
+            ],
+            "claimed_safe": false
+          },
+          "triple_depth_backstop": {
+            "node_loss": [
+              "34921751/50",
+              "37030"
+            ],
+            "claimed_safe": false
+          }
+        }
+      },
+      {
+        "id": "shock4_depth1_profile0",
+        "mass": 1,
+        "visible": [
+          4
+        ],
+        "queries": [
+          1,
+          0
+        ],
+        "outcomes": {
+          "no_liquidity_support": {
+            "node_loss": [
+              "1000000",
+              "94400"
+            ],
+            "claimed_safe": false
+          },
+          "triple_depth_backstop": {
+            "node_loss": [
+              "1000000",
+              "94400"
+            ],
+            "claimed_safe": false
+          }
+        }
+      },
+      {
+        "id": "shock4_depth1_profile1",
+        "mass": 1,
+        "visible": [
+          4
+        ],
+        "queries": [
+          1,
+          1
+        ],
+        "outcomes": {
+          "no_liquidity_support": {
+            "node_loss": [
+              "6955239/10",
+              "37030"
+            ],
+            "claimed_safe": false
+          },
+          "triple_depth_backstop": {
+            "node_loss": [
+              "67815457/100",
+              "37030"
+            ],
+            "claimed_safe": false
+          }
+        }
+      },
+      {
+        "id": "shock4_depth2_profile0",
+        "mass": 1,
+        "visible": [
+          4
+        ],
+        "queries": [
+          2,
+          0
+        ],
+        "outcomes": {
+          "no_liquidity_support": {
+            "node_loss": [
+              "1000000",
+              "94400"
+            ],
+            "claimed_safe": false
+          },
+          "triple_depth_backstop": {
+            "node_loss": [
+              "1000000",
+              "94400"
+            ],
+            "claimed_safe": false
+          }
+        }
+      },
+      {
+        "id": "shock4_depth2_profile1",
+        "mass": 1,
+        "visible": [
+          4
+        ],
+        "queries": [
+          2,
+          1
+        ],
+        "outcomes": {
+          "no_liquidity_support": {
+            "node_loss": [
+              "6747133/10",
+              "37030"
+            ],
+            "claimed_safe": false
+          },
+          "triple_depth_backstop": {
+            "node_loss": [
+              "67128701/100",
+              "37030"
+            ],
+            "claimed_safe": false
+          }
+        }
+      }
+    ],
+    "source": {
+      "repo": "patrickdugan/SystemicRiskBench",
+      "experiment_id": "SRB-CF-02-DEV",
+      "simulator": "cohort_fire_sale_v0.1",
+      "simulator_module_sha256": "719dd6ab7f4d8d5683cb50079c728c58acac9bd217a970dee330466ce0b1398a",
+      "exporter_module_sha256": "0ef7d86fab1b5c90d91c3608b3c77bcb64ef30299e52bb3f53edbf82e4dba7c9",
+      "config_sha256": "0cf8118f5332efb1efb9ffc0ac73b1a05df4106e2e5807405bfd9d6ad5205818",
+      "model_calls": 0,
+      "counterfactual_evidence": "same simulator, paired depth-only intervention; USD losses rounded to cents",
+      "scenario_mass": "equal mass per grid cell; illustrative, not estimated probabilities",
+      "loss_accounting": "investor limited-liability loss plus creditor shortfall; no double counting",
+      "claimed_safe_checker": "toy exogenous-book-loss-only heuristic, no model or human grader",
+      "visibility": "shock index visible; depth and cohort profile query-gated",
+      "quantization": "Decimal(str(float_value)) nearest cent, ROUND_HALF_EVEN",
+      "historical_cases_included": false,
+      "simulations": 60
+    }
+  },
+  "counterfactual_bank_sha256": "fb30de244eba6ee68467829640aa5022d665297fcf732a7d250ca28b3846c4a9",
+  "runtime": {
+    "python_version": "3.12.14",
+    "python_implementation": "CPython",
+    "platform": "Linux-6.18.57-x86_64-with-glibc2.41"
+  },
+  "source_sha256": {
+    "policy.py": "2103ca78e6e7d21d31feca1927b2c69ee155922a9e00d09ba43c6ae93eebf7b8",
+    "evalmath.py": "0ef7d86fab1b5c90d91c3608b3c77bcb64ef30299e52bb3f53edbf82e4dba7c9",
+    "simulation.py": "719dd6ab7f4d8d5683cb50079c728c58acac9bd217a970dee330466ce0b1398a",
+    "risk.py": "6d2efcb9c945d74a856fd8aa67def805280a4b56cd427c8cf21bcdd88c83e883",
+    "runner.py": "86d051115c7bef4a580c4716d133a37269e074401b506fc6b4964886d62d5185",
+    "scoring.py": "8064974cfb59ae9f862c98a643942bd4be45f01cc1578cf234b688b4a29edc02"
+  },
+  "limits": {
+    "policy_horizon": "one pre-cascade liquidity choice; cohort liquidation rules remain fixed",
+    "mechanisms": "one public fire-sale mechanism; grid cells are correlated variants",
+    "action_cost": "stipulated external sponsor cost, charged once; funding capacity unmodeled",
+    "external_harm": "creditor shortfall only; other counterparties and welfare unmodeled",
+    "probabilities": "illustrative scenario masses; no market-frequency calibration",
+    "adapter_is_operator_trusted_and_unsandboxed": true,
+    "holdout_status": "public development inputs; no protected holdout",
+    "model_ranking_supported": false
+  }
+}
