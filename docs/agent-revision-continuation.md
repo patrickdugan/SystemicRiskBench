@@ -41,8 +41,8 @@ From the SystemicRiskBench root, with Python 3.10+:
 
 ~~~bash
 python -m unittest discover -s tests -p 'test_agent_revision.py' -v
-python -m systemic_risk_bench agent-revision --adapter-argv '["python","-m","examples.agent_revision_fixture_adapter"]' --experiment configs/experiment.template.json --mode count --cases 16 --output artifacts/agent-revision-count.json
-python -m systemic_risk_bench agent-revision --adapter-argv '["python","-m","examples.agent_revision_fixture_adapter"]' --experiment configs/experiment.template.json --mode bitmap --cases 16 --output artifacts/agent-revision-bitmap.json
+python -m systemic_risk_bench agent-revision --adapter-argv '["python","-m","examples.agent_revision_fixture_adapter"]' --experiment configs/agent-revision-fixture.json --mode count --cases 16 --output artifacts/agent-revision-count.json
+python -m systemic_risk_bench agent-revision --adapter-argv '["python","-m","examples.agent_revision_fixture_adapter"]' --experiment configs/agent-revision-fixture.json --mode bitmap --cases 16 --output artifacts/agent-revision-bitmap.json
 ~~~
 
 The fixture adapter is a deterministic mathematical oracle and makes **zero AI model calls**. The harness invokes it using exactly the same subprocess interface that future models use. Both fixture results are engineering validation, not evidence that an actual LLM has passed the evaluation.
