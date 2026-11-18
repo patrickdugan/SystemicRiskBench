@@ -1,0 +1,164 @@
+{
+  "schema_version": "srb.policy.fixture_summary.v1",
+  "evidence_status": "public_development_fixture",
+  "experiment_id": "SRB-CF-02-DEV",
+  "config_sha256": "5d60bb5406b029d8a9b3427391af2987d38e1557c64d474f44daa8f38c71aa5c",
+  "source_sha256": {
+    "policy.py": "2103ca78e6e7d21d31feca1927b2c69ee155922a9e00d09ba43c6ae93eebf7b8",
+    "evalmath.py": "0ef7d86fab1b5c90d91c3608b3c77bcb64ef30299e52bb3f53edbf82e4dba7c9",
+    "simulation.py": "719dd6ab7f4d8d5683cb50079c728c58acac9bd217a970dee330466ce0b1398a",
+    "risk.py": "6d2efcb9c945d74a856fd8aa67def805280a4b56cd427c8cf21bcdd88c83e883",
+    "runner.py": "86d051115c7bef4a580c4716d133a37269e074401b506fc6b4964886d62d5185",
+    "scoring.py": "8064974cfb59ae9f862c98a643942bd4be45f01cc1578cf234b688b4a29edc02"
+  },
+  "threshold_adapter_sha256": "f1f2ea3fe941f9f1c41c81712c4b22b0828ac6abf073730f0cf27d0b3cb6fae4",
+  "known_model_calls_across_these_fixtures": 0,
+  "model_call_evidence": "The two built-in fixtures and the inspected examples/policy_adapter.py contain no inference. Arbitrary adapter counts remain unknown to the harness.",
+  "worlds_per_run": 30,
+  "simulations_per_run": 60,
+  "observation_oracle": {
+    "expected_investor_loss": "657835163/1500",
+    "expected_creditor_shortfall": "13143",
+    "expected_action_cost": "8000",
+    "expected_total_cost": "689549663/1500",
+    "expected_shortfall_total_cost": "100287277/100",
+    "max_total_cost": "1104400"
+  },
+  "perfect_information_bound": {
+    "expected_investor_loss": "109915901/250",
+    "expected_creditor_shortfall": "13143",
+    "expected_action_cost": "14000/3",
+    "expected_total_cost": "343104953/750",
+    "expected_shortfall_total_cost": "598458941/600",
+    "max_total_cost": "1094400"
+  },
+  "information_gap": "3339757/1500",
+  "runs": [
+    {
+      "name": "baseline",
+      "report_file": "baseline.json",
+      "report_sha256": "ebdd0831083dfcb02785b69453de9959bdd44956f596c6254580a0a0c012f3bd",
+      "run_kind": "fixture",
+      "model_calls_recorded_by_harness": 0,
+      "adapter_invocations": 0,
+      "policy_decisions": 5,
+      "failed_decisions": 0,
+      "selected_actions": [
+        {
+          "shock": "1/25",
+          "action": "no_liquidity_support"
+        },
+        {
+          "shock": "2/25",
+          "action": "no_liquidity_support"
+        },
+        {
+          "shock": "3/25",
+          "action": "no_liquidity_support"
+        },
+        {
+          "shock": "3/10",
+          "action": "no_liquidity_support"
+        },
+        {
+          "shock": "19/50",
+          "action": "no_liquidity_support"
+        }
+      ],
+      "selected_policy": {
+        "expected_investor_loss": "183029857/375",
+        "expected_creditor_shortfall": "2719901/200",
+        "expected_action_cost": "0",
+        "expected_total_cost": "1505037371/3000",
+        "expected_shortfall_total_cost": "304509031/300",
+        "max_total_cost": "1094400"
+      },
+      "expected_regret_vs_observation_oracle": "25187609/600",
+      "expected_total_cost_change_vs_baseline": "0"
+    },
+    {
+      "name": "always-support",
+      "report_file": "always-support.json",
+      "report_sha256": "008e1a86fad211da8ce319226c91d03eea70f2ac52e55c93d0d612a429d82544",
+      "run_kind": "fixture",
+      "model_calls_recorded_by_harness": 0,
+      "adapter_invocations": 0,
+      "policy_decisions": 5,
+      "failed_decisions": 0,
+      "selected_actions": [
+        {
+          "shock": "1/25",
+          "action": "triple_depth_backstop"
+        },
+        {
+          "shock": "2/25",
+          "action": "triple_depth_backstop"
+        },
+        {
+          "shock": "3/25",
+          "action": "triple_depth_backstop"
+        },
+        {
+          "shock": "3/10",
+          "action": "triple_depth_backstop"
+        },
+        {
+          "shock": "19/50",
+          "action": "triple_depth_backstop"
+        }
+      ],
+      "selected_policy": {
+        "expected_investor_loss": "657835163/1500",
+        "expected_creditor_shortfall": "13143",
+        "expected_action_cost": "10000",
+        "expected_total_cost": "692549663/1500",
+        "expected_shortfall_total_cost": "100287277/100",
+        "max_total_cost": "1104400"
+      },
+      "expected_regret_vs_observation_oracle": "2000",
+      "expected_total_cost_change_vs_baseline": "-23987609/600"
+    },
+    {
+      "name": "threshold-fixture",
+      "report_file": "threshold-fixture.json",
+      "report_sha256": "7442c23a43a12714eb0695ef0e1413119dbcd4dcb2e731f02cfc193348908f42",
+      "run_kind": "adapter",
+      "model_calls_recorded_by_harness": null,
+      "adapter_invocations": 5,
+      "policy_decisions": 5,
+      "failed_decisions": 0,
+      "selected_actions": [
+        {
+          "shock": "1/25",
+          "action": "no_liquidity_support"
+        },
+        {
+          "shock": "2/25",
+          "action": "no_liquidity_support"
+        },
+        {
+          "shock": "3/25",
+          "action": "no_liquidity_support"
+        },
+        {
+          "shock": "3/10",
+          "action": "triple_depth_backstop"
+        },
+        {
+          "shock": "19/50",
+          "action": "triple_depth_backstop"
+        }
+      ],
+      "selected_policy": {
+        "expected_investor_loss": "1433317687/3000",
+        "expected_creditor_shortfall": "13143",
+        "expected_action_cost": "4000",
+        "expected_total_cost": "1484746687/3000",
+        "expected_shortfall_total_cost": "100287277/100",
+        "max_total_cost": "1104400"
+      },
+      "expected_regret_vs_observation_oracle": "35215787/1000",
+      "expected_total_cost_change_vs_baseline": "-5072671/750"
+    }
+  ]
+}

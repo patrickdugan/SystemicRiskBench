@@ -34,6 +34,8 @@ This review adds a descriptive comparison report in `systemic_risk_bench/compari
 
 ## Next experimental registration: SRB-CF-02
 
+The [SRB-CF-02-DEV harness](policy-simulation.md) now supplies a public development precursor: one frozen, budgeted liquidity choice per visible shock, executed through the existing simulator and scored against an observation-constrained policy. The prospective study below still requires held-out mechanism groups and a frozen model protocol.
+
 **Scientific question:** does architecture-aware self-critique reduce *realized constrained policy regret and harm to others* when other agents make correlated decisions?
 
 Suggested prospective design, to be frozen before any held-out model run:
