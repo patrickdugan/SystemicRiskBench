@@ -70,6 +70,13 @@ def main(argv=None):
     revise.add_argument("--cases", type=int, default=16, help="public development issuer roots")
     revise.add_argument("--timeout", type=float, default=30)
     revise.add_argument("--output", required=True)
+    financial = commands.add_parser("finance-revision", help="synthetic financial evidence revision with policy regret")
+    financial.add_argument("--adapter-argv", required=True, help="JSON string array; no shell expansion")
+    financial.add_argument("--experiment", required=True)
+    financial.add_argument("--mode", choices=("count", "bitmap"), required=True)
+    financial.add_argument("--cases", type=int, default=18)
+    financial.add_argument("--timeout", type=float, default=30)
+    financial.add_argument("--output", required=True)
     bridge = commands.add_parser("bitagent-packet", help="read-only covenant v1 risk projection")
     bridge.add_argument("--input", required=True)
     bridge.add_argument("--output", required=True)
@@ -117,6 +124,11 @@ def main(argv=None):
         elif args.command == "agent-revision":
             from .agent_revision import run_agent_revision
             write(args.output, run_agent_revision(
+                json.loads(args.adapter_argv), read_json(args.experiment),
+                mode=args.mode, cases=args.cases, timeout=args.timeout))
+        elif args.command == "finance-revision":
+            from .finance_revision import run_financial_revision
+            write(args.output, run_financial_revision(
                 json.loads(args.adapter_argv), read_json(args.experiment),
                 mode=args.mode, cases=args.cases, timeout=args.timeout))
         elif args.command == "calibration":
