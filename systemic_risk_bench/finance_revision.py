@@ -7,6 +7,7 @@ An adapter receives no evaluator regime, earlier transcript, or executable autho
 from __future__ import annotations
 
 import math
+from fractions import Fraction
 
 from .agent_revision import (
     MAX_CASES, MODES, fixture, initial_packet, initial_posterior,
@@ -50,7 +51,7 @@ SCENARIOS = {
 def expected_loss(action: str, posterior, family: str) -> float:
     if family not in SCENARIOS or action not in ACTIONS:
         raise ValueError("unsupported synthetic family or action")
-    if len(posterior) != 3 or any(type(p) not in (float, int) or
+    if len(posterior) != 3 or any(type(p) not in (float, int, Fraction) or
                                   not math.isfinite(p) or p < 0 for p in posterior):
         raise ValueError("invalid risk posterior")
     return math.fsum(p * loss for p, loss in
