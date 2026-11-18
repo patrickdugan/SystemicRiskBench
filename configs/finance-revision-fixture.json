@@ -1,0 +1,13 @@
+{
+  "experiment_id": "SRB-REV-02-synthetic-finance-fixture",
+  "architecture_label": "deterministic_oracle_no_model_inference",
+  "evaluation": "price_feed_collateral_counterparty_revision",
+  "split": "public_deterministic_development",
+  "memory_policy": "count_4bit_or_named_bitmap_12bit",
+  "checkpoint_sha256": null,
+  "model_roots": 0,
+  "agent_action_authorized": false,
+  "policy_loss_units": "arbitrary_synthetic_decision_cost",
+  "precommitment": "scenarios fixed in systemic_risk_bench/finance_revision.py",
+  "not_an_empirical_market_claim": true
+}
