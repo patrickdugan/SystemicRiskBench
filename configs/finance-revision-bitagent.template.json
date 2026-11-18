@@ -1,0 +1,18 @@
+{
+  "experiment_id": "SRB-REV-02-bitagent-local-PRE_REGISTER_BEFORE_RUNNING",
+  "architecture_label": "BitAgent Bonsai 8B local llama.cpp",
+  "evaluation": "public_financial_evidence_revision",
+  "split": "public_development",
+  "memory_policy": "count_4bit_or_named_bitmap_12bit",
+  "checkpoint_sha256": "REPLACE_WITH_VERIFIED_LOCAL_LORA_SHA256",
+  "inference_server": "operator_owned_loopback_llama_cpp",
+  "model_roots": 1,
+  "agent_action_authorized": false,
+  "max_output_tokens_per_call": 1024,
+  "temperature": 0,
+  "seed": 0,
+  "physical_memory_enforcement": "unverified",
+  "server_reset_between_stages": false,
+  "preregistered_cases": 48,
+  "status": "template_no_model_calls_run"
+}

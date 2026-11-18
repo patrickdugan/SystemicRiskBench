@@ -105,6 +105,28 @@ python -m systemic_risk_bench agent-revision --adapter-argv '["python","-m","exa
 python -m systemic_risk_bench agent-revision --adapter-argv '["python","-m","examples.agent_revision_fixture_adapter"]' --experiment configs/agent-revision-fixture.json --mode bitmap --cases 16 --output artifacts/revision-bitmap.json
 ~~~
 
+## Financial evidence revision and BitAgent model transport
+
+[SRB-REV-02](docs/finance-revision.md) extends bounded-memory correction tasks to
+synthetic price-feed, collateral and counterparty decisions. The adapter must
+preserve a 4-bit count or 12-bit named bitmap across independent calls, update a
+three-regime forecast and choose a registered hypothetical risk action. The
+evaluator reports matched-information Brier error, policy regret, actual
+synthetic loss and missed escalation checks separately.
+
+```bash
+python -m unittest discover -s tests -p 'test_finance_revision.py' -v
+python -m systemic_risk_bench finance-revision --adapter-argv '["python","-m","examples.finance_revision_fixture_adapter"]' --experiment configs/finance-revision-fixture.json --mode count --cases 18 --output artifacts/finance-count.json
+python -m systemic_risk_bench finance-revision --adapter-argv '["python","-m","examples.finance_revision_fixture_adapter"]' --experiment configs/finance-revision-fixture.json --mode bitmap --cases 18 --output artifacts/finance-bitmap.json
+```
+
+The fixture is a deterministic mathematical oracle. The separate
+[llama.cpp revision adapter](adapters/revision_llamacpp.py) can send those same
+packets to a locally served, artifact-verified BitAgent. CI tests the adapter
+using a fake HTTP server and makes no neural calls. Reported two-process
+continuation does not certify a physically isolated memory budget or a reset
+model server. Financial actions are read-only synthetic choices.
+
 ## Compare reasoning
 
 Publish a vector: numerical family accuracy, human-audited reasoning,

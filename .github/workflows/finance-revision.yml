@@ -1,0 +1,81 @@
+name: SRB-REV-02 financial evidence revisions (source-only)
+
+on:
+  push:
+    paths:
+      - "systemic_risk_bench/finance_revision.py"
+      - "systemic_risk_bench/agent_revision.py"
+      - "systemic_risk_bench/cli.py"
+      - "examples/finance_revision_fixture_adapter.py"
+      - "adapters/revision_llamacpp.py"
+      - "tests/test_finance_revision.py"
+      - "configs/finance-revision-fixture.json"
+      - "configs/finance-revision-bitagent.template.json"
+      - "docs/finance-revision.md"
+      - ".github/workflows/finance-revision.yml"
+  pull_request:
+    paths:
+      - "systemic_risk_bench/finance_revision.py"
+      - "systemic_risk_bench/agent_revision.py"
+      - "systemic_risk_bench/cli.py"
+      - "examples/finance_revision_fixture_adapter.py"
+      - "adapters/revision_llamacpp.py"
+      - "tests/test_finance_revision.py"
+      - "configs/finance-revision-fixture.json"
+      - "configs/finance-revision-bitagent.template.json"
+      - "docs/finance-revision.md"
+      - ".github/workflows/finance-revision.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  source-only:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Registered synthetic financial and local model transport tests
+        run: python -m unittest discover -s tests -p 'test_finance_revision.py' -v
+      - name: Full repository regression suite
+        run: python -m unittest discover -s tests -q
+      - name: Run independent fixture adapter through real subprocess CLI
+        run: |
+          python -m systemic_risk_bench finance-revision --adapter-argv '["python","-m","examples.finance_revision_fixture_adapter"]' --experiment configs/finance-revision-fixture.json --mode count --cases 18 --output artifacts/finance-count.json
+          python -m systemic_risk_bench finance-revision --adapter-argv '["python","-m","examples.finance_revision_fixture_adapter"]' --experiment configs/finance-revision-fixture.json --mode bitmap --cases 18 --output artifacts/finance-bitmap.json
+      - name: Check fixture-only evidence contract and paired action results
+        run: |
+          python - <<'PY'
+          import json
+          p = []
+          for mode, bits in (("count", 4), ("bitmap", 12)):
+              with open("artifacts/finance-" + mode + ".json", encoding="utf-8") as f:
+                  r = json.load(f)
+              assert r["n_scored"] == 18 and r["coverage"] == 1.0
+              assert r["memory_logical_bits"] == bits
+              assert r["model_calls_attempted"] == 36
+              assert all(r["n_cases_by_family"][name] == 6 for name in
+                         ("price_feed", "collateral", "counterparty"))
+              assert r["mean_excess_brier_with_missing_penalty"] < 1e-20
+              assert r["mean_policy_regret_with_missing_penalty"] < 1e-10
+              assert r["action_accuracy_scored"] == 1
+              assert r["model_evaluation_claim"] is False
+              assert r["physical_memory_enforced"] is False
+              assert r["model_server_state_reset_verified"] is False
+              p.append(r)
+          assert [row["case_id"] for row in p[0]["rows"]] == [
+              row["case_id"] for row in p[1]["rows"]]
+          print("PASS: deterministic fixture-only 4-bit/12-bit matched-policy tests")
+          PY
+      - name: Archive source-only fixture receipts
+        uses: actions/upload-artifact@v4
+        with:
+          name: srb-rev-02-source-only-finance-fixture
+          path: |
+            artifacts/finance-count.json
+            artifacts/finance-bitmap.json
+          if-no-files-found: error
