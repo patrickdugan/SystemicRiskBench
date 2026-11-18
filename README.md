@@ -1,5 +1,17 @@
 # Systemic Risk Bench
 
+**Research target:** a frontier-solvable systemic reasoning benchmark and a
+compactification challenge for BitAgent. The hard tier will require agents to
+learn contextual rules, compose reusable skills and execute policies under
+bounded resources. Opus 4.5 and stronger reference systems anchor the intended
+difficulty; INTELLECT-3 is an open-weight calibration candidate.
+
+The [SRB-HARD-01 design](docs/frontier-compactification.md) sets the proposed
+difficulty tiers, calibration gates and learning protocols. Its
+[machine-readable plan](configs/frontier-hard-v1.design.json) records pending
+work explicitly. The hard bank awaits construction and calibration. Existing
+arithmetic tasks and simulator fixtures supply its prerequisite tier.
+
 Version 0.1.0 — a standalone research benchmark for BitAgent and compact
 reasoners on financial strategy, self-critique, architecture critique and
 population externalities. Lean reasoner, RLT, HRM and CGRT are experiment labels;
