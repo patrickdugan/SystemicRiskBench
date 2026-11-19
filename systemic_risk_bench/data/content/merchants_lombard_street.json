@@ -100,14 +100,16 @@
             "Under the specified repeated public recapitalization rule the capital injections are financed by the Treasury. A separate scenario substitutes private shareholders for the public fiscal authority; another scenario refuses recapitalization and imposes contraction or resolution.",
             "Separately, the Bank of England starts with GBP 10 million of its own equity and originates an emergency liquidity loan in the stress episode. At origination, equally sized loan assets and reserve liabilities leave its equity unchanged. If the central bank later realizes a GBP 4 million net credit loss on this loan, its own equity falls.",
             "A Treasury transfer can restore central-bank equity to GBP 10 million. Some central banks can operate with low or negative accounting capital depending on institutions and law, so mandatory restoration is a stated policy assumption here.",
-            "The exercise does not assume that emergency support makes private borrowing cheaper in advance. A reduction of the private funding premium through an anticipated guarantee would require a separate market pricing or moral-hazard mechanism."
+            "The exercise does not assume that emergency support makes private borrowing cheaper in advance. A reduction of the private funding premium through an anticipated guarantee would require a separate market pricing or moral-hazard mechanism.",
+            "ADDITIONAL INVENTED PRICING CONTROL: hold a merchant's GBP 10,000 equity, GBP 40,000 debt and GBP 5,000 operating profit fixed. Compare an 11% private-risk borrowing rate with a 5% rate under an assumed anticipated-guarantee premium. The transition from rescue expectations to the loan price is a stipulated hypothesis rather than an observed fact."
           ],
           "questions": [
             "Calculate cumulative public bank recapitalization over three repeated GBP 30 million losses and the bank-equity trajectory with and without transfers. Explain the formal recurrence and its assumptions.",
             "Keep three accounts separate: the borrower's 5% private bill finance, the commercial bank's GBP 30 million equity transfer or emergency liquidity loan, and the Bank of England's GBP 4 million loan loss and possible GBP 4 million fiscal recapitalization.",
             "Specify the conditional feedback loop from expected rescue to private funding spreads, risk appetite, low equity buffers, credit losses and renewed recapitalization. Identify which arrows are model assumptions requiring observed data.",
             "Construct a non-rescue counterexample, an initially solvent illiquid-bank case and a case where high funding rates or operating losses reverse Bagehot's merchant advantage. Assess fixed aggregate credit versus fixed credit per agent.",
-            "Propose a BitAgent policy that distinguishes halt/raise-capital/reduce-risk from collateralized lender-of-last-resort lending. State what an independent verifier can prove and which empirical conditions remain open."
+            "Propose a BitAgent policy that distinguishes halt/raise-capital/reduce-risk from collateralized lender-of-last-resort lending. State what an independent verifier can prove and which empirical conditions remain open.",
+            "Under the two invented funding rates, calculate the merchant's ROE at 11% and 5%, annual interest saving, and ROE uplift. Compare each with the unlevered merchant's 10% ROE. Identify the ex-ante pricing evidence required to attribute the spread difference to expected official rescue."
           ]
         }
       ],
@@ -128,7 +130,11 @@
           "three_period_public_bank_recap_million_gbp": 90,
           "bank_equity_after_three_periods_no_recap_before_resolution_million_gbp": -40,
           "central_bank_post_credit_loss_equity_million_gbp": 6,
-          "central_bank_recap_million_gbp": 4
+          "central_bank_recap_million_gbp": 4,
+          "unsubsidized_roe": 0.06,
+          "supported_roe": 0.3,
+          "annual_interest_saving_gbp": 2400,
+          "conditional_roe_uplift": 0.24
         },
         "rubric_anchors": [
           "Bagehot's merchant calculations show a positive funding spread's equity-return leverage; conditional credit access permits margin undercutting and entrepreneurial entry.",
@@ -138,7 +144,8 @@
           "Central bank equity loss and Treasury recapitalization of the central bank are separate from fiscal bank recapitalization; no automatic accounting mandate is claimed.",
           "Repeated rescue transfers follow directly from a specified policy and repeated losses, while endogenously recurring crises or moral hazard require causal assumptions beyond accounting.",
           "Reasoning should discuss Bagehot's efficiency gain and distributional impact alongside liquidation, risk pricing and systemic feedback, without assuming every leveraged merchant fails.",
-          "Historical 1873 source numbers and later invented bank examples must be attributed separately. No real-world trading permission is conveyed."
+          "Historical 1873 source numbers and later invented bank examples must be attributed separately. No real-world trading permission is conveyed.",
+          "The 11% to 5% rate contrast is an assumed risk-premium reduction. It creates a leverage-return ranking reversal without proving bailouts cause cheap credit in actual markets."
         ],
         "required_negative_controls": [
           "funding_rate_at_or_above_operating_ROA",
