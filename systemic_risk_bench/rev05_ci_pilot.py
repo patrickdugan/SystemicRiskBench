@@ -283,8 +283,15 @@ def run_pilot(spec: dict, manifest: dict, experiment: dict, adapter_argv: list[s
     seen_initial = len(rows)
     receipts = [receipt for row in rows for receipt in
                 (row["initial_receipt"],row["update_receipt"]) if receipt is not None]
-    real = any((r.get("adapter_telemetry") or {}).get("identity",{}).get(
-        "local_artifacts_verified") is True for r in receipts)
+    real = any(
+        (r.get("adapter_telemetry") or {}).get("identity", {}).get(
+            "local_artifacts_verified") is True and
+        (r.get("adapter_telemetry") or {}).get("isolation", {}).get(
+            "requests_served") in (1, 2) and
+        type((r.get("adapter_telemetry") or {}).get("usage", {}).get(
+            "output_tokens")) is int and
+        (r.get("adapter_telemetry") or {})["usage"]["output_tokens"] > 0
+        for r in receipts)
     gates = {
         "exact_visible_codec": "PASS",
         "genuine_model_inference_observed": "PASS" if real else "FAIL",
@@ -321,72 +328,107 @@ def run_pilot(spec: dict, manifest: dict, experiment: dict, adapter_argv: list[s
 
 
 def next_prompt(report: dict) -> str:
-    """Build an actionable next-experiment prompt from observed PASS/FAIL gates."""
-    groups = report["groups"]
+    """Write PASS/FAIL promotion instructions from the observed receipts."""
     gates = report["gate_results"]
+    groups = report["groups"]
+    rows = report["rows"]
+    timed_out = sum(
+        int(row["initial_receipt"]["status"] == "timeout") +
+        int(row["update_receipt"] is not None and
+            row["update_receipt"]["status"] == "timeout")
+        for row in rows
+    )
+    calls = sum(g["stage_calls_attempted"] for g in groups.values())
+    known = sum(g["inference_receipt_valid_calls"] for g in groups.values())
+    raw_valid = sum(g["raw_model_memory_correct"] for g in groups.values())
+    scored = sum(g["scored"] for g in groups.values())
     lines = [
-        "# SRB-REV-05 follow-up prompt from actual CI observations",
+        "# SRB-REV-05 next-run prompt: promoted observed CI PASS/FAIL",
         "",
-        f"**Experiment:** \`{report['experiment_id']}\`.",
-        f"**Frozen registration SHA-256:** \`{report['registration_sha256']}\`.",
-        f"**Source panel SHA-256:** \`{report['source_manifest_sha256']}\`.",
+        f"Experiment: \`{report['experiment_id']}\`.",
+        f"Frozen registration: \`{report['registration_sha256']}\`.",
+        f"Frozen issuer panel: \`{report['source_manifest_sha256']}\`.",
         "",
-        "## Observed pass/fail gates",
+        "## Observed gate outcomes",
         "",
-        "| Gate | Result |",
+        "| Prespecified gate | Outcome |",
         "| --- | --- |",
     ]
-    lines.extend(f"| {key} | **{value}** |" for key,value in gates.items())
+    lines.extend(f"| {key} | **{status}** |" for key, status in gates.items())
     lines.extend([
         "",
-        "## Real observed coverage and cost",
+        f"**Observed stage calls:** {calls}, of which {timed_out} timed out "
+        f"and {known} supplied validated usage receipts. "
+        f"Correct model-origin memory: {raw_valid} of {len(rows)} "
+        f"initial attempts. Fully scored: {scored} of {len(rows)}.",
         "",
-        "| Mode / treatment | Raw memory correct | Scored | Calls | Output tokens | Missing-penalized full-info regret |",
-        "| --- | ---: | ---: | ---: | ---: | ---: |",
+        "| Mode / treatment | Raw correct | Scored | Timeouts | Observed input/output tokens |",
+        "| --- | ---: | ---: | ---: | ---: |",
     ])
     for name, g in groups.items():
+        members = [x for x in rows if x["mode"]+"/"+x["treatment"] == name]
+        count_timeout = sum(
+            (row["initial_receipt"]["status"] == "timeout") +
+            bool(row["update_receipt"] is not None and
+                 row["update_receipt"]["status"] == "timeout")
+            for row in members)
         lines.append(f"| {name} | {g['raw_model_memory_correct']}/{g['cases']} | "
-                     f"{g['scored']}/{g['cases']} | {g['stage_calls_attempted']} | "
-                     f"{g['observed_output_tokens']} | "
-                     f"{g['full_information_regret_with_missing_penalty']:.6f} |")
+                     f"{g['scored']}/{g['cases']} | {count_timeout} | "
+                     f"{g['observed_input_tokens']}/{g['observed_output_tokens']} |")
     lines.extend(["", "## Next execution prompt", ""])
     if gates["genuine_model_inference_observed"] != "PASS":
-        lines.append("**INFRASTRUCTURE FAIL:** Repair verified model loading, LoRA activation, "
-                     "llama-server startup, or stage receipt transport before drawing "
-                     "conclusions from model behavior. Inspect CI stderr and exact "
-                     "registered artifact digests. Keep all failure counts.")
+        lines.append("**INFRASTRUCTURE FAIL:** Verify the pinned CPU model, LoRA, "
+                     "release hash, server preflight and strict JSON transport. "
+                     "Until a positive-token completion receipt exists, mark all "
+                     "model competence as unknown.")
+    elif timed_out:
+        lines.append(
+            f"**CPU STAGE TIMEOUT FAIL ({timed_out}/{calls}):** "
+            "The registered 150-second stage ceiling censored the main "
+            "model comparison. First implement timeout-safe process-tree "
+            "termination and confirm that every timed-out inference server "
+            "and its port are reaped. Keep completed responses, failed-call "
+            "costs and observed usage in separate categories. "
+            "Then rerun a smaller resource-feasible registered CPU subset "
+            "with a generous declared timeout, or use the pinned local GPU "
+            "for the full paired study. Recompare direct and host-coded "
+            "memory only after both reach update-stage scoring.")
+        if any(row["raw_model_memory_correct"] for row in rows):
+            lines.append(
+                "At least one raw model-generated memory integer was already "
+                "correct; host verification cannot demonstrate a lift on "
+                "a root whose initial memory was correct and whose later "
+                "inference timed out.")
     elif gates["verified_codec_any_completed"] != "PASS":
-        lines.append("**DECISION-PIPELINE FAIL:** The verified host codec permitted "
-                     "correct retained state, but no registered paired-root case "
-                     "completed. Diagnose simplex-normalization, action contract, "
-                     "and stage-two inference separately. Add independent arithmetic "
-                     "and constrained action-choice controls before scaling.")
+        lines.append("**DECISION-PIPELINE FAIL:** Inference finished within "
+                     "the registered stage ceilings, but the assisted arm "
+                     "still scored zero. Inspect posterior normalization "
+                     "and action-choice consistency before changing memory.")
     elif gates["verified_codec_better_than_model_memory"] != "PASS":
-        lines.append("**CODEC-LIFT FAIL:** Valid source-state serialization has not "
-                     "increased completed cases on the registered public pilot. "
-                     "Expand to new independent issuer roots, check per-stage "
-                     "validity and measure conditional action regret under "
-                     "equalized inference budgets.")
+        lines.append("**CODEC-LIFT FAIL:** Under completed paired inference, "
+                     "source-visible integer verification did not improve "
+                     "coverage. Test fresh issuer roots and compute-matched "
+                     "artifacts before drawing broad conclusions.")
     else:
-        lines.append("**CODEC-LIFT PASS (public development pilot):** Verify "
-                     "the improvement on independent issuer roots and a "
-                     "larger, resource-matched comparison. Do not count "
-                     "host-computed integer memory as learned model reasoning.")
-    if groups["bitmap/verified_visible_codec"]["scored"] == 0:
-        lines.append("The 12-bit bitmap assisted arm completed zero cases. "
-                     "Prioritize a constrained exact posterior and JSON grammar "
-                     "test, keeping the raw model action uncorrected.")
+        lines.append("**CODEC-LIFT PASS (development only):** Register a "
+                     "larger fresh-root and compute-matched confirmation "
+                     "with the same checkpoint. Host-computed state is a "
+                     "tool intervention rather than learned BitAgent memory.")
+    if gates["all_stage_server_resets_verified"] != "PASS":
+        lines.append(
+            "**RESET-AUDIT FAIL:** Preserve successful per-stage reaping "
+            "evidence separately from timed-out calls without receipts. "
+            "Investigate any orphaned llama-server processes and certify "
+            "full process-group cleanup before making a server isolation claim.")
     lines.extend([
         "",
-        "Preserve both memory arms, the frozen source law, overlapping pilot-root "
-        "denominators, the precise model and LoRA hashes, and all failed-call "
-        "token and latency receipts. Compare model-only arithmetic and "
-        "host-verified codec paths as distinct treatments. "
-        "Never imply physical memory sandboxing or financial execution.",
-        "",
-        "**Run status:** model observations from public deterministic development roots; "
-        "independent inference attestation and model/root-disjoint confirmation "
-        "remain future gates.",
+        "Maintain the frozen source-law cases and original hashes. "
+        "Measure per-stage first-token and completion latency, retain all "
+        "failed calls in denominators, and preserve the model's raw "
+        "posterior, action and uncorrected memory alongside any host "
+        "intervention. Public deterministic issuer roots do not provide "
+        "independent scientific confirmation. Financial actions are "
+        "synthetic, read-only, and physically unsandboxed at the adapter.",
         "",
     ])
     return "\n".join(lines)
