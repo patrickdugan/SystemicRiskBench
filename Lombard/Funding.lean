@@ -24,6 +24,7 @@ theorem bank_funding_parity
        1+rf := by
   dsimp [bankRate]
   field_simp [ne_of_gt hden]
+  ring
 
 /-- If bank default/LGD risk is held fixed and the guarantee rises, its
     actuarially fair promised bank funding rate weakly decreases. -/
@@ -76,7 +77,6 @@ theorem full_pass_through
     (unbacked backed : ℚ) :
     passedRate unbacked backed 1 = backed := by
   simp [passedRate]
-  ring
 
 /-- Increasing a stipulated pass-through fraction reduces the merchant's
     bank-base funding charge when a lower backed rate exists. -/
