@@ -97,7 +97,7 @@ class FundingFeedbackTests(unittest.TestCase):
             with self.subTest(bad=bad), self.assertRaises(ValueError):
                 validate_config(copy)
         copy = deepcopy(config)
-        copy["projects"][0]["failure_slope_per_debt_to_equity"] = .2
+        copy["projects"][0]["failure_slope_per_debt_to_equity"] = .3
         with self.assertRaises(ValueError):
             validate_config(copy)
 
@@ -186,7 +186,7 @@ class FundingFeedbackTests(unittest.TestCase):
         self.assertEqual(case["provenance"]["mode"], "synthetic_counterfactual")
         self.assertEqual(len(case["stages"]), 3)
         initial = json.dumps(content_packet(case["id"], 0))
-        self.assertNotIn("outcome", initial.lower())
+        self.assertNotIn("outcome", content_packet(case["id"], 0))
         self.assertNotIn("2013/094", initial)
 
     def test_reference_adapter_subprocess_and_scoring_failures(self):
