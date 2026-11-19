@@ -1,0 +1,13 @@
+{
+  "experiment_id": "SRB-REV-03-source-only-public-panels",
+  "evaluation_kind": "deterministic_reference_fixture",
+  "architecture_label": "deterministic_oracle_no_model_inference",
+  "evaluation": "price_feed_collateral_counterparty_revision",
+  "split": "public_deterministic_development",
+  "memory_arms": ["count", "bitmap"],
+  "checkpoint_sha256": null,
+  "model_roots": 0,
+  "agent_action_authorized": false,
+  "policy_loss_units": "arbitrary_synthetic_decision_cost",
+  "not_an_empirical_market_claim": true
+}

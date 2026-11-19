@@ -74,9 +74,15 @@ def main(argv=None):
     financial.add_argument("--adapter-argv", required=True, help="JSON string array; no shell expansion")
     financial.add_argument("--experiment", required=True)
     financial.add_argument("--mode", choices=("count", "bitmap"), required=True)
-    financial.add_argument("--cases", type=int, default=18)
+    financial.add_argument("--cases", type=int, help="legacy prefix size, default 18; omitted for named panels")
+    financial.add_argument("--panel", choices=("legacy", "pilot", "natural", "stress"), default="legacy")
+    financial.add_argument("--manifest", help="frozen panel JSON; required for named panels")
     financial.add_argument("--timeout", type=float, default=30)
     financial.add_argument("--output", required=True)
+    finance_panel = commands.add_parser("finance-panel", help="register or verify the SRB-REV-03 source-only panels")
+    panel_action = finance_panel.add_mutually_exclusive_group(required=True)
+    panel_action.add_argument("--output", help="write complete source-law manifest and selection audit")
+    panel_action.add_argument("--verify", help="verify frozen manifest against source and all 256 search roots")
     content_list = commands.add_parser("content-list", help="list sourced conceptual content cases")
     content_packet = commands.add_parser("content-packet", help="export staged content without evaluator keys")
     content_packet.add_argument("--case", required=True)
@@ -180,7 +186,19 @@ def main(argv=None):
             from .finance_revision import run_financial_revision
             write(args.output, run_financial_revision(
                 json.loads(args.adapter_argv), read_json(args.experiment),
-                mode=args.mode, cases=args.cases, timeout=args.timeout))
+                mode=args.mode, cases=args.cases, timeout=args.timeout,
+                panel=args.panel, manifest=read_json(args.manifest) if args.manifest else None))
+        elif args.command == "finance-panel":
+            from .finance_revision_panels import build_manifest, verify_manifest
+            if args.verify:
+                manifest = read_json(args.verify)
+                verify_manifest(manifest)
+            else:
+                manifest = build_manifest()
+                write(args.output, manifest)
+            print(json.dumps({"manifest_sha256": manifest["manifest_sha256"],
+                              "verified": bool(args.verify), "model_calls": 0,
+                              "panels": {name: panel["summary"] for name, panel in manifest["panels"].items()}}, indent=2))
         elif args.command == "calibration":
             write(args.output, brier(read_json(args.input)["forecasts"]))
         elif args.command == "bitagent-packet":

@@ -1,29 +1,29 @@
-name: SRB-REV-02 financial evidence revisions (source-only)
+name: SRB-REV-03 financial revision panels (source-only)
 
 on:
   push:
     paths:
-      - "systemic_risk_bench/finance_revision.py"
-      - "systemic_risk_bench/agent_revision.py"
+      - "systemic_risk_bench/*revision*.py"
+      - "systemic_risk_bench/runner.py"
       - "systemic_risk_bench/cli.py"
       - "examples/finance_revision_fixture_adapter.py"
       - "adapters/revision_llamacpp.py"
-      - "tests/test_finance_revision.py"
-      - "configs/finance-revision-fixture.json"
-      - "configs/finance-revision-bitagent.template.json"
-      - "docs/finance-revision.md"
+      - "tests/test_*revision*.py"
+      - "configs/finance-revision*.json"
+      - "docs/finance-revision*.md"
+      - ".gitattributes"
       - ".github/workflows/finance-revision.yml"
   pull_request:
     paths:
-      - "systemic_risk_bench/finance_revision.py"
-      - "systemic_risk_bench/agent_revision.py"
+      - "systemic_risk_bench/*revision*.py"
+      - "systemic_risk_bench/runner.py"
       - "systemic_risk_bench/cli.py"
       - "examples/finance_revision_fixture_adapter.py"
       - "adapters/revision_llamacpp.py"
-      - "tests/test_finance_revision.py"
-      - "configs/finance-revision-fixture.json"
-      - "configs/finance-revision-bitagent.template.json"
-      - "docs/finance-revision.md"
+      - "tests/test_*revision*.py"
+      - "configs/finance-revision*.json"
+      - "docs/finance-revision*.md"
+      - ".gitattributes"
       - ".github/workflows/finance-revision.yml"
   workflow_dispatch:
 
@@ -39,43 +39,61 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: Registered synthetic financial and local model transport tests
-        run: python -m unittest discover -s tests -p 'test_finance_revision.py' -v
-      - name: Full repository regression suite
+      - name: Verify frozen source hashes and all 256 selection decisions
+        run: python -m systemic_risk_bench finance-panel --verify configs/finance-revision-panels.json
+      - name: Independent Bayesian, coverage, transport and repository regression tests
         run: python -m unittest discover -s tests -q
-      - name: Run independent fixture adapter through real subprocess CLI
+      - name: Run every registered panel through both real subprocess arms
         run: |
-          python -m systemic_risk_bench finance-revision --adapter-argv '["python","-m","examples.finance_revision_fixture_adapter"]' --experiment configs/finance-revision-fixture.json --mode count --cases 18 --output artifacts/finance-count.json
-          python -m systemic_risk_bench finance-revision --adapter-argv '["python","-m","examples.finance_revision_fixture_adapter"]' --experiment configs/finance-revision-fixture.json --mode bitmap --cases 18 --output artifacts/finance-bitmap.json
-      - name: Check fixture-only evidence contract and paired action results
+          for panel in pilot natural stress; do
+            for mode in count bitmap; do
+              python -m systemic_risk_bench finance-revision --panel "$panel" --manifest configs/finance-revision-panels.json --adapter-argv '["python","-m","examples.finance_revision_fixture_adapter"]' --experiment configs/finance-revision-03-fixture.json --mode "$mode" --output "artifacts/finance-$panel-$mode.json"
+            done
+          done
+      - name: Check serialized panel scores and source-only evidence claims
         run: |
           python - <<'PY'
           import json
-          p = []
-          for mode, bits in (("count", 4), ("bitmap", 12)):
-              with open("artifacts/finance-" + mode + ".json", encoding="utf-8") as f:
-                  r = json.load(f)
-              assert r["n_scored"] == 18 and r["coverage"] == 1.0
-              assert r["memory_logical_bits"] == bits
-              assert r["model_calls_attempted"] == 36
-              assert all(r["n_cases_by_family"][name] == 6 for name in
-                         ("price_feed", "collateral", "counterparty"))
-              assert r["mean_excess_brier_with_missing_penalty"] < 1e-20
-              assert r["mean_policy_regret_with_missing_penalty"] < 1e-10
-              assert r["action_accuracy_scored"] == 1
-              assert r["model_evaluation_claim"] is False
-              assert r["physical_memory_enforced"] is False
-              assert r["model_server_state_reset_verified"] is False
-              p.append(r)
-          assert [row["case_id"] for row in p[0]["rows"]] == [
-              row["case_id"] for row in p[1]["rows"]]
-          print("PASS: deterministic fixture-only 4-bit/12-bit matched-policy tests")
+          from pathlib import Path
+          expected = {"pilot": (6, 1, 0.058780161261036766),
+                      "natural": (48, 4, 0.044322996041277686),
+                      "stress": (18, 18, 0.5700017725664853)}
+          manifest = json.loads(Path("configs/finance-revision-panels.json").read_text())
+          for panel, (n, disagreements, count_regret) in expected.items():
+              reports = []
+              for mode, bits in (("count", 4), ("bitmap", 12)):
+                  r = json.loads(Path(f"artifacts/finance-{panel}-{mode}.json").read_text())
+                  assert r["n_scored"] == n and r["coverage"] == 1.0
+                  assert r["panel_manifest_sha256"] == manifest["manifest_sha256"]
+                  assert r["memory_logical_bits"] == bits
+                  assert r["adapter_calls_attempted"] == 2 * n
+                  assert all(r["n_cases_by_family"][name] == n // 3 for name in
+                             ("price_feed", "collateral", "counterparty"))
+                  assert r["panel_summary"]["n_oracle_action_disagreements"] == disagreements
+                  assert r["mean_excess_brier_with_missing_penalty"] < 1e-20
+                  assert r["mean_policy_regret_with_missing_penalty"] < 1e-10
+                  assert abs(r["mean_policy_regret_vs_full_with_missing_penalty"] -
+                             (count_regret if mode == "count" else 0)) < 1e-10
+                  assert r["action_accuracy_with_missing_penalty"] == 1
+                  assert r["initial_action_forecast_incoherent_count"] == 0
+                  assert r["update_action_forecast_incoherent_count"] == 0
+                  assert r["model_evaluation_claim"] is False
+                  assert r["physical_memory_enforced"] is False
+                  assert r["model_server_state_reset_verified"] is False
+                  assert r["selection_conditioned_bayes_claim"] is False
+                  assert r["inference_costs"]["calls_with_valid_telemetry"] == 0
+                  assert r["inference_costs"]["input_tokens_all_calls"] is None
+                  assert [row["index"] for row in r["rows"]] == manifest["panels"][panel]["indices"]
+                  reports.append(r)
+              assert [row["case_id"] for row in reports[0]["rows"]] == [
+                  row["case_id"] for row in reports[1]["rows"]]
+          print("PASS: frozen panels, paired 4-bit/12-bit references, zero model evidence")
           PY
-      - name: Archive source-only fixture receipts
+      - name: Archive source-only panel receipts and registration
         uses: actions/upload-artifact@v4
         with:
-          name: srb-rev-02-source-only-finance-fixture
+          name: srb-rev-03-source-only-financial-panels
           path: |
-            artifacts/finance-count.json
-            artifacts/finance-bitmap.json
+            artifacts/finance-*.json
+            configs/finance-revision-panels.json
           if-no-files-found: error

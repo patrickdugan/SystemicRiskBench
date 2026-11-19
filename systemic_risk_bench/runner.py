@@ -20,19 +20,42 @@ def execute(adapter_argv, packet, prior_responses, timeout, experiment=None):
         not isinstance(arg, str) or not arg for arg in adapter_argv
     ):
         raise ValueError("adapter argv must be a nonempty JSON array of strings")
+    revision = packet.get("schema") in {"srb.agent_revision.v1", "srb.finance_revision.v1"}
+    instruction = (
+        "Return exactly one JSON object on stdout matching the current packet's "
+        "reply_contract. Include only the phase's declared fields."
+        if revision else
+        "Return one JSON object on stdout. Give a concise decision "
+        "rationale, assumptions, estimates, self/architecture critique and revision "
+        "triggers. Cite supplied evidence IDs and identify missing inputs.")
     request = {"protocol": "srb.adapter.v0.1", "packet": packet,
                "experiment": experiment,
                "prior_responses": prior_responses,
-               "instruction": "Return one JSON object on stdout. Give a concise decision "
-               "rationale, assumptions, estimates, self/architecture critique and revision "
-               "triggers. Cite supplied evidence IDs and identify missing inputs."}
+               "instruction": instruction}
+
+    def attach_telemetry(receipt, stderr):
+        if revision:
+            from .revision_receipts import parse_receipt
+            telemetry, status, error = parse_receipt(
+                stderr, packet, receipt["response"], receipt["status"])
+            receipt.update(adapter_telemetry=telemetry, telemetry_status=status,
+                           telemetry_error=error)
+            if telemetry is not None:
+                receipt["input_tokens"] = telemetry["usage"]["input_tokens"]
+                receipt["output_tokens"] = telemetry["usage"]["output_tokens"]
+        return receipt
     started = time.perf_counter()
     try:
         result = subprocess.run(adapter_argv, input=json.dumps(request), capture_output=True,
                                 text=True, encoding="utf-8", timeout=timeout, shell=False)
-    except subprocess.TimeoutExpired:
-        return {"status": "timeout", "wall_seconds": time.perf_counter()-started,
-                "response": None, "input_tokens": None, "output_tokens": None}
+    except subprocess.TimeoutExpired as error:
+        stderr = error.stderr or ""
+        if isinstance(stderr, bytes):
+            stderr = stderr.decode("utf-8", errors="replace")
+        return attach_telemetry({
+            "status": "timeout", "wall_seconds": time.perf_counter()-started,
+            "response": None, "input_tokens": None, "output_tokens": None,
+            "stderr_tail": stderr[-2000:]}, stderr)
     receipt = {"status": "ok" if result.returncode == 0 else "adapter_error",
                "exit_code": result.returncode, "wall_seconds": time.perf_counter()-started,
                "input_tokens": None, "output_tokens": None,
@@ -46,7 +69,7 @@ def execute(adapter_argv, packet, prior_responses, timeout, experiment=None):
             receipt["response"] = response
         except (ValueError, TypeError) as error:
             receipt.update(status="invalid_json", error=str(error))
-    return receipt
+    return attach_telemetry(receipt, result.stderr)
 
 
 def run(adapter_argv, experiment, *, cases=None, masked=False, timeout=60,

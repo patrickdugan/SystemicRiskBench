@@ -154,6 +154,31 @@ using a fake HTTP server and makes no neural calls. Reported two-process
 continuation does not certify a physically isolated memory budget or a reset
 model server. Financial actions are read-only synthetic choices.
 
+### SRB-REV-03: frozen natural and stress panels
+
+[The registered continuation](docs/finance-revision-stress.md) retains the first
+48 source roots and adds 18 selected stress roots, with six from each financial
+family. The source-law count and bitmap policies disagree on all 18 stress
+roots. A [hashed manifest](configs/finance-revision-panels.json) records every
+acceptance and rejection in the 256-root search.
+
+The scorer records forecast/action coherence at both stages, missing-penalized
+full-information regret and family summaries. Structured local transport
+receipts bind model-reported token costs and latency to the packet and response.
+The [pilot template](configs/finance-revision-bitagent-v3.template.json) fixes
+the paired arms, output budget and deadline before local inference.
+
+```bash
+python -m systemic_risk_bench finance-panel --verify configs/finance-revision-panels.json
+python -m systemic_risk_bench finance-revision --panel stress --manifest configs/finance-revision-panels.json --adapter-argv '["python","-m","examples.finance_revision_fixture_adapter"]' --experiment configs/finance-revision-03-fixture.json --mode count --output artifacts/finance-stress-count.json
+```
+
+The selected panel uses the original source-law comparator. Known panel
+membership changes the sampling law, so these scores support development
+diagnostics. Actual BitAgent inference and a verified server reset remain
+pending. The natural panel supplies seven full-information escalation cases;
+the registered stress panel supplies zero.
+
 ## Compare reasoning
 
 Publish a vector: numerical family accuracy, human-audited reasoning,
