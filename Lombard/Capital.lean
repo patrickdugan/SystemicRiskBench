@@ -63,6 +63,27 @@ theorem leveraged_roe_lt_if_negative_spread
   apply (div_lt_div_iff₀ hequity hassetspos).2
   linarith
 
+/-- A rescue-expectation hypothesis can switch which merchant earns higher
+    accounting ROE only if it actually moves the borrowing rate across the
+    asset-return threshold. The movement itself is an assumption, not proven. -/
+theorem assumed_funding_rate_shift_flips_roe_ranking
+    {assets equity debt gross lowRate highRate : ℚ}
+    (hassets : assets = equity + debt)
+    (hequity : 0 < equity)
+    (hdebt : 0 < debt)
+    (hcheap : lowRate * assets < gross)
+    (hexpensive : gross < highRate * assets) :
+    unleveredROE gross assets < merchantROE gross lowRate debt equity ∧
+      merchantROE gross highRate debt equity < unleveredROE gross assets := by
+  constructor
+  · exact leveraged_roe_gt_if_positive_spread hassets hequity hdebt hcheap
+  · exact leveraged_roe_lt_if_negative_spread hassets hequity hdebt hexpensive
+
+/-- An invented 11% borrower term sheet yields only 6% accounting ROE. -/
+theorem invented_11_percent_funding_roe :
+    merchantROE (5000 : ℚ) (11 / 100) 40000 10000 = 3 / 50 := by
+  norm_num [merchantROE]
+
 /-- Holding volume and all other costs fixed, a bounded price cut preserves
     a stipulated target equity return. -/
 theorem price_cut_preserves_equity_target
@@ -203,6 +224,7 @@ theorem central_bank_loss_requires_four_if_restored :
 
 #print axioms leveraged_roe_gt_if_positive_spread
 #print axioms leveraged_roe_lt_if_negative_spread
+#print axioms assumed_funding_rate_shift_flips_roe_ranking
 #print axioms binding_capital_breached_after_loss
 #print axioms loss_matched_recap_repeats_unchanged
 #print axioms public_transfers_are_number_of_rounds_times_loss
