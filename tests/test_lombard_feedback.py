@@ -182,6 +182,15 @@ class FundingFeedbackTests(unittest.TestCase):
         self.assertEqual(start["expected_treasury_bank_debt_guarantee"], 0)
         self.assertGreater(end["expected_treasury_bank_debt_guarantee"], 0)
         self.assertFalse(scaled["empirical_identification_claim"])
+        # Fixed-project, fixed-debt quote falls with stronger guaranteed funding.
+        project = next(p for p in cfg(SCALE)["projects"] if p["name"] == "prudent")
+        fixed_rates = [quote(cfg(SCALE), project, 20000, g)["merchant_loan_rate"]
+                       for g in cfg(SCALE)["guarantee_grid"]]
+        self.assertEqual(fixed_rates, sorted(fixed_rates, reverse=True))
+        # Chosen loan rate may rise when support induces a debt-ladder jump.
+        at_quarter = scaled["rows"][1]["baseline"]
+        self.assertGreater(at_quarter["merchant_loan_rate"], start["merchant_loan_rate"])
+        self.assertGreater(at_quarter["borrowed"], start["borrowed"])
 
     def test_source_only_packets_and_content_case_leakage(self):
         c = cfg()
