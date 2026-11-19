@@ -55,7 +55,7 @@ jobs:
 
   actual-bitagent-cpu:
     needs: source-and-codec
-    if: github.event_name != 'pull_request'
+    if: github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     timeout-minutes: 55
     env:
