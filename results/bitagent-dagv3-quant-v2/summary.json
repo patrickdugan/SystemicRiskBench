@@ -1,0 +1,135 @@
+{
+  "completed_calls": 15,
+  "expected_calls": 80,
+  "successful_calls": 10,
+  "failed_calls": 5,
+  "numeric": {
+    "schema_version": "srb.numeric_report.v0.1",
+    "checks": [
+      {
+        "id": "q-cva-term",
+        "field": "cva",
+        "expected": 23400.0,
+        "actual": 1000000.0,
+        "passed": false,
+        "status": "wrong"
+      },
+      {
+        "id": "q-wrong-way",
+        "field": "joint_loss",
+        "expected": 12540.0,
+        "actual": 100000,
+        "passed": false,
+        "status": "wrong"
+      },
+      {
+        "id": "q-wrong-way",
+        "field": "independent_loss",
+        "expected": 3306.0000000000005,
+        "actual": 100000,
+        "passed": false,
+        "status": "wrong"
+      },
+      {
+        "id": "q-settlement",
+        "field": "non_pvp_principal_el",
+        "expected": 12000.0,
+        "actual": 9999996,
+        "passed": false,
+        "status": "wrong"
+      },
+      {
+        "id": "q-settlement",
+        "field": "pvp_principal_el",
+        "expected": 0.0,
+        "actual": 9999994,
+        "passed": false,
+        "status": "wrong"
+      },
+      {
+        "id": "q-settlement",
+        "field": "liquidity_need",
+        "expected": 10000000,
+        "actual": 0,
+        "passed": false,
+        "status": "wrong"
+      },
+      {
+        "id": "q-tail",
+        "field": "var",
+        "expected": 20.0,
+        "actual": 20,
+        "passed": true,
+        "status": "correct"
+      },
+      {
+        "id": "q-tail",
+        "field": "expected_shortfall",
+        "expected": 51.99999999999997,
+        "actual": 25.5,
+        "passed": false,
+        "status": "wrong"
+      },
+      {
+        "id": "q-netting",
+        "field": "same_set_exposure",
+        "expected": 20.0,
+        "actual": 20,
+        "passed": true,
+        "status": "correct"
+      },
+      {
+        "id": "q-netting",
+        "field": "separate_set_exposure",
+        "expected": 100.0,
+        "actual": 0,
+        "passed": false,
+        "status": "wrong"
+      },
+      {
+        "id": "q-capacity",
+        "field": "single_sell",
+        "expected": 300.0,
+        "actual": 3000,
+        "passed": false,
+        "status": "wrong"
+      },
+      {
+        "id": "q-capacity",
+        "field": "million_sell",
+        "expected": 300000000.0,
+        "actual": 300000000,
+        "passed": true,
+        "status": "correct"
+      },
+      {
+        "id": "q-capacity",
+        "field": "million_flow_depth",
+        "expected": 3.0,
+        "actual": 1000000000000000,
+        "passed": false,
+        "status": "wrong"
+      }
+    ],
+    "numeric_micro_accuracy": 0.23076923076923078,
+    "numeric_family_macro_accuracy": 0.25,
+    "family_accuracy": {
+      "credit": 0.16666666666666666,
+      "crowding": 0.3333333333333333,
+      "settlement": 0.0,
+      "tail": 0.5
+    },
+    "coverage": 1.0,
+    "reasoning_score": null,
+    "reasoning_status": "requires_independent_human_audit"
+  },
+  "reasoning_score": null,
+  "reasoning_status": "requires_independent_audit",
+  "token_usage": {
+    "input_tokens": 4799,
+    "output_tokens": 3426,
+    "total_tokens": 8225,
+    "reasoning_tokens": null
+  },
+  "median_wall_seconds": 11.791384600102901
+}
