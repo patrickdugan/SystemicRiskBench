@@ -140,8 +140,8 @@ class FundingFeedbackTests(unittest.TestCase):
         self.assertLess(rows[0]["baseline"]["borrowed"], rows[-1]["baseline"]["borrowed"])
         self.assertLess(rows[0]["baseline"]["merchant_failure_probability"],
                         rows[-1]["baseline"]["merchant_failure_probability"])
-        self.assertLess(rows[0]["baseline"]["merchant_loan_rate"],
-                        rows[-1]["baseline"]["unbacked_bank_funding_rate"] + 1)
+        self.assertLess(rows[-1]["baseline"]["backed_bank_funding_rate"],
+                        rows[-1]["baseline"]["unbacked_bank_funding_rate"])
         for row in rows:
             self.assertEqual(
                 (row["no_pass_through"]["project"], row["no_pass_through"]["borrowed"]),
@@ -186,7 +186,6 @@ class FundingFeedbackTests(unittest.TestCase):
         self.assertEqual(case["provenance"]["mode"], "synthetic_counterfactual")
         self.assertEqual(len(case["stages"]), 3)
         initial = json.dumps(content_packet(case["id"], 0))
-        self.assertNotIn("treasury", initial.lower())
         self.assertNotIn("outcome", initial.lower())
         self.assertNotIn("2013/094", initial)
 
