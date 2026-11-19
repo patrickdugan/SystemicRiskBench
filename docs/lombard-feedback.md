@@ -34,7 +34,13 @@ Let `E` be merchant equity, `D` merchant loan principal, `g` anticipated
 coverage of a bank **funding-creditor** claim shortfall, and `alpha` the fraction
 of the bank funding saving passed to its merchant borrowers. The benchmark
 uses one-period gross promised rates and recovery fractions. All its
-probabilities are expressly stipulated risk-neutral underwriting inputs.
+probabilities are expressly stipulated underwriting inputs. For tractability,
+the experiment assumes **pricing-measure default probabilities equal physical
+default probabilities**, so the same bank PD appears in competitive creditor
+quotes and expected fiscal cash transfers, and the same merchant PD enters
+underwriting and the entrepreneur's expectation. A measured bank risk premium
+or state-price adjustment would break this equality. No empirical probability
+measure is estimated here.
 
 ```text
 Bank p_B(j,D) = p_B0 + sensitivity * p_M(j,D) * (D/E)
