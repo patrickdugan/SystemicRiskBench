@@ -88,6 +88,18 @@ recovery, 80% pass-through of the funding saving, and a 10% bank equity funding
 fraction. Merchant project risks, terminal values, and margins are committed
 with the config. Guarantee coverage runs `0, 0.25, 0.5, 0.75, 1`.
 
+A third [roughly 60-basis-point illustrative scale](../configs/lombard-feedback-60bp-scale.json)
+sets bank PD to 0.9% and freezes its leverage feedback at zero. With 35%
+bank-creditor loss-given-default and the same 2.5% risk-free rate, fully
+protected funding is about 60 basis points cheaper than the unbacked rate.
+The magnitude is chosen to resemble the order of scale of the
+[IMF's 2012 historical structural-support estimate](https://www.elibrary.imf.org/view/journals/001/2012/128/article-A001-en.xml)
+of approximately 60 basis points near end-2007. The benchmark does not
+use the IMF's bank sample, estimation methodology or actual loan contract
+observations; 0.9% is solely a fabricated risk-neutral probability chosen to
+create a similar price gap. This scenario probes whether the large-stress
+result persists with a smaller price advantage.
+
 The [risk-mix ambiguity control](../configs/lombard-feedback-charter-control.json)
 changes only the prudent project's success return. Its purpose is to
 test whether risk-taking necessarily rises with government support.
