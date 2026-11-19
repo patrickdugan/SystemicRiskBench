@@ -2,7 +2,7 @@
 
 **Source-based content suite, registered 19 November 2026.**
 
-A standalone primary-source reasoning case, three cumulative stages, thirteen numerical answer fields and a Lean 4 mathematical audit. The nineteenth-century merchant example is taken from Walter Bagehot's *Lombard Street: A Description of the Money Market* (1873), Chapter I. Every bank loss, capital requirement, intervention and recurring crisis scenario is invented for this training/evaluation content.
+A standalone primary-source reasoning case, three cumulative stages, seventeen numerical answer fields and a Lean 4 mathematical audit. The nineteenth-century merchant example is taken from Walter Bagehot's *Lombard Street: A Description of the Money Market* (1873), Chapter I. Every bank loss, capital requirement, intervention and recurring crisis scenario is invented for this training/evaluation content.
 
 ## Reading and attribution
 
@@ -80,6 +80,8 @@ anticipated safety net
 
 A matched control with no credit loss requires zero equity recap. Another control funds a solvent but illiquid bank through a secured loan, with its equity unchanged. Private recapitalization substitutes new investor equity for fiscal cost. These controls distinguish the accounting mechanism from a universal rescue narrative.
 
+An additional **invented risk-premium contrast** changes only the loan price: at an 11% rate the same £40,000 debt costs £4,400 annually, producing 6% borrower ROE; at 5% the debt costs £2,000, producing 30% ROE. The annual debt-service saving is £2,400, or 24 percentage points of ROE on £10,000 equity. Relative to a cash merchant's 10%, the ranking reverses. This is a controlled sensitivity exercise. Any causal effect of anticipated rescue on an actual interest spread requires independent evidence of lender pricing, default risk, collateral and guaranteed claims.
+
 The leveraged-ROE expression and competition argument are also discussed alongside the risks of leverage in [RBA, Returns on Equity, Cost of Equity and the Implications for Banks](https://www.rba.gov.au/publications/bulletin/2017/mar/6.html). Higher accounting ROE is not automatically higher risk-adjusted shareholder value.
 
 ## Lean 4 proof boundary
@@ -108,7 +110,7 @@ python -m systemic_risk_bench content-packet --case content_bagehot_lombard_merc
 python -m systemic_risk_bench content-quant --output artifacts/lombard-questions.json
 ```
 
-For an agent response adapter, use `content-run` with a registered experiment and `--cases content_bagehot_lombard_merchants`; the runner sends cumulative staged narrative evidence and previous replies and records subprocess results. It **does not** enforce the 4/12-bit memory contract of SRB-REV-02. Numeric responses may be separately scored with `content-score --responses <file> --output <file>`. There are three registered numerical tasks and 13 answer fields; they are intentionally separate from the main benchmark's 6-task, 13-field frozen baseline.
+For an agent response adapter, use `content-run` with a registered experiment and `--cases content_bagehot_lombard_merchants`; the runner sends cumulative staged narrative evidence and previous replies and records subprocess results. It **does not** enforce the 4/12-bit memory contract of SRB-REV-02. Numeric responses may be separately scored with `content-score --responses <file> --output <file>`. There are four registered numerical tasks and 17 answer fields; they are intentionally separate from the main benchmark's 6-task, 13-field frozen baseline.
 
 ## Evaluation questions for BitAgent and compact reasoners
 
