@@ -210,6 +210,33 @@ def best_choice(config: dict, guarantee: float, *, pass_through=None, feedback=N
             "candidate_plans_rejected": rejected}
 
 
+def population_controls(choice: dict, counts=(1, 1000, 1_000_000)) -> list[dict]:
+    """Freeze the chosen per-merchant risk quote across aggregation choices.
+
+    Holding TOTAL credit constant must leave total risk-priced guarantee cost
+    unchanged. Fixed credit per agent scales aggregate exposure instead.
+    Neither rule simulates correlated runs, market depth, or price impact.
+    """
+    if not isinstance(choice, dict):
+        raise ValueError("choice must be an oracle quote")
+    unit_debt = choice["borrowed"]
+    unit_cost = choice["expected_treasury_bank_debt_guarantee"]
+    result = []
+    for n in counts:
+        if type(n) is not int or n < 1:
+            raise ValueError("cohort count must be a positive integer")
+        result.append({
+            "agents": n,
+            "fixed_total_debt": unit_debt,
+            "fixed_total_treasury_expected": unit_cost,
+            "fixed_per_agent_debt_total": n * unit_debt,
+            "fixed_per_agent_treasury_expected": n * unit_cost,
+            "bank_pd_held_constant": True,
+            "no_market_depth_or_agent_interactions": True,
+        })
+    return result
+
+
 def analysis(config: dict) -> dict:
     validate_config(config)
     rows = []
@@ -227,6 +254,7 @@ def analysis(config: dict) -> dict:
         rows.append({
             "guarantee": g,
             "baseline": full,
+            "population_controls": population_controls(full),
             "no_pass_through": no_pass,
             "no_bank_default_feedback": no_bank_pd,
             "zero_bank_default_probability": no_default,
