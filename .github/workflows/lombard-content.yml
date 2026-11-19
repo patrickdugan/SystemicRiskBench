@@ -68,7 +68,7 @@ jobs:
           b=json.load(open('/tmp/lombard-stage2.json'))
           q=json.load(open('/tmp/lombard-tasks.json'))
           assert len(a['visible_stages']) == 1 and len(b['visible_stages']) == 3
-          assert len(q['tasks']) == 3 and q['gold_answers_present'] is False
+          assert len(q['tasks']) == 4 and q['gold_answers_present'] is False
           assert 'outcome' not in a and 'sources' not in a
           print('PASS: historical source and evaluator-only data separated')
           PY
