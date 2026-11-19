@@ -230,6 +230,18 @@ class FundingFeedbackTests(unittest.TestCase):
             score_responses(c, [{"id": "unknown", "response": None}])
         with self.assertRaises(ValueError):
             validate_response({"project": "prudent"})
+        for field, value in (("merchant_failure_probability", 2),
+                             ("bank_default_probability", -1),
+                             ("expected_treasury_bank_debt_guarantee", -100)):
+            candidate = dict(oracle_reply(public_cases(c)[0]), **{field: value})
+            with self.subTest(field=field), self.assertRaises(ValueError):
+                validate_response(candidate)
+        failed = run_adapter(
+            c, [sys.executable, "-c", "print('{}')"],
+            {"experiment_id": "invalid-adapter"}, timeout=10)
+        self.assertEqual(failed["subprocess_calls_attempted"], 5)
+        self.assertEqual(failed["score"]["coverage"], 0)
+        self.assertEqual(failed["score"]["field_accuracy_including_missing"], 0)
 
     def test_source_only_report_deterministic(self):
         c = cfg()
