@@ -60,3 +60,9 @@ Sources support curator reconstructions at the scope recorded in each JSON card.
   Source and formal protocol: [Merchants of Lombard Street](lombard-street.md).
   This case is stored in `systemic_risk_bench/data/content/` and is excluded
   from the frozen historical crisis case and numerical baseline counts.
+
+- `content_bagehot_guarantee_feedback` — a modern source-motivated staged
+  extension of Bagehot's merchant argument to contingent guarantees of bank
+  funding creditors, bank-to-merchant interest pass-through, portfolio-risk
+  feedback and expected fiscal exposures. Separate from all historical
+  source-grounded crisis episodes. See [SRB-LOMBARD-02](lombard-feedback.md).
