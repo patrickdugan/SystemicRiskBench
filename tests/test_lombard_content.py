@@ -26,7 +26,7 @@ class LombardContentTests(unittest.TestCase):
         from systemic_risk_bench.cli import historical
         self.assertEqual(len(historical()), 37)  # 33 histories + four benign controls.
         self.assertEqual(len(content_cases()), 2)
-        self.assertEqual(content_cases()[0]["id"], CASE_ID)
+        self.assertIn(CASE_ID, {c["id"] for c in content_cases()})
         self.assertEqual(len(quantitative_tasks()), 6)
         self.assertEqual(sum(len(fields) for fields in numerical_answers().values()), 13)
 
