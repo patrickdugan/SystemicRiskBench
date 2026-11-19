@@ -1,0 +1,51 @@
+name: SRB published artifact URI and scrub audit
+
+on:
+  push:
+    paths:
+      - "results/**"
+      - "configs/finance-revision-panels.json"
+      - "configs/srb-rev-0*.json"
+      - "docs/finance-revision-*.md"
+      - "scripts/audit_artifact_uris.py"
+      - "tests/test_artifact_uris.py"
+      - ".github/workflows/artifact-uris.yml"
+  pull_request:
+    paths:
+      - "results/**"
+      - "configs/finance-revision-panels.json"
+      - "configs/srb-rev-0*.json"
+      - "docs/finance-revision-*.md"
+      - "scripts/audit_artifact_uris.py"
+      - "tests/test_artifact_uris.py"
+      - ".github/workflows/artifact-uris.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  published-dataset-integrity:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Verify committed report and dataset bytes, SHA-256, and immutable URLs
+        run: python scripts/audit_artifact_uris.py
+      - name: Mutated dataset, URL, and local-path leak regression
+        run: python -m unittest discover -s tests -p 'test_artifact_uris.py' -v
+      - name: Confirm artifact count and bounded Git tier
+        run: |
+          python - <<'PY'
+          from scripts.audit_artifact_uris import audit
+          result=audit()
+          assert result["status"] == "passed"
+          assert result["n_verified"] == 28
+          assert result["bytes_verified"] == 1382582
+          assert result["n_pinned_external_weights"] == 2
+          assert result["issues"] == []
+          print("PASS: 28 artifact hash/size pairs and 2 pinned external weights")
+          PY
