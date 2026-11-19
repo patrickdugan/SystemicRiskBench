@@ -195,7 +195,14 @@ class RevisionLlamaCppAdapter(LlamaCppAdapter):
                 {"role": "user", "content": json.dumps(
                     {"packet": packet}, sort_keys=True, allow_nan=False)},
             ],
-            "response_format": {"type": "json_schema", "schema": schema},
+            "response_format": {
+                "type": "json_schema",
+                "json_schema": {
+                    "name": "srb_revision_response",
+                    "strict": True,
+                    "schema": schema,
+                },
+            },
             "temperature": self.config.get("temperature", 0),
             "seed": self.config.get("seed", 0),
             "top_p": 1,

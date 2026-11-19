@@ -187,8 +187,9 @@ class LocalRevisionModelTransportTests(unittest.TestCase):
         self.assertEqual(supplied["packet"]["old"], "not_replayed")
         self.assertNotIn("initial_forecast", supplied["packet"])
         self.assertEqual(request["response_format"]["type"], "json_schema")
-        self.assertEqual(set(request["response_format"]["schema"]["required"]),
-                         {"posterior", "action"})
+        self.assertEqual(
+            set(request["response_format"]["json_schema"]["schema"]["required"]),
+            {"posterior", "action"})
         self.assertFalse(request["cache_prompt"])
         self.assertEqual(request["lora"], [{"id": 0, "scale": 1.0}])
         self.assertNotIn("tools", request)

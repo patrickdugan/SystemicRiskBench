@@ -1,5 +1,5 @@
 {
-  "experiment_id": "SRB-REV-03-bitagent-ephemeral-natural-v1",
+  "experiment_id": "SRB-REV-03-bitagent-ephemeral-natural-v2",
   "evaluation_kind": "model",
   "architecture_label": "BitAgent Bonsai 8B stage-isolated llama.cpp",
   "status": "registered",
