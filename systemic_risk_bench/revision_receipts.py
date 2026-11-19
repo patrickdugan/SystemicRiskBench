@@ -134,12 +134,35 @@ def parse_receipt(stderr, packet, response, host_status):
         _number(identity["adapter_scale"], "adapter_scale")
         if type(identity["local_artifacts_verified"]) is not bool:
             raise ValueError("local artifact verification must be a boolean")
-        if identity["verification"] != "local_files_plus_server_alias_and_adapter_metadata":
-            raise ValueError("unsupported model identity verification claim")
-        _object(value["isolation"], {"server_reset_verified", "physical_memory_enforced"},
-                "isolation")
-        if any(flag is not False for flag in value["isolation"].values()):
-            raise ValueError("this transport cannot attest physical memory isolation")
+        isolation = value["isolation"]
+        if type(isolation) is not dict or type(isolation.get("server_reset_verified")) is not bool:
+            raise ValueError("isolation server_reset_verified must be a boolean")
+        if isolation.get("physical_memory_enforced") is not False:
+            raise ValueError("unsandboxed host adapter cannot attest physical_memory_enforced")
+        if isolation["server_reset_verified"] is False:
+            if identity["verification"] != "local_files_plus_server_alias_and_adapter_metadata":
+                raise ValueError("unsupported model identity verification claim")
+            _object(isolation, {"server_reset_verified", "physical_memory_enforced"},
+                    "isolation")
+        else:
+            if identity["local_artifacts_verified"] is not True:
+                raise ValueError("server_reset_verified requires verified local artifacts")
+            if identity["verification"] != "ephemeral_per_stage_server_plus_local_file_and_adapter_hashes":
+                raise ValueError("server_reset_verified requires ephemeral per-stage verification")
+            _object(isolation, {
+                "server_reset_verified", "physical_memory_enforced",
+                "server_boot_sha256", "requests_served", "process_reaped",
+                "port_closed_verified", "startup_seconds", "shutdown_seconds",
+            }, "isolation")
+            _digest(isolation["server_boot_sha256"], "server_boot_sha256")
+            if type(isolation["requests_served"]) is not int or isolation["requests_served"] not in (0, 1):
+                raise ValueError("ephemeral stage server may serve at most one request")
+            if value["status"] == "ok" and isolation["requests_served"] != 1:
+                raise ValueError("successful ephemeral receipt must record exactly one request")
+            if isolation["process_reaped"] is not True or isolation["port_closed_verified"] is not True:
+                raise ValueError("server_reset_verified requires reaped process and closed port")
+            _number(isolation["startup_seconds"], "startup_seconds")
+            _number(isolation["shutdown_seconds"], "shutdown_seconds")
         return value, "valid", None
     except (ValueError, TypeError, KeyError, OverflowError) as error:
         return None, "invalid", str(error)
@@ -197,5 +220,20 @@ def validate_registered_experiment(config, experiment, packet, *, require_model=
         raise ValueError("model experiment must register the paired memory arms")
     if packet.get("memory_codec") not in experiment["memory_arms"]:
         raise ValueError("packet memory codec is outside the registered experiment")
-    if experiment.get("inference_server") != "operator_owned_loopback_llama_cpp":
+    server_kind = experiment.get("inference_server")
+    lifecycle = config.get("server_lifecycle", "persistent")
+    if server_kind == "operator_owned_loopback_llama_cpp":
+        if experiment.get("server_reset_between_stages", False) is not False:
+            raise ValueError("persistent loopback server cannot claim server_reset_between_stages")
+        if lifecycle != "persistent":
+            raise ValueError("runtime server_lifecycle differs from registered inference_server")
+    elif server_kind == "ephemeral_per_stage_llama_cpp":
+        if experiment.get("server_reset_between_stages") is not True:
+            raise ValueError("ephemeral per-stage server must register server_reset_between_stages=true")
+        if lifecycle != "ephemeral_per_stage":
+            raise ValueError("runtime server_lifecycle must be ephemeral_per_stage")
+        _digest(experiment.get("server_sha256"), "server_sha256")
+        if config.get("server_sha256") != experiment["server_sha256"]:
+            raise ValueError("registered server_sha256 differs from the runtime config")
+    else:
         raise ValueError("model experiment must register the local inference server")

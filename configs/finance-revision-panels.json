@@ -4,7 +4,7 @@
   "source_domain": "srb-agent-revision/public-development-v1",
   "source_sha256": {
     "systemic_risk_bench/agent_revision.py": "41fa99637336ae1291ceabd7c569d3887245ec26e19187bf7eae8c9b294a879e",
-    "systemic_risk_bench/finance_revision.py": "4684913f877b4de0bc64509cbf49e97d9dafde9492017169f84e043baa891469",
+    "systemic_risk_bench/finance_revision.py": "50013908975e1d39f7c3a6ea2c0d9079c2cf0ddf706bd4fe2667d1f5cc9d9f87",
     "systemic_risk_bench/finance_revision_panels.py": "48a66832cf861c7998280839ee9d2bf594510f601982dc7729176631977cf3d9"
   },
   "selection": {
@@ -3555,5 +3555,5 @@
       "decision": "predicate_false"
     }
   ],
-  "manifest_sha256": "087b4be25433bf9e29b58f6d2286236ee1669db19d34a2e958d14be25a039ea4"
+  "manifest_sha256": "81232c2f28c1e57b0fd8c1d8cc478ec3983c73f08be2e51076acb8e5995a0f0a"
 }

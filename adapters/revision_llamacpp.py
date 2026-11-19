@@ -10,6 +10,7 @@ import re
 import sys
 import time
 
+from .ephemeral_llamacpp import EphemeralLlamaCppSession
 from .llamacpp import LlamaCppAdapter, check_gpu_window
 from systemic_risk_bench.agent_revision import SCHEMA as BASE_SCHEMA, parse_forecast
 from systemic_risk_bench.finance_revision import (
@@ -165,8 +166,17 @@ def _response_schema(packet):
 
 class RevisionLlamaCppAdapter(LlamaCppAdapter):
     def __init__(self, config, **kwargs):
-        super().__init__(config, **kwargs)
+        self.server_lifecycle = config.get("server_lifecycle", "persistent")
+        if self.server_lifecycle not in ("persistent", "ephemeral_per_stage"):
+            raise ValueError("unsupported server_lifecycle")
+        self.session_factory = kwargs.pop("session_factory", EphemeralLlamaCppSession)
         self.local_artifacts_verified = kwargs.get("verify", True)
+        if self.server_lifecycle == "ephemeral_per_stage":
+            init_config = dict(config)
+            init_config.setdefault("endpoint", "http://127.0.0.1:8873/v1")
+            super().__init__(init_config, **{**kwargs, "verify": False})
+        else:
+            super().__init__(config, **kwargs)
 
     def infer_revision(self, packet, prior, experiment=None):
         if prior != []:
@@ -175,7 +185,7 @@ class RevisionLlamaCppAdapter(LlamaCppAdapter):
         validate_registered_experiment(self.config, experiment, packet,
                                        require_model=self.local_artifacts_verified)
         check_gpu_window(self.config, self.clock() if self.clock else None)
-        if self.runtime_identity is None:
+        if self.server_lifecycle == "persistent" and self.runtime_identity is None:
             self.preflight()
         schema = _response_schema(packet)
         payload = {
@@ -195,11 +205,26 @@ class RevisionLlamaCppAdapter(LlamaCppAdapter):
                       "scale": self.config["adapter"]["scale"]}],
         }
         started = time.perf_counter()
+        inference_elapsed = None
         status, error_code = "transport_error", "http_or_decode"
         usage = {"input_tokens": None, "output_tokens": None, "total_tokens": None}
         resolved_model, response = None, None
+        session = None
+        requests_served = 0
         try:
+            if self.server_lifecycle == "ephemeral_per_stage":
+                session = self.session_factory(
+                    self.config, verify=self.local_artifacts_verified,
+                    clock=self.clock, opener=self.opener,
+                )
+                session.__enter__()
+                self.origin = f"http://127.0.0.1:{session.port}"
+                self.runtime_identity = None
+                self.preflight()
+            infer_started = time.perf_counter()
+            requests_served = 1
             result = self.request("/v1/chat/completions", payload)
+            inference_elapsed = time.perf_counter() - infer_started
             status, error_code = "invalid_response", "response_contract"
             if type(result) is not dict:
                 raise ValueError("completion response must be an object")
@@ -254,17 +279,44 @@ class RevisionLlamaCppAdapter(LlamaCppAdapter):
                     type(candidate["memory"]) is not int or
                     not 0 <= candidate["memory"] <= packet["memory_max"]):
                 raise ValueError("memory must fit the declared integer codec")
+            if session is not None:
+                session.close()
+                if not (session.process_reaped and session.port_closed_verified):
+                    status, error_code = "transport_error", "http_or_decode"
+                    raise RuntimeError("ephemeral server teardown verification failed")
             response = candidate
             status, error_code = "ok", None
             return response
         finally:
+            if session is not None and not session.process_reaped:
+                session.close()
+            elapsed = (inference_elapsed if inference_elapsed is not None
+                       else time.perf_counter() - started)
+            if (session is not None and self.local_artifacts_verified and
+                    session.server_boot_sha256 and session.process_reaped and
+                    session.port_closed_verified and session.startup_seconds is not None and
+                    session.shutdown_seconds is not None and requests_served in (0, 1)):
+                verification = "ephemeral_per_stage_server_plus_local_file_and_adapter_hashes"
+                isolation = {
+                    "server_reset_verified": True,
+                    "physical_memory_enforced": False,
+                    "server_boot_sha256": session.server_boot_sha256,
+                    "requests_served": requests_served,
+                    "process_reaped": True,
+                    "port_closed_verified": True,
+                    "startup_seconds": session.startup_seconds,
+                    "shutdown_seconds": session.shutdown_seconds,
+                }
+            else:
+                verification = "local_files_plus_server_alias_and_adapter_metadata"
+                isolation = {"server_reset_verified": False, "physical_memory_enforced": False}
             # This fixed telemetry schema contains no packet contents or local
             # paths and is never carried forward to the update model call.
             receipt = {
                 "schema": RECEIPT_SCHEMA, "packet_sha256": canonical_sha(packet),
                 "response_sha256": canonical_sha(response) if status == "ok" else None,
                 "phase": packet["phase"], "status": status,
-                "elapsed_seconds": time.perf_counter() - started,
+                "elapsed_seconds": elapsed,
                 "requested_model": self.config["model_alias"],
                 "resolved_model": resolved_model, "usage": usage,
                 "sampling": {key: payload[key] for key in ("temperature", "seed", "max_tokens")},
@@ -274,9 +326,9 @@ class RevisionLlamaCppAdapter(LlamaCppAdapter):
                     "adapter_id": self.config["adapter"]["id"],
                     "adapter_scale": self.config["adapter"]["scale"],
                     "local_artifacts_verified": self.local_artifacts_verified,
-                    "verification": "local_files_plus_server_alias_and_adapter_metadata",
+                    "verification": verification,
                 },
-                "isolation": {"server_reset_verified": False, "physical_memory_enforced": False},
+                "isolation": isolation,
                 "error_code": error_code,
             }
             print(PREFIX + json.dumps(receipt, sort_keys=True, allow_nan=False),

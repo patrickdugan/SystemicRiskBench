@@ -191,10 +191,31 @@ def _registered_model_budget(experiment, panel, manifest, mode, cases):
     return wall
 
 
+def _server_reset_verified(attempted: list[dict]) -> bool:
+    if not attempted:
+        return False
+    boot_ids = []
+    for receipt in attempted:
+        if receipt.get("telemetry_status") != "valid" or not receipt.get("adapter_telemetry"):
+            return False
+        isolation = receipt["adapter_telemetry"].get("isolation") or {}
+        if isolation.get("server_reset_verified") is not True:
+            return False
+        if isolation.get("process_reaped") is not True or isolation.get("port_closed_verified") is not True:
+            return False
+        boot_id = isolation.get("server_boot_sha256")
+        if type(boot_id) is not str or not boot_id:
+            return False
+        boot_ids.append(boot_id)
+    return len(set(boot_ids)) == len(attempted)
+
+
 def _cost_summary(receipts: list[dict]) -> dict:
     attempted = [receipt for receipt in receipts if receipt["status"] != "budget_exhausted"]
     valid = [receipt["adapter_telemetry"] for receipt in attempted
              if receipt.get("telemetry_status") == "valid" and receipt.get("adapter_telemetry")]
+    reset_entries = [entry for entry in valid if entry["isolation"].get("server_reset_verified") is True]
+    boot_ids = [entry["isolation"]["server_boot_sha256"] for entry in reset_entries]
     inputs = [entry["usage"]["input_tokens"] for entry in valid
               if entry["usage"]["input_tokens"] is not None]
     outputs = [entry["usage"]["output_tokens"] for entry in valid
@@ -206,6 +227,8 @@ def _cost_summary(receipts: list[dict]) -> dict:
         "adapter_calls_attempted": n,
         "calls_with_valid_telemetry": len(valid),
         "calls_with_invalid_telemetry": sum(receipt.get("telemetry_status") == "invalid" for receipt in attempted),
+        "server_reset_verified_calls": len(reset_entries),
+        "unique_server_boots_observed": len(set(boot_ids)),
         "telemetry_coverage": len(valid) / n if n else 0.0,
         "input_token_coverage": len(inputs) / n if n else 0.0,
         "output_token_coverage": len(outputs) / n if n else 0.0,
@@ -215,6 +238,8 @@ def _cost_summary(receipts: list[dict]) -> dict:
         "output_tokens_all_calls": sum(outputs) if n and len(outputs) == n else None,
         "adapter_reported_inference_seconds_observed": math.fsum(entry["elapsed_seconds"] for entry in valid) if valid else None,
         "adapter_reported_inference_seconds_all_calls": math.fsum(entry["elapsed_seconds"] for entry in valid) if n and len(valid) == n else None,
+        "server_startup_seconds_observed": math.fsum(entry["isolation"]["startup_seconds"] for entry in reset_entries) if reset_entries else None,
+        "server_shutdown_seconds_observed": math.fsum(entry["isolation"]["shutdown_seconds"] for entry in reset_entries) if reset_entries else None,
         "failed_calls_with_usage": sum(entry["status"] != "ok" and (
             entry["usage"]["input_tokens"] is not None or entry["usage"]["output_tokens"] is not None) for entry in valid),
     }
@@ -347,7 +372,7 @@ def run_financial_revision(adapter_argv: list[str], experiment: dict, *,
         "evidence_class": "public_deterministic_synthetic_financial_development_only",
         "model_evaluation_claim": False, "scientific_confirmation_claim": False,
         "physical_memory_enforced": False, "adapter_process_sandboxed": False,
-        "model_server_state_reset_verified": False,
+        "model_server_state_reset_verified": _server_reset_verified(attempted),
         "authority": "read_only_no_orders_no_signing",
         "experiment": experiment, "experiment_sha256": canonical_sha(experiment),
         "adapter_argv_sha256": canonical_sha(adapter_argv),
