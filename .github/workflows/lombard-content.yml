@@ -92,16 +92,18 @@ jobs:
       - name: Freeze source-law result panels and reproducibility metadata
         run: |
           python -m systemic_risk_bench lombard-feedback-oracle --config configs/lombard-feedback-charter-control.json --output /tmp/lombard-feedback-charter.json
+          python -m systemic_risk_bench lombard-feedback-oracle --config configs/lombard-feedback-60bp-scale.json --output /tmp/lombard-feedback-60bp.json
           mkdir -p artifacts/lombard-feedback
           cp /tmp/lombard-feedback-oracle.json artifacts/lombard-feedback/main-oracle.json
           cp /tmp/lombard-feedback-charter.json artifacts/lombard-feedback/charter-control.json
+          cp /tmp/lombard-feedback-60bp.json artifacts/lombard-feedback/60bp-scale.json
           cp /tmp/lombard-feedback-public.json artifacts/lombard-feedback/public-questions.json
           cp /tmp/lombard-feedback-fixture.json artifacts/lombard-feedback/reference-adapter.json
           python - <<'PY'
           import json
           from pathlib import Path
           p=Path('artifacts/lombard-feedback')
-          reports = {name:json.loads((p/(name+'.json')).read_text()) for name in ('main-oracle','charter-control')}
+          reports = {name:json.loads((p/(name+'.json')).read_text()) for name in ('main-oracle','charter-control','60bp-scale')}
           for name, report in reports.items():
               print(name, 'config sha:', report['config_sha256'])
               for row in report['rows']:
@@ -116,6 +118,9 @@ jobs:
                         'Treasury_E=',round(base['expected_treasury_bank_debt_guarantee'],3))
               assert not report['model_evaluation_claim']
           assert reports['main-oracle']['rows'][0]['baseline']['borrowed'] < reports['main-oracle']['rows'][-1]['baseline']['borrowed']
+          scaled = reports['60bp-scale']
+          reduced = scaled['rows'][0]['baseline']['unbacked_bank_funding_rate'] - scaled['rows'][-1]['baseline']['backed_bank_funding_rate']
+          assert 0.005 < reduced < 0.007
           print('PASS: source-only comparative statics and fixed-capital controls')
           PY
       - uses: actions/upload-artifact@v4
