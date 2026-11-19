@@ -49,3 +49,27 @@ is only bounded by the protocol, with `physical_memory_enforced=false`.
 
 The next-run prompt is a generated outcome artifact, rather than a
 researcher-supplied claim of a successful model run.
+
+## Final verified outcome (run 44490225970)
+
+The registered real CPU pilot completed with an Actions workflow result
+of **success** for execution and receipt generation. The model task
+result was **FAIL** under the 150-second stage limit: **0/8** arm-case
+updates scored. Across **10** attempted stage calls, **8 timed out**.
+Two initial count calls produced genuine model responses, each with
+**918 input / 81 output tokens** and correct visible memory integer **6**
+for root 0. Their update calls timed out. There were no successful
+bitmap initial completions.
+
+The exact host codec and pinned model/server SHA/size checks passed.
+The complete server-reset gate failed because timed-out child servers
+lacked teardown receipts and the runner identified surviving
+`llama-server` descendants. A host-verified codec benefit remains
+**inconclusive** because zero update decisions completed. The scored
+missing-regret value of 20.0 in every arm is solely the registered
+failure penalty.
+
+See the [full report](REPORT.md), [structured result](summary.json),
+and [evidence-promoted next-run prompt](NEXT_PROMPT.md).
+The original generated prompt and full receipts are preserved in
+[artifact #14513409340](https://github.com/patrickdugan/SystemicRiskBench/actions/runs/44490225970/artifacts/14513409340).
