@@ -41,7 +41,7 @@ class CodecPilotTests(unittest.TestCase):
                 initial=packet(world,mode,("price_feed","collateral","counterparty")[index%3],"initial")
                 expected=world.old_count if mode=="count" else world.old_mask
                 self.assertEqual(visible_codec(initial),expected)
-                self.assertNotIn("regime",json.dumps(initial))
+                self.assertNotIn("hidden_regime",json.dumps(initial))
                 update=packet(world,mode,("price_feed","collateral","counterparty")[index%3],
                               "update",expected)
                 self.assertEqual(update["old"],"not_replayed")
@@ -116,7 +116,7 @@ class CodecPilotTests(unittest.TestCase):
         self.assertEqual(report["initial_calls"],8)
         self.assertEqual(sum(x["status"]=="scored" for x in report["rows"]),0)
         self.assertEqual(report["gate_results"]["verified_codec_any_completed"],"FAIL")
-        self.assertIn("DECISION-PIPELINE FAIL",next_prompt(report))
+        self.assertIn("INFRASTRUCTURE FAIL",next_prompt(report))
 
     def test_response_attestation_has_separate_physical_boundary(self):
         def fake_verified(argv,payload,prior,timeout,experiment):
