@@ -8,7 +8,10 @@
 
 Walter Bagehot's [*Lombard Street*](https://www.gutenberg.org/cache/epub/4359/pg4359-images.html) (1873) shows how cheaper credit can produce superior accounting ROE and a price-undercutting margin for an entrepreneur with modest equity. Modern studies document the possibility of **implicit bank funding subsidies** when public support is expected. Relevant context appears in the [IMF April 2014 GFSR](https://www.imf.org/external/pubs/ft/gfsr/2014/01/) and its [2013 cross-country bank risk study](https://www.elibrary.imf.org/view/journals/001/2013/094/article-A001-en.xml).
 
-The exact experiment here is an **invented one-period mechanism model**. Its empirical task is to isolate the causal arrows that would require data before claiming an observed subsidy or recurring central-bank rescue cycle. No bank issuance tape, merchant loan file, official intervention sample or external market prices have been used.
+The exact experiment here is an **invented one-period mechanism model**. It
+assumes pricing-measure and physical default probabilities coincide; a real
+fiscal loss estimate would require physical probabilities with a separately
+calibrated market-risk-premium model. Its empirical task is to isolate the causal arrows that would require data before claiming an observed subsidy or recurring central-bank rescue cycle. No bank issuance tape, merchant loan file, official intervention sample or external market prices have been used.
 
 ## Registered one-period source-law findings
 
