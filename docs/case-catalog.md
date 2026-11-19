@@ -49,3 +49,14 @@ Sources support curator reconstructions at the scope recorded in each JSON card.
 - `control_pvp_prefunded` — Functioning PvP with prefunded replacement liquidity (2 stages; fictional dates; no historical source claim).
 - `control_orderly_volatility` — Orderly volatility with adequate collateral (2 stages; fictional dates; no historical source claim).
 - `control_redeemable_basis` — Temporary stablecoin basis with redemption access confirmed (2 stages; fictional dates; no historical source claim).
+
+## Separate source-grounded content suite
+
+- `content_bagehot_lombard_merchants` — Walter Bagehot, *Lombard Street*
+  (1873), Chapter I: merchant return on equity under borrowing; competitive
+  pricing and cash-financed competitor; synthetic bank losses, emergency
+  liquidity, privately or publicly funded recapitalization and Treasury/central
+  bank accounting; three staged teaching decisions.
+  Source and formal protocol: [Merchants of Lombard Street](lombard-street.md).
+  This case is stored in `systemic_risk_bench/data/content/` and is excluded
+  from the frozen historical crisis case and numerical baseline counts.
