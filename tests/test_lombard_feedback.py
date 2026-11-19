@@ -133,6 +133,8 @@ class FundingFeedbackTests(unittest.TestCase):
         report = analysis(c)
         self.assertEqual(report["n_cases"], 5)
         self.assertFalse(report["empirical_identification_claim"])
+        self.assertTrue(report["physical_and_pricing_default_probabilities_assumed_equal"])
+        self.assertFalse(report["physical_measure_calibration_claim"])
         self.assertFalse(report["general_equilibrium_claim"])
         self.assertTrue(report["no_bank_equity_recap_or_central_bank_credit_in_this_model"])
         rows = report["rows"]
