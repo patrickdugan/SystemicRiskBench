@@ -29,7 +29,6 @@ OUTPUTS = (
     "merchant_loan_rate", "merchant_expected_equity_profit",
     "expected_treasury_bank_debt_guarantee",
 )
-MISSING_PENALTY = 1.0
 MAX_CASES = 128
 
 
@@ -309,7 +308,15 @@ def validate_response(value: dict) -> dict:
     for key in OUTPUTS:
         if key in ("project", "borrowed"):
             continue
-        _num(value[key], key)
+        if key in ("bank_default_probability", "merchant_failure_probability"):
+            _num(value[key], key, 0, 1)
+        elif key == "expected_treasury_bank_debt_guarantee":
+            _num(value[key], key, 0)
+        elif key in ("unbacked_bank_funding_rate", "backed_bank_funding_rate",
+                     "merchant_loan_rate"):
+            _num(value[key], key, -0.999999)
+        else:
+            _num(value[key], key)
     return value
 
 
@@ -390,5 +397,7 @@ def run_adapter(config: dict, adapter_argv: list[str], experiment: dict,
         "experiment": experiment,
         "input_sha256": canonical_sha(config),
         "score": score_responses(config, responses),
+        "subprocess_calls_attempted": len(cases),
+        "all_model_identity_and_resource_telemetry_requires_independent_audit": True,
         "receipts": receipts,
     }
