@@ -24,6 +24,7 @@ from systemic_risk_bench.scoring import read_json
 ROOT = Path(__file__).resolve().parent.parent
 CONFIG = ROOT / "configs/lombard-feedback-v1.json"
 ALT = ROOT / "configs/lombard-feedback-charter-control.json"
+SCALE = ROOT / "configs/lombard-feedback-60bp-scale.json"
 
 
 def cfg(path=CONFIG):
@@ -166,6 +167,21 @@ class FundingFeedbackTests(unittest.TestCase):
         # and lower project-default risk at the new optimum.
         self.assertGreater(start["merchant_failure_probability"],
                            end["merchant_failure_probability"])
+
+    def test_illustrative_60bp_funding_scale_changes_less_credit(self):
+        scaled = analysis(cfg(SCALE))
+        start = scaled["rows"][0]["baseline"]
+        end = scaled["rows"][-1]["baseline"]
+        delta_rate = start["unbacked_bank_funding_rate"] - end["backed_bank_funding_rate"]
+        self.assertGreater(delta_rate, .005)
+        self.assertLess(delta_rate, .007)
+        self.assertEqual(start["project"], "prudent")
+        self.assertEqual(end["project"], "prudent")
+        self.assertEqual(start["borrowed"], 20000)
+        self.assertEqual(end["borrowed"], 25000)
+        self.assertEqual(start["expected_treasury_bank_debt_guarantee"], 0)
+        self.assertGreater(end["expected_treasury_bank_debt_guarantee"], 0)
+        self.assertFalse(scaled["empirical_identification_claim"])
 
     def test_source_only_packets_and_content_case_leakage(self):
         c = cfg()
