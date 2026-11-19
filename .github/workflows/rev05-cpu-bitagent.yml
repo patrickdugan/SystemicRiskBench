@@ -1,0 +1,93 @@
+name: SRB-REV-05 real CPU BitAgent codec pilot
+
+on:
+  push:
+    branches:
+      - research/srb-rev05-ci-bitagent-pilot
+    paths:
+      - ".github/workflows/rev05-cpu-bitagent.yml"
+      - "configs/rev05-cpu-ci-pilot.json"
+      - "systemic_risk_bench/rev05_ci_pilot.py"
+      - "scripts/rev05-ci-*.py"
+      - "scripts/rev05-ci-*.sh"
+      - "scripts/run_rev05_cpu.py"
+      - "scripts/prepare_rev05_cpu.py"
+      - "tests/test_rev05_ci_pilot.py"
+      - "docs/rev05-ci-pilot.md"
+  pull_request:
+    paths:
+      - ".github/workflows/rev05-cpu-bitagent.yml"
+      - "configs/rev05-cpu-ci-pilot.json"
+      - "systemic_risk_bench/rev05_ci_pilot.py"
+      - "scripts/rev05-ci-*.py"
+      - "scripts/rev05-ci-*.sh"
+      - "scripts/run_rev05_cpu.py"
+      - "scripts/prepare_rev05_cpu.py"
+      - "tests/test_rev05_ci_pilot.py"
+      - "docs/rev05-ci-pilot.md"
+  workflow_dispatch:
+
+env:
+  PYTHONPATH: .
+
+permissions:
+  contents: read
+
+concurrency:
+  group: srb-rev05-${{ github.event_name }}-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  source-and-codec:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Frozen source-law panel verification
+        run: python -m systemic_risk_bench finance-panel --verify configs/finance-revision-panels.json
+      - name: Exact public visible 4-bit and 12-bit codec tests
+        run: python -m unittest discover -s tests -p "test_rev05_ci_pilot.py" -v
+      - name: Complete SystemicRiskBench regression
+        run: python -m unittest discover -s tests -q
+
+  actual-bitagent-cpu:
+    needs: source-and-codec
+    if: github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    timeout-minutes: 55
+    env:
+      REV05_TMP: /tmp/srb-rev05
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Verify immutable llama.cpp Ubuntu x64 CPU release
+        run: bash scripts/rev05-ci-download-server.sh
+      - name: Download and verify exact Bonsai Q1 and BitAgent LoRA
+        run: bash scripts/rev05-ci-download-model.sh
+      - name: Pin runtime server hash and register constrained CPU experiment
+        shell: bash
+        run: |
+          python scripts/prepare_rev05_cpu.py --spec configs/rev05-cpu-ci-pilot.json --manifest configs/finance-revision-panels.json --server "$LLAMA_SERVER" --base "$REV05_TMP/models/Bonsai-8B-Q1_0.gguf" --adapter "$REV05_TMP/models/bitagent-bonsai8b-dagv2-lora-v3-f16.gguf" --runtime "$REV05_TMP/runtime.json" --experiment "$REV05_TMP/experiment.json"
+      - name: Real BitAgent model inference and source-verified codec contrast
+        shell: bash
+        run: |
+          python scripts/run_rev05_cpu.py --spec configs/rev05-cpu-ci-pilot.json --manifest configs/finance-revision-panels.json --experiment "$REV05_TMP/experiment.json" --runtime "$REV05_TMP/runtime.json" --output artifacts/rev05-ci/observations.json --prompt artifacts/rev05-ci/NEXT_PROMPT.md
+      - name: Always publish pass/fail outcomes in next experiment prompt
+        if: always()
+        run: python scripts/rev05-ci-finalize.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: srb-rev05-real-bitagent-cpu-pilot
+          path: artifacts/rev05-ci/
+          retention-days: 30
+          if-no-files-found: error
+      - name: Gate on actual inference evidence, independent of scientific score
+        shell: bash
+        run: |
+          python -c "import json; d=json.load(open('artifacts/rev05-ci/observations.json')); assert d.get('actual_model_inference_observed') is True, 'No verified model-inference receipt'; print('PASS: real BitAgent inference observed')"

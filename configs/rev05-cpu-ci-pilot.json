@@ -1,0 +1,84 @@
+{
+  "schema": "srb.rev05.cpu_pilot.v1",
+  "experiment_id": "SRB-REV-05-ci-Q1-memcodec-public-2roots-v1",
+  "source_panel_manifest_sha256": "81232c2f28c1e57b0fd8c1d8cc478ec3983c73f08be2e51076acb8e5995a0f0a",
+  "source_panel": "pilot",
+  "root_indices": [
+    0,
+    5
+  ],
+  "modes": [
+    "count",
+    "bitmap"
+  ],
+  "treatments": [
+    "model_memory",
+    "verified_visible_codec"
+  ],
+  "source_class": "public_deterministic_development_pilot",
+  "model_inference_expected": true,
+  "comparison_is_compute_matched": false,
+  "initial_model_prompt_same_across_treatments": true,
+  "after_initial_intervention": "verified_visible_codec replaces ONLY integer memory using the 12 public initial old match bits; model posterior and action remain untouched",
+  "model": {
+    "alias": "bitagent-bonsai8b-dagv3",
+    "base": {
+      "name": "Bonsai-8B-Q1_0.gguf",
+      "url": "https://huggingface.co/prism-ml/Bonsai-8B-gguf/resolve/48516770dd04643643e9f9019a2a349cf26c5dbd/Bonsai-8B-Q1_0.gguf",
+      "sha256": "284a335aa3fb2ced3b1b01fcb40b08aa783e3b70832767f0dd2e3fdfa134bd54",
+      "bytes": 1158654496
+    },
+    "adapter": {
+      "name": "bitagent-bonsai8b-dagv2-lora-v3-f16.gguf",
+      "url": "https://huggingface.co/AlephFunk/bitagent-bonsai8b-dagv2-lora-v3/resolve/ee2937fb58d87bbd155cd205c43dc8103b51eac2/bitagent-bonsai8b-dagv2-lora-v3-f16.gguf",
+      "sha256": "9a11fe2cecf795f53dbea490b9897b28f3d3346a9f69a71ce28bbb195f7de704",
+      "bytes": 87329024
+    },
+    "llama_server": {
+      "tag": "b12248",
+      "commit": "3837bf0bc02ea5d08f8ee3585fc8c7784a81bce8",
+      "url": "https://github.com/ggml-org/llama.cpp/releases/download/b12248/llama-b12248-bin-ubuntu-x64.tar.gz",
+      "archive_sha256": "6b3a530b44f6b0a4ae4872d3b3c8d1edc2ac6bba7d8bd211329a4ba644c0dc65",
+      "archive_bytes": 23157778,
+      "platform": "ubuntu-x64-cpu"
+    }
+  },
+  "runtime": {
+    "threads": 4,
+    "threads_batch": 4,
+    "n_gpu_layers": 0,
+    "device": "none",
+    "flash_attn": "off",
+    "context": 4096,
+    "batch_size": 128,
+    "ubatch_size": 64,
+    "cache_type_k": "f16",
+    "cache_type_v": "f16",
+    "max_tokens": 256,
+    "temperature": 0,
+    "seed": 0,
+    "startup_timeout_seconds": 120,
+    "per_stage_timeout_seconds": 150,
+    "max_arm_wall_seconds": 900,
+    "job_timeout_minutes": 50
+  },
+  "scoring": {
+    "missing_excess_brier_penalty": 2,
+    "missing_policy_regret_penalty": 20,
+    "raw_model_memory_accuracy_denominator": "all attempted initial-stage calls",
+    "scored_denominator": "two registered roots per memory arm per treatment",
+    "codec_gate": "host-visible encoding exact on every registered root and memory arm",
+    "model_gate": "at least one scored case in the verified codec treatment",
+    "coverage_lift_gate": "verified_visible_codec scored coverage strictly exceeds model_memory within a memory arm",
+    "model_gate_result_is_not_ci_infrastructure_gate": true
+  },
+  "assumptions": {
+    "no_hidden_regime_in_codec": true,
+    "no_old_history_in_update": true,
+    "server_reset_each_stage": true,
+    "adapter_sandboxed": false,
+    "physical_memory_enforced": false,
+    "real_market_evidence": false,
+    "confirmation_claim": false
+  }
+}

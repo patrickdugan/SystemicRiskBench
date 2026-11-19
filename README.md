@@ -214,6 +214,31 @@ in [REV-03](results/srb-rev-03-bitagent-ephemeral-v2/REPORT.md) and
 memory isolation remains unverified. The natural panel supplies seven full-information escalation cases;
 the registered stress panel supplies zero.
 
+## BitAgent REV-05: GitHub-hosted CPU inference pilot
+
+[SRB-REV-05](docs/rev05-ci-pilot.md) ran the actual pinned Bonsai-8B
+Q1 plus BitAgent LoRA under an official SHA-pinned CPU `llama.cpp`
+server. The experiment compared 4-bit count and 12-bit bitmap memory
+under model-generated integers and a verifier that computes the integer
+from initial public observations.
+
+[Observed run #44490225970](https://github.com/patrickdugan/SystemicRiskBench/actions/runs/44490225970)
+confirmed genuine initial-stage BitAgent inference and passed the
+source/codec/model-artifact integrity checks. **All 8 registered
+arm-cases failed to complete a full update** under the 150-second
+per-stage CPU limit; two initial count responses were valid and
+both update calls timed out. The verified-codec lift is
+**timeout-censored**, with zero completed decisions to compare.
+Timed-out descendant server cleanup also failed the complete
+reset-attestation gate.
+
+Read the [recorded PASS/FAIL report](results/rev05-ci/REPORT.md),
+[structured summary](results/rev05-ci/summary.json), and
+[next experiment prompt](results/rev05-ci/NEXT_PROMPT.md). Heavy real
+CPU inference runs by explicit workflow dispatch, while normal CI
+retains source-only checks. These model results establish neither
+independent finance competence nor physical memory enforcement.
+
 ## Compare reasoning
 
 Publish a vector: numerical family accuracy, human-audited reasoning,
