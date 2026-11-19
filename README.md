@@ -141,6 +141,11 @@ that bank funding advantage into merchant loan rates, and enumerates merchant
 leverage and project type under source-law credit-risk assumptions. It then
 reports public guarantee exposure and fixed-total/fixed-per-agent controls.
 
+The [source-only research report](results/lombard-feedback-v1/REPORT.md)
+records the main, risk-mix and roughly 60-basis-point price-scale panels, with
+canonical input SHA-256 digests and the distinction between matched quotes
+and post-selection average borrower rates.
+
 The experiment has five registered guarantee levels, explicit no-pass-through
 and no-default controls, plus a second project calibration where the direction
 of risk-taking can change. [Lean proof modules](Lombard/Funding.lean) cover
