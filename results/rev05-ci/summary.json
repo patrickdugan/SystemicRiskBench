@@ -1,0 +1,104 @@
+{
+  "schema": "srb.rev05.cpu_pilot.observed_summary.v1",
+  "date_utc": "2026-11-19",
+  "run_id": 44490225970,
+  "run_url": "https://github.com/patrickdugan/SystemicRiskBench/actions/runs/44490225970",
+  "artifact_id": 14513409340,
+  "artifact_url": "https://github.com/patrickdugan/SystemicRiskBench/actions/runs/44490225970/artifacts/14513409340",
+  "artifact_zip_sha256": "c86bbef5c5e2d90a59c54b32368e9373b606e3029cd3b559e5eb98a7db3182d0",
+  "source_panel_manifest_sha256": "81232c2f28c1e57b0fd8c1d8cc478ec3983c73f08be2e51076acb8e5995a0f0a",
+  "pilot_registration_sha256": "1b9946b7f1cf4583371690cec46921543e5ba715dd9035a9d040fada2e2e4b99",
+  "public_roots": [
+    0,
+    5
+  ],
+  "weights": {
+    "base_sha256": "284a335aa3fb2ced3b1b01fcb40b08aa783e3b70832767f0dd2e3fdfa134bd54",
+    "adapter_sha256": "9a11fe2cecf795f53dbea490b9897b28f3d3346a9f69a71ce28bbb195f7de704",
+    "source": "immutable_HuggingFace_commit_URIs_in_registration",
+    "source_distribution_sha256": "6b3a530b44f6b0a4ae4872d3b3c8d1edc2ac6bba7d8bd211329a4ba644c0dc65"
+  },
+  "engineering_gates": {
+    "source_and_codec_tests": "PASS",
+    "pinned_binary_and_weights": "PASS",
+    "visible_codec": "PASS",
+    "actual_model_inference_observed": "PASS",
+    "all_server_resets_verified": "FAIL"
+  },
+  "scientific_gates": {
+    "any_completed_update": "FAIL",
+    "verified_codec_lift": "FAIL",
+    "conditional_reasoning_comparison": "INCONCLUSIVE_timeout_censored"
+  },
+  "observations": {
+    "registered_root_arm_cases": 8,
+    "actual_subprocess_stage_attempts": 10,
+    "stage_timeout_count": 8,
+    "stage_calls_with_valid_usage": 2,
+    "stage_credited_model_memory_correct": 2,
+    "scored_updates": 0,
+    "observed_input_tokens": 1836,
+    "observed_output_tokens": 162,
+    "timed_out_call_token_usage": "unmeasured",
+    "total_host_wall_seconds": 1487.62,
+    "stage_timeout_seconds": 150,
+    "counts": {
+      "count/model_memory": {
+        "raw_memory_correct": 1,
+        "cases": 2,
+        "scored": 0,
+        "calls": 3,
+        "timeouts": 2,
+        "known_input_tokens": 918,
+        "known_output_tokens": 81,
+        "wall_seconds": 441.46
+      },
+      "count/verified_visible_codec": {
+        "raw_memory_correct": 1,
+        "cases": 2,
+        "scored": 0,
+        "calls": 3,
+        "timeouts": 2,
+        "known_input_tokens": 918,
+        "known_output_tokens": 81,
+        "wall_seconds": 445.72
+      },
+      "bitmap/model_memory": {
+        "raw_memory_correct": 0,
+        "cases": 2,
+        "scored": 0,
+        "calls": 2,
+        "timeouts": 2,
+        "known_input_tokens": 0,
+        "known_output_tokens": 0,
+        "wall_seconds": 300.22
+      },
+      "bitmap/verified_visible_codec": {
+        "raw_memory_correct": 0,
+        "cases": 2,
+        "scored": 0,
+        "calls": 2,
+        "timeouts": 2,
+        "known_input_tokens": 0,
+        "known_output_tokens": 0,
+        "wall_seconds": 300.22
+      }
+    },
+    "raw_count_root0_memory": 6,
+    "raw_count_root0_memory_correct": true,
+    "root0_update_status": "timeout",
+    "bitmap_initial_model_response_observed": false
+  },
+  "scoring": {
+    "missing_policy_regret_penalty": 20,
+    "missing_excess_brier_penalty": 2,
+    "full_information_regret_all_arms": 20,
+    "conditional_policy_regret_on_scored_cases": null,
+    "interpretation": "all_missed_case_penalty_not_observed_decision_error"
+  },
+  "model_evaluation_claim": false,
+  "scientific_confirmation_claim": false,
+  "physical_memory_enforced": false,
+  "adapter_process_sandboxed": false,
+  "versioned_prompt": "results/rev05-ci/NEXT_PROMPT.md"
+}
