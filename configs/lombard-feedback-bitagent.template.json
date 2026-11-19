@@ -1,0 +1,15 @@
+{
+  "experiment_id": "SRB-LOMBARD-02-bitagent-model-run-REGISTER",
+  "architecture_label": "verified_local_bonsai8b_bitagent_adapter",
+  "split": "public_source_law_development",
+  "model_alias": "bitagent-bonsai8b-dagv3",
+  "checkpoint_sha256": "REPLACE_WITH_VERIFIED_SHA256",
+  "budget": {
+    "max_output_tokens": 1536,
+    "timeout_seconds": 300
+  },
+  "max_cases": 5,
+  "no_external_tool_calls": true,
+  "model_server_reset_between_cases": false,
+  "notes": "Use real model inference receipts and verify local model/LoRA hashes. No physical memory-enforcement claim."
+}

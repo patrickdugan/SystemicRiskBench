@@ -132,6 +132,39 @@ a stipulated repeated rescue policy. They establish no empirical probability
 of future losses or bailouts. CI checks kernel compilation, the content packet
 leakage boundary and the complete Python regression suite.
 
+## Bagehot funding-support feedback experiment
+
+[SRB-LOMBARD-02](docs/lombard-feedback.md) extends the merchant-credit content
+track into an exact finite debt/project-choice model. It prices an assumed
+Treasury guarantee of bank funding creditors, passes a registered portion of
+that bank funding advantage into merchant loan rates, and enumerates merchant
+leverage and project type under source-law credit-risk assumptions. It then
+reports public guarantee exposure and fixed-total/fixed-per-agent controls.
+
+The [source-only research report](results/lombard-feedback-v1/REPORT.md)
+records the main, risk-mix and roughly 60-basis-point price-scale panels, with
+canonical input SHA-256 digests and the distinction between matched quotes
+and post-selection average borrower rates.
+
+The experiment has five registered guarantee levels, explicit no-pass-through
+and no-default controls, plus a second project calibration where the direction
+of risk-taking can change. [Lean proof modules](Lombard/Funding.lean) cover
+bank-creditor break-even pricing, funding monotonicity and conditional risk
+relations. A public synthetic
+[content case](systemic_risk_bench/data/content/bagehot_guarantee_feedback.json)
+provides staged reasoning questions alongside the original 1873 chapter.
+
+```bash
+python -m systemic_risk_bench lombard-feedback-export --config configs/lombard-feedback-v1.json --output artifacts/lombard-feedback-tasks.json
+python -m systemic_risk_bench lombard-feedback-oracle --config configs/lombard-feedback-v1.json --output artifacts/lombard-feedback-oracle.json
+python -m systemic_risk_bench lombard-feedback-run --config configs/lombard-feedback-v1.json --experiment configs/finance-revision-fixture.json --adapter-argv '["python","-m","examples.lombard_feedback_reference_adapter"]' --output artifacts/lombard-feedback-fixture.json
+```
+
+Reference-only tests make zero AI calls. A locally pinned
+[BitAgent adapter](adapters/lombard_feedback_llamacpp.py) is provided for
+measured neural experiments. All new bank probabilities, margins and guarantees
+are hypothetical; the empirical identification plan remains a separate study.
+
 ## Financial evidence revision and BitAgent model transport
 
 [SRB-REV-02](docs/finance-revision.md) extends bounded-memory correction tasks to
@@ -154,7 +187,7 @@ using a fake HTTP server and makes no neural calls. Reported two-process
 continuation does not certify a physically isolated memory budget or a reset
 model server. Financial actions are read-only synthetic choices.
 
-### SRB-REV-03: frozen natural and stress panels
+## SRB-REV-03: frozen natural and stress panels
 
 [The registered continuation](docs/finance-revision-stress.md) retains the first
 48 source roots and adds 18 selected stress roots, with six from each financial
@@ -175,8 +208,10 @@ python -m systemic_risk_bench finance-revision --panel stress --manifest configs
 
 The selected panel uses the original source-law comparator. Known panel
 membership changes the sampling law, so these scores support development
-diagnostics. Actual BitAgent inference and a verified server reset remain
-pending. The natural panel supplies seven full-information escalation cases;
+diagnostics. Actual BitAgent inference and per-stage server reset receipts are documented
+in [REV-03](results/srb-rev-03-bitagent-ephemeral-v2/REPORT.md) and
+[REV-04](results/srb-rev-04-bitagent-scratchpad-v1/REPORT.md). Physical adapter
+memory isolation remains unverified. The natural panel supplies seven full-information escalation cases;
 the registered stress panel supplies zero.
 
 ## Compare reasoning

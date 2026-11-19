@@ -1,0 +1,141 @@
+{
+  "schema_version": "srb.content.v0.1",
+  "title": "The Bagehot-to-bailout credit-pricing mechanism",
+  "created_on": "2026-11-19",
+  "cases": [
+    {
+      "id": "content_bagehot_guarantee_feedback",
+      "title": "From Bagehot's merchant borrowing advantage to implicit bank funding guarantees",
+      "event_date": "2014-04-09",
+      "family": "bank_funding_guarantee_credit_competition",
+      "entities": [
+        {
+          "name": "Walter Bagehot"
+        },
+        {
+          "name": "International Monetary Fund",
+          "aliases": [
+            "IMF"
+          ]
+        },
+        {
+          "name": "Bank of England"
+        }
+      ],
+      "provenance": {
+        "mode": "synthetic_counterfactual",
+        "source_scope": "Bagehot 1873 primary merchant arithmetic; IMF 2014 and 2013 studies motivate the conceptual public guarantee/discipline hypothesis. All loan rates, probabilities, guarantees, productivity, bank losses and policy choices in this case are synthetic and have no empirical calibration.",
+        "event_date_note": "2014-04-09 is an IMF paper-publication marker, not the date of a funding crisis.",
+        "data_status": "zero_real_market_records",
+        "problem_config": "configs/lombard-feedback-v1.json",
+        "model_evaluation_claim": false
+      },
+      "sources": [
+        {
+          "url": "https://www.gutenberg.org/cache/epub/4359/pg4359-images.html",
+          "title": "Bagehot 1873, Lombard Street, Chapter I",
+          "scope": "1873 merchant accounting/credit competition"
+        },
+        {
+          "url": "https://www.imf.org/external/pubs/ft/gfsr/2014/01/",
+          "title": "IMF, GFSR April 2014 Chapter 3",
+          "scope": "implicit support lowers bank funding costs and may distort credit allocation"
+        },
+        {
+          "url": "https://www.elibrary.imf.org/view/journals/001/2013/094/article-A001-en.xml",
+          "title": "IMF Working Paper 2013/094",
+          "scope": "international evidence of support and bank risk-taking, alternative charter value mechanism"
+        },
+        {
+          "url": "https://www.bis.org/speeches/20141202-bailouts-bail-and-financial-stability",
+          "title": "BIS, Bailouts, bail-in and financial stability",
+          "scope": "moral hazard of implicit government rescue"
+        },
+        {
+          "url": "https://www.bankofengland.co.uk/working-paper/2025/the-implicit-subsidy-to-the-indian-banking-system",
+          "title": "Bank of England staff working paper 1136, 2025 (revised August 2026)",
+          "scope": "modern empirical measurement illustration via equity-implied and CDS-implied default risk"
+        }
+      ],
+      "stages": [
+        {
+          "id": "quoted_funding_prices",
+          "cutoff": "2026-02-01T00:00:00Z",
+          "observations": [
+            "SYNTHETIC LAW: A representative bank borrows at a one-period risk-free gross return 1+r_f and has independently stipulated risk-neutral bank failure probability p_B and creditor recovery fraction R_B.",
+            "The Treasury may make a fraction g of promised bank-debt shortfall whole in bank default. Exactly at issue, competitive risk-neutral bank creditors require (1+r_B) [1-p_B (1-R_B)(1-g)] = 1+r_f.",
+            "This guarantee is on bank FUNDING claims. It differs from a central-bank collateralized liquidity loan, a merchant-loan guarantee, and a public bank common-equity recapitalization.",
+            "An underwriting intermediary passes fraction alpha of the reduction in its bank-funding rate into merchant credit. A zero-pass-through arm retains the cheaper funding inside the bank rather than lowering the merchant quote.",
+            "Bagehot's original 1873 10% versus 30% ROE example is a comparison at fixed operating profit and fixed scale. Here default risk and debt choice vary; all added behavioral laws are invented."
+          ],
+          "questions": [
+            "Derive r_B = (1+r_f)/(1-p_B(1-R_B)(1-g))-1 and prove under positive denominator and risk-free gross rate that it is nonincreasing in g at fixed bank failure probability.",
+            "State the exact zero-pass-through and zero-bank-default-risk negative controls. Identify who benefits economically when the lending bank retains the lower funding cost.",
+            "Give an empirical identification strategy for rescue support expectations, funding spreads and merchant pass-through, separating them from bank size, collateral, default risk, fixed effects and the policy regime."
+          ]
+        },
+        {
+          "id": "merchant_debt_best_response",
+          "cutoff": "2026-02-02T00:00:00Z",
+          "observations": [
+            "NEW SYNTHETIC DECISION: the merchant owns GBP 10,000 equity and chooses debt on a GBP 5,000 ladder from zero through GBP 40,000, and chooses either prudent or aggressive project.",
+            "Project failure probability rises linearly in its chosen debt/equity ratio. A prudent project offers lower success-state operating returns and lower default risk. An aggressive project has higher success-state revenue with higher failure risk.",
+            "In success, assets must cover the promised debt amount. In failure, the lender recovers a stated fraction of promised debt, leaving the merchant with zero terminal equity. A full-repayment assumption in success is checked before scoring.",
+            "Merchant interest prices are chosen to cover loan losses under the assumed merchant-failure probability, with stated bank origination margin. The representative merchant chooses a strategy maximizing expected terminal shareholder value.",
+            "The bank-failure probability in the feedback arm is an explicitly chosen function of merchant project failure and leverage; each full portfolio is re-quoted before selecting the best plan. This is an enumerated conditional choice, not a price-taking general equilibrium."
+          ],
+          "questions": [
+            "Compute the complete debt/project argmax for each specified coverage g. Give exact input units, both default probabilities, bank funding rate, merchant loan rate, chosen debt and expected shareholder profit.",
+            "Compare policy outcomes with alpha=0 and bank default probability equal to zero. Check for the presence and size of loan balance expansion and risk appetite changes rather than assuming every project becomes riskier.",
+            "Describe what additional model would be required to study millions of atomistic merchants where each takes the common bank funding price as given."
+          ]
+        },
+        {
+          "id": "treasury_claims_and_resolution",
+          "cutoff": "2026-02-03T00:00:00Z",
+          "observations": [
+            "NEW SYNTHETIC FISCAL EXPOSURE: if a bank defaults in the one-period model, Treasury pays g times the stipulated unsecured bank-funding creditor shortfall. Expected payout is bank PD times conditional guarantee payout on the bank-funding face value.",
+            "The bank funds the chosen merchant loan using a stipulated share of debt liabilities and the remainder common equity. That capital funding share does not automatically replenish a later loan impairment.",
+            "Every guarantee choice changes the terms offered at new bank-debt origination under the model. Conditional rescue payments are distinct from a public capital subscription, a central-bank credit loss, and a discretionary private-sector bail-in.",
+            "A second invented calibration changes the prudent project success-state return to test whether bank guarantees can also make a relatively safer project more attractive. With no known market data, the sign of the project-mix effect remains a model output."
+          ],
+          "questions": [
+            "Calculate the expected Treasury exposure on guaranteed bank funding claims at the chosen portfolio and show why zero coverage implies zero guarantee payout.",
+            "Hold aggregate bank funding debt fixed while varying agent count; contrast fixed per-agent lending where total guarantees scale with the number of represented borrowers, conditional on fixed default parameters.",
+            "Explain how underwriting, bank capital rules, resolution with bail-in, merchant competition and guaranteed creditor behavior might break the proposed repeated recapitalization mechanism.",
+            "Separate a proved algebraic rate effect from the empirical question of whether past bank rescues changed observed funding costs and borrower behavior."
+          ]
+        }
+      ],
+      "outcome": {
+        "result_kind": "registered_synthetic_exact_law_no_model_results",
+        "scoring_rules": {
+          "model_response_fields": [
+            "project",
+            "borrowed",
+            "bank_default_probability",
+            "merchant_failure_probability",
+            "unbacked_bank_funding_rate",
+            "backed_bank_funding_rate",
+            "merchant_loan_rate",
+            "merchant_expected_equity_profit",
+            "expected_treasury_bank_debt_guarantee"
+          ],
+          "decision_rule": "maximize terminal expected merchant-equity profit; smaller debt and prudent project break ties",
+          "reference_source": "systemic_risk_bench/lombard_feedback.py"
+        },
+        "rubric_anchors": [
+          "At fixed PD and LGD and positive denominator, a greater guarantee reduces the actuarially fair promised bank-debt interest rate.",
+          "Bank pass-through is an additional parameter; beta/alpha zero removes merchant rate movement across guarantee scenarios at identical risk composition.",
+          "Leveraged project selection depends on expected risk-adjusted terminal equity payout, which may differ from accounting ROE and Bagehot's fixed-profit illustration.",
+          "Fiscal guarantee exposure is state-contingent bank-debt coverage, distinct from bank common-equity injections or central-bank own capital restoration.",
+          "Credit supply and risk change through a synthetic decision rule; no inference of real-world subsidy size or welfare is authorized.",
+          "Conditional negative controls test zero default, zero pass-through, fixed/feedback bank PD, and project-mix ambiguity.",
+          "Two competing explanations of risk-taking effects include impaired market discipline and increased charter value."
+        ],
+        "protected_evaluation_claim": false,
+        "execution_authorized": false
+      }
+    }
+  ]
+}

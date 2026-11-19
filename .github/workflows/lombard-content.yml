@@ -4,6 +4,12 @@ on:
   push:
     paths:
       - "systemic_risk_bench/lombard.py"
+      - "systemic_risk_bench/lombard_feedback.py"
+      - "adapters/lombard_feedback_llamacpp.py"
+      - "examples/lombard_feedback_reference_adapter.py"
+      - "configs/lombard-feedback-*.json"
+      - "tests/test_lombard_feedback.py"
+      - "docs/lombard-feedback.md"
       - "systemic_risk_bench/content_suite.py"
       - "systemic_risk_bench/content_math.py"
       - "systemic_risk_bench/data/content/**"
@@ -22,6 +28,12 @@ on:
   pull_request:
     paths:
       - "systemic_risk_bench/lombard.py"
+      - "systemic_risk_bench/lombard_feedback.py"
+      - "adapters/lombard_feedback_llamacpp.py"
+      - "examples/lombard_feedback_reference_adapter.py"
+      - "configs/lombard-feedback-*.json"
+      - "tests/test_lombard_feedback.py"
+      - "docs/lombard-feedback.md"
       - "systemic_risk_bench/content_suite.py"
       - "systemic_risk_bench/content_math.py"
       - "systemic_risk_bench/data/content/**"
@@ -54,8 +66,68 @@ jobs:
           python-version: "3.12"
       - name: Run Bagehot content-suite tests
         run: python -m unittest discover -s tests -p 'test_lombard_content.py' -v
+      - name: Run Bagehot guarantee-price feedback tests
+        run: python -m unittest discover -s tests -p 'test_lombard_feedback.py' -v
       - name: Run complete Python regression suite
         run: python -m unittest discover -s tests -q
+      - name: Verify source-only oracle and real subprocess adapter scoring
+        run: |
+          python -m systemic_risk_bench lombard-feedback-oracle --config configs/lombard-feedback-v1.json --output /tmp/lombard-feedback-oracle.json
+          python -m systemic_risk_bench lombard-feedback-export --config configs/lombard-feedback-v1.json --output /tmp/lombard-feedback-public.json
+          python -m systemic_risk_bench lombard-feedback-run --config configs/lombard-feedback-v1.json --experiment configs/finance-revision-fixture.json --adapter-argv '["python","-m","examples.lombard_feedback_reference_adapter"]' --output /tmp/lombard-feedback-fixture.json
+          python - <<'PY'
+          import json
+          o=json.load(open('/tmp/lombard-feedback-oracle.json'))
+          pub=json.load(open('/tmp/lombard-feedback-public.json'))
+          fixture=json.load(open('/tmp/lombard-feedback-fixture.json'))
+          assert o['n_cases'] == 5 and not o['empirical_identification_claim']
+          assert pub['answer_keys_present'] is False and len(pub['cases']) == 5
+          assert fixture['score']['coverage'] == 1
+          assert fixture['score']['field_accuracy_including_missing'] == 1
+          assert fixture['score']['policy_accuracy_including_missing'] == 1
+          assert fixture['model_evaluation_claim'] is False
+          assert fixture['physical_memory_enforced'] is False
+          print('PASS: guarantee credit feedback source-only transport and exact scorer')
+          PY
+      - name: Freeze source-law result panels and reproducibility metadata
+        run: |
+          python -m systemic_risk_bench lombard-feedback-oracle --config configs/lombard-feedback-charter-control.json --output /tmp/lombard-feedback-charter.json
+          python -m systemic_risk_bench lombard-feedback-oracle --config configs/lombard-feedback-60bp-scale.json --output /tmp/lombard-feedback-60bp.json
+          mkdir -p artifacts/lombard-feedback
+          cp /tmp/lombard-feedback-oracle.json artifacts/lombard-feedback/main-oracle.json
+          cp /tmp/lombard-feedback-charter.json artifacts/lombard-feedback/charter-control.json
+          cp /tmp/lombard-feedback-60bp.json artifacts/lombard-feedback/60bp-scale.json
+          cp /tmp/lombard-feedback-public.json artifacts/lombard-feedback/public-questions.json
+          cp /tmp/lombard-feedback-fixture.json artifacts/lombard-feedback/reference-adapter.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path('artifacts/lombard-feedback')
+          reports = {name:json.loads((p/(name+'.json')).read_text()) for name in ('main-oracle','charter-control','60bp-scale')}
+          for name, report in reports.items():
+              print(name, 'config sha:', report['config_sha256'])
+              for row in report['rows']:
+                  base=row['baseline']
+                  pop=row['population_controls']
+                  assert all(x['fixed_total_treasury_expected']==pop[0]['fixed_total_treasury_expected'] for x in pop)
+                  assert all(x['fixed_per_agent_treasury_expected']==x['agents']*pop[0]['fixed_per_agent_treasury_expected'] for x in pop)
+                  print('  g=',row['guarantee'], 'project=',base['project'],
+                        'debt=',base['borrowed'], 'bank_PD=',round(base['bank_default_probability'],5),
+                        'merchant_PD=',round(base['merchant_failure_probability'],5),
+                        'merchant_rate=',round(base['merchant_loan_rate'],6),
+                        'Treasury_E=',round(base['expected_treasury_bank_debt_guarantee'],3))
+              assert not report['model_evaluation_claim']
+          assert reports['main-oracle']['rows'][0]['baseline']['borrowed'] < reports['main-oracle']['rows'][-1]['baseline']['borrowed']
+          scaled = reports['60bp-scale']
+          reduced = scaled['rows'][0]['baseline']['unbacked_bank_funding_rate'] - scaled['rows'][-1]['baseline']['backed_bank_funding_rate']
+          assert 0.005 < reduced < 0.007
+          print('PASS: source-only comparative statics and fixed-capital controls')
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: srb-lombard-02-synthetic-source-law
+          path: artifacts/lombard-feedback/
+          if-no-files-found: error
       - name: CLI validated source and synthetic content exports
         run: |
           python -m systemic_risk_bench content-list > /tmp/lombard-cases.json
@@ -92,6 +164,7 @@ jobs:
         run: |
           set -euo pipefail
           lake env lean Lombard/Capital.lean | tee lombard-axioms.txt
+          lake env lean Lombard/Funding.lean | tee -a lombard-axioms.txt
           if grep -Eq 'sorryAx|ofReduceBool' lombard-axioms.txt; then
             echo 'Unexpected admitted or native-reduction axiom'
             exit 1

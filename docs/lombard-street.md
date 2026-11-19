@@ -121,3 +121,12 @@ For an agent response adapter, use `content-run` with a registered experiment an
 5. If multiple agents pursue the trade, compare fixed total credit with fixed credit per participant, correlated signal exposure and liquidation costs.
 
 The source and synthetic cases are public development material. The rubric still needs independently graded model responses, measured resource budgets, and epistemic/causal audits before claiming model performance.
+
+## Modern support-expectation extension
+
+[SRB-LOMBARD-02](lombard-feedback.md) adds a source-motivated hypothetical
+Treasury guarantee of bank funding debt, an independent loan-rate pass-through
+parameter, discrete merchant project/borrowing best responses and a calculated
+bank-guarantee fiscal exposure. Its additional IMF and BIS citations concern
+modern bank funding advantages. They do not retroactively turn the 1873
+merchant illustration into an empirical study of central bank bailouts.
