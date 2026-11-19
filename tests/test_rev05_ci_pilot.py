@@ -1,5 +1,4 @@
 """SRB-REV-05 CPU source-law pilot / host verified visible codec tests."""
-from collections import defaultdict
 from copy import deepcopy
 import json
 from pathlib import Path
@@ -107,7 +106,6 @@ class CodecPilotTests(unittest.TestCase):
         self.assertIn("GATE",next_run.upper())
         self.assertIn("PASS",next_run)
         self.assertIn("FAIL",next_run)
-        self.assertIn("raw model",next_run.lower() if False else "raw model".lower()) if False else None
 
     def test_invalid_initial_schema_gets_no_help_from_codec(self):
         def bad_adapter(argv,payload,prior,timeout,experiment):
