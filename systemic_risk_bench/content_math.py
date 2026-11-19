@@ -7,7 +7,7 @@ from __future__ import annotations
 
 import math
 
-from .lombard import bank_rescue, merchant_equity, repeat_rescue
+from .lombard import bank_rescue, merchant_equity, repeat_rescue, funding_spread_counterfactual
 from .scoring import finite
 
 
@@ -59,6 +59,27 @@ def content_quantitative_tasks() -> list[dict]:
             ],
         },
         {
+            "id": "content-lombard-pricing-counterfactual",
+            "family": "guarantee_pricing_hypothesis",
+            "source_status": "invented_rate_sensitivity_control_no_empirical_guarantee_effect",
+            "prompt": "Invented merchant term sheets: GBP 10,000 equity, GBP 40,000 "
+                      "debt, GBP 5,000 annual gross operating profit. An "
+                      "unsubsidized risk-pricing scenario sets borrowing at 11% "
+                      "and an anticipated-support scenario sets borrowing at 5%. "
+                      "Compute each ROE, yearly interest saving and difference "
+                      "in ROE as a decimal. The rate reduction is a premise, "
+                      "not an observed central-bank subsidy.",
+            "inputs": {
+                "borrower_equity": 10000, "borrowed": 40000,
+                "gross_operating_profit": 5000,
+                "unsubsidized_rate": 0.11, "supported_rate": 0.05
+            },
+            "answer_fields": [
+                "unsubsidized_roe", "supported_roe",
+                "annual_interest_saving", "roe_difference",
+            ],
+        },
+        {
             "id": "content-lombard-repeat-rescue",
             "family": "conditional_public_recapitalization",
             "source_status": "invented_repeat_loss_and_policy_assumption",
@@ -84,10 +105,12 @@ def content_numeric_answers() -> dict[str, dict[str, float]]:
     merchant = merchant_equity(**tasks["content-lombard-merchants"])
     bank = bank_rescue(**tasks["content-lombard-bank-rescue"])
     recurring = repeat_rescue(**tasks["content-lombard-repeat-rescue"])
+    pricing = funding_spread_counterfactual(**tasks["content-lombard-pricing-counterfactual"])
     values = {
         "content-lombard-merchants": merchant,
         "content-lombard-bank-rescue": bank,
         "content-lombard-repeat-rescue": recurring,
+        "content-lombard-pricing-counterfactual": pricing,
     }
     return {
         task["id"]: {field: values[task["id"]][field] for field in task["answer_fields"]}
