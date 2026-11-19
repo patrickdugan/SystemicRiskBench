@@ -115,8 +115,8 @@ commercial-bank equity recapitalization and secured emergency liquidity.
 A third stage tests a conditional repeated-loss public rescue cycle with
 separate central-bank and Treasury balance sheets.
 
-The content track has three staged packets and three independent numerical
-tasks with 13 fields. It does not alter the frozen 33 historical crisis cases,
+The content track has three staged packets and four independent numerical
+tasks with 17 fields. It does not alter the frozen 33 historical crisis cases,
 four benign controls, or 6-task / 13-field general numerical baseline.
 
 ```bash
