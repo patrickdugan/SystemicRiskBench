@@ -4,6 +4,12 @@ on:
   push:
     paths:
       - "systemic_risk_bench/lombard.py"
+      - "systemic_risk_bench/lombard_feedback.py"
+      - "adapters/lombard_feedback_llamacpp.py"
+      - "examples/lombard_feedback_reference_adapter.py"
+      - "configs/lombard-feedback-*.json"
+      - "tests/test_lombard_feedback.py"
+      - "docs/lombard-feedback.md"
       - "systemic_risk_bench/content_suite.py"
       - "systemic_risk_bench/content_math.py"
       - "systemic_risk_bench/data/content/**"
@@ -22,6 +28,12 @@ on:
   pull_request:
     paths:
       - "systemic_risk_bench/lombard.py"
+      - "systemic_risk_bench/lombard_feedback.py"
+      - "adapters/lombard_feedback_llamacpp.py"
+      - "examples/lombard_feedback_reference_adapter.py"
+      - "configs/lombard-feedback-*.json"
+      - "tests/test_lombard_feedback.py"
+      - "docs/lombard-feedback.md"
       - "systemic_risk_bench/content_suite.py"
       - "systemic_risk_bench/content_math.py"
       - "systemic_risk_bench/data/content/**"
@@ -54,8 +66,29 @@ jobs:
           python-version: "3.12"
       - name: Run Bagehot content-suite tests
         run: python -m unittest discover -s tests -p 'test_lombard_content.py' -v
+      - name: Run Bagehot guarantee-price feedback tests
+        run: python -m unittest discover -s tests -p 'test_lombard_feedback.py' -v
       - name: Run complete Python regression suite
         run: python -m unittest discover -s tests -q
+      - name: Verify source-only oracle and real subprocess adapter scoring
+        run: |
+          python -m systemic_risk_bench lombard-feedback-oracle --config configs/lombard-feedback-v1.json --output /tmp/lombard-feedback-oracle.json
+          python -m systemic_risk_bench lombard-feedback-export --config configs/lombard-feedback-v1.json --output /tmp/lombard-feedback-public.json
+          python -m systemic_risk_bench lombard-feedback-run --config configs/lombard-feedback-v1.json --experiment configs/finance-revision-fixture.json --adapter-argv '["python","-m","examples.lombard_feedback_reference_adapter"]' --output /tmp/lombard-feedback-fixture.json
+          python - <<'PY'
+          import json
+          o=json.load(open('/tmp/lombard-feedback-oracle.json'))
+          pub=json.load(open('/tmp/lombard-feedback-public.json'))
+          fixture=json.load(open('/tmp/lombard-feedback-fixture.json'))
+          assert o['n_cases'] == 5 and not o['empirical_identification_claim']
+          assert pub['answer_keys_present'] is False and len(pub['cases']) == 5
+          assert fixture['score']['coverage'] == 1
+          assert fixture['score']['field_accuracy_including_missing'] == 1
+          assert fixture['score']['policy_accuracy_including_missing'] == 1
+          assert fixture['model_evaluation_claim'] is False
+          assert fixture['physical_memory_enforced'] is False
+          print('PASS: guarantee credit feedback source-only transport and exact scorer')
+          PY
       - name: CLI validated source and synthetic content exports
         run: |
           python -m systemic_risk_bench content-list > /tmp/lombard-cases.json
@@ -92,6 +125,7 @@ jobs:
         run: |
           set -euo pipefail
           lake env lean Lombard/Capital.lean | tee lombard-axioms.txt
+          lake env lean Lombard/Funding.lean | tee -a lombard-axioms.txt
           if grep -Eq 'sorryAx|ofReduceBool' lombard-axioms.txt; then
             echo 'Unexpected admitted or native-reduction axiom'
             exit 1
