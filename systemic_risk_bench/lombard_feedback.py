@@ -263,7 +263,11 @@ def analysis(config: dict) -> dict:
         "source_class": "synthetic_law_evaluator_fixture",
         "model_evaluation_claim": False, "empirical_identification_claim": False,
         "general_equilibrium_claim": False,
+        "physical_and_pricing_default_probabilities_assumed_equal": True,
+        "physical_measure_calibration_claim": False,
         "policy": "anticipated_Treasury_guarantee_on_bank_funding_debt",
+        "treasury_expected_value_interpretation":
+            "one-period physical mean only under the registered P_equals_Q_assumption",
         "no_bank_equity_recap_or_central_bank_credit_in_this_model": True,
         "bank_liability_guarantee_vs_equity_transfer_kept_distinct": True,
         "config_sha256": canonical_sha(config), "n_cases": len(rows),
