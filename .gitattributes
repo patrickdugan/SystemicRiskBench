@@ -1,0 +1,3 @@
+# Frozen source manifests hash LF bytes on Windows and Unix checkouts.
+*.py text eol=lf
+*.json text eol=lf

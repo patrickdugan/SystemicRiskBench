@@ -1,0 +1,223 @@
+{
+  "schema": "srb.artifact_uri_index.v1",
+  "repository": "https://github.com/patrickdugan/SystemicRiskBench",
+  "branch": "research/srb-finance-revision-04",
+  "srb_rev_03_pr": "https://github.com/patrickdugan/SystemicRiskBench/pull/8",
+  "srb_rev_03_commit": "https://github.com/patrickdugan/SystemicRiskBench/commit/77d011a",
+  "storage_tier": "git_repository_under_100mb",
+  "total_indexed_bytes": 1382582,
+  "external_pinned_weights_huggingface": [
+    {
+      "label": "Bonsai-8B-Q1_0.gguf",
+      "bytes": 1158654496,
+      "sha256": "284a335aa3fb2ced3b1b01fcb40b08aa783e3b70832767f0dd2e3fdfa134bd54",
+      "uri": "https://huggingface.co/prism-ml/Bonsai-8B-gguf/resolve/48516770dd04643643e9f9019a2a349cf26c5dbd/Bonsai-8B-Q1_0.gguf"
+    },
+    {
+      "label": "bitagent-bonsai8b-dagv2-lora-v3-f16.gguf",
+      "bytes": 87329024,
+      "sha256": "9a11fe2cecf795f53dbea490b9897b28f3d3346a9f69a71ce28bbb195f7de704",
+      "uri": "https://huggingface.co/AlephFunk/bitagent-bonsai8b-dagv2-lora-v3/resolve/ee2937fb58d87bbd155cd205c43dc8103b51eac2/bitagent-bonsai8b-dagv2-lora-v3-f16.gguf"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "results/srb-rev-03-bitagent-ephemeral-v2/REPORT.md",
+      "bytes": 6860,
+      "sha256": "ab20f3d1941e2cce536b641010ac97bd865dc5fc02bd02e449426cc15e839ef0",
+      "blob_uri": "https://github.com/patrickdugan/SystemicRiskBench/blob/ba45bee97a36fa05253efee8df66193e585a96b4/results/srb-rev-03-bitagent-ephemeral-v2/REPORT.md",
+      "raw_uri": "https://raw.githubusercontent.com/patrickdugan/SystemicRiskBench/ba45bee97a36fa05253efee8df66193e585a96b4/results/srb-rev-03-bitagent-ephemeral-v2/REPORT.md"
+    },
+    {
+      "path": "results/srb-rev-03-bitagent-ephemeral-v2/summary.json",
+      "bytes": 16757,
+      "sha256": "cad3d69187f7c19059701089d8f4420d56481d1811bd1bcd4b618cb0a10fca03",
+      "blob_uri": "https://github.com/patrickdugan/SystemicRiskBench/blob/ba45bee97a36fa05253efee8df66193e585a96b4/results/srb-rev-03-bitagent-ephemeral-v2/summary.json",
+      "raw_uri": "https://raw.githubusercontent.com/patrickdugan/SystemicRiskBench/ba45bee97a36fa05253efee8df66193e585a96b4/results/srb-rev-03-bitagent-ephemeral-v2/summary.json"
+    },
+    {
+      "path": "results/srb-rev-04-bitagent-scratchpad-v1/REPORT.md",
+      "bytes": 5853,
+      "sha256": "e538944cfd4faa6192cee97cc615bb278d0be176f5b17cf9a725907553a93d16",
+      "blob_uri": "https://github.com/patrickdugan/SystemicRiskBench/blob/ba45bee97a36fa05253efee8df66193e585a96b4/results/srb-rev-04-bitagent-scratchpad-v1/REPORT.md",
+      "raw_uri": "https://raw.githubusercontent.com/patrickdugan/SystemicRiskBench/ba45bee97a36fa05253efee8df66193e585a96b4/results/srb-rev-04-bitagent-scratchpad-v1/REPORT.md"
+    },
+    {
+      "path": "results/srb-rev-04-bitagent-scratchpad-v1/summary.json",
+      "bytes": 16798,
+      "sha256": "63c2507ef30741a2786838e5361fcbedeaeab96fad5658dfff78ebf2d91008b9",
+      "blob_uri": "https://github.com/patrickdugan/SystemicRiskBench/blob/ba45bee97a36fa05253efee8df66193e585a96b4/results/srb-rev-04-bitagent-scratchpad-v1/summary.json",
+      "raw_uri": "https://raw.githubusercontent.com/patrickdugan/SystemicRiskBench/ba45bee97a36fa05253efee8df66193e585a96b4/results/srb-rev-04-bitagent-scratchpad-v1/summary.json"
+    },
+    {
+      "path": "results/bitagent-dagv3-quant-v2/REPORT.md",
+      "bytes": 1198,
+      "sha256": "5d7000fd8660313d60a362d0d2532da91719fc60638a2c0286954e3e8792efff",
+      "blob_uri": "https://github.com/patrickdugan/SystemicRiskBench/blob/ba45bee97a36fa05253efee8df66193e585a96b4/results/bitagent-dagv3-quant-v2/REPORT.md",
+      "raw_uri": "https://raw.githubusercontent.com/patrickdugan/SystemicRiskBench/ba45bee97a36fa05253efee8df66193e585a96b4/results/bitagent-dagv3-quant-v2/REPORT.md"
+    },
+    {
+      "path": "results/bitagent-dagv3-quant-v2/summary.json",
+      "bytes": 3219,
+      "sha256": "482ae6229eb0eda6297c605d9a9a370d3edefec51a7e41fa5adb89457d38d5b7",
+      "blob_uri": "https://github.com/patrickdugan/SystemicRiskBench/blob/ba45bee97a36fa05253efee8df66193e585a96b4/results/bitagent-dagv3-quant-v2/summary.json",
+      "raw_uri": "https://raw.githubusercontent.com/patrickdugan/SystemicRiskBench/ba45bee97a36fa05253efee8df66193e585a96b4/results/bitagent-dagv3-quant-v2/summary.json"
+    },
+    {
+      "path": "docs/finance-revision-stress.md",
+      "bytes": 18761,
+      "sha256": "82cfb9e4156c9967b84707e637083f3e7545d965b8f678954aa9f26b3decd78a",
+      "blob_uri": "https://github.com/patrickdugan/SystemicRiskBench/blob/ba45bee97a36fa05253efee8df66193e585a96b4/docs/finance-revision-stress.md",
+      "raw_uri": "https://raw.githubusercontent.com/patrickdugan/SystemicRiskBench/ba45bee97a36fa05253efee8df66193e585a96b4/docs/finance-revision-stress.md"
+    },
+    {
+      "path": "docs/finance-revision-scratchpad.md",
+      "bytes": 2326,
+      "sha256": "f1e1af2b44c6a3b76f3b4f914b849fece5571f9ab7c3a469cfb9fae440e0211f",
+      "blob_uri": "https://github.com/patrickdugan/SystemicRiskBench/blob/ba45bee97a36fa05253efee8df66193e585a96b4/docs/finance-revision-scratchpad.md",
+      "raw_uri": "https://raw.githubusercontent.com/patrickdugan/SystemicRiskBench/ba45bee97a36fa05253efee8df66193e585a96b4/docs/finance-revision-scratchpad.md"
+    },
+    {
+      "path": "configs/finance-revision-panels.json",
+      "bytes": 120704,
+      "sha256": "db8ba40c6b2f6fd56a52cebb7f5943532bd169ab45f160318fb903db938b0c2a",
+      "blob_uri": "https://github.com/patrickdugan/SystemicRiskBench/blob/ba45bee97a36fa05253efee8df66193e585a96b4/configs/finance-revision-panels.json",
+      "raw_uri": "https://raw.githubusercontent.com/patrickdugan/SystemicRiskBench/ba45bee97a36fa05253efee8df66193e585a96b4/configs/finance-revision-panels.json"
+    },
+    {
+      "path": "results/srb-rev-03-bitagent-ephemeral-v2/pilot-count.scrubbed.json",
+      "bytes": 33446,
+      "sha256": "0a40facfa53db5cbb4c1ac375d46c6a0ce040f83371b7456de54bd073aca2d21",
+      "blob_uri": "https://github.com/patrickdugan/SystemicRiskBench/blob/ba45bee97a36fa05253efee8df66193e585a96b4/results/srb-rev-03-bitagent-ephemeral-v2/pilot-count.scrubbed.json",
+      "raw_uri": "https://raw.githubusercontent.com/patrickdugan/SystemicRiskBench/ba45bee97a36fa05253efee8df66193e585a96b4/results/srb-rev-03-bitagent-ephemeral-v2/pilot-count.scrubbed.json"
+    },
+    {
+      "path": "results/srb-rev-03-bitagent-ephemeral-v2/pilot-bitmap.scrubbed.json",
+      "bytes": 30648,
+      "sha256": "2cc9ffc40733d640ce4f9738170b53e40c4bff5eb0e7ce051ef30e56ef4330ca",
+      "blob_uri": "https://github.com/patrickdugan/SystemicRiskBench/blob/ba45bee97a36fa05253efee8df66193e585a96b4/results/srb-rev-03-bitagent-ephemeral-v2/pilot-bitmap.scrubbed.json",
+      "raw_uri": "https://raw.githubusercontent.com/patrickdugan/SystemicRiskBench/ba45bee97a36fa05253efee8df66193e585a96b4/results/srb-rev-03-bitagent-ephemeral-v2/pilot-bitmap.scrubbed.json"
+    },
+    {
+      "path": "results/srb-rev-03-bitagent-ephemeral-v2/stress-count.scrubbed.json",
+      "bytes": 70278,
+      "sha256": "2c6e8aa06d4a4c94feaafe31a17736f2ba52ac60cc1c45992ecc1be5f5756ab7",
+      "blob_uri": "https://github.com/patrickdugan/SystemicRiskBench/blob/ba45bee97a36fa05253efee8df66193e585a96b4/results/srb-rev-03-bitagent-ephemeral-v2/stress-count.scrubbed.json",
+      "raw_uri": "https://raw.githubusercontent.com/patrickdugan/SystemicRiskBench/ba45bee97a36fa05253efee8df66193e585a96b4/results/srb-rev-03-bitagent-ephemeral-v2/stress-count.scrubbed.json"
+    },
+    {
+      "path": "results/srb-rev-03-bitagent-ephemeral-v2/stress-bitmap.scrubbed.json",
+      "bytes": 70194,
+      "sha256": "a827c5c0ad3305f0528fe4fa19c4b66550e9ef9b81548e0cc71012b52469e043",
+      "blob_uri": "https://github.com/patrickdugan/SystemicRiskBench/blob/ba45bee97a36fa05253efee8df66193e585a96b4/results/srb-rev-03-bitagent-ephemeral-v2/stress-bitmap.scrubbed.json",
+      "raw_uri": "https://raw.githubusercontent.com/patrickdugan/SystemicRiskBench/ba45bee97a36fa05253efee8df66193e585a96b4/results/srb-rev-03-bitagent-ephemeral-v2/stress-bitmap.scrubbed.json"
+    },
+    {
+      "path": "results/srb-rev-03-bitagent-ephemeral-v2/natural-count.scrubbed.json",
+      "bytes": 176341,
+      "sha256": "66706ba23c12d143c6f626cb219c2bcc90a12392b1fe230c38f8d254c744368f",
+      "blob_uri": "https://github.com/patrickdugan/SystemicRiskBench/blob/ba45bee97a36fa05253efee8df66193e585a96b4/results/srb-rev-03-bitagent-ephemeral-v2/natural-count.scrubbed.json",
+      "raw_uri": "https://raw.githubusercontent.com/patrickdugan/SystemicRiskBench/ba45bee97a36fa05253efee8df66193e585a96b4/results/srb-rev-03-bitagent-ephemeral-v2/natural-count.scrubbed.json"
+    },
+    {
+      "path": "results/srb-rev-03-bitagent-ephemeral-v2/natural-bitmap.scrubbed.json",
+      "bytes": 169277,
+      "sha256": "a92a32c8cae160d8569c89421574fc78f4892570689eefa9602800a72bcb97d4",
+      "blob_uri": "https://github.com/patrickdugan/SystemicRiskBench/blob/ba45bee97a36fa05253efee8df66193e585a96b4/results/srb-rev-03-bitagent-ephemeral-v2/natural-bitmap.scrubbed.json",
+      "raw_uri": "https://raw.githubusercontent.com/patrickdugan/SystemicRiskBench/ba45bee97a36fa05253efee8df66193e585a96b4/results/srb-rev-03-bitagent-ephemeral-v2/natural-bitmap.scrubbed.json"
+    },
+    {
+      "path": "results/srb-rev-04-bitagent-scratchpad-v1/pilot-count.scrubbed.json",
+      "bytes": 33501,
+      "sha256": "703d600bedcd4ef0457a5baa54e387dd8b9a8671fbe74ac2b7e21b399e3ce238",
+      "blob_uri": "https://github.com/patrickdugan/SystemicRiskBench/blob/ba45bee97a36fa05253efee8df66193e585a96b4/results/srb-rev-04-bitagent-scratchpad-v1/pilot-count.scrubbed.json",
+      "raw_uri": "https://raw.githubusercontent.com/patrickdugan/SystemicRiskBench/ba45bee97a36fa05253efee8df66193e585a96b4/results/srb-rev-04-bitagent-scratchpad-v1/pilot-count.scrubbed.json"
+    },
+    {
+      "path": "results/srb-rev-04-bitagent-scratchpad-v1/pilot-bitmap.scrubbed.json",
+      "bytes": 30358,
+      "sha256": "731d7c526eb622a7e67cac5d20b11294ba750da13b8a8e892feb39155aa191cc",
+      "blob_uri": "https://github.com/patrickdugan/SystemicRiskBench/blob/ba45bee97a36fa05253efee8df66193e585a96b4/results/srb-rev-04-bitagent-scratchpad-v1/pilot-bitmap.scrubbed.json",
+      "raw_uri": "https://raw.githubusercontent.com/patrickdugan/SystemicRiskBench/ba45bee97a36fa05253efee8df66193e585a96b4/results/srb-rev-04-bitagent-scratchpad-v1/pilot-bitmap.scrubbed.json"
+    },
+    {
+      "path": "results/srb-rev-04-bitagent-scratchpad-v1/stress-count.scrubbed.json",
+      "bytes": 81166,
+      "sha256": "dfb34eb9e99787a6c0aee5bd9c0387a12238ddaaa69babb19139c5a3591597b2",
+      "blob_uri": "https://github.com/patrickdugan/SystemicRiskBench/blob/ba45bee97a36fa05253efee8df66193e585a96b4/results/srb-rev-04-bitagent-scratchpad-v1/stress-count.scrubbed.json",
+      "raw_uri": "https://raw.githubusercontent.com/patrickdugan/SystemicRiskBench/ba45bee97a36fa05253efee8df66193e585a96b4/results/srb-rev-04-bitagent-scratchpad-v1/stress-count.scrubbed.json"
+    },
+    {
+      "path": "results/srb-rev-04-bitagent-scratchpad-v1/stress-bitmap.scrubbed.json",
+      "bytes": 70131,
+      "sha256": "32cdb69f4d911114ea2cf27e06de9d4b2be9cef1a9102df746c2f3f3057afffb",
+      "blob_uri": "https://github.com/patrickdugan/SystemicRiskBench/blob/ba45bee97a36fa05253efee8df66193e585a96b4/results/srb-rev-04-bitagent-scratchpad-v1/stress-bitmap.scrubbed.json",
+      "raw_uri": "https://raw.githubusercontent.com/patrickdugan/SystemicRiskBench/ba45bee97a36fa05253efee8df66193e585a96b4/results/srb-rev-04-bitagent-scratchpad-v1/stress-bitmap.scrubbed.json"
+    },
+    {
+      "path": "results/srb-rev-04-bitagent-scratchpad-v1/natural-count.scrubbed.json",
+      "bytes": 210986,
+      "sha256": "111ef5b870997bebbe6b49d638994b8418e45244715607ac0fc632db303f99c5",
+      "blob_uri": "https://github.com/patrickdugan/SystemicRiskBench/blob/ba45bee97a36fa05253efee8df66193e585a96b4/results/srb-rev-04-bitagent-scratchpad-v1/natural-count.scrubbed.json",
+      "raw_uri": "https://raw.githubusercontent.com/patrickdugan/SystemicRiskBench/ba45bee97a36fa05253efee8df66193e585a96b4/results/srb-rev-04-bitagent-scratchpad-v1/natural-count.scrubbed.json"
+    },
+    {
+      "path": "results/srb-rev-04-bitagent-scratchpad-v1/natural-bitmap.scrubbed.json",
+      "bytes": 175682,
+      "sha256": "4481cf181ddae152a1a29b74ad832754d439c983a029b51be5666ec7895d02d2",
+      "blob_uri": "https://github.com/patrickdugan/SystemicRiskBench/blob/ba45bee97a36fa05253efee8df66193e585a96b4/results/srb-rev-04-bitagent-scratchpad-v1/natural-bitmap.scrubbed.json",
+      "raw_uri": "https://raw.githubusercontent.com/patrickdugan/SystemicRiskBench/ba45bee97a36fa05253efee8df66193e585a96b4/results/srb-rev-04-bitagent-scratchpad-v1/natural-bitmap.scrubbed.json"
+    },
+    {
+      "path": "results/bitagent-dagv3-quant-v2/responses.scrubbed.json",
+      "bytes": 31216,
+      "sha256": "1282861185be9533c2ca5e0e42a06c6eaaec406dbeabfd75c5555b416b12e945",
+      "blob_uri": "https://github.com/patrickdugan/SystemicRiskBench/blob/ba45bee97a36fa05253efee8df66193e585a96b4/results/bitagent-dagv3-quant-v2/responses.scrubbed.json",
+      "raw_uri": "https://raw.githubusercontent.com/patrickdugan/SystemicRiskBench/ba45bee97a36fa05253efee8df66193e585a96b4/results/bitagent-dagv3-quant-v2/responses.scrubbed.json"
+    },
+    {
+      "path": "configs/srb-rev-03-bitagent-pilot.json",
+      "bytes": 1129,
+      "sha256": "08a04b0577ea54447c2d5813dbd0860950ecd72d4be0df35931225d008d88eb2",
+      "blob_uri": "https://github.com/patrickdugan/SystemicRiskBench/blob/ba45bee97a36fa05253efee8df66193e585a96b4/configs/srb-rev-03-bitagent-pilot.json",
+      "raw_uri": "https://raw.githubusercontent.com/patrickdugan/SystemicRiskBench/ba45bee97a36fa05253efee8df66193e585a96b4/configs/srb-rev-03-bitagent-pilot.json"
+    },
+    {
+      "path": "configs/srb-rev-03-bitagent-stress.json",
+      "bytes": 1133,
+      "sha256": "4d09da4488b9757a7aaf14c50470dc5fbbc7bcba89d4114c1246f7fed1ae9457",
+      "blob_uri": "https://github.com/patrickdugan/SystemicRiskBench/blob/ba45bee97a36fa05253efee8df66193e585a96b4/configs/srb-rev-03-bitagent-stress.json",
+      "raw_uri": "https://raw.githubusercontent.com/patrickdugan/SystemicRiskBench/ba45bee97a36fa05253efee8df66193e585a96b4/configs/srb-rev-03-bitagent-stress.json"
+    },
+    {
+      "path": "configs/srb-rev-03-bitagent-natural.json",
+      "bytes": 1135,
+      "sha256": "d4d1856d265c8107bcb970cdf36e2e58ae51c257f119df19567b652557a863ea",
+      "blob_uri": "https://github.com/patrickdugan/SystemicRiskBench/blob/ba45bee97a36fa05253efee8df66193e585a96b4/configs/srb-rev-03-bitagent-natural.json",
+      "raw_uri": "https://raw.githubusercontent.com/patrickdugan/SystemicRiskBench/ba45bee97a36fa05253efee8df66193e585a96b4/configs/srb-rev-03-bitagent-natural.json"
+    },
+    {
+      "path": "configs/srb-rev-04-bitagent-scratchpad-pilot.json",
+      "bytes": 1159,
+      "sha256": "b8a2f667018e2814f87d8b0f110628b0a4e677b7fa25224f726a95ca011efe4f",
+      "blob_uri": "https://github.com/patrickdugan/SystemicRiskBench/blob/ba45bee97a36fa05253efee8df66193e585a96b4/configs/srb-rev-04-bitagent-scratchpad-pilot.json",
+      "raw_uri": "https://raw.githubusercontent.com/patrickdugan/SystemicRiskBench/ba45bee97a36fa05253efee8df66193e585a96b4/configs/srb-rev-04-bitagent-scratchpad-pilot.json"
+    },
+    {
+      "path": "configs/srb-rev-04-bitagent-scratchpad-stress.json",
+      "bytes": 1162,
+      "sha256": "9a0e46ff72a5bd6cc9496ad3abf2480ebb6f7bad4526a60ecc85b3cf5deaebf3",
+      "blob_uri": "https://github.com/patrickdugan/SystemicRiskBench/blob/ba45bee97a36fa05253efee8df66193e585a96b4/configs/srb-rev-04-bitagent-scratchpad-stress.json",
+      "raw_uri": "https://raw.githubusercontent.com/patrickdugan/SystemicRiskBench/ba45bee97a36fa05253efee8df66193e585a96b4/configs/srb-rev-04-bitagent-scratchpad-stress.json"
+    },
+    {
+      "path": "configs/srb-rev-04-bitagent-scratchpad-natural.json",
+      "bytes": 1164,
+      "sha256": "80b9bb49f8085cba3c47bf35827d876558cb910301c59457d3a95716d3085f32",
+      "blob_uri": "https://github.com/patrickdugan/SystemicRiskBench/blob/ba45bee97a36fa05253efee8df66193e585a96b4/configs/srb-rev-04-bitagent-scratchpad-natural.json",
+      "raw_uri": "https://raw.githubusercontent.com/patrickdugan/SystemicRiskBench/ba45bee97a36fa05253efee8df66193e585a96b4/configs/srb-rev-04-bitagent-scratchpad-natural.json"
+    }
+  ],
+  "artifact_commit": "ba45bee97a36fa05253efee8df66193e585a96b4",
+  "uri_policy": "immutable_commit_pinned_reports_and_datasets"
+}

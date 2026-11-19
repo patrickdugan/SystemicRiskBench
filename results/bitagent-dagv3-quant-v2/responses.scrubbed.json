@@ -1,0 +1,719 @@
+{
+  "schema": "srb.local_campaign.scrubbed_receipts.v1",
+  "receipts": [
+    {
+      "status": "ok",
+      "response": {
+        "estimates": {
+          "cva": 1000000.0
+        },
+        "rationale": "The CVA is calculated as the expected loss due to default, which is the product of the exposure, the default probability increment, and the recovery rate. The exposure is 1000000, the default probability increment is 0.01, and the recovery rate is 0.4. The CVA is therefore 1000000 * 0.01 * (1 - 0.4) = 1000000 * 0.01 * 0.6 = 60000. The CVA is therefore 60000. The CVA is calculated as the expected loss due to default, which is the product of the exposure, the default probability increment, and the recovery rate. The exposure is 1000000, the default probability increment is 0.01, and the recovery rate is 0.4. The CVA is therefore 1000000 * 0.01 * (1 - 0.4) = 1000000 * 0.01 * 0.6 = 60000. The CVA is therefore 60000.",
+        "limitations": [
+          "The CVA assumes independence of positive exposure and default, which may not hold in practice.",
+          "The CVA is based on risk-neutral default probability increments and does not account for actual default probabilities.",
+          "The CVA does not consider the impact of recovery on the expected loss.",
+          "The CVA is a simplified model and does not account for complex risk factors such as credit risk, liquidity risk, or market risk."
+        ]
+      },
+      "wall_seconds": 5.055501400027424,
+      "requested_model": "bitagent-bonsai8b-dagv3",
+      "resolved_model": "bitagent-bonsai8b-dagv3",
+      "runtime_identity": {
+        "model_alias": "bitagent-bonsai8b-dagv3",
+        "active_adapters": [
+          {
+            "id": 0,
+            "path": "bitagent-bonsai8b-dagv2-lora-v3-f16.gguf",
+            "scale": 1.0,
+            "task_name": "",
+            "prompt_prefix": ""
+          }
+        ],
+        "base_sha256": "284a335aa3fb2ced3b1b01fcb40b08aa783e3b70832767f0dd2e3fdfa134bd54",
+        "adapter_sha256": "9a11fe2cecf795f53dbea490b9897b28f3d3346a9f69a71ce28bbb195f7de704"
+      },
+      "tool_calls": [],
+      "usage": {
+        "input_tokens": 244,
+        "output_tokens": 377,
+        "total_tokens": 621,
+        "reasoning_tokens": null
+      },
+      "sampling": {
+        "temperature": 0,
+        "seed": 0,
+        "max_tokens": 2048
+      },
+      "token_meter": "llama.cpp server telemetry",
+      "task_index": 0,
+      "case_id": "q-cva-term",
+      "stage_index": 0,
+      "track": "quant",
+      "packet_sha256": "30b8901f95cc4c41842ded3f728b248a1ed262a5d05cf7bf338cdc9676d10871",
+      "completed_at": "2026-11-19T04:58:55.075478+00:00"
+    },
+    {
+      "status": "ok",
+      "response": {
+        "estimates": {
+          "joint_loss": 100000,
+          "independent_loss": 100000
+        },
+        "rationale": "The joint-state expected credit loss is calculated by multiplying each exposure by its respective conditional PD and state probability, then summing the results. For the first exposure, 100000 * 0.01 * 0.9 = 900. For the second exposure, 1000000 * 0.2 * 0.1 = 200000. Summing these gives 209000. The independent loss assumes each exposure is independent, so it calculates the expected loss for each exposure separately. For the first exposure, 100000 * 0.01 = 1000. For the second exposure, 1000000 * 0.2 = 200000. Summing these gives 201000. The gap is 8000, reflecting the loss from assuming independence in a correlated state.",
+        "limitations": [
+          "The joint loss calculation assumes the conditional PDs and state probabilities are correctly specified and that the recovery rate is consistent with the exposure and PDs."
+        ]
+      },
+      "wall_seconds": 4.166558800032362,
+      "requested_model": "bitagent-bonsai8b-dagv3",
+      "resolved_model": "bitagent-bonsai8b-dagv3",
+      "runtime_identity": {
+        "model_alias": "bitagent-bonsai8b-dagv3",
+        "active_adapters": [
+          {
+            "id": 0,
+            "path": "bitagent-bonsai8b-dagv2-lora-v3-f16.gguf",
+            "scale": 1.0,
+            "task_name": "",
+            "prompt_prefix": ""
+          }
+        ],
+        "base_sha256": "284a335aa3fb2ced3b1b01fcb40b08aa783e3b70832767f0dd2e3fdfa134bd54",
+        "adapter_sha256": "9a11fe2cecf795f53dbea490b9897b28f3d3346a9f69a71ce28bbb195f7de704"
+      },
+      "tool_calls": [],
+      "usage": {
+        "input_tokens": 250,
+        "output_tokens": 277,
+        "total_tokens": 527,
+        "reasoning_tokens": null
+      },
+      "sampling": {
+        "temperature": 0,
+        "seed": 0,
+        "max_tokens": 2048
+      },
+      "token_meter": "llama.cpp server telemetry",
+      "task_index": 1,
+      "case_id": "q-wrong-way",
+      "stage_index": 0,
+      "track": "quant",
+      "packet_sha256": "4e45e5353d1a3a636c4506dde63c2d3cbaeb66c9e3232bdf4b15b796c88d4906",
+      "completed_at": "2026-11-19T04:58:59.263856+00:00"
+    },
+    {
+      "status": "ok",
+      "response": {
+        "estimates": {
+          "non_pvp_principal_el": 9999996,
+          "pvp_principal_el": 9999994,
+          "liquidity_need": 0
+        },
+        "rationale": "Non-PvP principal loss is calculated as principal * (1 - recovery) * fail_probability = 10000000 * (1 - 0.4) * 0.002 = 9999996. PvP principal loss is similar but with a slightly higher failure probability due to the risk of pay-away: 10000000 * (1 - 0.4) * 0.0025 = 9999994. Liquidity need is null as recovery applies to principal and replacement funding is not required for the purchased currency.",
+        "limitations": [
+          "No external data sources used",
+          "No assumptions beyond inputs provided"
+        ]
+      },
+      "wall_seconds": 3.3909128000959754,
+      "requested_model": "bitagent-bonsai8b-dagv3",
+      "resolved_model": "bitagent-bonsai8b-dagv3",
+      "runtime_identity": {
+        "model_alias": "bitagent-bonsai8b-dagv3",
+        "active_adapters": [
+          {
+            "id": 0,
+            "path": "bitagent-bonsai8b-dagv2-lora-v3-f16.gguf",
+            "scale": 1.0,
+            "task_name": "",
+            "prompt_prefix": ""
+          }
+        ],
+        "base_sha256": "284a335aa3fb2ced3b1b01fcb40b08aa783e3b70832767f0dd2e3fdfa134bd54",
+        "adapter_sha256": "9a11fe2cecf795f53dbea490b9897b28f3d3346a9f69a71ce28bbb195f7de704"
+      },
+      "tool_calls": [],
+      "usage": {
+        "input_tokens": 263,
+        "output_tokens": 201,
+        "total_tokens": 464,
+        "reasoning_tokens": null
+      },
+      "sampling": {
+        "temperature": 0,
+        "seed": 0,
+        "max_tokens": 2048
+      },
+      "token_meter": "llama.cpp server telemetry",
+      "task_index": 2,
+      "case_id": "q-settlement",
+      "stage_index": 0,
+      "track": "quant",
+      "packet_sha256": "42047bac0555c06afa3f6865900879ea0e21b21e7e78b1c9e4be38c2cb9e6587",
+      "completed_at": "2026-11-19T04:59:02.675422+00:00"
+    },
+    {
+      "status": "ok",
+      "response": {
+        "estimates": {
+          "var": 20,
+          "expected_shortfall": 25.5
+        },
+        "rationale": "VaR is calculated as the left quantile of losses, which corresponds to the 2.5th percentile (1 - 0.975) of the loss distribution. The worst (1 - alpha) probability mass is the sum of the probabilities of the worst losses, which are 0.01 (100) and 0.04 (20). The expected shortfall is the average of the worst losses weighted by their probabilities, which is (100 * 0.01 + 20 * 0.04) / (0.01 + 0.04) = 25.5. The answer fields are filled with these estimates.",
+        "limitations": [
+          "Missing inputs for the stress interval and additional loss data.",
+          "No validation of the inputs.",
+          "No explanation of the methodology.",
+          "No handling of non-normal distributions.",
+          "No handling of multiple stress intervals."
+        ]
+      },
+      "wall_seconds": 3.465867100050673,
+      "requested_model": "bitagent-bonsai8b-dagv3",
+      "resolved_model": "bitagent-bonsai8b-dagv3",
+      "runtime_identity": {
+        "model_alias": "bitagent-bonsai8b-dagv3",
+        "active_adapters": [
+          {
+            "id": 0,
+            "path": "bitagent-bonsai8b-dagv2-lora-v3-f16.gguf",
+            "scale": 1.0,
+            "task_name": "",
+            "prompt_prefix": ""
+          }
+        ],
+        "base_sha256": "284a335aa3fb2ced3b1b01fcb40b08aa783e3b70832767f0dd2e3fdfa134bd54",
+        "adapter_sha256": "9a11fe2cecf795f53dbea490b9897b28f3d3346a9f69a71ce28bbb195f7de704"
+      },
+      "tool_calls": [],
+      "usage": {
+        "input_tokens": 272,
+        "output_tokens": 218,
+        "total_tokens": 490,
+        "reasoning_tokens": null
+      },
+      "sampling": {
+        "temperature": 0,
+        "seed": 0,
+        "max_tokens": 2048
+      },
+      "token_meter": "llama.cpp server telemetry",
+      "task_index": 3,
+      "case_id": "q-tail",
+      "stage_index": 0,
+      "track": "quant",
+      "packet_sha256": "cdba48802f5ccc10f66268d0c25f934fb78d701a10b0b91b24ad6de0b4551d5a",
+      "completed_at": "2026-11-19T04:59:06.159456+00:00"
+    },
+    {
+      "status": "ok",
+      "response": {
+        "estimates": {
+          "same_set_exposure": 20,
+          "separate_set_exposure": 0
+        },
+        "rationale": "Positive exposure for same_set is calculated as the sum of positions within the inner array, which is 100 - 80 = 20. For separate_sets, exposure is calculated as the sum of individual positions, which is 100 + (-80) = 20. Market hedging does not establish cross-counterparty legal close-out netting because it only neutralizes risk, not the legal obligations between counterparties.",
+        "limitations": [
+          "Exposure calculations assume no additional positions or risk factors.",
+          "Market hedging does not address legal obligations or netting between different parties."
+        ]
+      },
+      "wall_seconds": 2.987742699915543,
+      "requested_model": "bitagent-bonsai8b-dagv3",
+      "resolved_model": "bitagent-bonsai8b-dagv3",
+      "runtime_identity": {
+        "model_alias": "bitagent-bonsai8b-dagv3",
+        "active_adapters": [
+          {
+            "id": 0,
+            "path": "bitagent-bonsai8b-dagv2-lora-v3-f16.gguf",
+            "scale": 1.0,
+            "task_name": "",
+            "prompt_prefix": ""
+          }
+        ],
+        "base_sha256": "284a335aa3fb2ced3b1b01fcb40b08aa783e3b70832767f0dd2e3fdfa134bd54",
+        "adapter_sha256": "9a11fe2cecf795f53dbea490b9897b28f3d3346a9f69a71ce28bbb195f7de704"
+      },
+      "tool_calls": [],
+      "usage": {
+        "input_tokens": 220,
+        "output_tokens": 155,
+        "total_tokens": 375,
+        "reasoning_tokens": null
+      },
+      "sampling": {
+        "temperature": 0,
+        "seed": 0,
+        "max_tokens": 2048
+      },
+      "token_meter": "llama.cpp server telemetry",
+      "task_index": 4,
+      "case_id": "q-netting",
+      "stage_index": 0,
+      "track": "quant",
+      "packet_sha256": "ee791cab4c73e360f5e3a8808d44d5d31d5ba02741377e026dd0950891830226",
+      "completed_at": "2026-11-19T04:59:09.174255+00:00"
+    },
+    {
+      "status": "ok",
+      "response": {
+        "estimates": {
+          "single_sell": 3000,
+          "million_sell": 300000000,
+          "million_flow_depth": 1000000000000000
+        },
+        "rationale": "Each agent sells the stated fraction of leveraged risky assets in one interval. With a capital per agent of $1000, leverage of 3, and a sell fraction of 0.1, the total sell notional for one agent is calculated as capital_per_agent * leverage * sell_fraction = 1000 * 3 * 0.1 = $3000. For one million agents, the total sell notional is $3000 * 1000000 = $300,000,000. The sell-notional/depth for one agent is calculated as sell_fraction * leverage * capital_per_agent / depth = 0.1 * 3 * 1000 / 100000000 = $0.000003. For one million agents, the sell-notional/depth is $0.000003 * 1000000 = $3. The depth is a scenario capacity parameter, not a guaranteed executable quote.",
+        "limitations": [
+          "The calculations assume uniform behavior across agents and do not account for market impact or liquidity constraints."
+        ]
+      },
+      "wall_seconds": 4.474711700109765,
+      "requested_model": "bitagent-bonsai8b-dagv3",
+      "resolved_model": "bitagent-bonsai8b-dagv3",
+      "runtime_identity": {
+        "model_alias": "bitagent-bonsai8b-dagv3",
+        "active_adapters": [
+          {
+            "id": 0,
+            "path": "bitagent-bonsai8b-dagv2-lora-v3-f16.gguf",
+            "scale": 1.0,
+            "task_name": "",
+            "prompt_prefix": ""
+          }
+        ],
+        "base_sha256": "284a335aa3fb2ced3b1b01fcb40b08aa783e3b70832767f0dd2e3fdfa134bd54",
+        "adapter_sha256": "9a11fe2cecf795f53dbea490b9897b28f3d3346a9f69a71ce28bbb195f7de704"
+      },
+      "tool_calls": [],
+      "usage": {
+        "input_tokens": 259,
+        "output_tokens": 309,
+        "total_tokens": 568,
+        "reasoning_tokens": null
+      },
+      "sampling": {
+        "temperature": 0,
+        "seed": 0,
+        "max_tokens": 2048
+      },
+      "token_meter": "llama.cpp server telemetry",
+      "task_index": 5,
+      "case_id": "q-capacity",
+      "stage_index": 0,
+      "track": "quant",
+      "packet_sha256": "73fa7f204039383bd5068961e081261ccddf353d913745dec13c8f279ca1f741",
+      "completed_at": "2026-11-19T04:59:13.673096+00:00"
+    },
+    {
+      "status": "adapter_error",
+      "response": null,
+      "error": "completion did not finish normally: length",
+      "usage": null,
+      "wall_seconds": 25.179745600093156,
+      "task_index": 6,
+      "case_id": "control_funding_buffer",
+      "stage_index": 0,
+      "track": "history",
+      "packet_sha256": "d6420ae6520263d74484c9f54c2a45bb7d3048ac73ebb17bbc2786a555d4f674",
+      "completed_at": "2026-11-19T04:59:38.874364+00:00"
+    },
+    {
+      "status": "ok",
+      "response": {
+        "policy": {
+          "action": "reduce",
+          "conditions": "new obligation exceeds cap, no leverage"
+        },
+        "rationale": [
+          "New evidence indicates next-day obligations increased to 12 USD-units, exceeding the approved position cap of 20 USD-units. This suggests potential crowding risk, as the strategy's fixed capital may not accommodate the increased obligations without violating the position cap. The prior response was an adapter error, indicating the system might not have properly processed the stage transitions. The strategy should reduce exposure to maintain liquidity and avoid exceeding the approved capital limits. The risk of tail loss remains within the supplied stress scenario, but the new obligation necessitates a reduction to preserve the position cap and ensure the strategy remains bounded. The monitoring data shows no additional crowding, but the increased obligations require a revision of the previous decision to maintain the strategy's integrity and risk controls."
+        ],
+        "risk_estimates": [
+          {
+            "metric": "position_cap",
+            "value": 20,
+            "units": "USD-units",
+            "horizon": "current",
+            "assumptions": "fixed capital, no leverage"
+          },
+          {
+            "metric": "new_obligation",
+            "value": 12,
+            "units": "USD-units",
+            "horizon": "current",
+            "assumptions": "fixed capital, no leverage"
+          }
+        ],
+        "self_critique": "The response assumes the position cap is fixed and the strategy should reduce exposure to maintain the cap. However, the system's prior response was an adapter error, which might have been due to improper handling of the stage transitions. The response should be more robust in handling such errors and should clearly state the missing inputs, such as the exact capital structure and leverage rules, to ensure the bounded strategy remains valid.",
+        "architecture_critique": "The decision architecture relies on the fixed capital assumption and the position cap, which may not hold in dynamic scenarios. The system should be designed to handle such scenarios by incorporating more flexible risk controls and clearly identifying missing inputs to ensure the bounded strategy remains valid.",
+        "population_analysis": {
+          "fixed_total_capital": "null",
+          "fixed_capital_per_agent": "null",
+          "feedback_and_mitigation": "null"
+        },
+        "revision": {
+          "action": "revise",
+          "reason": "new obligation exceeds cap, no leverage",
+          "evidence_ids": [
+            "s1.e0",
+            "s1.e1"
+          ]
+        },
+        "missing_inputs": [
+          "exact capital structure",
+          "leverage rules",
+          "position cap definition"
+        ],
+        "limitations": [
+          "assumes fixed capital and no leverage",
+          "does not account for dynamic capital adjustments"
+        ]
+      },
+      "wall_seconds": 13.34044019994326,
+      "requested_model": "bitagent-bonsai8b-dagv3",
+      "resolved_model": "bitagent-bonsai8b-dagv3",
+      "runtime_identity": {
+        "model_alias": "bitagent-bonsai8b-dagv3",
+        "active_adapters": [
+          {
+            "id": 0,
+            "path": "bitagent-bonsai8b-dagv2-lora-v3-f16.gguf",
+            "scale": 1.0,
+            "task_name": "",
+            "prompt_prefix": ""
+          }
+        ],
+        "base_sha256": "284a335aa3fb2ced3b1b01fcb40b08aa783e3b70832767f0dd2e3fdfa134bd54",
+        "adapter_sha256": "9a11fe2cecf795f53dbea490b9897b28f3d3346a9f69a71ce28bbb195f7de704"
+      },
+      "tool_calls": [],
+      "usage": {
+        "input_tokens": 770,
+        "output_tokens": 549,
+        "total_tokens": 1319,
+        "reasoning_tokens": null
+      },
+      "sampling": {
+        "temperature": 0,
+        "seed": 0,
+        "max_tokens": 2048
+      },
+      "token_meter": "llama.cpp server telemetry",
+      "task_index": 7,
+      "case_id": "control_funding_buffer",
+      "stage_index": 1,
+      "track": "history",
+      "packet_sha256": "b07a0a17c3e90fc4eaa02978a0b66dbcbe90108b50a12c2abdbdb3a70b6b5ca7",
+      "completed_at": "2026-11-19T04:59:52.234135+00:00"
+    },
+    {
+      "status": "ok",
+      "response": {
+        "policy": {
+          "action": "defer",
+          "conditions": "null"
+        },
+        "rationale": [
+          "The visible stages do not provide sufficient evidence to determine the bounded strategy, quantify supported risks, or identify missing inputs. The evidence is incomplete and does not include any authentic historical prices or clean holdout data. The masked nature of the evidence further limits the ability to analyze the scenario with reliability. The questions posed are not directly answerable from the given data without additional assumptions or information."
+        ],
+        "risk_estimates": [
+          {
+            "metric": "unquantified",
+            "value": null,
+            "units": "null",
+            "horizon": "null",
+            "assumptions": "null"
+          }
+        ],
+        "self_critique": "The response is based on the incomplete and masked evidence provided, which does not allow for a robust analysis of the bounded strategy, supported risks, or missing inputs. The lack of authentic historical prices and clean holdout data further reduces the reliability of the risk estimates.",
+        "architecture_critique": "The decision architecture is constrained by the limited evidence available, which prevents a comprehensive evaluation of the bounded strategy and its associated risks. The absence of clear legal assumptions or failure scenarios makes it difficult to challenge the strategy or decision architecture effectively.",
+        "population_analysis": {
+          "fixed_total_capital": "null",
+          "fixed_capital_per_agent": "null",
+          "feedback_and_mitigation": "null"
+        },
+        "revision": {
+          "action": "revise",
+          "reason": "The response is based on incomplete and masked evidence, which does not allow for a robust analysis of the bounded strategy, supported risks, or missing inputs. The lack of authentic historical prices and clean holdout data further reduces the reliability of the risk estimates.",
+          "evidence_ids": [
+            "s0.e0",
+            "s0.e1",
+            "s0.e2"
+          ]
+        },
+        "missing_inputs": [
+          "unlisted_entities",
+          "unlisted_facts",
+          "unlisted_entities",
+          "unlisted_facts"
+        ],
+        "limitations": [
+          "unquantified_risk",
+          "unquantified_principal_loss",
+          "unquantified_liquidity_risk"
+        ]
+      },
+      "wall_seconds": 12.785687499912456,
+      "requested_model": "bitagent-bonsai8b-dagv3",
+      "resolved_model": "bitagent-bonsai8b-dagv3",
+      "runtime_identity": {
+        "model_alias": "bitagent-bonsai8b-dagv3",
+        "active_adapters": [
+          {
+            "id": 0,
+            "path": "bitagent-bonsai8b-dagv2-lora-v3-f16.gguf",
+            "scale": 1.0,
+            "task_name": "",
+            "prompt_prefix": ""
+          }
+        ],
+        "base_sha256": "284a335aa3fb2ced3b1b01fcb40b08aa783e3b70832767f0dd2e3fdfa134bd54",
+        "adapter_sha256": "9a11fe2cecf795f53dbea490b9897b28f3d3346a9f69a71ce28bbb195f7de704"
+      },
+      "tool_calls": [],
+      "usage": {
+        "input_tokens": 578,
+        "output_tokens": 453,
+        "total_tokens": 1031,
+        "reasoning_tokens": null
+      },
+      "sampling": {
+        "temperature": 0,
+        "seed": 0,
+        "max_tokens": 2048
+      },
+      "token_meter": "llama.cpp server telemetry",
+      "task_index": 8,
+      "case_id": "control_pvp_prefunded",
+      "stage_index": 0,
+      "track": "history",
+      "packet_sha256": "35c0f1896620b978c650f1de3584a1b5fc01cbcd13485b5ae508b4278ce23f2e",
+      "completed_at": "2026-11-19T05:00:05.045150+00:00"
+    },
+    {
+      "status": "ok",
+      "response": {
+        "policy": {
+          "action": "defer",
+          "conditions": "null"
+        },
+        "rationale": [
+          "The visible stages do not provide sufficient evidence to determine the bounded strategy, quantify supported risks, or identify missing inputs. The evidence is incomplete and does not include any authentic historical prices or clean holdout data. The masked nature of the evidence further limits the ability to analyze the scenario with reliability. The questions posed are not directly answerable from the given data without additional assumptions or information."
+        ],
+        "risk_estimates": [
+          {
+            "metric": "unquantified",
+            "value": null,
+            "units": "null",
+            "horizon": "null",
+            "assumptions": "null"
+          }
+        ],
+        "self_critique": "The response is based on the incomplete and masked evidence provided, which does not allow for a robust analysis of the bounded strategy, supported risks, or missing inputs. The lack of authentic historical prices and clean holdout data further reduces the reliability of the risk estimates.",
+        "architecture_critique": "The decision architecture is constrained by the limited evidence available, which prevents a comprehensive evaluation of the bounded strategy and its associated risks. The absence of clear legal assumptions or failure scenarios makes it difficult to challenge the strategy or decision architecture effectively.",
+        "population_analysis": {
+          "fixed_total_capital": "null",
+          "fixed_capital_per_agent": "null",
+          "feedback_and_mitigation": "null"
+        },
+        "revision": {
+          "action": "revise",
+          "reason": "The response is based on incomplete and masked evidence, which does not allow for a robust analysis of the bounded strategy, supported risks, or missing inputs. The lack of authentic historical prices and clean holdout data further reduces the reliability of the risk estimates.",
+          "evidence_ids": [
+            "s0.e0",
+            "s0.e1",
+            "s0.e2"
+          ]
+        },
+        "missing_inputs": [
+          "unlisted_entities",
+          "unlisted_facts",
+          "unlisted_entities",
+          "unlisted_facts"
+        ],
+        "limitations": [
+          "unquantified_risk",
+          "unquantified_principal_loss",
+          "unquantified_liquidity_risk"
+        ]
+      },
+      "wall_seconds": 7.582531000021845,
+      "requested_model": "bitagent-bonsai8b-dagv3",
+      "resolved_model": "bitagent-bonsai8b-dagv3",
+      "runtime_identity": {
+        "model_alias": "bitagent-bonsai8b-dagv3",
+        "active_adapters": [
+          {
+            "id": 0,
+            "path": "bitagent-bonsai8b-dagv2-lora-v3-f16.gguf",
+            "scale": 1.0,
+            "task_name": "",
+            "prompt_prefix": ""
+          }
+        ],
+        "base_sha256": "284a335aa3fb2ced3b1b01fcb40b08aa783e3b70832767f0dd2e3fdfa134bd54",
+        "adapter_sha256": "9a11fe2cecf795f53dbea490b9897b28f3d3346a9f69a71ce28bbb195f7de704"
+      },
+      "tool_calls": [],
+      "usage": {
+        "input_tokens": 1179,
+        "output_tokens": 422,
+        "total_tokens": 1601,
+        "reasoning_tokens": null
+      },
+      "sampling": {
+        "temperature": 0,
+        "seed": 0,
+        "max_tokens": 2048
+      },
+      "token_meter": "llama.cpp server telemetry",
+      "task_index": 9,
+      "case_id": "control_pvp_prefunded",
+      "stage_index": 1,
+      "track": "history",
+      "packet_sha256": "235563d3a827f8b22cab2354bd1dc99b7c1a23d94541dc7ae7d19f0abf2466df",
+      "completed_at": "2026-11-19T05:00:12.653700+00:00"
+    },
+    {
+      "status": "adapter_error",
+      "response": null,
+      "error": "completion did not finish normally: length",
+      "usage": null,
+      "wall_seconds": 27.861571999965236,
+      "task_index": 10,
+      "case_id": "control_orderly_volatility",
+      "stage_index": 0,
+      "track": "history",
+      "packet_sha256": "7954f2006b2cd515e7d5c5b7fcdbf1e7d800bf1b2f4f6ceab41fdd25ac777ac2",
+      "completed_at": "2026-11-19T05:00:40.536519+00:00"
+    },
+    {
+      "status": "ok",
+      "response": {
+        "policy": {
+          "action": "reduce",
+          "conditions": "volatility rises and margin call occurs"
+        },
+        "rationale": [
+          "Higher volatility increases the likelihood of exceeding the risk budget, necessitating a reduction in the hedge to maintain risk control.",
+          "The evidence indicates a margin call, which directly impacts the collateral availability and the effectiveness of the capped strategy."
+        ],
+        "risk_estimates": [
+          {
+            "metric": "collateral_loss",
+            "value": 3,
+            "units": "USD-units",
+            "horizon": "short_term",
+            "assumptions": "margin call is paid from liquid collateral buffer"
+          },
+          {
+            "metric": "risk_budget",
+            "value": 10,
+            "units": "USD-units",
+            "horizon": "short_term",
+            "assumptions": "risk budget remains unchanged"
+          }
+        ],
+        "self_critique": "The policy assumes that the risk budget remains unchanged, which may not be accurate in a dynamic market environment. The reduction in the hedge could lead to increased exposure if the volatility remains high.",
+        "architecture_critique": "The policy does not account for the possibility of a self-amplifying liquidation spiral, which could occur if the margin call leads to a cascade of forced liquidations.",
+        "population_analysis": {
+          "fixed_total_capital": "100 USD-units",
+          "fixed_capital_per_agent": "100 USD-units",
+          "feedback_and_mitigation": "the policy suggests a reduction in the hedge, which could mitigate the risk of a liquidation spiral, but the effectiveness of this mitigation is not quantified."
+        },
+        "revision": {
+          "action": "maintain",
+          "reason": "the evidence shows that the portfolio's stated hedging purpose remains valid and that the execution capacity is sufficient to handle the additional margin call.",
+          "evidence_ids": [
+            "s1.e0",
+            "s1.e1"
+          ]
+        },
+        "missing_inputs": [
+          "risk_budget",
+          "collateral_availability",
+          "margin_call_threshold"
+        ],
+        "limitations": [
+          "the policy does not account for the possibility of a self-amplifying liquidation spiral",
+          "the effectiveness of the reduction in the hedge is not quantified"
+        ]
+      },
+      "wall_seconds": 11.791384600102901,
+      "requested_model": "bitagent-bonsai8b-dagv3",
+      "resolved_model": "bitagent-bonsai8b-dagv3",
+      "runtime_identity": {
+        "model_alias": "bitagent-bonsai8b-dagv3",
+        "active_adapters": [
+          {
+            "id": 0,
+            "path": "bitagent-bonsai8b-dagv2-lora-v3-f16.gguf",
+            "scale": 1.0,
+            "task_name": "",
+            "prompt_prefix": ""
+          }
+        ],
+        "base_sha256": "284a335aa3fb2ced3b1b01fcb40b08aa783e3b70832767f0dd2e3fdfa134bd54",
+        "adapter_sha256": "9a11fe2cecf795f53dbea490b9897b28f3d3346a9f69a71ce28bbb195f7de704"
+      },
+      "tool_calls": [],
+      "usage": {
+        "input_tokens": 764,
+        "output_tokens": 465,
+        "total_tokens": 1229,
+        "reasoning_tokens": null
+      },
+      "sampling": {
+        "temperature": 0,
+        "seed": 0,
+        "max_tokens": 2048
+      },
+      "token_meter": "llama.cpp server telemetry",
+      "task_index": 11,
+      "case_id": "control_orderly_volatility",
+      "stage_index": 1,
+      "track": "history",
+      "packet_sha256": "d8883dc9a0df70f53946f9f08a7fd7803ce25aae8e28b7df95620ed938cece8c",
+      "completed_at": "2026-11-19T05:00:52.348532+00:00"
+    },
+    {
+      "status": "adapter_error",
+      "response": null,
+      "error": "completion did not finish normally: length",
+      "usage": null,
+      "wall_seconds": 25.37553229997866,
+      "task_index": 12,
+      "case_id": "control_redeemable_basis",
+      "stage_index": 0,
+      "track": "history",
+      "packet_sha256": "a6b16e14a6c65cb94f74a7d86bd7b1feff0837ac503980e69c7759faa993ed77",
+      "completed_at": "2026-11-19T05:01:17.743693+00:00"
+    },
+    {
+      "status": "adapter_error",
+      "response": null,
+      "error": "completion did not finish normally: length",
+      "usage": null,
+      "wall_seconds": 29.286214100196958,
+      "task_index": 13,
+      "case_id": "control_redeemable_basis",
+      "stage_index": 1,
+      "track": "history",
+      "packet_sha256": "161df3cbc5094a4c0888540fac9a119c0fe88ea1cc25eed09adca3b54e42ef43",
+      "completed_at": "2026-11-19T05:01:47.052769+00:00"
+    },
+    {
+      "status": "adapter_error",
+      "response": null,
+      "error": "completion did not finish normally: length",
+      "usage": null,
+      "wall_seconds": 25.072443600045517,
+      "task_index": 14,
+      "case_id": "crypto_mtgox_2014",
+      "stage_index": 0,
+      "track": "history",
+      "packet_sha256": "bd01d28f576facc557a3b5c44c91a7bd73694025815350fdbf7fa15fef7656d8",
+      "completed_at": "2026-11-19T05:02:12.135771+00:00"
+    }
+  ]
+}

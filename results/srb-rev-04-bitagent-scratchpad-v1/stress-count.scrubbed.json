@@ -1,0 +1,2080 @@
+{
+  "schema": "srb.finance_revision.v1",
+  "report_schema": "srb.finance_revision.report.v2",
+  "evidence_class": "public_deterministic_synthetic_financial_development_only",
+  "model_evaluation_claim": false,
+  "scientific_confirmation_claim": false,
+  "physical_memory_enforced": false,
+  "adapter_process_sandboxed": false,
+  "model_server_state_reset_verified": true,
+  "authority": "read_only_no_orders_no_signing",
+  "experiment": {
+    "experiment_id": "SRB-REV-04-bitagent-scratchpad-stress-v1",
+    "evaluation_kind": "model",
+    "architecture_label": "BitAgent Bonsai 8B two-pass bounded-scratchpad stage-isolated llama.cpp",
+    "status": "registered",
+    "panel": "stress",
+    "panel_manifest_sha256": "81232c2f28c1e57b0fd8c1d8cc478ec3983c73f08be2e51076acb8e5995a0f0a",
+    "split": "public_deterministic_development",
+    "model_roots": 1,
+    "memory_arms": [
+      "count",
+      "bitmap"
+    ],
+    "server_sha256": "d5897802f2bc893214fa86abf9b7276bf409f5f661751c4ef0e9981443a005f6",
+    "base_sha256": "284a335aa3fb2ced3b1b01fcb40b08aa783e3b70832767f0dd2e3fdfa134bd54",
+    "checkpoint_sha256": "9a11fe2cecf795f53dbea490b9897b28f3d3346a9f69a71ce28bbb195f7de704",
+    "model_alias": "bitagent-bonsai8b-dagv3",
+    "inference_server": "ephemeral_per_stage_llama_cpp",
+    "preregistered_cases": 18,
+    "max_calls_per_arm": 36,
+    "max_wall_seconds_per_arm": 4500,
+    "max_output_tokens_per_call": 2048,
+    "max_input_tokens_per_call": 6144,
+    "temperature": 0,
+    "seed": 0,
+    "agent_action_authorized": false,
+    "physical_memory_enforcement": "unverified_host_adapter_ephemeral_server_reset",
+    "server_reset_between_stages": true
+  },
+  "experiment_sha256": "4f072c1003896fcaaf5e3505149e7c81dea74f150a6b2c56a0c8370c73a4dd53",
+  "adapter_argv_sha256": "d9e644a12ad4ed493227c1fe03094e9a8573a00be333d516647259ab4ac5de91",
+  "timeout_seconds_per_call": 300.0,
+  "panel": "stress",
+  "panel_manifest_sha256": "81232c2f28c1e57b0fd8c1d8cc478ec3983c73f08be2e51076acb8e5995a0f0a",
+  "panel_summary": {
+    "n_cases": 18,
+    "reference_law": "original_unconditioned_source_law",
+    "n_oracle_action_disagreements": 18,
+    "oracle_action_disagreement_rate": 1.0,
+    "mean_posterior_information_gap": 0.26839734492716816,
+    "count_optimal_action_revisions": 3,
+    "count_optimal_action_revision_rate": 0.16666666666666666,
+    "bitmap_optimal_action_revisions": 15,
+    "bitmap_optimal_action_revision_rate": 0.8333333333333334,
+    "mean_count_policy_regret_vs_full": 0.5700017725664853,
+    "mean_bitmap_policy_regret_vs_full": 0.0,
+    "count_action_counts": {
+      "continue": 7,
+      "de_risk": 10,
+      "halt_and_escalate": 1
+    },
+    "bitmap_action_counts": {
+      "continue": 10,
+      "de_risk": 8,
+      "halt_and_escalate": 0
+    }
+  },
+  "family_summaries": {
+    "price_feed": {
+      "n_cases": 6,
+      "reference_law": "original_unconditioned_source_law",
+      "n_oracle_action_disagreements": 6,
+      "oracle_action_disagreement_rate": 1.0,
+      "mean_posterior_information_gap": 0.14825172634865758,
+      "count_optimal_action_revisions": 1,
+      "count_optimal_action_revision_rate": 0.16666666666666666,
+      "bitmap_optimal_action_revisions": 5,
+      "bitmap_optimal_action_revision_rate": 0.8333333333333334,
+      "mean_count_policy_regret_vs_full": 0.3816855454745845,
+      "mean_bitmap_policy_regret_vs_full": 0.0,
+      "count_action_counts": {
+        "continue": 4,
+        "de_risk": 2,
+        "halt_and_escalate": 0
+      },
+      "bitmap_action_counts": {
+        "continue": 2,
+        "de_risk": 4,
+        "halt_and_escalate": 0
+      },
+      "n_scored": 1,
+      "coverage": 0.16666666666666666,
+      "n_initial_valid": 1,
+      "initial_coverage": 0.16666666666666666,
+      "mean_excess_brier_with_missing_penalty": 1.6866159893340182,
+      "mean_sample_brier_with_missing_penalty": 1.765625,
+      "mean_policy_regret_with_missing_penalty": 16.904950765074048,
+      "mean_policy_regret_vs_full_with_missing_penalty": 17.044689723085554,
+      "mean_policy_regret_vs_full_scored": 2.268138338513326,
+      "mean_information_loss_sq_all_cases": 0.14825172634865758,
+      "mean_information_constrained_expected_regret": 0.3816855454745845,
+      "action_accuracy_scored": 0.0,
+      "action_accuracy_with_missing_penalty": 0.0,
+      "action_revision_rate_scored": 0.0,
+      "missed_full_escalations_scored": 0,
+      "initial_action_forecast_incoherent_count": 1,
+      "initial_action_forecast_incoherent_rate_valid": 1.0,
+      "mean_initial_action_forecast_regret_valid": 0.5712033974600002,
+      "update_action_forecast_incoherent_count": 1,
+      "update_action_forecast_incoherent_rate_scored": 1.0,
+      "mean_update_action_forecast_regret_scored": 0.6375
+    },
+    "collateral": {
+      "n_cases": 6,
+      "reference_law": "original_unconditioned_source_law",
+      "n_oracle_action_disagreements": 6,
+      "oracle_action_disagreement_rate": 1.0,
+      "mean_posterior_information_gap": 0.4881761325479341,
+      "count_optimal_action_revisions": 1,
+      "count_optimal_action_revision_rate": 0.16666666666666666,
+      "bitmap_optimal_action_revisions": 5,
+      "bitmap_optimal_action_revision_rate": 0.8333333333333334,
+      "mean_count_policy_regret_vs_full": 0.8882960396217742,
+      "mean_bitmap_policy_regret_vs_full": 0.0,
+      "count_action_counts": {
+        "continue": 2,
+        "de_risk": 3,
+        "halt_and_escalate": 1
+      },
+      "bitmap_action_counts": {
+        "continue": 3,
+        "de_risk": 3,
+        "halt_and_escalate": 0
+      },
+      "n_scored": 1,
+      "coverage": 0.16666666666666666,
+      "n_initial_valid": 1,
+      "initial_coverage": 0.16666666666666666,
+      "mean_excess_brier_with_missing_penalty": 1.703716397990453,
+      "mean_sample_brier_with_missing_penalty": 1.8125,
+      "mean_policy_regret_with_missing_penalty": 16.772592447376258,
+      "mean_policy_regret_vs_full_with_missing_penalty": 16.666666666666668,
+      "mean_policy_regret_vs_full_scored": 0.0,
+      "mean_information_loss_sq_all_cases": 0.4881761325479341,
+      "mean_information_constrained_expected_regret": 0.8882960396217742,
+      "action_accuracy_scored": 0.0,
+      "action_accuracy_with_missing_penalty": 0.0,
+      "action_revision_rate_scored": 0.0,
+      "missed_full_escalations_scored": 0,
+      "initial_action_forecast_incoherent_count": 0,
+      "initial_action_forecast_incoherent_rate_valid": 0.0,
+      "mean_initial_action_forecast_regret_valid": 0.0,
+      "update_action_forecast_incoherent_count": 0,
+      "update_action_forecast_incoherent_rate_scored": 0.0,
+      "mean_update_action_forecast_regret_scored": 0.0
+    },
+    "counterparty": {
+      "n_cases": 6,
+      "reference_law": "original_unconditioned_source_law",
+      "n_oracle_action_disagreements": 6,
+      "oracle_action_disagreement_rate": 1.0,
+      "mean_posterior_information_gap": 0.16876417588491277,
+      "count_optimal_action_revisions": 1,
+      "count_optimal_action_revision_rate": 0.16666666666666666,
+      "bitmap_optimal_action_revisions": 5,
+      "bitmap_optimal_action_revision_rate": 0.8333333333333334,
+      "mean_count_policy_regret_vs_full": 0.4400237326030972,
+      "mean_bitmap_policy_regret_vs_full": 0.0,
+      "count_action_counts": {
+        "continue": 1,
+        "de_risk": 5,
+        "halt_and_escalate": 0
+      },
+      "bitmap_action_counts": {
+        "continue": 5,
+        "de_risk": 1,
+        "halt_and_escalate": 0
+      },
+      "n_scored": 2,
+      "coverage": 0.3333333333333333,
+      "n_initial_valid": 2,
+      "initial_coverage": 0.3333333333333333,
+      "mean_excess_brier_with_missing_penalty": 1.3701130753377007,
+      "mean_sample_brier_with_missing_penalty": 1.4583333333333333,
+      "mean_policy_regret_with_missing_penalty": 13.565183660049298,
+      "mean_policy_regret_vs_full_with_missing_penalty": 13.72392202839965,
+      "mean_policy_regret_vs_full_scored": 1.1717660851989544,
+      "mean_information_loss_sq_all_cases": 0.16876417588491277,
+      "mean_information_constrained_expected_regret": 0.4400237326030972,
+      "action_accuracy_scored": 0.5,
+      "action_accuracy_with_missing_penalty": 0.16666666666666666,
+      "action_revision_rate_scored": 0.0,
+      "missed_full_escalations_scored": 0,
+      "initial_action_forecast_incoherent_count": 1,
+      "initial_action_forecast_incoherent_rate_valid": 0.5,
+      "mean_initial_action_forecast_regret_valid": 0.23333333099999987,
+      "update_action_forecast_incoherent_count": 1,
+      "update_action_forecast_incoherent_rate_scored": 0.5,
+      "mean_update_action_forecast_regret_scored": 0.38749999999999996
+    }
+  },
+  "reference_law": "original_unconditioned_source_law",
+  "selection_conditioned_bayes_claim": false,
+  "population_estimate_claim": false,
+  "coherence_rule": "reported_action_equals_argmin_with_registered_action_order_tie_break",
+  "mode": "count",
+  "n_cases": 18,
+  "n_scored": 4,
+  "coverage": 0.2222222222222222,
+  "n_initial_valid": 4,
+  "initial_coverage": 0.2222222222222222,
+  "mean_excess_brier_with_missing_penalty": 1.5868151542207238,
+  "mean_sample_brier_with_missing_penalty": 1.6788194444444444,
+  "mean_policy_regret_with_missing_penalty": 15.747575624166537,
+  "mean_policy_regret_vs_full_with_missing_penalty": 15.811759472717291,
+  "mean_policy_regret_vs_full_scored": 1.1529176272278088,
+  "mean_information_loss_sq_all_cases": 0.26839734492716816,
+  "mean_information_constrained_expected_regret": 0.5700017725664853,
+  "action_accuracy_scored": 0.25,
+  "action_accuracy_with_missing_penalty": 0.05555555555555555,
+  "action_revision_rate_scored": 0.0,
+  "missed_full_escalations_scored": 0,
+  "initial_action_forecast_incoherent_count": 2,
+  "initial_action_forecast_incoherent_rate_valid": 0.5,
+  "mean_initial_action_forecast_regret_valid": 0.25946751486499997,
+  "update_action_forecast_incoherent_count": 2,
+  "update_action_forecast_incoherent_rate_scored": 0.5,
+  "mean_update_action_forecast_regret_scored": 0.35312499999999997,
+  "n_cases_by_family": {
+    "price_feed": 6,
+    "collateral": 6,
+    "counterparty": 6
+  },
+  "model_calls_attempted": 22,
+  "adapter_calls_attempted": 22,
+  "model_calls_attempted_field_scope": "legacy_name_counts_adapter_subprocesses_including_fixtures",
+  "host_measured_wall_seconds": 649.8830939000472,
+  "inference_costs": {
+    "provenance": "host_wall_time_and_adapter_reported_server_counters",
+    "independent_runtime_attestation": false,
+    "adapter_calls_attempted": 22,
+    "calls_with_valid_telemetry": 22,
+    "calls_with_invalid_telemetry": 0,
+    "server_reset_verified_calls": 22,
+    "unique_server_boots_observed": 22,
+    "telemetry_coverage": 1.0,
+    "input_token_coverage": 1.0,
+    "output_token_coverage": 1.0,
+    "input_tokens_observed": 79135,
+    "output_tokens_observed": 27309,
+    "input_tokens_all_calls": 79135,
+    "output_tokens_all_calls": 27309,
+    "adapter_reported_inference_seconds_observed": 491.47931780014187,
+    "adapter_reported_inference_seconds_all_calls": 491.47931780014187,
+    "server_startup_seconds_observed": 82.89458810072392,
+    "server_shutdown_seconds_observed": 13.221456500235945,
+    "failed_calls_with_usage": 6
+  },
+  "max_wall_seconds_per_arm": 4500,
+  "n_stages_skipped_for_budget": 0,
+  "memory_logical_bits": 4,
+  "missing_brier_penalty": 2.0,
+  "missing_policy_regret_penalty": 20.0,
+  "prior_responses_suppressed": true,
+  "original_history_excluded_from_update": true,
+  "hidden_regime_excluded_from_packets": true,
+  "reference_is_evaluator_only": true,
+  "rows": [
+    {
+      "index": 5,
+      "case_id": "a17945f2b764481daab33db0a0082ebadd4f466ad0876944c58edb381b745fef",
+      "family": "counterparty",
+      "mode": "count",
+      "initial_packet_sha256": "00f6587a82137033ca70698840eb2a6a300cee3d272936baea558be482720f0d",
+      "initial_receipt": {
+        "status": "ok",
+        "exit_code": 0,
+        "wall_seconds": 30.90735529991798,
+        "input_tokens": 3751,
+        "output_tokens": 1495,
+        "stdout_sha256": "bc1da75bb79685ae4ad04fd6834663a717404d8d7363307401840ac625dbb388",
+        "response": {
+          "posterior": [
+            0.33333333,
+            0.33333333,
+            0.33333333
+          ],
+          "memory": 8,
+          "action": "halt_and_escalate"
+        },
+        "telemetry_status": "valid",
+        "telemetry_error": null,
+        "adapter_telemetry": {
+          "elapsed_seconds": 25.23396659991704,
+          "error_code": null,
+          "identity": {
+            "adapter_id": 0,
+            "adapter_scale": 1.0,
+            "adapter_sha256": "9a11fe2cecf795f53dbea490b9897b28f3d3346a9f69a71ce28bbb195f7de704",
+            "base_sha256": "284a335aa3fb2ced3b1b01fcb40b08aa783e3b70832767f0dd2e3fdfa134bd54",
+            "local_artifacts_verified": true,
+            "verification": "ephemeral_per_stage_server_plus_local_file_and_adapter_hashes"
+          },
+          "isolation": {
+            "physical_memory_enforced": false,
+            "port_closed_verified": true,
+            "process_reaped": true,
+            "requests_served": 2,
+            "server_boot_sha256": "5d3c7dce878f5a445e6c6cc03f948962235e01c010cc376af2d3891199aa36c3",
+            "server_reset_verified": true,
+            "shutdown_seconds": 0.5039484000299126,
+            "startup_seconds": 2.9132887001615018
+          },
+          "packet_sha256": "00f6587a82137033ca70698840eb2a6a300cee3d272936baea558be482720f0d",
+          "phase": "initial",
+          "requested_model": "bitagent-bonsai8b-dagv3",
+          "resolved_model": "bitagent-bonsai8b-dagv3",
+          "response_sha256": "4601703a9a53fecce6e935acbb7e458b4ee42f14b8ef9f900775292774007079",
+          "sampling": {
+            "max_tokens": 2048,
+            "seed": 0,
+            "temperature": 0
+          },
+          "schema": "srb.revision_inference_receipt.v1",
+          "status": "ok",
+          "usage": {
+            "input_tokens": 3751,
+            "output_tokens": 1495,
+            "total_tokens": 5246
+          }
+        }
+      },
+      "update_receipt": {
+        "status": "ok",
+        "exit_code": 0,
+        "wall_seconds": 20.02341330004856,
+        "input_tokens": 3461,
+        "output_tokens": 699,
+        "stdout_sha256": "a033d5d9cc6aa0d85419324f1786b9bec6ffc4aa11afd9208ad3ab160ad72d93",
+        "response": {
+          "posterior": [
+            0.5,
+            0.25,
+            0.25
+          ],
+          "action": "halt_and_escalate"
+        },
+        "telemetry_status": "valid",
+        "telemetry_error": null,
+        "adapter_telemetry": {
+          "elapsed_seconds": 14.369924300117418,
+          "error_code": null,
+          "identity": {
+            "adapter_id": 0,
+            "adapter_scale": 1.0,
+            "adapter_sha256": "9a11fe2cecf795f53dbea490b9897b28f3d3346a9f69a71ce28bbb195f7de704",
+            "base_sha256": "284a335aa3fb2ced3b1b01fcb40b08aa783e3b70832767f0dd2e3fdfa134bd54",
+            "local_artifacts_verified": true,
+            "verification": "ephemeral_per_stage_server_plus_local_file_and_adapter_hashes"
+          },
+          "isolation": {
+            "physical_memory_enforced": false,
+            "port_closed_verified": true,
+            "process_reaped": true,
+            "requests_served": 2,
+            "server_boot_sha256": "de0bc8de40b4d549d802b62f032b0d5d0b107a846769427f4c5a82a35d053378",
+            "server_reset_verified": true,
+            "shutdown_seconds": 0.5264665998984128,
+            "startup_seconds": 2.9710328998044133
+          },
+          "packet_sha256": "4454b359dc5587433635746fc479b77cbd5e21fcbd8bbd139096651aac4566bf",
+          "phase": "update",
+          "requested_model": "bitagent-bonsai8b-dagv3",
+          "resolved_model": "bitagent-bonsai8b-dagv3",
+          "response_sha256": "2f506746c4aa8aea6bbd9e87eb74749ab9f53f0d4ceeb610a12a13e563df5510",
+          "sampling": {
+            "max_tokens": 2048,
+            "seed": 0,
+            "temperature": 0
+          },
+          "schema": "srb.revision_inference_receipt.v1",
+          "status": "ok",
+          "usage": {
+            "input_tokens": 3461,
+            "output_tokens": 699,
+            "total_tokens": 4160
+          }
+        }
+      },
+      "status": "scored",
+      "initial_error": null,
+      "initial_forecast": [
+        0.33333333,
+        0.33333333,
+        0.33333333
+      ],
+      "initial_action": "halt_and_escalate",
+      "initial_excess_brier": 0.18886344668767147,
+      "initial_policy_regret": 1.3774145489531966,
+      "initial_action_forecast_regret": 0.46666666199999973,
+      "initial_action_forecast_coherent": false,
+      "update_forecast": [
+        0.5,
+        0.25,
+        0.25
+      ],
+      "update_action": "halt_and_escalate",
+      "excess_brier": 0.0939845107849692,
+      "sample_brier": 0.375,
+      "policy_regret_vs_matched": 1.3911019602957868,
+      "policy_regret_vs_full": 1.9908512028316885,
+      "update_action_forecast_regret": 0.7749999999999999,
+      "update_action_forecast_coherent": false,
+      "realized_loss": 2.3,
+      "information_loss_sq": 0.19070249982829743,
+      "optimal_full_action": "continue",
+      "optimal_arm_action": "de_risk",
+      "information_constrained_expected_regret": 0.3526809675662206,
+      "update_packet_sha256": "4454b359dc5587433635746fc479b77cbd5e21fcbd8bbd139096651aac4566bf",
+      "input_matched_reference": [
+        0.6139155864273133,
+        0.3860698855507516,
+        1.4528021935097517e-05
+      ],
+      "action_revised": false,
+      "action_matches_arm_optimum": false,
+      "missed_full_escalation": false
+    },
+    {
+      "index": 28,
+      "case_id": "d8a76f7d4a289e2eeecd37ea9993640eb8f446329ef6afb61cd658c8eb6eb622",
+      "family": "collateral",
+      "mode": "count",
+      "initial_packet_sha256": "9dc144c7fa9e4b828c3fee2da1ac1f3b3d66f244a3b19addc107998891fa77c0",
+      "initial_receipt": {
+        "status": "ok",
+        "exit_code": 0,
+        "wall_seconds": 23.317578899906948,
+        "input_tokens": 3262,
+        "output_tokens": 1008,
+        "stdout_sha256": "168a40b30d128699e682d6dc34effc185edc6b6123fb4f908f700d963a3696cc",
+        "response": {
+          "posterior": [
+            0.25,
+            0.5,
+            0.25
+          ],
+          "memory": 8,
+          "action": "de_risk"
+        },
+        "telemetry_status": "valid",
+        "telemetry_error": null,
+        "adapter_telemetry": {
+          "elapsed_seconds": 17.431923400145024,
+          "error_code": null,
+          "identity": {
+            "adapter_id": 0,
+            "adapter_scale": 1.0,
+            "adapter_sha256": "9a11fe2cecf795f53dbea490b9897b28f3d3346a9f69a71ce28bbb195f7de704",
+            "base_sha256": "284a335aa3fb2ced3b1b01fcb40b08aa783e3b70832767f0dd2e3fdfa134bd54",
+            "local_artifacts_verified": true,
+            "verification": "ephemeral_per_stage_server_plus_local_file_and_adapter_hashes"
+          },
+          "isolation": {
+            "physical_memory_enforced": false,
+            "port_closed_verified": true,
+            "process_reaped": true,
+            "requests_served": 2,
+            "server_boot_sha256": "a97fa4338217bf71fdf1ef63e5f0e73a7031c211c57cf360bbdb07199b500d38",
+            "server_reset_verified": true,
+            "shutdown_seconds": 0.37912900000810623,
+            "startup_seconds": 3.2635751001071185
+          },
+          "packet_sha256": "9dc144c7fa9e4b828c3fee2da1ac1f3b3d66f244a3b19addc107998891fa77c0",
+          "phase": "initial",
+          "requested_model": "bitagent-bonsai8b-dagv3",
+          "resolved_model": "bitagent-bonsai8b-dagv3",
+          "response_sha256": "b10b10001572132dd2245af3f23d629f9d3a255d6a99d7f08a4a6b105a735a44",
+          "sampling": {
+            "max_tokens": 2048,
+            "seed": 0,
+            "temperature": 0
+          },
+          "schema": "srb.revision_inference_receipt.v1",
+          "status": "ok",
+          "usage": {
+            "input_tokens": 3262,
+            "output_tokens": 1008,
+            "total_tokens": 4270
+          }
+        }
+      },
+      "update_receipt": null,
+      "status": "initial_invalid",
+      "initial_error": "initial memory did not encode the declared old state",
+      "initial_forecast": null,
+      "initial_action": null,
+      "initial_excess_brier": null,
+      "initial_policy_regret": null,
+      "initial_action_forecast_regret": null,
+      "initial_action_forecast_coherent": null,
+      "update_forecast": null,
+      "update_action": null,
+      "excess_brier": null,
+      "sample_brier": null,
+      "policy_regret_vs_matched": null,
+      "policy_regret_vs_full": null,
+      "update_action_forecast_regret": null,
+      "update_action_forecast_coherent": null,
+      "realized_loss": null,
+      "information_loss_sq": 0.5172711402018619,
+      "optimal_full_action": "continue",
+      "optimal_arm_action": "de_risk",
+      "information_constrained_expected_regret": 0.7681383491150661
+    },
+    {
+      "index": 36,
+      "case_id": "03116ba2c38d32bc6b8c1fea21f6589fec19df171c297651aa79aec0a642376d",
+      "family": "price_feed",
+      "mode": "count",
+      "initial_packet_sha256": "818e2f0d5affd6aaaa9bf20f6da85432e13a75c9b50b908dfebceb14da34bdd1",
+      "initial_receipt": {
+        "status": "ok",
+        "exit_code": 0,
+        "wall_seconds": 29.685451100114733,
+        "input_tokens": 3793,
+        "output_tokens": 1529,
+        "stdout_sha256": "234879665ee947d028c33cfbfd4445e36b390a77aebdb5ef215f132fac30849f",
+        "response": {
+          "posterior": [
+            0.5,
+            0.25,
+            0.25
+          ],
+          "memory": 9,
+          "action": "de_risk"
+        },
+        "telemetry_status": "valid",
+        "telemetry_error": null,
+        "adapter_telemetry": {
+          "elapsed_seconds": 23.801466399803758,
+          "error_code": null,
+          "identity": {
+            "adapter_id": 0,
+            "adapter_scale": 1.0,
+            "adapter_sha256": "9a11fe2cecf795f53dbea490b9897b28f3d3346a9f69a71ce28bbb195f7de704",
+            "base_sha256": "284a335aa3fb2ced3b1b01fcb40b08aa783e3b70832767f0dd2e3fdfa134bd54",
+            "local_artifacts_verified": true,
+            "verification": "ephemeral_per_stage_server_plus_local_file_and_adapter_hashes"
+          },
+          "isolation": {
+            "physical_memory_enforced": false,
+            "port_closed_verified": true,
+            "process_reaped": true,
+            "requests_served": 2,
+            "server_boot_sha256": "e02023e8e38b04aa37291657401b87ea3057f2f033ee7340d3693fa1540c260c",
+            "server_reset_verified": true,
+            "shutdown_seconds": 0.5217540001031011,
+            "startup_seconds": 3.1608472000807524
+          },
+          "packet_sha256": "818e2f0d5affd6aaaa9bf20f6da85432e13a75c9b50b908dfebceb14da34bdd1",
+          "phase": "initial",
+          "requested_model": "bitagent-bonsai8b-dagv3",
+          "resolved_model": "bitagent-bonsai8b-dagv3",
+          "response_sha256": "70a80ee562d6c83cca9c4230b4995994622c21ebd7a8a6a9de8377180e264507",
+          "sampling": {
+            "max_tokens": 2048,
+            "seed": 0,
+            "temperature": 0
+          },
+          "schema": "srb.revision_inference_receipt.v1",
+          "status": "ok",
+          "usage": {
+            "input_tokens": 3793,
+            "output_tokens": 1529,
+            "total_tokens": 5322
+          }
+        }
+      },
+      "update_receipt": null,
+      "status": "initial_invalid",
+      "initial_error": "initial memory did not encode the declared old state",
+      "initial_forecast": null,
+      "initial_action": null,
+      "initial_excess_brier": null,
+      "initial_policy_regret": null,
+      "initial_action_forecast_regret": null,
+      "initial_action_forecast_coherent": null,
+      "update_forecast": null,
+      "update_action": null,
+      "excess_brier": null,
+      "sample_brier": null,
+      "policy_regret_vs_matched": null,
+      "policy_regret_vs_full": null,
+      "update_action_forecast_regret": null,
+      "update_action_forecast_coherent": null,
+      "realized_loss": null,
+      "information_loss_sq": 0.19070249982829743,
+      "optimal_full_action": "continue",
+      "optimal_arm_action": "de_risk",
+      "information_constrained_expected_regret": 0.6222393896796947
+    },
+    {
+      "index": 37,
+      "case_id": "b46eb101487cfef186afcbadb54717d0b657ee5b5041526bd96506074bc4ecfe",
+      "family": "collateral",
+      "mode": "count",
+      "initial_packet_sha256": "fb292d8251cbf1f9a712ae979cd8259b853375767a732cd7a3300fdfa09af259",
+      "initial_receipt": {
+        "status": "ok",
+        "exit_code": 0,
+        "wall_seconds": 50.316493599908426,
+        "input_tokens": 4100,
+        "output_tokens": 1845,
+        "stdout_sha256": "bf0c62af6d6f334c09e32f36fa10991a56846d628a9aa46c3e2a8a354af02ec1",
+        "response": {
+          "posterior": [
+            0.64528302,
+            0.3433962,
+            0.01132075
+          ],
+          "memory": 8,
+          "action": "continue"
+        },
+        "telemetry_status": "valid",
+        "telemetry_error": null,
+        "adapter_telemetry": {
+          "elapsed_seconds": 42.80445210007019,
+          "error_code": null,
+          "identity": {
+            "adapter_id": 0,
+            "adapter_scale": 1.0,
+            "adapter_sha256": "9a11fe2cecf795f53dbea490b9897b28f3d3346a9f69a71ce28bbb195f7de704",
+            "base_sha256": "284a335aa3fb2ced3b1b01fcb40b08aa783e3b70832767f0dd2e3fdfa134bd54",
+            "local_artifacts_verified": true,
+            "verification": "ephemeral_per_stage_server_plus_local_file_and_adapter_hashes"
+          },
+          "isolation": {
+            "physical_memory_enforced": false,
+            "port_closed_verified": true,
+            "process_reaped": true,
+            "requests_served": 2,
+            "server_boot_sha256": "835f574c95a1849d629b8cf4095477f4413bd168739f627b83e4b083ef4fb8b5",
+            "server_reset_verified": true,
+            "shutdown_seconds": 0.793891099980101,
+            "startup_seconds": 4.082204699981958
+          },
+          "packet_sha256": "fb292d8251cbf1f9a712ae979cd8259b853375767a732cd7a3300fdfa09af259",
+          "phase": "initial",
+          "requested_model": "bitagent-bonsai8b-dagv3",
+          "resolved_model": "bitagent-bonsai8b-dagv3",
+          "response_sha256": "fa8b690c029f36881b8064957e58418778c6d1f356bd890a544ee1c143061892",
+          "sampling": {
+            "max_tokens": 2048,
+            "seed": 0,
+            "temperature": 0
+          },
+          "schema": "srb.revision_inference_receipt.v1",
+          "status": "ok",
+          "usage": {
+            "input_tokens": 4100,
+            "output_tokens": 1845,
+            "total_tokens": 5945
+          }
+        }
+      },
+      "update_receipt": null,
+      "status": "initial_invalid",
+      "initial_error": "initial memory did not encode the declared old state",
+      "initial_forecast": null,
+      "initial_action": null,
+      "initial_excess_brier": null,
+      "initial_policy_regret": null,
+      "initial_action_forecast_regret": null,
+      "initial_action_forecast_coherent": null,
+      "update_forecast": null,
+      "update_action": null,
+      "excess_brier": null,
+      "sample_brier": null,
+      "policy_regret_vs_matched": null,
+      "policy_regret_vs_full": null,
+      "update_action_forecast_regret": null,
+      "update_action_forecast_coherent": null,
+      "realized_loss": null,
+      "information_loss_sq": 0.09230013941656749,
+      "optimal_full_action": "de_risk",
+      "optimal_arm_action": "continue",
+      "information_constrained_expected_regret": 0.38444510362034756
+    },
+    {
+      "index": 48,
+      "case_id": "b42f9d0535e9d0b5b864b72460ce5d2cfeaadafec14c7770c725468983fe4101",
+      "family": "price_feed",
+      "mode": "count",
+      "initial_packet_sha256": "6cea0dbceff4e40ced20a84946322e58eb336b056b3296a7d62279e2e2dbd7db",
+      "initial_receipt": {
+        "status": "ok",
+        "exit_code": 0,
+        "wall_seconds": 26.844767299946398,
+        "input_tokens": 3058,
+        "output_tokens": 789,
+        "stdout_sha256": "7b2a4cfc1212ce197a6fe11f83131066f144d72da4f0d1539b326c10ab485289",
+        "response": {
+          "posterior": [
+            0.5,
+            0.5,
+            0.0
+          ],
+          "memory": 12,
+          "action": "de_risk"
+        },
+        "telemetry_status": "valid",
+        "telemetry_error": null,
+        "adapter_telemetry": {
+          "elapsed_seconds": 14.974256300134584,
+          "error_code": null,
+          "identity": {
+            "adapter_id": 0,
+            "adapter_scale": 1.0,
+            "adapter_sha256": "9a11fe2cecf795f53dbea490b9897b28f3d3346a9f69a71ce28bbb195f7de704",
+            "base_sha256": "284a335aa3fb2ced3b1b01fcb40b08aa783e3b70832767f0dd2e3fdfa134bd54",
+            "local_artifacts_verified": true,
+            "verification": "ephemeral_per_stage_server_plus_local_file_and_adapter_hashes"
+          },
+          "isolation": {
+            "physical_memory_enforced": false,
+            "port_closed_verified": true,
+            "process_reaped": true,
+            "requests_served": 2,
+            "server_boot_sha256": "21837b6fbb3f79d53b6e77adbdf8e8c01ca93097151d72af8a7cb056cc8108de",
+            "server_reset_verified": true,
+            "shutdown_seconds": 0.6564650000073016,
+            "startup_seconds": 3.3526530999224633
+          },
+          "packet_sha256": "6cea0dbceff4e40ced20a84946322e58eb336b056b3296a7d62279e2e2dbd7db",
+          "phase": "initial",
+          "requested_model": "bitagent-bonsai8b-dagv3",
+          "resolved_model": "bitagent-bonsai8b-dagv3",
+          "response_sha256": "f96c677301bd73026b7365334449140b214ee785400c4dd2513779b7cab66dcd",
+          "sampling": {
+            "max_tokens": 2048,
+            "seed": 0,
+            "temperature": 0
+          },
+          "schema": "srb.revision_inference_receipt.v1",
+          "status": "ok",
+          "usage": {
+            "input_tokens": 3058,
+            "output_tokens": 789,
+            "total_tokens": 3847
+          }
+        }
+      },
+      "update_receipt": null,
+      "status": "initial_invalid",
+      "initial_error": "initial memory did not encode the declared old state",
+      "initial_forecast": null,
+      "initial_action": null,
+      "initial_excess_brier": null,
+      "initial_policy_regret": null,
+      "initial_action_forecast_regret": null,
+      "initial_action_forecast_coherent": null,
+      "update_forecast": null,
+      "update_action": null,
+      "excess_brier": null,
+      "sample_brier": null,
+      "policy_regret_vs_matched": null,
+      "policy_regret_vs_full": null,
+      "update_action_forecast_regret": null,
+      "update_action_forecast_coherent": null,
+      "realized_loss": null,
+      "information_loss_sq": 0.2312049401856481,
+      "optimal_full_action": "de_risk",
+      "optimal_arm_action": "continue",
+      "information_constrained_expected_regret": 0.2614086233720294
+    },
+    {
+      "index": 50,
+      "case_id": "06c0b0ece39b699c1c165d4b3303120416efb8072619e5c46a110a48c4e90211",
+      "family": "counterparty",
+      "mode": "count",
+      "initial_packet_sha256": "141bca424dcae287082f700e8300df4523eee751cb2eed4a83ee4187a338c827",
+      "initial_receipt": {
+        "status": "adapter_error",
+        "exit_code": 1,
+        "wall_seconds": 37.307729799998924,
+        "input_tokens": 4122,
+        "output_tokens": 1845,
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "response": null,
+        "telemetry_status": "valid",
+        "telemetry_error": null,
+        "adapter_telemetry": {
+          "elapsed_seconds": 30.305269199889153,
+          "error_code": "response_contract",
+          "identity": {
+            "adapter_id": 0,
+            "adapter_scale": 1.0,
+            "adapter_sha256": "9a11fe2cecf795f53dbea490b9897b28f3d3346a9f69a71ce28bbb195f7de704",
+            "base_sha256": "284a335aa3fb2ced3b1b01fcb40b08aa783e3b70832767f0dd2e3fdfa134bd54",
+            "local_artifacts_verified": true,
+            "verification": "ephemeral_per_stage_server_plus_local_file_and_adapter_hashes"
+          },
+          "isolation": {
+            "physical_memory_enforced": false,
+            "port_closed_verified": true,
+            "process_reaped": true,
+            "requests_served": 2,
+            "server_boot_sha256": "200433adf57a23dd3da3f9778e9bc2ffc42ef2583b3a35175b84e4791914467d",
+            "server_reset_verified": true,
+            "shutdown_seconds": 0.6765874000266194,
+            "startup_seconds": 3.558728100033477
+          },
+          "packet_sha256": "141bca424dcae287082f700e8300df4523eee751cb2eed4a83ee4187a338c827",
+          "phase": "initial",
+          "requested_model": "bitagent-bonsai8b-dagv3",
+          "resolved_model": "bitagent-bonsai8b-dagv3",
+          "response_sha256": null,
+          "sampling": {
+            "max_tokens": 2048,
+            "seed": 0,
+            "temperature": 0
+          },
+          "schema": "srb.revision_inference_receipt.v1",
+          "status": "invalid_response",
+          "usage": {
+            "input_tokens": 4122,
+            "output_tokens": 1845,
+            "total_tokens": 5967
+          }
+        }
+      },
+      "update_receipt": null,
+      "status": "initial_invalid",
+      "initial_error": "adapter_error",
+      "initial_forecast": null,
+      "initial_action": null,
+      "initial_excess_brier": null,
+      "initial_policy_regret": null,
+      "initial_action_forecast_regret": null,
+      "initial_action_forecast_coherent": null,
+      "update_forecast": null,
+      "update_action": null,
+      "excess_brier": null,
+      "sample_brier": null,
+      "policy_regret_vs_matched": null,
+      "policy_regret_vs_full": null,
+      "update_action_forecast_regret": null,
+      "update_action_forecast_coherent": null,
+      "realized_loss": null,
+      "information_loss_sq": 0.32573807982704805,
+      "optimal_full_action": "de_risk",
+      "optimal_arm_action": "continue",
+      "information_constrained_expected_regret": 0.8767375577874801
+    },
+    {
+      "index": 59,
+      "case_id": "8abc1099735ec4cc4fec156131b96b4c37d05fb67d2d8d0b6c319f17015ef1c0",
+      "family": "counterparty",
+      "mode": "count",
+      "initial_packet_sha256": "aff6b7f0af748fc6d547a53d9e3d3089ff37c9a94f852c87c0b381d4bf3f2447",
+      "initial_receipt": {
+        "status": "adapter_error",
+        "exit_code": 1,
+        "wall_seconds": 28.70427480014041,
+        "input_tokens": 3421,
+        "output_tokens": 1159,
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "response": null,
+        "telemetry_status": "valid",
+        "telemetry_error": null,
+        "adapter_telemetry": {
+          "elapsed_seconds": 20.36759079992771,
+          "error_code": "response_contract",
+          "identity": {
+            "adapter_id": 0,
+            "adapter_scale": 1.0,
+            "adapter_sha256": "9a11fe2cecf795f53dbea490b9897b28f3d3346a9f69a71ce28bbb195f7de704",
+            "base_sha256": "284a335aa3fb2ced3b1b01fcb40b08aa783e3b70832767f0dd2e3fdfa134bd54",
+            "local_artifacts_verified": true,
+            "verification": "ephemeral_per_stage_server_plus_local_file_and_adapter_hashes"
+          },
+          "isolation": {
+            "physical_memory_enforced": false,
+            "port_closed_verified": true,
+            "process_reaped": true,
+            "requests_served": 2,
+            "server_boot_sha256": "ff0174b8fdf174c10d37c39acc51b916cf1775976e17e12c856b6e46b7f8db2e",
+            "server_reset_verified": true,
+            "shutdown_seconds": 0.4938204998616129,
+            "startup_seconds": 4.8595897001214325
+          },
+          "packet_sha256": "aff6b7f0af748fc6d547a53d9e3d3089ff37c9a94f852c87c0b381d4bf3f2447",
+          "phase": "initial",
+          "requested_model": "bitagent-bonsai8b-dagv3",
+          "resolved_model": "bitagent-bonsai8b-dagv3",
+          "response_sha256": null,
+          "sampling": {
+            "max_tokens": 2048,
+            "seed": 0,
+            "temperature": 0
+          },
+          "schema": "srb.revision_inference_receipt.v1",
+          "status": "invalid_response",
+          "usage": {
+            "input_tokens": 3421,
+            "output_tokens": 1159,
+            "total_tokens": 4580
+          }
+        }
+      },
+      "update_receipt": null,
+      "status": "initial_invalid",
+      "initial_error": "adapter_error",
+      "initial_forecast": null,
+      "initial_action": null,
+      "initial_excess_brier": null,
+      "initial_policy_regret": null,
+      "initial_action_forecast_regret": null,
+      "initial_action_forecast_coherent": null,
+      "update_forecast": null,
+      "update_action": null,
+      "excess_brier": null,
+      "sample_brier": null,
+      "policy_regret_vs_matched": null,
+      "policy_regret_vs_full": null,
+      "update_action_forecast_regret": null,
+      "update_action_forecast_coherent": null,
+      "realized_loss": null,
+      "information_loss_sq": 0.05736973799876819,
+      "optimal_full_action": "continue",
+      "optimal_arm_action": "de_risk",
+      "information_constrained_expected_regret": 0.3526809675662206
+    },
+    {
+      "index": 74,
+      "case_id": "a3d807844a3af75dfe32d996580537dd53db9e44335e807be46b8266925a7d3a",
+      "family": "counterparty",
+      "mode": "count",
+      "initial_packet_sha256": "d023d095ee08b633eb255be71a2b1bb3abeb6fe4fe97a949eadd74d536a8ba64",
+      "initial_receipt": {
+        "status": "adapter_error",
+        "exit_code": 1,
+        "wall_seconds": 36.699824899900705,
+        "input_tokens": 4118,
+        "output_tokens": 1853,
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "response": null,
+        "telemetry_status": "valid",
+        "telemetry_error": null,
+        "adapter_telemetry": {
+          "elapsed_seconds": 30.28861379995942,
+          "error_code": "response_contract",
+          "identity": {
+            "adapter_id": 0,
+            "adapter_scale": 1.0,
+            "adapter_sha256": "9a11fe2cecf795f53dbea490b9897b28f3d3346a9f69a71ce28bbb195f7de704",
+            "base_sha256": "284a335aa3fb2ced3b1b01fcb40b08aa783e3b70832767f0dd2e3fdfa134bd54",
+            "local_artifacts_verified": true,
+            "verification": "ephemeral_per_stage_server_plus_local_file_and_adapter_hashes"
+          },
+          "isolation": {
+            "physical_memory_enforced": false,
+            "port_closed_verified": true,
+            "process_reaped": true,
+            "requests_served": 2,
+            "server_boot_sha256": "672baf53134bb5449201423029f82ea7771bf6ce07e3739ca1d62db1962d65cd",
+            "server_reset_verified": true,
+            "shutdown_seconds": 0.5377833000384271,
+            "startup_seconds": 3.381313000107184
+          },
+          "packet_sha256": "d023d095ee08b633eb255be71a2b1bb3abeb6fe4fe97a949eadd74d536a8ba64",
+          "phase": "initial",
+          "requested_model": "bitagent-bonsai8b-dagv3",
+          "resolved_model": "bitagent-bonsai8b-dagv3",
+          "response_sha256": null,
+          "sampling": {
+            "max_tokens": 2048,
+            "seed": 0,
+            "temperature": 0
+          },
+          "schema": "srb.revision_inference_receipt.v1",
+          "status": "invalid_response",
+          "usage": {
+            "input_tokens": 4118,
+            "output_tokens": 1853,
+            "total_tokens": 5971
+          }
+        }
+      },
+      "update_receipt": null,
+      "status": "initial_invalid",
+      "initial_error": "adapter_error",
+      "initial_forecast": null,
+      "initial_action": null,
+      "initial_excess_brier": null,
+      "initial_policy_regret": null,
+      "initial_action_forecast_regret": null,
+      "initial_action_forecast_coherent": null,
+      "update_forecast": null,
+      "update_action": null,
+      "excess_brier": null,
+      "sample_brier": null,
+      "policy_regret_vs_matched": null,
+      "policy_regret_vs_full": null,
+      "update_action_forecast_regret": null,
+      "update_action_forecast_coherent": null,
+      "realized_loss": null,
+      "information_loss_sq": 0.19070249982829743,
+      "optimal_full_action": "continue",
+      "optimal_arm_action": "de_risk",
+      "information_constrained_expected_regret": 0.3526809675662206
+    },
+    {
+      "index": 77,
+      "case_id": "c78e9aa5d54d01234d88dd64d3264d164786aa6f9428cf986a41a7cec8ae0c2e",
+      "family": "counterparty",
+      "mode": "count",
+      "initial_packet_sha256": "e592bfec849eb911c57842387bf586fc4ffb6c09f7e5dc56861a004cff1b0bc5",
+      "initial_receipt": {
+        "status": "adapter_error",
+        "exit_code": 1,
+        "wall_seconds": 35.144023600034416,
+        "input_tokens": 4041,
+        "output_tokens": 1779,
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "response": null,
+        "telemetry_status": "valid",
+        "telemetry_error": null,
+        "adapter_telemetry": {
+          "elapsed_seconds": 29.231540799839422,
+          "error_code": "response_contract",
+          "identity": {
+            "adapter_id": 0,
+            "adapter_scale": 1.0,
+            "adapter_sha256": "9a11fe2cecf795f53dbea490b9897b28f3d3346a9f69a71ce28bbb195f7de704",
+            "base_sha256": "284a335aa3fb2ced3b1b01fcb40b08aa783e3b70832767f0dd2e3fdfa134bd54",
+            "local_artifacts_verified": true,
+            "verification": "ephemeral_per_stage_server_plus_local_file_and_adapter_hashes"
+          },
+          "isolation": {
+            "physical_memory_enforced": false,
+            "port_closed_verified": true,
+            "process_reaped": true,
+            "requests_served": 2,
+            "server_boot_sha256": "c60f4a44f9adaa73cea0eb99d733b43e6a5a03493f9ebf3f7cdf6bbded076bcf",
+            "server_reset_verified": true,
+            "shutdown_seconds": 0.5899191000498831,
+            "startup_seconds": 2.898979000048712
+          },
+          "packet_sha256": "e592bfec849eb911c57842387bf586fc4ffb6c09f7e5dc56861a004cff1b0bc5",
+          "phase": "initial",
+          "requested_model": "bitagent-bonsai8b-dagv3",
+          "resolved_model": "bitagent-bonsai8b-dagv3",
+          "response_sha256": null,
+          "sampling": {
+            "max_tokens": 2048,
+            "seed": 0,
+            "temperature": 0
+          },
+          "schema": "srb.revision_inference_receipt.v1",
+          "status": "invalid_response",
+          "usage": {
+            "input_tokens": 4041,
+            "output_tokens": 1779,
+            "total_tokens": 5820
+          }
+        }
+      },
+      "update_receipt": null,
+      "status": "initial_invalid",
+      "initial_error": "adapter_error",
+      "initial_forecast": null,
+      "initial_action": null,
+      "initial_excess_brier": null,
+      "initial_policy_regret": null,
+      "initial_action_forecast_regret": null,
+      "initial_action_forecast_coherent": null,
+      "update_forecast": null,
+      "update_action": null,
+      "excess_brier": null,
+      "sample_brier": null,
+      "policy_regret_vs_matched": null,
+      "policy_regret_vs_full": null,
+      "update_action_forecast_regret": null,
+      "update_action_forecast_coherent": null,
+      "realized_loss": null,
+      "information_loss_sq": 0.19070249982829743,
+      "optimal_full_action": "continue",
+      "optimal_arm_action": "de_risk",
+      "information_constrained_expected_regret": 0.3526809675662206
+    },
+    {
+      "index": 92,
+      "case_id": "3f92d0314665bbb6ffd023a3732c3e9f25f18b80e0d68886576948ed22555d14",
+      "family": "counterparty",
+      "mode": "count",
+      "initial_packet_sha256": "c3477283319db75c19eb23eb123f582fbfcb0e6ac2a8e496bed3c45aa16f2d51",
+      "initial_receipt": {
+        "status": "ok",
+        "exit_code": 0,
+        "wall_seconds": 26.326062800129876,
+        "input_tokens": 3448,
+        "output_tokens": 1178,
+        "stdout_sha256": "acc7e774598da0fe1e83268908aae8b78944672ea62909dd20c9803330515dc0",
+        "response": {
+          "posterior": [
+            0.3,
+            0.45,
+            0.25
+          ],
+          "memory": 9,
+          "action": "de_risk"
+        },
+        "telemetry_status": "valid",
+        "telemetry_error": null,
+        "adapter_telemetry": {
+          "elapsed_seconds": 20.145022300072014,
+          "error_code": null,
+          "identity": {
+            "adapter_id": 0,
+            "adapter_scale": 1.0,
+            "adapter_sha256": "9a11fe2cecf795f53dbea490b9897b28f3d3346a9f69a71ce28bbb195f7de704",
+            "base_sha256": "284a335aa3fb2ced3b1b01fcb40b08aa783e3b70832767f0dd2e3fdfa134bd54",
+            "local_artifacts_verified": true,
+            "verification": "ephemeral_per_stage_server_plus_local_file_and_adapter_hashes"
+          },
+          "isolation": {
+            "physical_memory_enforced": false,
+            "port_closed_verified": true,
+            "process_reaped": true,
+            "requests_served": 2,
+            "server_boot_sha256": "5747cae01e242de746c27d60ab085cbb02c87f1a3105ae83c527eca23efd61c1",
+            "server_reset_verified": true,
+            "shutdown_seconds": 0.4625520999543369,
+            "startup_seconds": 3.30199269996956
+          },
+          "packet_sha256": "c3477283319db75c19eb23eb123f582fbfcb0e6ac2a8e496bed3c45aa16f2d51",
+          "phase": "initial",
+          "requested_model": "bitagent-bonsai8b-dagv3",
+          "resolved_model": "bitagent-bonsai8b-dagv3",
+          "response_sha256": "ea178c60b9d227ecc409622313ac62eb6032e8724d14b99a4e3223ce8084be3d",
+          "sampling": {
+            "max_tokens": 2048,
+            "seed": 0,
+            "temperature": 0
+          },
+          "schema": "srb.revision_inference_receipt.v1",
+          "status": "ok",
+          "usage": {
+            "input_tokens": 3448,
+            "output_tokens": 1178,
+            "total_tokens": 4626
+          }
+        }
+      },
+      "update_receipt": {
+        "status": "ok",
+        "exit_code": 0,
+        "wall_seconds": 21.2212471999228,
+        "input_tokens": 3543,
+        "output_tokens": 775,
+        "stdout_sha256": "d9334708cffed966a0cedff5181cd3904ab9943a4de9d131e6b7226129b1e04a",
+        "response": {
+          "posterior": [
+            0.5,
+            0.25,
+            0.25
+          ],
+          "action": "de_risk"
+        },
+        "telemetry_status": "valid",
+        "telemetry_error": null,
+        "adapter_telemetry": {
+          "elapsed_seconds": 15.321546100080013,
+          "error_code": null,
+          "identity": {
+            "adapter_id": 0,
+            "adapter_scale": 1.0,
+            "adapter_sha256": "9a11fe2cecf795f53dbea490b9897b28f3d3346a9f69a71ce28bbb195f7de704",
+            "base_sha256": "284a335aa3fb2ced3b1b01fcb40b08aa783e3b70832767f0dd2e3fdfa134bd54",
+            "local_artifacts_verified": true,
+            "verification": "ephemeral_per_stage_server_plus_local_file_and_adapter_hashes"
+          },
+          "isolation": {
+            "physical_memory_enforced": false,
+            "port_closed_verified": true,
+            "process_reaped": true,
+            "requests_served": 2,
+            "server_boot_sha256": "51e56cb78e9b5b552017b2a69950728bc0ca85200b2aa6e74894f75526864573",
+            "server_reset_verified": true,
+            "shutdown_seconds": 0.4683505001012236,
+            "startup_seconds": 3.093398799886927
+          },
+          "packet_sha256": "0dfad1086e0840e7fbbd3202b47aa85f21cc677e39428d7677a31623ee3b74af",
+          "phase": "update",
+          "requested_model": "bitagent-bonsai8b-dagv3",
+          "resolved_model": "bitagent-bonsai8b-dagv3",
+          "response_sha256": "022f5d3cb9100bf127428a0fdab1e9ef988c56a82dfc15a345f0893f2a23e677",
+          "sampling": {
+            "max_tokens": 2048,
+            "seed": 0,
+            "temperature": 0
+          },
+          "schema": "srb.revision_inference_receipt.v1",
+          "status": "ok",
+          "usage": {
+            "input_tokens": 3543,
+            "output_tokens": 775,
+            "total_tokens": 4318
+          }
+        }
+      },
+      "status": "scored",
+      "initial_error": null,
+      "initial_forecast": [
+        0.3,
+        0.45,
+        0.25
+      ],
+      "initial_action": "de_risk",
+      "initial_excess_brier": 0.31958274003892273,
+      "initial_policy_regret": 0.0,
+      "initial_action_forecast_regret": 0.0,
+      "initial_action_forecast_coherent": true,
+      "update_forecast": [
+        0.5,
+        0.25,
+        0.25
+      ],
+      "update_action": "de_risk",
+      "excess_brier": 0.12669394124123498,
+      "sample_brier": 0.375,
+      "policy_regret_vs_matched": 0.0,
+      "policy_regret_vs_full": 0.3526809675662206,
+      "update_action_forecast_regret": 0.0,
+      "update_action_forecast_coherent": true,
+      "realized_loss": 0.6,
+      "information_loss_sq": 0.05736973799876819,
+      "optimal_full_action": "continue",
+      "optimal_arm_action": "de_risk",
+      "information_constrained_expected_regret": 0.3526809675662206,
+      "update_packet_sha256": "0dfad1086e0840e7fbbd3202b47aa85f21cc677e39428d7677a31623ee3b74af",
+      "input_matched_reference": [
+        0.7533455247896057,
+        0.24665203001299715,
+        2.445197397173216e-06
+      ],
+      "action_revised": false,
+      "action_matches_arm_optimum": true,
+      "missed_full_escalation": false
+    },
+    {
+      "index": 120,
+      "case_id": "524fec5702f8cb0de6fb785d1e0c4a2fea07beab1d043f738f159081ab60d3fa",
+      "family": "price_feed",
+      "mode": "count",
+      "initial_packet_sha256": "f6480023b578df840f483a8b746bff9d6fa96d8102300fc9b0c637b0df60a0ed",
+      "initial_receipt": {
+        "status": "ok",
+        "exit_code": 0,
+        "wall_seconds": 27.959311600076035,
+        "input_tokens": 3569,
+        "output_tokens": 1307,
+        "stdout_sha256": "e94742d02cf4978c081916a1d1ece75a1fbc8e69e3901e1f562a2290b9f01999",
+        "response": {
+          "posterior": [
+            0.5,
+            0.3,
+            0.2
+          ],
+          "memory": 8,
+          "action": "de_risk"
+        },
+        "telemetry_status": "valid",
+        "telemetry_error": null,
+        "adapter_telemetry": {
+          "elapsed_seconds": 21.999178299913183,
+          "error_code": null,
+          "identity": {
+            "adapter_id": 0,
+            "adapter_scale": 1.0,
+            "adapter_sha256": "9a11fe2cecf795f53dbea490b9897b28f3d3346a9f69a71ce28bbb195f7de704",
+            "base_sha256": "284a335aa3fb2ced3b1b01fcb40b08aa783e3b70832767f0dd2e3fdfa134bd54",
+            "local_artifacts_verified": true,
+            "verification": "ephemeral_per_stage_server_plus_local_file_and_adapter_hashes"
+          },
+          "isolation": {
+            "physical_memory_enforced": false,
+            "port_closed_verified": true,
+            "process_reaped": true,
+            "requests_served": 2,
+            "server_boot_sha256": "48cc3443b4dd01d6377607b329c2d02b605ba683d15d90c3642bd0b0ea7eed15",
+            "server_reset_verified": true,
+            "shutdown_seconds": 0.5373219999019057,
+            "startup_seconds": 3.073181000072509
+          },
+          "packet_sha256": "f6480023b578df840f483a8b746bff9d6fa96d8102300fc9b0c637b0df60a0ed",
+          "phase": "initial",
+          "requested_model": "bitagent-bonsai8b-dagv3",
+          "resolved_model": "bitagent-bonsai8b-dagv3",
+          "response_sha256": "a459871089fc177896b70ebe8c34aa3642f745e3f6dd58b0c441fa0f2b5ceff7",
+          "sampling": {
+            "max_tokens": 2048,
+            "seed": 0,
+            "temperature": 0
+          },
+          "schema": "srb.revision_inference_receipt.v1",
+          "status": "ok",
+          "usage": {
+            "input_tokens": 3569,
+            "output_tokens": 1307,
+            "total_tokens": 4876
+          }
+        }
+      },
+      "update_receipt": null,
+      "status": "initial_invalid",
+      "initial_error": "initial memory did not encode the declared old state",
+      "initial_forecast": null,
+      "initial_action": null,
+      "initial_excess_brier": null,
+      "initial_policy_regret": null,
+      "initial_action_forecast_regret": null,
+      "initial_action_forecast_coherent": null,
+      "update_forecast": null,
+      "update_action": null,
+      "excess_brier": null,
+      "sample_brier": null,
+      "policy_regret_vs_matched": null,
+      "policy_regret_vs_full": null,
+      "update_action_forecast_regret": null,
+      "update_action_forecast_coherent": null,
+      "realized_loss": null,
+      "information_loss_sq": 0.09230013941656749,
+      "optimal_full_action": "de_risk",
+      "optimal_arm_action": "continue",
+      "information_constrained_expected_regret": 0.2614086233720294
+    },
+    {
+      "index": 121,
+      "case_id": "a8d07455015d0e7a4cdbf752ceea917028c6a4406fbfe3c76126f38d8004741a",
+      "family": "collateral",
+      "mode": "count",
+      "initial_packet_sha256": "3492dc659b1419c0aedfa8e6b6497782006d89378f1a2af98b2d96b5ce17185c",
+      "initial_receipt": {
+        "status": "ok",
+        "exit_code": 0,
+        "wall_seconds": 36.676365699851885,
+        "input_tokens": 4112,
+        "output_tokens": 1845,
+        "stdout_sha256": "a6657b551b9fc56bb7ada76eafca988932221776d583507be29c827169366ff1",
+        "response": {
+          "posterior": [
+            0.33333333,
+            0.33333333,
+            0.33333333
+          ],
+          "memory": 6,
+          "action": "continue"
+        },
+        "telemetry_status": "valid",
+        "telemetry_error": null,
+        "adapter_telemetry": {
+          "elapsed_seconds": 30.781472300179303,
+          "error_code": null,
+          "identity": {
+            "adapter_id": 0,
+            "adapter_scale": 1.0,
+            "adapter_sha256": "9a11fe2cecf795f53dbea490b9897b28f3d3346a9f69a71ce28bbb195f7de704",
+            "base_sha256": "284a335aa3fb2ced3b1b01fcb40b08aa783e3b70832767f0dd2e3fdfa134bd54",
+            "local_artifacts_verified": true,
+            "verification": "ephemeral_per_stage_server_plus_local_file_and_adapter_hashes"
+          },
+          "isolation": {
+            "physical_memory_enforced": false,
+            "port_closed_verified": true,
+            "process_reaped": true,
+            "requests_served": 2,
+            "server_boot_sha256": "79be3ed36cbe5cd6ec692c84bf44cf1dc5c154e7a0351cc7165b943589e7bfe7",
+            "server_reset_verified": true,
+            "shutdown_seconds": 0.527049999916926,
+            "startup_seconds": 2.962654500035569
+          },
+          "packet_sha256": "3492dc659b1419c0aedfa8e6b6497782006d89378f1a2af98b2d96b5ce17185c",
+          "phase": "initial",
+          "requested_model": "bitagent-bonsai8b-dagv3",
+          "resolved_model": "bitagent-bonsai8b-dagv3",
+          "response_sha256": "e24c7cec0d3bde76485c2561ed86e11d692af7aa543b2ebef097d3f3c7191bbe",
+          "sampling": {
+            "max_tokens": 2048,
+            "seed": 0,
+            "temperature": 0
+          },
+          "schema": "srb.revision_inference_receipt.v1",
+          "status": "ok",
+          "usage": {
+            "input_tokens": 4112,
+            "output_tokens": 1845,
+            "total_tokens": 5957
+          }
+        }
+      },
+      "update_receipt": null,
+      "status": "initial_invalid",
+      "initial_error": "initial memory did not encode the declared old state",
+      "initial_forecast": null,
+      "initial_action": null,
+      "initial_excess_brier": null,
+      "initial_policy_regret": null,
+      "initial_action_forecast_regret": null,
+      "initial_action_forecast_coherent": null,
+      "update_forecast": null,
+      "update_action": null,
+      "excess_brier": null,
+      "sample_brier": null,
+      "policy_regret_vs_matched": null,
+      "policy_regret_vs_full": null,
+      "update_action_forecast_regret": null,
+      "update_action_forecast_coherent": null,
+      "realized_loss": null,
+      "information_loss_sq": 0.7333092639079578,
+      "optimal_full_action": "de_risk",
+      "optimal_arm_action": "halt_and_escalate",
+      "information_constrained_expected_regret": 0.9479145831149989
+    },
+    {
+      "index": 138,
+      "case_id": "1634aee35355dccb7f0582a833149eecdb36574cb55862bfadc3e725a08327a3",
+      "family": "price_feed",
+      "mode": "count",
+      "initial_packet_sha256": "5bf3772381407984be3b7a7743ae5b719c9660b95f33a7123cee785fb547af1b",
+      "initial_receipt": {
+        "status": "ok",
+        "exit_code": 0,
+        "wall_seconds": 24.455636400030926,
+        "input_tokens": 3121,
+        "output_tokens": 857,
+        "stdout_sha256": "9851661af9c858066e46d4db2e6f2e18a561f68e3364aad611cc0704693c8ac5",
+        "response": {
+          "posterior": [
+            0.30901671,
+            0.43098329,
+            0.26
+          ],
+          "memory": 8,
+          "action": "de_risk"
+        },
+        "telemetry_status": "valid",
+        "telemetry_error": null,
+        "adapter_telemetry": {
+          "elapsed_seconds": 16.468451200053096,
+          "error_code": null,
+          "identity": {
+            "adapter_id": 0,
+            "adapter_scale": 1.0,
+            "adapter_sha256": "9a11fe2cecf795f53dbea490b9897b28f3d3346a9f69a71ce28bbb195f7de704",
+            "base_sha256": "284a335aa3fb2ced3b1b01fcb40b08aa783e3b70832767f0dd2e3fdfa134bd54",
+            "local_artifacts_verified": true,
+            "verification": "ephemeral_per_stage_server_plus_local_file_and_adapter_hashes"
+          },
+          "isolation": {
+            "physical_memory_enforced": false,
+            "port_closed_verified": true,
+            "process_reaped": true,
+            "requests_served": 2,
+            "server_boot_sha256": "b020faa69732ae7536971ad98af86fdd9e1cc9ca7d4f20b2dc530efba87e2463",
+            "server_reset_verified": true,
+            "shutdown_seconds": 0.7521573000121862,
+            "startup_seconds": 4.638401200063527
+          },
+          "packet_sha256": "5bf3772381407984be3b7a7743ae5b719c9660b95f33a7123cee785fb547af1b",
+          "phase": "initial",
+          "requested_model": "bitagent-bonsai8b-dagv3",
+          "resolved_model": "bitagent-bonsai8b-dagv3",
+          "response_sha256": "b3687d23b3b1db2025078f09ed447c6bed3f7c582aecf3f76d62e0bfe9851486",
+          "sampling": {
+            "max_tokens": 2048,
+            "seed": 0,
+            "temperature": 0
+          },
+          "schema": "srb.revision_inference_receipt.v1",
+          "status": "ok",
+          "usage": {
+            "input_tokens": 3121,
+            "output_tokens": 857,
+            "total_tokens": 3978
+          }
+        }
+      },
+      "update_receipt": null,
+      "status": "initial_invalid",
+      "initial_error": "initial memory did not encode the declared old state",
+      "initial_forecast": null,
+      "initial_action": null,
+      "initial_excess_brier": null,
+      "initial_policy_regret": null,
+      "initial_action_forecast_regret": null,
+      "initial_action_forecast_coherent": null,
+      "update_forecast": null,
+      "update_action": null,
+      "excess_brier": null,
+      "sample_brier": null,
+      "policy_regret_vs_matched": null,
+      "policy_regret_vs_full": null,
+      "update_action_forecast_regret": null,
+      "update_action_forecast_coherent": null,
+      "realized_loss": null,
+      "information_loss_sq": 0.09230013941656749,
+      "optimal_full_action": "de_risk",
+      "optimal_arm_action": "continue",
+      "information_constrained_expected_regret": 0.2614086233720294
+    },
+    {
+      "index": 150,
+      "case_id": "1506706dc7f07d3bb2bc96fd4982d8ddce64535e5cd91768cdf3fe7289b476f7",
+      "family": "price_feed",
+      "mode": "count",
+      "initial_packet_sha256": "ce1b2a5e4214719e4d88a980fff64fddcbb0b0f604445ea294f9c0ceac7b5f62",
+      "initial_receipt": {
+        "status": "ok",
+        "exit_code": 0,
+        "wall_seconds": 28.335387300001457,
+        "input_tokens": 3174,
+        "output_tokens": 918,
+        "stdout_sha256": "505018436d3c7e67f6a004228425d01342dc25de5a54edcbdf74a6748eb50c6b",
+        "response": {
+          "posterior": [
+            0.3077777778,
+            0.4345258034,
+            0.2576964188
+          ],
+          "memory": 8,
+          "action": "halt_and_escalate"
+        },
+        "telemetry_status": "valid",
+        "telemetry_error": null,
+        "adapter_telemetry": {
+          "elapsed_seconds": 17.631209400016814,
+          "error_code": null,
+          "identity": {
+            "adapter_id": 0,
+            "adapter_scale": 1.0,
+            "adapter_sha256": "9a11fe2cecf795f53dbea490b9897b28f3d3346a9f69a71ce28bbb195f7de704",
+            "base_sha256": "284a335aa3fb2ced3b1b01fcb40b08aa783e3b70832767f0dd2e3fdfa134bd54",
+            "local_artifacts_verified": true,
+            "verification": "ephemeral_per_stage_server_plus_local_file_and_adapter_hashes"
+          },
+          "isolation": {
+            "physical_memory_enforced": false,
+            "port_closed_verified": true,
+            "process_reaped": true,
+            "requests_served": 2,
+            "server_boot_sha256": "78e7852ec30132fe4c7bbb8a8e481359c5ee8d5b0ee03fbc64b6a3a32032cd63",
+            "server_reset_verified": true,
+            "shutdown_seconds": 0.6286872001364827,
+            "startup_seconds": 7.157445099903271
+          },
+          "packet_sha256": "ce1b2a5e4214719e4d88a980fff64fddcbb0b0f604445ea294f9c0ceac7b5f62",
+          "phase": "initial",
+          "requested_model": "bitagent-bonsai8b-dagv3",
+          "resolved_model": "bitagent-bonsai8b-dagv3",
+          "response_sha256": "bf5b9f4a0b156cdd92ad5b1f22eb0905ed0793e9aeb45410f1b58c9445518945",
+          "sampling": {
+            "max_tokens": 2048,
+            "seed": 0,
+            "temperature": 0
+          },
+          "schema": "srb.revision_inference_receipt.v1",
+          "status": "ok",
+          "usage": {
+            "input_tokens": 3174,
+            "output_tokens": 918,
+            "total_tokens": 4092
+          }
+        }
+      },
+      "update_receipt": {
+        "status": "ok",
+        "exit_code": 0,
+        "wall_seconds": 23.056749900104478,
+        "input_tokens": 3475,
+        "output_tokens": 699,
+        "stdout_sha256": "724499ce0325f6d6678156c5abc3c43c806e23f24b2ad1c9fe5b275674b40772",
+        "response": {
+          "posterior": [
+            0.375,
+            0.375,
+            0.25
+          ],
+          "action": "halt_and_escalate"
+        },
+        "telemetry_status": "valid",
+        "telemetry_error": null,
+        "adapter_telemetry": {
+          "elapsed_seconds": 14.821626499993727,
+          "error_code": null,
+          "identity": {
+            "adapter_id": 0,
+            "adapter_scale": 1.0,
+            "adapter_sha256": "9a11fe2cecf795f53dbea490b9897b28f3d3346a9f69a71ce28bbb195f7de704",
+            "base_sha256": "284a335aa3fb2ced3b1b01fcb40b08aa783e3b70832767f0dd2e3fdfa134bd54",
+            "local_artifacts_verified": true,
+            "verification": "ephemeral_per_stage_server_plus_local_file_and_adapter_hashes"
+          },
+          "isolation": {
+            "physical_memory_enforced": false,
+            "port_closed_verified": true,
+            "process_reaped": true,
+            "requests_served": 2,
+            "server_boot_sha256": "2202a7ad2a555da69aebf2b7885e21a9a62a37a0a0d1b67596729f9bd926a667",
+            "server_reset_verified": true,
+            "shutdown_seconds": 0.6845589999575168,
+            "startup_seconds": 4.764219200005755
+          },
+          "packet_sha256": "4db5fc0b03363c97f8543fb8883dd10184aa9d4bc733acc72820e87f17d94d8b",
+          "phase": "update",
+          "requested_model": "bitagent-bonsai8b-dagv3",
+          "resolved_model": "bitagent-bonsai8b-dagv3",
+          "response_sha256": "7df7d032bc9f4358c70f2f1a61deee26c8993be1a5ece8e21de37e2e90b75a92",
+          "sampling": {
+            "max_tokens": 2048,
+            "seed": 0,
+            "temperature": 0
+          },
+          "schema": "srb.revision_inference_receipt.v1",
+          "status": "ok",
+          "usage": {
+            "input_tokens": 3475,
+            "output_tokens": 699,
+            "total_tokens": 4174
+          }
+        }
+      },
+      "status": "scored",
+      "initial_error": null,
+      "initial_forecast": [
+        0.3077777778,
+        0.4345258034,
+        0.2576964188
+      ],
+      "initial_action": "halt_and_escalate",
+      "initial_excess_brier": 0.16333079643776527,
+      "initial_policy_regret": 1.4119129245765527,
+      "initial_action_forecast_regret": 0.5712033974600002,
+      "initial_action_forecast_coherent": false,
+      "update_forecast": [
+        0.375,
+        0.375,
+        0.25
+      ],
+      "update_action": "halt_and_escalate",
+      "excess_brier": 0.1196959360041096,
+      "sample_brier": 0.59375,
+      "policy_regret_vs_matched": 1.4297045904442816,
+      "policy_regret_vs_full": 2.268138338513326,
+      "update_action_forecast_regret": 0.6375,
+      "update_action_forecast_coherent": false,
+      "realized_loss": 2.5,
+      "information_loss_sq": 0.19070249982829743,
+      "optimal_full_action": "continue",
+      "optimal_arm_action": "de_risk",
+      "information_constrained_expected_regret": 0.6222393896796947,
+      "update_packet_sha256": "4db5fc0b03363c97f8543fb8883dd10184aa9d4bc733acc72820e87f17d94d8b",
+      "input_matched_reference": [
+        0.6139155864273133,
+        0.3860698855507516,
+        1.4528021935097517e-05
+      ],
+      "action_revised": false,
+      "action_matches_arm_optimum": false,
+      "missed_full_escalation": false
+    },
+    {
+      "index": 156,
+      "case_id": "b58649f0801fd36749e16219a3c9f8117462ef75cc2905bbbad3d38e262d4de2",
+      "family": "price_feed",
+      "mode": "count",
+      "initial_packet_sha256": "e13ee4fa1e765612192bcfa00b55c8c78362f67a6ed595794a87069d4909be8d",
+      "initial_receipt": {
+        "status": "ok",
+        "exit_code": 0,
+        "wall_seconds": 19.468458299990743,
+        "input_tokens": 2804,
+        "output_tokens": 533,
+        "stdout_sha256": "6c7ccc26c44b75ee86bdfbf8ef3088f1f89ecd62320fd76e06b741289f92762e",
+        "response": {
+          "posterior": [
+            0.5,
+            0.375,
+            0.125
+          ],
+          "memory": 11,
+          "action": "continue"
+        },
+        "telemetry_status": "valid",
+        "telemetry_error": null,
+        "adapter_telemetry": {
+          "elapsed_seconds": 11.828011800069362,
+          "error_code": null,
+          "identity": {
+            "adapter_id": 0,
+            "adapter_scale": 1.0,
+            "adapter_sha256": "9a11fe2cecf795f53dbea490b9897b28f3d3346a9f69a71ce28bbb195f7de704",
+            "base_sha256": "284a335aa3fb2ced3b1b01fcb40b08aa783e3b70832767f0dd2e3fdfa134bd54",
+            "local_artifacts_verified": true,
+            "verification": "ephemeral_per_stage_server_plus_local_file_and_adapter_hashes"
+          },
+          "isolation": {
+            "physical_memory_enforced": false,
+            "port_closed_verified": true,
+            "process_reaped": true,
+            "requests_served": 2,
+            "server_boot_sha256": "167e70809eab34e97d1d34853000c5c3653d871045583138311f7793a8d8e1d9",
+            "server_reset_verified": true,
+            "shutdown_seconds": 0.5800509001128376,
+            "startup_seconds": 4.102091900072992
+          },
+          "packet_sha256": "e13ee4fa1e765612192bcfa00b55c8c78362f67a6ed595794a87069d4909be8d",
+          "phase": "initial",
+          "requested_model": "bitagent-bonsai8b-dagv3",
+          "resolved_model": "bitagent-bonsai8b-dagv3",
+          "response_sha256": "af195cde1ddc577d4895cbaf5badd44b988de7b8b806e5d8c7c7836ba010ef80",
+          "sampling": {
+            "max_tokens": 2048,
+            "seed": 0,
+            "temperature": 0
+          },
+          "schema": "srb.revision_inference_receipt.v1",
+          "status": "ok",
+          "usage": {
+            "input_tokens": 2804,
+            "output_tokens": 533,
+            "total_tokens": 3337
+          }
+        }
+      },
+      "update_receipt": null,
+      "status": "initial_invalid",
+      "initial_error": "initial memory did not encode the declared old state",
+      "initial_forecast": null,
+      "initial_action": null,
+      "initial_excess_brier": null,
+      "initial_policy_regret": null,
+      "initial_action_forecast_regret": null,
+      "initial_action_forecast_coherent": null,
+      "update_forecast": null,
+      "update_action": null,
+      "excess_brier": null,
+      "sample_brier": null,
+      "policy_regret_vs_matched": null,
+      "policy_regret_vs_full": null,
+      "update_action_forecast_regret": null,
+      "update_action_forecast_coherent": null,
+      "realized_loss": null,
+      "information_loss_sq": 0.09230013941656749,
+      "optimal_full_action": "de_risk",
+      "optimal_arm_action": "continue",
+      "information_constrained_expected_regret": 0.2614086233720294
+    },
+    {
+      "index": 172,
+      "case_id": "3e62b3c6452c8d26f3046544973fd9adc7b7f7e66bb604e653a9a1d64112dcca",
+      "family": "collateral",
+      "mode": "count",
+      "initial_packet_sha256": "b058a3bf98d5434a740075945fb0881c49a05e9a9ba12e791af43339b4483e42",
+      "initial_receipt": {
+        "status": "adapter_error",
+        "exit_code": 1,
+        "wall_seconds": 33.163466500118375,
+        "input_tokens": 3828,
+        "output_tokens": 1564,
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "response": null,
+        "telemetry_status": "valid",
+        "telemetry_error": null,
+        "adapter_telemetry": {
+          "elapsed_seconds": 26.095622800057754,
+          "error_code": "response_contract",
+          "identity": {
+            "adapter_id": 0,
+            "adapter_scale": 1.0,
+            "adapter_sha256": "9a11fe2cecf795f53dbea490b9897b28f3d3346a9f69a71ce28bbb195f7de704",
+            "base_sha256": "284a335aa3fb2ced3b1b01fcb40b08aa783e3b70832767f0dd2e3fdfa134bd54",
+            "local_artifacts_verified": true,
+            "verification": "ephemeral_per_stage_server_plus_local_file_and_adapter_hashes"
+          },
+          "isolation": {
+            "physical_memory_enforced": false,
+            "port_closed_verified": true,
+            "process_reaped": true,
+            "requests_served": 2,
+            "server_boot_sha256": "7a38a475aaebb3d5edeaf8ef178553c9e7a09de9793d3008ab702561465600cc",
+            "server_reset_verified": true,
+            "shutdown_seconds": 0.5959845001343638,
+            "startup_seconds": 3.7469787001609802
+          },
+          "packet_sha256": "b058a3bf98d5434a740075945fb0881c49a05e9a9ba12e791af43339b4483e42",
+          "phase": "initial",
+          "requested_model": "bitagent-bonsai8b-dagv3",
+          "resolved_model": "bitagent-bonsai8b-dagv3",
+          "response_sha256": null,
+          "sampling": {
+            "max_tokens": 2048,
+            "seed": 0,
+            "temperature": 0
+          },
+          "schema": "srb.revision_inference_receipt.v1",
+          "status": "invalid_response",
+          "usage": {
+            "input_tokens": 3828,
+            "output_tokens": 1564,
+            "total_tokens": 5392
+          }
+        }
+      },
+      "update_receipt": null,
+      "status": "initial_invalid",
+      "initial_error": "adapter_error",
+      "initial_forecast": null,
+      "initial_action": null,
+      "initial_excess_brier": null,
+      "initial_policy_regret": null,
+      "initial_action_forecast_regret": null,
+      "initial_action_forecast_coherent": null,
+      "update_forecast": null,
+      "update_action": null,
+      "excess_brier": null,
+      "sample_brier": null,
+      "policy_regret_vs_matched": null,
+      "policy_regret_vs_full": null,
+      "update_action_forecast_regret": null,
+      "update_action_forecast_coherent": null,
+      "realized_loss": null,
+      "information_loss_sq": 0.19070249982829743,
+      "optimal_full_action": "continue",
+      "optimal_arm_action": "de_risk",
+      "information_constrained_expected_regret": 0.7681383491150661
+    },
+    {
+      "index": 199,
+      "case_id": "02e41a9bf88f03649838d45bc8c9067044793fbd301647dec2e6b28d52598f82",
+      "family": "collateral",
+      "mode": "count",
+      "initial_packet_sha256": "e7350449da3ef8e655dc5483c8e816fe9f58157187be9078a7fed4f0354e03a3",
+      "initial_receipt": {
+        "status": "adapter_error",
+        "exit_code": 1,
+        "wall_seconds": 39.87778820004314,
+        "input_tokens": 3903,
+        "output_tokens": 1635,
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "response": null,
+        "telemetry_status": "valid",
+        "telemetry_error": null,
+        "adapter_telemetry": {
+          "elapsed_seconds": 30.668693999992684,
+          "error_code": "response_contract",
+          "identity": {
+            "adapter_id": 0,
+            "adapter_scale": 1.0,
+            "adapter_sha256": "9a11fe2cecf795f53dbea490b9897b28f3d3346a9f69a71ce28bbb195f7de704",
+            "base_sha256": "284a335aa3fb2ced3b1b01fcb40b08aa783e3b70832767f0dd2e3fdfa134bd54",
+            "local_artifacts_verified": true,
+            "verification": "ephemeral_per_stage_server_plus_local_file_and_adapter_hashes"
+          },
+          "isolation": {
+            "physical_memory_enforced": false,
+            "port_closed_verified": true,
+            "process_reaped": true,
+            "requests_served": 2,
+            "server_boot_sha256": "0173b9a2daaae5545ce6dba5cfb9e9434b31c08321edb4d8ccedf343387d7067",
+            "server_reset_verified": true,
+            "shutdown_seconds": 1.0652268000412732,
+            "startup_seconds": 4.8345622001215816
+          },
+          "packet_sha256": "e7350449da3ef8e655dc5483c8e816fe9f58157187be9078a7fed4f0354e03a3",
+          "phase": "initial",
+          "requested_model": "bitagent-bonsai8b-dagv3",
+          "resolved_model": "bitagent-bonsai8b-dagv3",
+          "response_sha256": null,
+          "sampling": {
+            "max_tokens": 2048,
+            "seed": 0,
+            "temperature": 0
+          },
+          "schema": "srb.revision_inference_receipt.v1",
+          "status": "invalid_response",
+          "usage": {
+            "input_tokens": 3903,
+            "output_tokens": 1635,
+            "total_tokens": 5538
+          }
+        }
+      },
+      "update_receipt": null,
+      "status": "initial_invalid",
+      "initial_error": "adapter_error",
+      "initial_forecast": null,
+      "initial_action": null,
+      "initial_excess_brier": null,
+      "initial_policy_regret": null,
+      "initial_action_forecast_regret": null,
+      "initial_action_forecast_coherent": null,
+      "update_forecast": null,
+      "update_action": null,
+      "excess_brier": null,
+      "sample_brier": null,
+      "policy_regret_vs_matched": null,
+      "policy_regret_vs_full": null,
+      "update_action_forecast_regret": null,
+      "update_action_forecast_coherent": null,
+      "realized_loss": null,
+      "information_loss_sq": 0.19070249982829743,
+      "optimal_full_action": "continue",
+      "optimal_arm_action": "de_risk",
+      "information_constrained_expected_regret": 0.7681383491150661
+    },
+    {
+      "index": 205,
+      "case_id": "1f81d2d2131238427ba987f96c77200ae3f13e93b9a894cec711d9bf6c36d716",
+      "family": "collateral",
+      "mode": "count",
+      "initial_packet_sha256": "a90f423ab00e96d90cf65147faaae08a3131c121f02512d30d057fd7e6693c43",
+      "initial_receipt": {
+        "status": "ok",
+        "exit_code": 0,
+        "wall_seconds": 28.441428099991754,
+        "input_tokens": 3461,
+        "output_tokens": 1195,
+        "stdout_sha256": "9d10c828678d4ee8fd1c86dd0f02844f855beffd1c194a48588c499b41036c99",
+        "response": {
+          "posterior": [
+            0.3,
+            0.45,
+            0.25
+          ],
+          "memory": 7,
+          "action": "de_risk"
+        },
+        "telemetry_status": "valid",
+        "telemetry_error": null,
+        "adapter_telemetry": {
+          "elapsed_seconds": 21.01391680003144,
+          "error_code": null,
+          "identity": {
+            "adapter_id": 0,
+            "adapter_scale": 1.0,
+            "adapter_sha256": "9a11fe2cecf795f53dbea490b9897b28f3d3346a9f69a71ce28bbb195f7de704",
+            "base_sha256": "284a335aa3fb2ced3b1b01fcb40b08aa783e3b70832767f0dd2e3fdfa134bd54",
+            "local_artifacts_verified": true,
+            "verification": "ephemeral_per_stage_server_plus_local_file_and_adapter_hashes"
+          },
+          "isolation": {
+            "physical_memory_enforced": false,
+            "port_closed_verified": true,
+            "process_reaped": true,
+            "requests_served": 2,
+            "server_boot_sha256": "24c6e89b5b5550b8cc3078df65ba3dd585df9505a659dfe2a15dd9a920fdf4dc",
+            "server_reset_verified": true,
+            "shutdown_seconds": 0.6110982999671251,
+            "startup_seconds": 3.9140453999862075
+          },
+          "packet_sha256": "a90f423ab00e96d90cf65147faaae08a3131c121f02512d30d057fd7e6693c43",
+          "phase": "initial",
+          "requested_model": "bitagent-bonsai8b-dagv3",
+          "resolved_model": "bitagent-bonsai8b-dagv3",
+          "response_sha256": "fd9d8cee3240440302463d2e6c8503a91ecdec68daf1d5dffdbe530c500dc656",
+          "sampling": {
+            "max_tokens": 2048,
+            "seed": 0,
+            "temperature": 0
+          },
+          "schema": "srb.revision_inference_receipt.v1",
+          "status": "ok",
+          "usage": {
+            "input_tokens": 3461,
+            "output_tokens": 1195,
+            "total_tokens": 4656
+          }
+        }
+      },
+      "update_receipt": {
+        "status": "ok",
+        "exit_code": 0,
+        "wall_seconds": 21.95027929986827,
+        "input_tokens": 3570,
+        "output_tokens": 802,
+        "stdout_sha256": "d9334708cffed966a0cedff5181cd3904ab9943a4de9d131e6b7226129b1e04a",
+        "response": {
+          "posterior": [
+            0.5,
+            0.25,
+            0.25
+          ],
+          "action": "de_risk"
+        },
+        "telemetry_status": "valid",
+        "telemetry_error": null,
+        "adapter_telemetry": {
+          "elapsed_seconds": 15.895562599878758,
+          "error_code": null,
+          "identity": {
+            "adapter_id": 0,
+            "adapter_scale": 1.0,
+            "adapter_sha256": "9a11fe2cecf795f53dbea490b9897b28f3d3346a9f69a71ce28bbb195f7de704",
+            "base_sha256": "284a335aa3fb2ced3b1b01fcb40b08aa783e3b70832767f0dd2e3fdfa134bd54",
+            "local_artifacts_verified": true,
+            "verification": "ephemeral_per_stage_server_plus_local_file_and_adapter_hashes"
+          },
+          "isolation": {
+            "physical_memory_enforced": false,
+            "port_closed_verified": true,
+            "process_reaped": true,
+            "requests_served": 2,
+            "server_boot_sha256": "46a3d862883eec98447c4ff99754900029bea6ef8d44aa1bb31dbb9df10a1c16",
+            "server_reset_verified": true,
+            "shutdown_seconds": 0.6286534999962896,
+            "startup_seconds": 2.8634059000760317
+          },
+          "packet_sha256": "c425bdb99d02a4f8920284a6e68d26cddca9bc54b4f6d6e981c8a5559c0db120",
+          "phase": "update",
+          "requested_model": "bitagent-bonsai8b-dagv3",
+          "resolved_model": "bitagent-bonsai8b-dagv3",
+          "response_sha256": "022f5d3cb9100bf127428a0fdab1e9ef988c56a82dfc15a345f0893f2a23e677",
+          "sampling": {
+            "max_tokens": 2048,
+            "seed": 0,
+            "temperature": 0
+          },
+          "schema": "srb.revision_inference_receipt.v1",
+          "status": "ok",
+          "usage": {
+            "input_tokens": 3570,
+            "output_tokens": 802,
+            "total_tokens": 4372
+          }
+        }
+      },
+      "status": "scored",
+      "initial_error": null,
+      "initial_forecast": [
+        0.3,
+        0.45,
+        0.25
+      ],
+      "initial_action": "de_risk",
+      "initial_excess_brier": 0.06222027283879043,
+      "initial_policy_regret": 0.0,
+      "initial_action_forecast_regret": 0.0,
+      "initial_action_forecast_coherent": true,
+      "update_forecast": [
+        0.5,
+        0.25,
+        0.25
+      ],
+      "update_action": "de_risk",
+      "excess_brier": 0.22229838794271786,
+      "sample_brier": 0.875,
+      "policy_regret_vs_matched": 0.6355546842575546,
+      "policy_regret_vs_full": 0.0,
+      "update_action_forecast_regret": 0.0,
+      "update_action_forecast_coherent": true,
+      "realized_loss": 2.0,
+      "information_loss_sq": 1.2047712521046228,
+      "optimal_full_action": "de_risk",
+      "optimal_arm_action": "continue",
+      "information_constrained_expected_regret": 1.6930015036501003,
+      "update_packet_sha256": "c425bdb99d02a4f8920284a6e68d26cddca9bc54b4f6d6e981c8a5559c0db120",
+      "input_matched_reference": [
+        0.8785239295564312,
+        0.1214745154970471,
+        1.5549465217230623e-06
+      ],
+      "action_revised": false,
+      "action_matches_arm_optimum": false,
+      "missed_full_escalation": false
+    }
+  ]
+}
