@@ -155,10 +155,10 @@ def parse_receipt(stderr, packet, response, host_status):
                 "port_closed_verified", "startup_seconds", "shutdown_seconds",
             }, "isolation")
             _digest(isolation["server_boot_sha256"], "server_boot_sha256")
-            if type(isolation["requests_served"]) is not int or isolation["requests_served"] not in (0, 1):
-                raise ValueError("ephemeral stage server may serve at most one request")
-            if value["status"] == "ok" and isolation["requests_served"] != 1:
-                raise ValueError("successful ephemeral receipt must record exactly one request")
+            if type(isolation["requests_served"]) is not int or isolation["requests_served"] not in (0, 1, 2):
+                raise ValueError("ephemeral stage server may serve at most two intra-stage requests")
+            if value["status"] == "ok" and isolation["requests_served"] not in (1, 2):
+                raise ValueError("successful ephemeral receipt must record one or two intra-stage requests")
             if isolation["process_reaped"] is not True or isolation["port_closed_verified"] is not True:
                 raise ValueError("server_reset_verified requires reaped process and closed port")
             _number(isolation["startup_seconds"], "startup_seconds")
