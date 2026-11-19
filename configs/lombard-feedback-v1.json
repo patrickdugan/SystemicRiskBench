@@ -1,0 +1,37 @@
+{
+  "experiment_id": "SRB-LOMBARD-02-public-source-law",
+  "merchant_equity": 10000,
+  "max_merchant_debt": 40000,
+  "debt_step": 5000,
+  "risk_free_rate": 0.025,
+  "bank_default_probability": 0.08,
+  "bank_recovery": 0.35,
+  "bank_default_feedback": 0.18,
+  "bank_equity_fraction": 0.1,
+  "pass_through": 0.8,
+  "merchant_recovery": 0.25,
+  "origination_margin": 0.005,
+  "guarantee_grid": [
+    0,
+    0.25,
+    0.5,
+    0.75,
+    1
+  ],
+  "projects": [
+    {
+      "name": "prudent",
+      "success_return_on_assets": 0.15,
+      "curvature": 0.007,
+      "base_failure_probability": 0.01,
+      "failure_slope_per_debt_to_equity": 0.015
+    },
+    {
+      "name": "aggressive",
+      "success_return_on_assets": 0.205,
+      "curvature": 0.01,
+      "base_failure_probability": 0.055,
+      "failure_slope_per_debt_to_equity": 0.022
+    }
+  ]
+}

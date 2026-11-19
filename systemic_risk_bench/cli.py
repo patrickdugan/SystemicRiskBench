@@ -77,6 +77,22 @@ def main(argv=None):
     financial.add_argument("--cases", type=int, default=18)
     financial.add_argument("--timeout", type=float, default=30)
     financial.add_argument("--output", required=True)
+    fb_export = commands.add_parser("lombard-feedback-export", help="export public synthetic guarantee credit-pricing tasks")
+    fb_export.add_argument("--config", required=True)
+    fb_export.add_argument("--output", required=True)
+    fb_oracle = commands.add_parser("lombard-feedback-oracle", help="evaluator-only exact model fixture; never a neural score")
+    fb_oracle.add_argument("--config", required=True)
+    fb_oracle.add_argument("--output", required=True)
+    fb_score = commands.add_parser("lombard-feedback-score", help="score bounded synthetic loan-pricing responses")
+    fb_score.add_argument("--config", required=True)
+    fb_score.add_argument("--responses", required=True)
+    fb_score.add_argument("--output", required=True)
+    fb_run = commands.add_parser("lombard-feedback-run", help="run registered JSON-stdio agent over synthetic funding cases")
+    fb_run.add_argument("--config", required=True)
+    fb_run.add_argument("--experiment", required=True)
+    fb_run.add_argument("--adapter-argv", required=True, help="JSON argv; no shell expansion")
+    fb_run.add_argument("--timeout", type=float, default=30.0)
+    fb_run.add_argument("--output", required=True)
     content_list = commands.add_parser("content-list", help="list sourced conceptual content cases")
     content_packet = commands.add_parser("content-packet", help="export staged content without evaluator keys")
     content_packet.add_argument("--case", required=True)
@@ -139,6 +155,26 @@ def main(argv=None):
         elif args.command == "evalmath-export":
             from .evalmath import export_bank
             write(args.output, export_bank(args.config))
+        elif args.command == "lombard-feedback-export":
+            from .lombard_feedback import public_cases
+            write(args.output, {
+                "schema": "srb.lombard_feedback.tasks.v1",
+                "source_class": "public_synthetic_development_only",
+                "model_calls": 0, "answer_keys_present": False,
+                "cases": public_cases(read_json(args.config)),
+            })
+        elif args.command == "lombard-feedback-oracle":
+            from .lombard_feedback import analysis
+            write(args.output, analysis(read_json(args.config)))
+        elif args.command == "lombard-feedback-score":
+            from .lombard_feedback import score_responses
+            write(args.output, score_responses(
+                read_json(args.config), read_json(args.responses)["responses"]))
+        elif args.command == "lombard-feedback-run":
+            from .lombard_feedback import run_adapter
+            write(args.output, run_adapter(read_json(args.config),
+                json.loads(args.adapter_argv), read_json(args.experiment),
+                timeout=args.timeout))
         elif args.command == "content-list":
             from .content_suite import content_cases
             print(json.dumps([
