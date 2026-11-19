@@ -51,6 +51,30 @@ def merchant_equity(
     }
 
 
+def funding_spread_counterfactual(
+    *, borrower_equity, borrowed, gross_operating_profit,
+    unsubsidized_rate, supported_rate
+) -> dict:
+    """Invented pricing counterfactual, not evidence that a guarantee lowers rates."""
+    e = _number(borrower_equity, "borrower_equity", positive=True)
+    d = _number(borrowed, "borrowed", positive=True)
+    g = _number(gross_operating_profit, "gross_operating_profit")
+    hi = _number(unsubsidized_rate, "unsubsidized_rate", nonnegative=True)
+    lo = _number(supported_rate, "supported_rate", nonnegative=True)
+    if lo > hi:
+        raise ValueError("supported rate must not exceed comparison rate")
+    high_roe = (g - hi*d)/e
+    low_roe = (g - lo*d)/e
+    return {
+        "unsubsidized_roe": high_roe,
+        "supported_roe": low_roe,
+        "annual_interest_saving": (hi-lo)*d,
+        "roe_difference": low_roe - high_roe,
+        "guarantee_to_rate_effect_is_assumed": True,
+        "real_world_pricing_claim": False,
+    }
+
+
 def bank_rescue(
     *, assets, equity, credit_loss, capital_ratio, liquidity_loan,
     central_bank_equity, central_bank_credit_loss
