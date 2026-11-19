@@ -49,7 +49,8 @@ def execute(adapter_argv, packet, prior_responses, timeout, experiment=None):
     return receipt
 
 
-def run(adapter_argv, experiment, *, cases=None, masked=False, timeout=60):
+def run(adapter_argv, experiment, *, cases=None, masked=False, timeout=60,
+        track_label="history_reconstruction"):
     from .history import public_packet
     if not isinstance(experiment, dict) or not isinstance(experiment.get("experiment_id"), str):
         raise ValueError("experiment config requires experiment_id")
@@ -80,7 +81,7 @@ def run(adapter_argv, experiment, *, cases=None, masked=False, timeout=60):
             numeric_report = {"status": "invalid_response_contract", "error": str(error)}
     return {"schema_version": "srb.run.v0.1", "created_at": datetime.now(timezone.utc).isoformat(),
             "experiment": experiment, "experiment_sha256": sha(experiment),
-            "track": "history_reconstruction" if cases is not None else "synthetic_numerical",
+            "track": track_label if cases is not None else "synthetic_numerical",
             "masked": masked, "adapter_argv": adapter_argv, "timeout_seconds_per_call": timeout,
             "adapter_process_is_not_sandboxed_by_this_harness": True,
             "host_measured_wall_seconds": sum(r["wall_seconds"] for r in receipts),

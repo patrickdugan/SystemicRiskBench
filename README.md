@@ -105,6 +105,33 @@ python -m systemic_risk_bench agent-revision --adapter-argv '["python","-m","exa
 python -m systemic_risk_bench agent-revision --adapter-argv '["python","-m","examples.agent_revision_fixture_adapter"]' --experiment configs/agent-revision-fixture.json --mode bitmap --cases 16 --output artifacts/revision-bitmap.json
 ~~~
 
+## Merchants of Lombard Street: sourced content and Lean reasoning
+
+[SRB-LOMBARD-01](docs/lombard-street.md) adds Walter Bagehot's 1873
+*Lombard Street* borrowing-merchant example to a **separate content suite**.
+It tests the 10% versus 30% return-on-equity arithmetic, competitive price
+undercutting, negative funding-spread controls, and the difference between a
+commercial-bank equity recapitalization and secured emergency liquidity.
+A third stage tests a conditional repeated-loss public rescue cycle with
+separate central-bank and Treasury balance sheets.
+
+The content track has three staged packets and four independent numerical
+tasks with 17 fields. It does not alter the frozen 33 historical crisis cases,
+four benign controls, or 6-task / 13-field general numerical baseline.
+
+```bash
+python -m systemic_risk_bench content-list
+python -m systemic_risk_bench content-packet --case content_bagehot_lombard_merchants --stage 0 --output artifacts/lombard-stage0.json
+python -m systemic_risk_bench content-quant --output artifacts/lombard-questions.json
+python -m unittest discover -s tests -p 'test_lombard_content.py' -v
+```
+
+The [Lean 4 proofs](Lombard/Capital.lean) establish conditional leverage
+return comparisons, loss and recap accounting, and the cumulative cost of
+a stipulated repeated rescue policy. They establish no empirical probability
+of future losses or bailouts. CI checks kernel compilation, the content packet
+leakage boundary and the complete Python regression suite.
+
 ## Financial evidence revision and BitAgent model transport
 
 [SRB-REV-02](docs/finance-revision.md) extends bounded-memory correction tasks to

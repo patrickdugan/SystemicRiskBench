@@ -16,4 +16,4 @@ systemic-risk-bench = "systemic_risk_bench.cli:main"
 include = ["systemic_risk_bench*"]
 
 [tool.setuptools.package-data]
-systemic_risk_bench = ["data/history/*.json"]
+systemic_risk_bench = ["data/history/*.json", "data/content/*.json"]

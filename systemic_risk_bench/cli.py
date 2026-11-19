@@ -77,6 +77,24 @@ def main(argv=None):
     financial.add_argument("--cases", type=int, default=18)
     financial.add_argument("--timeout", type=float, default=30)
     financial.add_argument("--output", required=True)
+    content_list = commands.add_parser("content-list", help="list sourced conceptual content cases")
+    content_packet = commands.add_parser("content-packet", help="export staged content without evaluator keys")
+    content_packet.add_argument("--case", required=True)
+    content_packet.add_argument("--stage", type=int, required=True)
+    content_packet.add_argument("--masked", action="store_true")
+    content_packet.add_argument("--output", required=True)
+    content_quant = commands.add_parser("content-quant", help="export Lombard source and synthetic numerical questions")
+    content_quant.add_argument("--output", required=True)
+    content_score = commands.add_parser("content-score", help="score content-suite numerical answers")
+    content_score.add_argument("--responses", required=True)
+    content_score.add_argument("--output", required=True)
+    content_run = commands.add_parser("content-run", help="send staged content to an operator-provided adapter")
+    content_run.add_argument("--adapter-argv", required=True)
+    content_run.add_argument("--experiment", required=True)
+    content_run.add_argument("--cases", required=True, help="comma-separated content case ids")
+    content_run.add_argument("--masked", action="store_true")
+    content_run.add_argument("--timeout", type=float, default=60)
+    content_run.add_argument("--output", required=True)
     bridge = commands.add_parser("bitagent-packet", help="read-only covenant v1 risk projection")
     bridge.add_argument("--input", required=True)
     bridge.add_argument("--output", required=True)
@@ -121,6 +139,38 @@ def main(argv=None):
         elif args.command == "evalmath-export":
             from .evalmath import export_bank
             write(args.output, export_bank(args.config))
+        elif args.command == "content-list":
+            from .content_suite import content_cases
+            print(json.dumps([
+                {"id": c["id"], "title": c["title"], "family": c["family"],
+                 "stages": len(c["stages"]), "historical_price_replay": False}
+                for c in content_cases()
+            ], indent=2))
+        elif args.command == "content-packet":
+            from .content_suite import content_packet
+            packet = content_packet(args.case, args.stage, masked=args.masked)
+            packet["packet_sha256"] = digest(packet)
+            write(args.output, packet)
+        elif args.command == "content-quant":
+            from .content_math import content_quantitative_tasks
+            write(args.output, {"schema": "srb.content.questions.v1",
+                                "tasks": content_quantitative_tasks(),
+                                "gold_answers_present": False})
+        elif args.command == "content-score":
+            from .content_math import score_content_numeric
+            write(args.output, score_content_numeric(read_json(args.responses)["responses"]))
+        elif args.command == "content-run":
+            from .runner import run
+            from .content_suite import content_cases
+            known = {c["id"]: c for c in content_cases()}
+            ids = args.cases.split(",")
+            if len(set(ids)) != len(ids) or set(ids) - set(known):
+                raise ValueError("duplicate or unknown content suite cases")
+            selected = [known[i] for i in ids]
+            write(args.output, run(json.loads(args.adapter_argv),
+                                   read_json(args.experiment), cases=selected,
+                                   masked=args.masked, timeout=args.timeout,
+                                   track_label="content_theory"))
         elif args.command == "agent-revision":
             from .agent_revision import run_agent_revision
             write(args.output, run_agent_revision(

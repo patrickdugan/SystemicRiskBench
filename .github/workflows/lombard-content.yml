@@ -1,0 +1,108 @@
+name: SRB-LOMBARD-01 Bagehot content and Lean kernel
+
+on:
+  push:
+    paths:
+      - "systemic_risk_bench/lombard.py"
+      - "systemic_risk_bench/content_suite.py"
+      - "systemic_risk_bench/content_math.py"
+      - "systemic_risk_bench/data/content/**"
+      - "systemic_risk_bench/runner.py"
+      - "systemic_risk_bench/cli.py"
+      - "tests/test_lombard_content.py"
+      - "Lombard/**"
+      - "Lombard.lean"
+      - "lean-toolchain"
+      - "lakefile.toml"
+      - "lake-manifest.json"
+      - "docs/lombard-street.md"
+      - "README.md"
+      - "pyproject.toml"
+      - ".github/workflows/lombard-content.yml"
+  pull_request:
+    paths:
+      - "systemic_risk_bench/lombard.py"
+      - "systemic_risk_bench/content_suite.py"
+      - "systemic_risk_bench/content_math.py"
+      - "systemic_risk_bench/data/content/**"
+      - "systemic_risk_bench/runner.py"
+      - "systemic_risk_bench/cli.py"
+      - "tests/test_lombard_content.py"
+      - "Lombard/**"
+      - "Lombard.lean"
+      - "lean-toolchain"
+      - "lakefile.toml"
+      - "lake-manifest.json"
+      - "docs/lombard-street.md"
+      - "README.md"
+      - "pyproject.toml"
+      - ".github/workflows/lombard-content.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  python-content:
+    name: Source and calculator regression
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run Bagehot content-suite tests
+        run: python -m unittest discover -s tests -p 'test_lombard_content.py' -v
+      - name: Run complete Python regression suite
+        run: python -m unittest discover -s tests -q
+      - name: CLI validated source and synthetic content exports
+        run: |
+          python -m systemic_risk_bench content-list > /tmp/lombard-cases.json
+          python -m systemic_risk_bench content-packet --case content_bagehot_lombard_merchants --stage 0 --output /tmp/lombard-stage0.json
+          python -m systemic_risk_bench content-packet --case content_bagehot_lombard_merchants --stage 2 --output /tmp/lombard-stage2.json
+          python -m systemic_risk_bench content-quant --output /tmp/lombard-tasks.json
+          python - <<'PY'
+          import json
+          a=json.load(open('/tmp/lombard-stage0.json'))
+          b=json.load(open('/tmp/lombard-stage2.json'))
+          q=json.load(open('/tmp/lombard-tasks.json'))
+          assert len(a['visible_stages']) == 1 and len(b['visible_stages']) == 3
+          assert len(q['tasks']) == 4 and q['gold_answers_present'] is False
+          assert 'outcome' not in a and 'sources' not in a
+          print('PASS: historical source and evaluator-only data separated')
+          PY
+
+  lean-kernel:
+    name: Kernel-checked merchant and rescue accounting
+    runs-on: ubuntu-latest
+    timeout-minutes: 50
+    steps:
+      - uses: actions/checkout@v4
+      - uses: leanprover/lean-action@v1
+        with:
+          auto-config: false
+          build: true
+          build-args: Lombard
+          test: false
+          lint: false
+          use-mathlib-cache: true
+      - name: Check proof file and banned admitted axioms
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake env lean Lombard/Capital.lean | tee lombard-axioms.txt
+          if grep -Eq 'sorryAx|ofReduceBool' lombard-axioms.txt; then
+            echo 'Unexpected admitted or native-reduction axiom'
+            exit 1
+          fi
+          if grep -REn '\\bsorry\\b|\\baxiom\\b' Lombard; then
+            echo 'Unexpected admitted theorem or standalone axiom in Lombard module'
+            exit 1
+          fi
+          echo 'PASS: Lean merchant and balance-sheet accounting theorems kernel checked'
+      - uses: actions/upload-artifact@v4
+        with:
+          name: srb-lombard-lean-kernel-checks
+          path: lombard-axioms.txt
+          if-no-files-found: error
