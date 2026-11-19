@@ -118,6 +118,32 @@ class CodecPilotTests(unittest.TestCase):
         self.assertEqual(report["gate_results"]["verified_codec_any_completed"],"FAIL")
         self.assertIn("INFRASTRUCTURE FAIL",next_prompt(report))
 
+    def test_timeout_censored_pilot_prompt_uses_resource_failure(self):
+        def fake_executor(argv,payload,prior,timeout,experiment):
+            if payload["phase"] == "update":
+                return {"status":"timeout","wall_seconds":timeout,
+                        "response":None,"adapter_telemetry":None,
+                        "telemetry_status":"missing"}
+            return {
+                "status":"ok","wall_seconds":.1,
+                "response":{"memory":visible_codec(payload),
+                            "posterior":[.5,.3,.2],"action":"de_risk"},
+                "telemetry_status":"valid",
+                "adapter_telemetry":{
+                    "identity":{"local_artifacts_verified":True},
+                    "isolation":{"requests_served":1,"server_reset_verified":True,
+                                 "server_boot_sha256":"boot_id",
+                                 "process_reaped":True,"port_closed_verified":True},
+                    "usage":{"input_tokens":918,"output_tokens":81},
+                },
+            }
+        report=run_pilot(self.spec,self.manifest,{"experiment_id":"test"},
+                         ["python","mock"],fake_executor)
+        self.assertEqual(report["gate_results"]["genuine_model_inference_observed"],"PASS")
+        self.assertEqual(report["gate_results"]["verified_codec_any_completed"],"FAIL")
+        self.assertIn("CPU STAGE TIMEOUT FAIL",next_prompt(report))
+        self.assertIn("RESET-AUDIT FAIL",next_prompt(report))
+
     def test_response_attestation_has_separate_physical_boundary(self):
         def fake_verified(argv,payload,prior,timeout,experiment):
             if payload["phase"]=="initial":
@@ -130,7 +156,7 @@ class CodecPilotTests(unittest.TestCase):
                 "adapter_telemetry":{
                     "identity":{"local_artifacts_verified":True},
                     "isolation":{"server_reset_verified":True,
-                                 "server_boot_sha256":"same_boot","process_reaped":True,
+                                 "server_boot_sha256":"same_boot","requests_served":1,"process_reaped":True,
                                  "port_closed_verified":True},
                     "usage":{"input_tokens":100,"output_tokens":20},
                 },
