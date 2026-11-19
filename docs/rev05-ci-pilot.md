@@ -97,3 +97,30 @@ weights on the original Hugging Face hosts and preserve SHA-pinned URLs and
 artifact hashes. Model JSON outputs and failed-call receipts are synthetic
 public benchmark data, with `model_evaluation_claim=false` and
 `physical_memory_enforced=false`.
+
+## Observed first CPU pilot
+
+The actual hosted CPU run [#44490225970](https://github.com/patrickdugan/SystemicRiskBench/actions/runs/44490225970) finished with successful CI infrastructure and **zero fully scored initial/update cases**.
+The registered exact-codec and pinned artifact checks passed. Two genuine
+initial BitAgent count-mode completions used the correct memory value 6
+for root 0, with 918 input and 81 output tokens recorded each. Their
+update calls and six other initial calls timed out at the 150-second
+stage ceiling. All four arms consequently scored 0/2 cases. The
+missing-penalty regret of 20.0 contains no completed policy decisions.
+
+Successful requests verified server reaping, but eight timeout calls
+had no valid cleanup receipt and the runner identified surviving
+llama-server descendants. The all-stage reset gate is **FAIL**.
+Under these CPU limits, the codec lift gate is likewise recorded
+**FAIL (timeout-censored)**, with no valid basis to assess model risk
+reasoning or improvement from the host codec.
+
+The full evidence is in
+[the published result](../results/rev05-ci/REPORT.md),
+[structured summary](../results/rev05-ci/summary.json) and the
+[PASS/FAIL-promoted continuation prompt](../results/rev05-ci/NEXT_PROMPT.md).
+The original unedited model call receipts remain in
+[Actions artifact #14513409340](https://github.com/patrickdugan/SystemicRiskBench/actions/runs/44490225970/artifacts/14513409340).
+Further heavy CPU inference now requires explicit GitHub Actions
+`workflow_dispatch`; ordinary PR and push checks keep source-only
+verification.
