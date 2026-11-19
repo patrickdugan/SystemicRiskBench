@@ -14,7 +14,7 @@ from systemic_risk_bench.content_math import (
     content_numeric_answers, content_quantitative_tasks, score_content_numeric,
 )
 from systemic_risk_bench.lombard import (
-    bank_rescue, merchant_equity, repeat_rescue,
+    bank_rescue, merchant_equity, repeat_rescue, funding_spread_counterfactual,
 )
 from systemic_risk_bench.suite import quantitative_tasks, numerical_answers
 
@@ -77,6 +77,17 @@ class LombardContentTests(unittest.TestCase):
             merchant_equity(**{**inputs, "cash_equity": True})
         with self.assertRaises(ValueError):
             merchant_equity(**{**inputs, "cash_equity": 40000})
+        conditional = funding_spread_counterfactual(
+            borrower_equity=10000, borrowed=40000,
+            gross_operating_profit=5000, unsubsidized_rate=.11, supported_rate=.05)
+        self.assertAlmostEqual(conditional["unsubsidized_roe"], .06)
+        self.assertAlmostEqual(conditional["supported_roe"], .30)
+        self.assertAlmostEqual(conditional["annual_interest_saving"], 2400)
+        self.assertAlmostEqual(conditional["roe_difference"], .24)
+        with self.assertRaises(ValueError):
+            funding_spread_counterfactual(
+                borrower_equity=10000, borrowed=40000,
+                gross_operating_profit=5000, unsubsidized_rate=.05, supported_rate=.11)
 
     def test_bank_vs_central_bank_ledger_and_no_loss_control(self):
         inputs = content_quantitative_tasks()[1]["inputs"]
@@ -114,17 +125,17 @@ class LombardContentTests(unittest.TestCase):
 
     def test_content_numeric_scores_keep_invalid_in_denominator(self):
         questions = content_quantitative_tasks()
-        self.assertEqual(len(questions), 3)
-        self.assertEqual(sum(len(q["answer_fields"]) for q in questions), 13)
+        self.assertEqual(len(questions), 4)
+        self.assertEqual(sum(len(q["answer_fields"]) for q in questions), 17)
         gold = content_numeric_answers()
         rows = [{"id": task["id"], "estimates": gold[task["id"]]} for task in questions]
         report = score_content_numeric(rows)
-        self.assertEqual(report["n_fields"], 13)
+        self.assertEqual(report["n_fields"], 17)
         self.assertEqual(report["micro_accuracy"], 1.0)
         self.assertFalse(report["model_evaluation_claim"])
         missing = score_content_numeric(rows[:1])
         self.assertEqual(missing["n_covered_fields"], 4)
-        self.assertEqual(missing["micro_accuracy"], 4/13)
+        self.assertEqual(missing["micro_accuracy"], 4/17)
         with self.assertRaises(ValueError):
             score_content_numeric(rows + [rows[0]])
         with self.assertRaises(ValueError):
