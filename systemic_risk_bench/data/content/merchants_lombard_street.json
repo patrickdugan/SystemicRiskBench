@@ -1,0 +1,162 @@
+{
+  "schema_version": "srb.content.v0.1",
+  "title": "Merchants of Lombard Street: source-grounded credit-competition content suite",
+  "created_on": "2026-11-19",
+  "scope": "One primary-source teaching case with modern synthetic bank and central-bank policy extensions; excludes historical crisis case counts.",
+  "cases": [
+    {
+      "id": "content_bagehot_lombard_merchants",
+      "title": "Merchants of Lombard Street: borrowing advantage and the recapitalization cycle",
+      "event_date": "1873-01-01",
+      "family": "bank_credit_competition_recapitalization",
+      "entities": [
+        {
+          "name": "Walter Bagehot",
+          "aliases": [
+            "Bagehot"
+          ]
+        },
+        {
+          "name": "Bank of England",
+          "aliases": [
+            "the Bank of England"
+          ]
+        },
+        {
+          "name": "Treasury",
+          "aliases": [
+            "HM Treasury"
+          ]
+        }
+      ],
+      "provenance": {
+        "mode": "synthetic_counterfactual",
+        "primary_text": "Bagehot 1873 Lombard Street Chapter I merchant example",
+        "source_scope": "Only merchant numbers and qualitative borrowing competition belong to 1873 source; all later bank balance sheets, risk parameters, loss timing, and public transfers are invented for evaluation.",
+        "stage_cutoffs": "2026-01-01 through 2026-01-03 are artificial benchmark ordering markers rather than historical availability dates",
+        "historical_market_data": false
+      },
+      "sources": [
+        {
+          "url": "https://www.gutenberg.org/ebooks/4359",
+          "title": "Walter Bagehot, Lombard Street: A Description of the Money Market (1873), Chapter I, Project Gutenberg",
+          "scope": "primary_source_merchant_example"
+        },
+        {
+          "url": "https://www.rba.gov.au/speeches/2023/sp-ag-2023-12-14.html",
+          "title": "RBA, Bagehot and the Lender of Last Resort, 150 Years On (2023)",
+          "scope": "modern_interpretation_of_emergency_liquidity"
+        },
+        {
+          "url": "https://www.bankofengland.co.uk/paper/2023/the-bank-of-englands-approach-to-resolution",
+          "title": "Bank of England, Approach to Resolution",
+          "scope": "bank_resolution_and_loss_absorption"
+        },
+        {
+          "url": "https://www.rba.gov.au/publications/bulletin/2017/mar/6.html",
+          "title": "RBA, Returns on Equity, Cost of Equity and the Implications for Banks (2017)",
+          "scope": "leverage_return_and_risk_context"
+        }
+      ],
+      "stages": [
+        {
+          "id": "source_merchant_comparison",
+          "cutoff": "2026-01-01T00:00:00Z",
+          "observations": [
+            "Source: Walter Bagehot's 1873 Lombard Street, Chapter I, contrasts two competing merchants. This stage is a source-based arithmetic exercise, not a reconstructed historical price tape.",
+            "A cash-financed merchant uses GBP 50,000 of own capital to operate a trade and seeks a 10% annual equity return; its illustrative annual operating profit is GBP 5,000.",
+            "A competing merchant uses GBP 10,000 of equity and GBP 40,000 obtained by discounting bills at 5% annual interest, giving both merchants the same GBP 50,000 of operating capital.",
+            "Assume both merchants can earn GBP 5,000 before financing and both initially sell the same units at equal nonfinancing costs. Ignore taxes, transaction costs, default losses and quantity responses for this illustrative comparison.",
+            "Price competition can lower the borrowing merchant's yearly gross margin. The minimum acceptable equity return for each is fixed at 10% in this exercise."
+          ],
+          "questions": [
+            "Calculate interest expense, both equity returns, debt/equity and assets/equity leverage ratios. Compute the borrowing merchant's total annual price reduction budget while still earning 10% on its own equity.",
+            "Derive the general condition in gross return on assets and debt rate under which this borrowed-capital advantage exists. Identify the amount of an operating loss that removes that advantage.",
+            "Explain which parts of the 'efficient borrower' claim concern cheaper funding and higher equity returns rather than superior production technology. State the fixed-output assumptions required to turn profit slack into a price reduction.",
+            "Describe how the extra credit capacity helps new traders, and which market or creditor conditions would prevent access to the cheap loans."
+          ]
+        },
+        {
+          "id": "synthetic_bank_capital_shock",
+          "cutoff": "2026-01-02T00:00:00Z",
+          "observations": [
+            "NEW SYNTHETIC COUNTERFACTUAL: a merchant-financing commercial bank starts with GBP 500 million of book assets, GBP 450 million of debt/deposits and GBP 50 million of common equity; its risk-weighted assets equal book assets for this simplified exercise.",
+            "The bank suffers a GBP 30 million credit loss. Its contractual debt amount is unchanged by recognizing the loss. The stated minimum equity/risk-asset ratio is 10%. Assume any sale of remaining assets for debt repayment happens at book value and has no further loss.",
+            "The same bank can instead obtain GBP 30 million of fully collateralized emergency cash from the Bank of England with an equal newly created liability. Assume no additional loan valuation loss at origination. The lender's liquidity operation is separate from a new common-equity contribution.",
+            "An independent private share issuance or a taxpayer-funded capital contribution could recapitalize the bank. The bank's common-equity target in either recap scenario is GBP 50 million."
+          ],
+          "questions": [
+            "Reconcile the bank assets, liabilities and common equity after the credit loss. Determine the fresh equity contribution needed to restore GBP 50 million of book equity.",
+            "If no recap is available, compute the highest remaining risk-asset book and the sale/paydown required to satisfy the 10% capital threshold, taking losses as already recognized.",
+            "Show the book entries for the GBP 30 million emergency liquidity loan and determine whether it restores the common-equity ratio. Compare with a GBP 30 million equity injection.",
+            "Explain a policy choice among emergency collateral lending, private bank recapitalization, taxpayer recapitalization, orderly resolution and shrinkage. What evidence of solvency, collateral, withdrawal timing and liquidation value would change the decision?"
+          ]
+        },
+        {
+          "id": "synthetic_recap_policy_feedback",
+          "cutoff": "2026-01-03T00:00:00Z",
+          "observations": [
+            "NEW SYNTHETIC POLICY STRESS: repeat the bank's GBP 30 million credit loss over three independent periods, and suppose a fiscal authority replaces each period's lost bank equity to restore the same GBP 50 million target. Assume the replenished loan book continues to face the exogenously stipulated loss; the scenario makes no claim about real failure probabilities.",
+            "Under the specified repeated public recapitalization rule the capital injections are financed by the Treasury. A separate scenario substitutes private shareholders for the public fiscal authority; another scenario refuses recapitalization and imposes contraction or resolution.",
+            "Separately, the Bank of England starts with GBP 10 million of its own equity and originates an emergency liquidity loan in the stress episode. At origination, equally sized loan assets and reserve liabilities leave its equity unchanged. If the central bank later realizes a GBP 4 million net credit loss on this loan, its own equity falls.",
+            "A Treasury transfer can restore central-bank equity to GBP 10 million. Some central banks can operate with low or negative accounting capital depending on institutions and law, so mandatory restoration is a stated policy assumption here.",
+            "The exercise does not assume that emergency support makes private borrowing cheaper in advance. A reduction of the private funding premium through an anticipated guarantee would require a separate market pricing or moral-hazard mechanism."
+          ],
+          "questions": [
+            "Calculate cumulative public bank recapitalization over three repeated GBP 30 million losses and the bank-equity trajectory with and without transfers. Explain the formal recurrence and its assumptions.",
+            "Keep three accounts separate: the borrower's 5% private bill finance, the commercial bank's GBP 30 million equity transfer or emergency liquidity loan, and the Bank of England's GBP 4 million loan loss and possible GBP 4 million fiscal recapitalization.",
+            "Specify the conditional feedback loop from expected rescue to private funding spreads, risk appetite, low equity buffers, credit losses and renewed recapitalization. Identify which arrows are model assumptions requiring observed data.",
+            "Construct a non-rescue counterexample, an initially solvent illiquid-bank case and a case where high funding rates or operating losses reverse Bagehot's merchant advantage. Assess fixed aggregate credit versus fixed credit per agent.",
+            "Propose a BitAgent policy that distinguishes halt/raise-capital/reduce-risk from collateralized lender-of-last-resort lending. State what an independent verifier can prove and which empirical conditions remain open."
+          ]
+        }
+      ],
+      "outcome": {
+        "scope": "scoring_anchors_for_theory_content_not_historical_outcome",
+        "expected_numerics": {
+          "annual_interest_gbp": 2000,
+          "cash_roe": 0.1,
+          "levered_roe": 0.3,
+          "total_price_reduction_budget_gbp": 2000,
+          "merchant_assets_to_equity": 5,
+          "bank_post_loss_assets_million_gbp": 470,
+          "bank_post_loss_equity_million_gbp": 20,
+          "bank_recap_million_gbp": 30,
+          "max_risk_assets_no_recap_million_gbp": 200,
+          "asset_reduction_no_recap_million_gbp": 270,
+          "equity_after_liquidity_loan_million_gbp": 20,
+          "three_period_public_bank_recap_million_gbp": 90,
+          "bank_equity_after_three_periods_no_recap_before_resolution_million_gbp": -40,
+          "central_bank_post_credit_loss_equity_million_gbp": 6,
+          "central_bank_recap_million_gbp": 4
+        },
+        "rubric_anchors": [
+          "Bagehot's merchant calculations show a positive funding spread's equity-return leverage; conditional credit access permits margin undercutting and entrepreneurial entry.",
+          "Funding cost below operating asset return is necessary for the same-assets higher-ROE leverage claim, and a loss can reverse that comparison.",
+          "Liquidity lending creates an equal bank liability and asset and leaves bank equity unchanged on origination. Solvency capital comes from private or public transfer, debt write-down or retained profit.",
+          "After an asset loss, restoring previous equity with new paid-in funds and shrinking risk assets for capital compliance are distinct paths.",
+          "Central bank equity loss and Treasury recapitalization of the central bank are separate from fiscal bank recapitalization; no automatic accounting mandate is claimed.",
+          "Repeated rescue transfers follow directly from a specified policy and repeated losses, while endogenously recurring crises or moral hazard require causal assumptions beyond accounting.",
+          "Reasoning should discuss Bagehot's efficiency gain and distributional impact alongside liquidation, risk pricing and systemic feedback, without assuming every leveraged merchant fails.",
+          "Historical 1873 source numbers and later invented bank examples must be attributed separately. No real-world trading permission is conveyed."
+        ],
+        "required_negative_controls": [
+          "funding_rate_at_or_above_operating_ROA",
+          "no_credit_loss_bank_no_recapitalization",
+          "solvent_illiquid_bank_collateral_liquidity_only",
+          "private_recapitalization_vs_public_budget",
+          "fixed_aggregate_credit_vs_fixed_credit_per_merchant"
+        ],
+        "model_evaluation_claim": false,
+        "financial_execution_authorized": false
+      },
+      "evaluation_anchors": [
+        "Correct accounting across bank and central-bank balance sheets",
+        "Exact conditional proof vs empirical hypotheses",
+        "Counterexamples under negative spread and no loss",
+        "Credit competition and cost-of-equity tradeoffs",
+        "Appropriate evidence-based escalation"
+      ]
+    }
+  ]
+}
