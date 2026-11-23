@@ -254,11 +254,14 @@ def main(argv=None):
         elif args.command == "compare":
             rows = []
             packet_sets = []
+            recordings = []
             for path in args.runs:
                 recorded = read_json(path)
+                recordings.append(recorded)
                 receipts = recorded["receipts"]
-                packet_sets.append([(r["case_id"], r["stage_index"], r["packet_sha256"])
-                                    for r in receipts])
+                # A different task order does not break a paired comparison.
+                packet_sets.append({(r["case_id"], r["stage_index"]): r["packet_sha256"]
+                                    for r in receipts})
                 numeric = recorded.get("numeric_report") or {}
                 rows.append({"experiment": recorded["experiment"]["experiment_id"],
                              "run_sha256": digest(recorded), "track": recorded["track"],
@@ -266,10 +269,19 @@ def main(argv=None):
                              "wall_seconds": recorded["host_measured_wall_seconds"],
                              "failed_calls": sum(r["status"] != "ok" for r in receipts),
                              "reasoning_score": None, "reasoning_audit": "separate_audit_artifact"})
-            write(args.output, {"rows": rows, "identical_packets": all(
-                p == packet_sets[0] for p in packet_sets), "compute_matched_claim": False,
-                "note": "Compare only matched packets/budgets; unknown resource measurements "
-                        "and unresolved human audits prevent a reasoning leaderboard claim."})
+            matched = all(p == packet_sets[0] for p in packet_sets)
+            paired = {"status": "not_applicable",
+                      "reason": "requires exactly two complete numeric runs with matching packets"}
+            if (len(recordings) == 2 and matched
+                    and all(r.get("track") == "synthetic_numerical" for r in recordings)):
+                from .comparison import paired_numeric_report
+                paired = paired_numeric_report(recordings[0], recordings[1])
+            write(args.output, {"schema_version": "srb.compare.v0.2", "rows": rows,
+                                "identical_packets": matched, "paired_numeric": paired,
+                                "compute_matched_claim": False,
+                                "note": "Only matched packets support descriptive paired diagnostics. "
+                                        "Unknown resource measurements and unresolved human audits "
+                                        "prevent a reasoning leaderboard claim."})
         elif args.command == "run":
             from .runner import run
             selected = None

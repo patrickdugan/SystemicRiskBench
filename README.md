@@ -14,6 +14,17 @@ synthetic benign controls add eight decisions. Six numerical tasks supply 13
 independently tested answer fields. A cohort stress matrix represents populations
 from one to ten million agents without executing millions of model calls.
 
+**Evidence map (v0.1):**
+
+| Track | Available result | Interpretation |
+| --- | --- | --- |
+| Historical mechanisms | 33 retrospective episodes plus four synthetic benign controls; 74 staged decisions | Public development cases, without an as-of price-tape backtest or independent reasoning grade |
+| Quantitative reasoning | Six questions, 13 scored fields, four causal families | Small arithmetic pilot; many model/effort cells already reach the ceiling |
+| Cohort population stress | Weighted synthetic cohorts representing up to ten million agents | Mechanistic stress simulation, zero independent agent calls |
+| EvalMath SRB-EM-01 | 30 worlds, 60 paired simulation outcomes | Exact scoring *after* cent quantization of deterministic simulator outputs; no model policy rollout |
+
+The [18 November research audit](docs/benchmark-audit-2026-11-18.md) prioritizes policy-in-the-loop population experiments, held-out causal families, historical as-of receipts and trustworthy uncertainty estimates. [Core validation](.github/workflows/tests.yml) runs tests and corpus/reference checks on every pull request.
+
 ## Run locally
 
 Python 3.10+; no runtime dependencies, API keys or model downloads. From this directory:
@@ -84,6 +95,14 @@ baseline. Replace its argv with the actual Lean/RLT/HRM/CGRT inference wrapper.
 Numerical replies put exact answer names in `estimates`, e.g.
 `{"estimates":{"cva":23400}}`. Missing fields receive zero calculation credit;
 duplicates, unknown fields and malformed numbers are rejected.
+
+For exactly two complete numerical runs on the same packet hashes, `compare`
+also emits a `paired_numeric` diagnostic. It reports the difference in
+accuracy within each of the four risk families and the discrete resolution
+of an exploratory family-level sign test. Even a win in all four families
+has a best possible two-sided p value of 0.125; the output explicitly
+withholds model-ranking and confidence-interval claims. Unmatched runs
+receive a `not_applicable` diagnostic.
 
 The runner records packet/config digests, responses, failures and host wall
 time. It enforces a per-call wall timeout. Token, tool, memory, recurrence,
