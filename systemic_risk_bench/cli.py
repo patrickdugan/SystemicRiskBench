@@ -7,7 +7,7 @@ from pathlib import Path
 import sys
 
 from . import __version__
-from .scoring import brier, read_json, score_numeric
+from .scoring import brier, loads_json, read_json, score_numeric
 from .simulation import sweep
 from .suite import numerical_answers, quantitative_tasks
 
@@ -50,6 +50,13 @@ def main(argv=None):
     em = commands.add_parser("evalmath-export", help="export evaluator-only paired simulator counterfactuals")
     em.add_argument("--config", required=True)
     em.add_argument("--output", required=True)
+    policy = commands.add_parser("policy-run", help="freeze liquidity choices, then run a public simulator probe")
+    policy.add_argument("--config", required=True)
+    mode = policy.add_mutually_exclusive_group(required=True)
+    mode.add_argument("--fixture", choices=("baseline", "always_support"))
+    mode.add_argument("--adapter-argv", help="JSON array of executable and arguments, no shell expansion")
+    policy.add_argument("--timeout", type=float, default=60)
+    policy.add_argument("--output", required=True)
     demo = commands.add_parser("smoke", help="reference fixtures only; never a model result")
     demo.add_argument("--output-dir", required=True)
     forecast = commands.add_parser("calibration", help="score resolved frozen binary forecasts")
@@ -107,6 +114,15 @@ def main(argv=None):
         elif args.command == "evalmath-export":
             from .evalmath import export_bank
             write(args.output, export_bank(args.config))
+        elif args.command == "policy-run":
+            from .policy import run_policy
+            argv = loads_json(args.adapter_argv) if args.adapter_argv is not None else None
+            result = run_policy(read_json(args.config), fixture=args.fixture,
+                                adapter_argv=argv, timeout=args.timeout)
+            write(args.output, result)
+            if result["run_status"] != "complete":
+                raise ValueError(f"policy evaluation failed; frozen receipts saved to {args.output}: "
+                                 + result["evaluation_error"]["message"])
         elif args.command == "calibration":
             write(args.output, brier(read_json(args.input)["forecasts"]))
         elif args.command == "bitagent-packet":

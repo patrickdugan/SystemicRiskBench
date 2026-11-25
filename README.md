@@ -1,5 +1,17 @@
 # Systemic Risk Bench
 
+**Research target:** a frontier-solvable systemic reasoning benchmark and a
+compactification challenge for BitAgent. The hard tier will require agents to
+learn contextual rules, compose reusable skills and execute policies under
+bounded resources. Opus 4.5 and stronger reference systems anchor the intended
+difficulty; INTELLECT-3 is an open-weight calibration candidate.
+
+The [SRB-HARD-01 design](docs/frontier-compactification.md) sets the proposed
+difficulty tiers, calibration gates and learning protocols. Its
+[machine-readable plan](configs/frontier-hard-v1.design.json) records pending
+work explicitly. The hard bank awaits construction and calibration. Existing
+arithmetic tasks and simulator fixtures supply its prerequisite tier.
+
 Version 0.1.0 — a standalone research benchmark for BitAgent and compact
 reasoners on financial strategy, self-critique, architecture critique and
 population externalities. Lean reasoner, RLT, HRM and CGRT are experiment labels;
@@ -22,6 +34,7 @@ from one to ten million agents without executing millions of model calls.
 | Quantitative reasoning | Six questions, 13 scored fields, four causal families | Small arithmetic pilot; many model/effort cells already reach the ceiling |
 | Cohort population stress | Weighted synthetic cohorts representing up to ten million agents | Mechanistic stress simulation, zero independent agent calls |
 | EvalMath SRB-EM-01 | 30 worlds, 60 paired simulation outcomes | Exact scoring *after* cent quantization of deterministic simulator outputs; no model policy rollout |
+| Policy execution SRB-CF-02-DEV | Five public shock packets; a budgeted action chosen before each cascade | Public development harness with deterministic fixtures or an operator adapter; mean-cost regret respects observation limits |
 
 The [18 November research audit](docs/benchmark-audit-2026-11-18.md) prioritizes policy-in-the-loop population experiments, held-out causal families, historical as-of receipts and trustworthy uncertainty estimates. [Core validation](.github/workflows/tests.yml) runs tests and corpus/reference checks on every pull request.
 
@@ -163,6 +176,26 @@ The exporter is evaluator-only and contains privileged counterfactual
 outcomes. It has no model calls, calibrated market frequencies, or historical
 replay claims. The cross-repository CI pins the EvalMath scorer at an exact
 commit and archives both the input bank and exact score output.
+
+## Execute a budgeted policy
+
+The [policy simulation harness](docs/policy-simulation.md) freezes an agent's
+liquidity choice before the fire-sale simulator runs. An adapter sees the
+shock and affordable actions, then selects a depth intervention. Each choice
+applies to all hidden worlds sharing that observation.
+
+```bash
+python -m systemic_risk_bench policy-run --config configs/policy-simulation-v1.json --fixture baseline --output artifacts/policy-baseline.json
+python -m systemic_risk_bench policy-run --config configs/policy-simulation-v1.json --fixture always_support --output artifacts/policy-support.json
+```
+
+These fixtures make zero model calls. Supply `--adapter-argv` to attach a
+policy process. Reports keep failed decisions visible through explicit
+baseline fallbacks and include intervention costs in the objective. An
+observation oracle supplies mean-cost regret, while a separate bound measures
+the benefit of seeing the full state. The public `SRB-CF-02-DEV` grid supports
+development of the proposed prospective trial; model-controlled order flow
+and independent held-out mechanism groups remain future work.
 
 ## Risk and BitAgent integration
 

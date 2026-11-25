@@ -29,7 +29,11 @@ def exact(value, label: str, *, positive: bool = False) -> Fraction:
         x = Fraction(value)
     except (ValueError, TypeError, ZeroDivisionError) as error:
         raise ValueError(f"{label} must be a rational string") from error
-    if x < 0 or (positive and x == 0) or not math.isfinite(float(x)):
+    try:
+        finite = math.isfinite(float(x))
+    except OverflowError:
+        finite = False
+    if x < 0 or (positive and x == 0) or not finite:
         raise ValueError(f"{label} must be finite and {'positive' if positive else 'nonnegative'}")
     return x
 
@@ -60,13 +64,18 @@ def validate_config(doc: dict) -> None:
     if alpha >= 1:
         raise ValueError("tail_alpha must be less than 1")
     for name in ("shocks", "depths", "cohort_profiles"):
-        if not isinstance(doc.get(name), list) or not doc[name] or len(set(doc[name])) != len(doc[name]):
+        if (not isinstance(doc.get(name), list) or not doc[name]
+                or any(type(value) is not str for value in doc[name])
+                or len(set(doc[name])) != len(doc[name])):
             raise ValueError(f"{name} must contain distinct choices")
-    for shock in doc["shocks"]:
-        if exact(shock, "shock") >= Fraction(99, 100):
+    shocks = [exact(shock, "shock") for shock in doc["shocks"]]
+    depths = [exact(depth, "depth", positive=True) for depth in doc["depths"]]
+    for name, values in (("shocks", shocks), ("depths", depths)):
+        if len(set(values)) != len(values):
+            raise ValueError(f"{name} must contain distinct rational values")
+    for shock in shocks:
+        if shock >= Fraction(99, 100):
             raise ValueError("shock must be below 0.99")
-    for depth in doc["depths"]:
-        exact(depth, "depth", positive=True)
     if any(p not in ("homogeneous", "heterogeneous") for p in doc["cohort_profiles"]):
         raise ValueError("unknown simulator cohort profile")
     actions = doc.get("actions")
@@ -87,14 +96,14 @@ def validate_config(doc: dict) -> None:
         raise ValueError("only the registered exogenous-only heuristic is implemented")
     if doc.get("quantization") != "Decimal(str(float_value)) nearest cent, ROUND_HALF_EVEN":
         raise ValueError("quantization policy is part of the scoring contract")
-    if cents(float(threshold)) != int(threshold * 100):
+    if (threshold * 100).denominator != 1:
         raise ValueError("harm threshold must be denominated in whole cents")
 
 
 def build_bank(config: dict, *, config_sha256: str | None = None) -> dict:
     validate_config(config)
     baseline_name = config["baseline"]
-    threshold_cents = cents(float(exact(config["harm_threshold"], "harm_threshold")))
+    threshold_cents = int(exact(config["harm_threshold"], "harm_threshold") * 100)
     total = float(exact(config["initial_capital"], "initial_capital", positive=True))
     impact = float(exact(config["impact"], "impact"))
     worlds = []
